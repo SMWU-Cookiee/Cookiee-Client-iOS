@@ -6,16 +6,24 @@
 //
 
 import SwiftUI
+import AuthenticationServices
 
 struct LoginView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            AppleSignInButton()
         }
         .padding()
+    }
+}
+
+// * 애플 로그인 버튼
+struct AppleSignInButton : View {
+    var body: some View {
+        SignInWithAppleButton(onRequest: { _ in
+        }, onCompletion: {_ in 
+        })
+        .frame(width : UIScreen.main.bounds.width * 0.7, height:45)
     }
 }
 
