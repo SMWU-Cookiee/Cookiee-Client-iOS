@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		834AB1B02C48C1D900D5D62E /* CookieeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834AB1AF2C48C1D900D5D62E /* CookieeApp.swift */; };
-		834AB1B22C48C1D900D5D62E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834AB1B12C48C1D900D5D62E /* ContentView.swift */; };
+		834AB1B22C48C1D900D5D62E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834AB1B12C48C1D900D5D62E /* LoginView.swift */; };
 		834AB1B42C48C1DB00D5D62E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 834AB1B32C48C1DB00D5D62E /* Assets.xcassets */; };
 		834AB1B72C48C1DB00D5D62E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 834AB1B62C48C1DB00D5D62E /* Preview Assets.xcassets */; };
 		834AB1C12C48C1DB00D5D62E /* CookieeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834AB1C02C48C1DB00D5D62E /* CookieeTests.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		834AB1AC2C48C1D900D5D62E /* Cookiee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookiee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834AB1AF2C48C1D900D5D62E /* CookieeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeApp.swift; sourceTree = "<group>"; };
-		834AB1B12C48C1D900D5D62E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		834AB1B12C48C1D900D5D62E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		834AB1B32C48C1DB00D5D62E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		834AB1B62C48C1DB00D5D62E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		834AB1BC2C48C1DB00D5D62E /* CookieeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookieeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				834AB1AF2C48C1D900D5D62E /* CookieeApp.swift */,
-				834AB1B12C48C1D900D5D62E /* ContentView.swift */,
+				834AB1B12C48C1D900D5D62E /* LoginView.swift */,
 				834AB1B32C48C1DB00D5D62E /* Assets.xcassets */,
 				834AB1B52C48C1DB00D5D62E /* Preview Content */,
 			);
@@ -257,7 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834AB1B22C48C1D900D5D62E /* ContentView.swift in Sources */,
+				834AB1B22C48C1D900D5D62E /* LoginView.swift in Sources */,
 				834AB1B02C48C1D900D5D62E /* CookieeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
