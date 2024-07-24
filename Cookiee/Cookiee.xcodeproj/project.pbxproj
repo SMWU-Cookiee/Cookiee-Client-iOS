@@ -44,6 +44,7 @@
 		834AB1C62C48C1DB00D5D62E /* CookieeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookieeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		834AB1CA2C48C1DB00D5D62E /* CookieeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITests.swift; sourceTree = "<group>"; };
 		834AB1CC2C48C1DB00D5D62E /* CookieeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		83666FE22C50CEE40021CF9C /* Cookiee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cookiee.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +95,7 @@
 		834AB1AE2C48C1D900D5D62E /* Cookiee */ = {
 			isa = PBXGroup;
 			children = (
+				83666FE22C50CEE40021CF9C /* Cookiee.entitlements */,
 				834AB1AF2C48C1D900D5D62E /* CookieeApp.swift */,
 				834AB1B12C48C1D900D5D62E /* LoginView.swift */,
 				834AB1B32C48C1DB00D5D62E /* Assets.xcassets */,
@@ -419,6 +421,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cookiee/Preview Content\"";
@@ -447,6 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cookiee/Preview Content\"";
