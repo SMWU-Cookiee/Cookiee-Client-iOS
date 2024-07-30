@@ -49,6 +49,7 @@
 		83D8205A2C59582100209B03 /* CookieeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookieeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D8205E2C59582100209B03 /* CookieeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITests.swift; sourceTree = "<group>"; };
 		83D820602C59582100209B03 /* CookieeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		83D8206D2C5958E200209B03 /* Cookiee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cookiee.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +100,7 @@
 		83D8203C2C59582000209B03 /* Cookiee */ = {
 			isa = PBXGroup;
 			children = (
+				83D8206D2C5958E200209B03 /* Cookiee.entitlements */,
 				83D8203D2C59582000209B03 /* AppDelegate.swift */,
 				83D8203F2C59582000209B03 /* SceneDelegate.swift */,
 				83D820412C59582000209B03 /* ViewController.swift */,
@@ -440,6 +442,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ATV75VJ92J;
@@ -455,7 +458,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Cookiee;
+				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.cookiee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -472,6 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ATV75VJ92J;
@@ -487,7 +491,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Cookiee;
+				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.cookiee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
