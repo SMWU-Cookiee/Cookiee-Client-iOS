@@ -32,7 +32,20 @@ class LoginViewController: UIViewController {
                 appleLoginButton.setBackgroundImage(resizedLoginButtonImage, for: .normal)
             }
       }
-  }
+    
+    @IBAction func appleLogin(_ sender: Any) {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+}
+
+
 
   extension UIImage {
       func resize(newWidth: CGFloat) -> UIImage {
@@ -48,3 +61,18 @@ class LoginViewController: UIViewController {
           return renderImage
       }
   }
+
+
+extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding{
+  func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    }
+    
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("login failed - \(error.localizedDescription)")
+    }
+}
