@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		832A3AAB2C663F02009F1A3D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A3AAA2C663F02009F1A3D /* LoginViewController.swift */; };
 		83D8203E2C59582000209B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8203D2C59582000209B03 /* AppDelegate.swift */; };
 		83D820402C59582000209B03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8203F2C59582000209B03 /* SceneDelegate.swift */; };
 		83D820422C59582000209B03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D820412C59582000209B03 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		832A3AAA2C663F02009F1A3D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		83D8203A2C59582000209B03 /* Cookiee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookiee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D8203D2C59582000209B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83D8203F2C59582000209B03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				83D8203D2C59582000209B03 /* AppDelegate.swift */,
 				83D8203F2C59582000209B03 /* SceneDelegate.swift */,
 				83D820412C59582000209B03 /* ViewController.swift */,
+				832A3AAA2C663F02009F1A3D /* LoginViewController.swift */,
 				83D820432C59582000209B03 /* Main.storyboard */,
 				83D820462C59582100209B03 /* Assets.xcassets */,
 				83D820482C59582100209B03 /* LaunchScreen.storyboard */,
@@ -260,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				832A3AAB2C663F02009F1A3D /* LoginViewController.swift in Sources */,
 				83D820422C59582000209B03 /* ViewController.swift in Sources */,
 				83D8203E2C59582000209B03 /* AppDelegate.swift in Sources */,
 				83D820402C59582000209B03 /* SceneDelegate.swift in Sources */,
