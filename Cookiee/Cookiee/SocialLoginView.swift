@@ -11,18 +11,24 @@ import AuthenticationServices
 
 struct SocialLoginView: View {
     var body: some View {
-        VStack {
-            HStack {
-                Image("CookieeIcon")
+        GeometryReader { geometry in
+            VStack {
+                HStack {
+                    HStack {
+                        Image("CookieeIcon")
+                    }
+                    .position(x: geometry.size.width / 2, y: 216)
+                    HStack {
+                        Image("cookiee_typo")
+                    }
+                    .position(x: 0, y: 350)
+                }
+               
+                HStack {
+                    AppleSignInButton()
+                }.padding(.bottom, 90)
             }
-            .padding(.bottom, 10)
-            HStack {
-                Image("cookiee_typo")
-            }
-            .padding(.bottom, 170)
-            HStack {
-                AppleSignInButton()
-            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
