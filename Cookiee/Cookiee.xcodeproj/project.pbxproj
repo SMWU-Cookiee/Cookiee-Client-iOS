@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369B3742C6905F6005ACDBD /* ColorExtension.swift */; };
+		83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CA882C690DCE00C69ED1 /* TabBarView.swift */; };
+		83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */; };
+		83B5CA972C6911AF00C69ED1 /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA8E2C6911AE00C69ED1 /* Pretendard-Black.ttf */; };
+		83B5CA982C6911AF00C69ED1 /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA8F2C6911AF00C69ED1 /* Pretendard-ExtraBold.ttf */; };
+		83B5CA992C6911AF00C69ED1 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA902C6911AF00C69ED1 /* Pretendard-Bold.ttf */; };
+		83B5CA9A2C6911AF00C69ED1 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA912C6911AF00C69ED1 /* Pretendard-Regular.ttf */; };
+		83B5CA9B2C6911AF00C69ED1 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA922C6911AF00C69ED1 /* Pretendard-Medium.ttf */; };
+		83B5CA9C2C6911AF00C69ED1 /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA932C6911AF00C69ED1 /* Pretendard-Light.ttf */; };
+		83B5CA9D2C6911AF00C69ED1 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA942C6911AF00C69ED1 /* Pretendard-SemiBold.ttf */; };
+		83B5CA9E2C6911AF00C69ED1 /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA952C6911AF00C69ED1 /* Pretendard-ExtraLight.ttf */; };
+		83B5CA9F2C6911AF00C69ED1 /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA962C6911AF00C69ED1 /* Pretendard-Thin.ttf */; };
 		83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79872C68BB570044C453 /* CookieeApp.swift */; };
 		83BD798A2C68BB570044C453 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79892C68BB570044C453 /* ContentView.swift */; };
 		83BD798C2C68BB580044C453 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83BD798B2C68BB580044C453 /* Assets.xcassets */; };
@@ -37,6 +48,18 @@
 
 /* Begin PBXFileReference section */
 		8369B3742C6905F6005ACDBD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		83B5CA882C690DCE00C69ED1 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
+		83B5CA8E2C6911AE00C69ED1 /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Black.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-Black.ttf"; sourceTree = "<group>"; };
+		83B5CA8F2C6911AF00C69ED1 /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-ExtraBold.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
+		83B5CA902C6911AF00C69ED1 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Bold.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-Bold.ttf"; sourceTree = "<group>"; };
+		83B5CA912C6911AF00C69ED1 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Regular.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-Regular.ttf"; sourceTree = "<group>"; };
+		83B5CA922C6911AF00C69ED1 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Medium.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-Medium.ttf"; sourceTree = "<group>"; };
+		83B5CA932C6911AF00C69ED1 /* Pretendard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Light.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-Light.ttf"; sourceTree = "<group>"; };
+		83B5CA942C6911AF00C69ED1 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-SemiBold.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
+		83B5CA952C6911AF00C69ED1 /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-ExtraLight.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; };
+		83B5CA962C6911AF00C69ED1 /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Thin.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-Thin.ttf"; sourceTree = "<group>"; };
+		83B5CAA02C6911EB00C69ED1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		83BD79842C68BB570044C453 /* Cookiee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookiee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83BD79872C68BB570044C453 /* CookieeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeApp.swift; sourceTree = "<group>"; };
 		83BD79892C68BB570044C453 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,6 +99,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		83B5CA8C2C6910F800C69ED1 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				8369B3742C6905F6005ACDBD /* ColorExtension.swift */,
+				83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */,
+				83B5CA8D2C69118000C69ED1 /* Font */,
+				83BD798B2C68BB580044C453 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		83B5CA8D2C69118000C69ED1 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				83B5CA8E2C6911AE00C69ED1 /* Pretendard-Black.ttf */,
+				83B5CA902C6911AF00C69ED1 /* Pretendard-Bold.ttf */,
+				83B5CA8F2C6911AF00C69ED1 /* Pretendard-ExtraBold.ttf */,
+				83B5CA952C6911AF00C69ED1 /* Pretendard-ExtraLight.ttf */,
+				83B5CA932C6911AF00C69ED1 /* Pretendard-Light.ttf */,
+				83B5CA922C6911AF00C69ED1 /* Pretendard-Medium.ttf */,
+				83B5CA912C6911AF00C69ED1 /* Pretendard-Regular.ttf */,
+				83B5CA942C6911AF00C69ED1 /* Pretendard-SemiBold.ttf */,
+				83B5CA962C6911AF00C69ED1 /* Pretendard-Thin.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		83BD797B2C68BB570044C453 = {
 			isa = PBXGroup;
 			children = (
@@ -99,12 +149,13 @@
 		83BD79862C68BB570044C453 /* Cookiee */ = {
 			isa = PBXGroup;
 			children = (
+				83B5CAA02C6911EB00C69ED1 /* Info.plist */,
 				83BD79B12C68BBA10044C453 /* Cookiee.entitlements */,
 				83BD79872C68BB570044C453 /* CookieeApp.swift */,
 				83BD79892C68BB570044C453 /* ContentView.swift */,
 				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
-				8369B3742C6905F6005ACDBD /* ColorExtension.swift */,
-				83BD798B2C68BB580044C453 /* Assets.xcassets */,
+				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
+				83B5CA8C2C6910F800C69ED1 /* Resource */,
 				83BD798D2C68BB580044C453 /* Preview Content */,
 			);
 			path = Cookiee;
@@ -239,8 +290,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83B5CA9D2C6911AF00C69ED1 /* Pretendard-SemiBold.ttf in Resources */,
 				83BD798F2C68BB580044C453 /* Preview Assets.xcassets in Resources */,
+				83B5CA992C6911AF00C69ED1 /* Pretendard-Bold.ttf in Resources */,
+				83B5CA9A2C6911AF00C69ED1 /* Pretendard-Regular.ttf in Resources */,
 				83BD798C2C68BB580044C453 /* Assets.xcassets in Resources */,
+				83B5CA972C6911AF00C69ED1 /* Pretendard-Black.ttf in Resources */,
+				83B5CA9B2C6911AF00C69ED1 /* Pretendard-Medium.ttf in Resources */,
+				83B5CA9E2C6911AF00C69ED1 /* Pretendard-ExtraLight.ttf in Resources */,
+				83B5CA9F2C6911AF00C69ED1 /* Pretendard-Thin.ttf in Resources */,
+				83B5CA9C2C6911AF00C69ED1 /* Pretendard-Light.ttf in Resources */,
+				83B5CA982C6911AF00C69ED1 /* Pretendard-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,9 +325,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
+				83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +498,7 @@
 				DEVELOPMENT_TEAM = ATV75VJ92J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cookiee/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -466,6 +529,7 @@
 				DEVELOPMENT_TEAM = ATV75VJ92J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cookiee/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
