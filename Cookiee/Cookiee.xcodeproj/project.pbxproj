@@ -44,6 +44,7 @@
 		83BD799E2C68BB590044C453 /* CookieeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookieeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83BD79A22C68BB590044C453 /* CookieeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITests.swift; sourceTree = "<group>"; };
 		83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		83BD79B12C68BBA10044C453 /* Cookiee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cookiee.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +95,7 @@
 		83BD79862C68BB570044C453 /* Cookiee */ = {
 			isa = PBXGroup;
 			children = (
+				83BD79B12C68BBA10044C453 /* Cookiee.entitlements */,
 				83BD79872C68BB570044C453 /* CookieeApp.swift */,
 				83BD79892C68BB570044C453 /* ContentView.swift */,
 				83BD798B2C68BB580044C453 /* Assets.xcassets */,
@@ -419,6 +421,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cookiee/Preview Content\"";
@@ -435,7 +438,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.Cookiee;
+				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.cookiee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -448,6 +451,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cookiee/Preview Content\"";
@@ -464,7 +468,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.Cookiee;
+				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.cookiee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
