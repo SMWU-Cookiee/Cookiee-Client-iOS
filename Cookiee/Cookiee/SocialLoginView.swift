@@ -15,7 +15,7 @@ struct SocialLoginView: View {
             VStack {
                 HStack {
                     HStack {
-                        Image("CookieeIcon")
+                        Image("cookiee_icon_big")
                     }
                     .position(x: geometry.size.width / 2, y: 216)
                     HStack {
