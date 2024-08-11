@@ -14,6 +14,7 @@
 		83BD79992C68BB590044C453 /* CookieeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79982C68BB590044C453 /* CookieeTests.swift */; };
 		83BD79A32C68BB590044C453 /* CookieeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79A22C68BB590044C453 /* CookieeUITests.swift */; };
 		83BD79A52C68BB590044C453 /* CookieeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */; };
+		83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		83BD79A22C68BB590044C453 /* CookieeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITests.swift; sourceTree = "<group>"; };
 		83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		83BD79B12C68BBA10044C453 /* Cookiee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cookiee.entitlements; sourceTree = "<group>"; };
+		83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				83BD79B12C68BBA10044C453 /* Cookiee.entitlements */,
 				83BD79872C68BB570044C453 /* CookieeApp.swift */,
 				83BD79892C68BB570044C453 /* ContentView.swift */,
+				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
 				83BD798B2C68BB580044C453 /* Assets.xcassets */,
 				83BD798D2C68BB580044C453 /* Preview Content */,
 			);
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
 			);
