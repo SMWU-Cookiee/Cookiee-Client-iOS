@@ -7,62 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		834AB1B02C48C1D900D5D62E /* CookieeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834AB1AF2C48C1D900D5D62E /* CookieeApp.swift */; };
-		834AB1B22C48C1D900D5D62E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834AB1B12C48C1D900D5D62E /* LoginView.swift */; };
-		834AB1B42C48C1DB00D5D62E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 834AB1B32C48C1DB00D5D62E /* Assets.xcassets */; };
-		834AB1B72C48C1DB00D5D62E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 834AB1B62C48C1DB00D5D62E /* Preview Assets.xcassets */; };
-		834AB1C12C48C1DB00D5D62E /* CookieeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834AB1C02C48C1DB00D5D62E /* CookieeTests.swift */; };
-		834AB1CB2C48C1DB00D5D62E /* CookieeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834AB1CA2C48C1DB00D5D62E /* CookieeUITests.swift */; };
-		834AB1CD2C48C1DB00D5D62E /* CookieeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834AB1CC2C48C1DB00D5D62E /* CookieeUITestsLaunchTests.swift */; };
+		832A3AAB2C663F02009F1A3D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A3AAA2C663F02009F1A3D /* LoginViewController.swift */; };
+		83D8203E2C59582000209B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8203D2C59582000209B03 /* AppDelegate.swift */; };
+		83D820402C59582000209B03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8203F2C59582000209B03 /* SceneDelegate.swift */; };
+		83D820422C59582000209B03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D820412C59582000209B03 /* ViewController.swift */; };
+		83D820452C59582000209B03 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83D820442C59582000209B03 /* Base */; };
+		83D820472C59582100209B03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83D820462C59582100209B03 /* Assets.xcassets */; };
+		83D8204A2C59582100209B03 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83D820492C59582100209B03 /* Base */; };
+		83D820552C59582100209B03 /* CookieeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D820542C59582100209B03 /* CookieeTests.swift */; };
+		83D8205F2C59582100209B03 /* CookieeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8205E2C59582100209B03 /* CookieeUITests.swift */; };
+		83D820612C59582100209B03 /* CookieeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D820602C59582100209B03 /* CookieeUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		834AB1BD2C48C1DB00D5D62E /* PBXContainerItemProxy */ = {
+		83D820512C59582100209B03 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 834AB1A42C48C1D900D5D62E /* Project object */;
+			containerPortal = 83D820322C59582000209B03 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 834AB1AB2C48C1D900D5D62E;
+			remoteGlobalIDString = 83D820392C59582000209B03;
 			remoteInfo = Cookiee;
 		};
-		834AB1C72C48C1DB00D5D62E /* PBXContainerItemProxy */ = {
+		83D8205B2C59582100209B03 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 834AB1A42C48C1D900D5D62E /* Project object */;
+			containerPortal = 83D820322C59582000209B03 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 834AB1AB2C48C1D900D5D62E;
+			remoteGlobalIDString = 83D820392C59582000209B03;
 			remoteInfo = Cookiee;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		834AB1AC2C48C1D900D5D62E /* Cookiee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookiee.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		834AB1AF2C48C1D900D5D62E /* CookieeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeApp.swift; sourceTree = "<group>"; };
-		834AB1B12C48C1D900D5D62E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		834AB1B32C48C1DB00D5D62E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		834AB1B62C48C1DB00D5D62E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		834AB1BC2C48C1DB00D5D62E /* CookieeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookieeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		834AB1C02C48C1DB00D5D62E /* CookieeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeTests.swift; sourceTree = "<group>"; };
-		834AB1C62C48C1DB00D5D62E /* CookieeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookieeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		834AB1CA2C48C1DB00D5D62E /* CookieeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITests.swift; sourceTree = "<group>"; };
-		834AB1CC2C48C1DB00D5D62E /* CookieeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		83666FE22C50CEE40021CF9C /* Cookiee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cookiee.entitlements; sourceTree = "<group>"; };
+		832A3AAA2C663F02009F1A3D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		83D8203A2C59582000209B03 /* Cookiee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookiee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83D8203D2C59582000209B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		83D8203F2C59582000209B03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		83D820412C59582000209B03 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		83D820442C59582000209B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		83D820462C59582100209B03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		83D820492C59582100209B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		83D8204B2C59582100209B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83D820502C59582100209B03 /* CookieeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookieeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83D820542C59582100209B03 /* CookieeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeTests.swift; sourceTree = "<group>"; };
+		83D8205A2C59582100209B03 /* CookieeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookieeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83D8205E2C59582100209B03 /* CookieeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITests.swift; sourceTree = "<group>"; };
+		83D820602C59582100209B03 /* CookieeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		83D8206D2C5958E200209B03 /* Cookiee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cookiee.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		834AB1A92C48C1D900D5D62E /* Frameworks */ = {
+		83D820372C59582000209B03 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		834AB1B92C48C1DB00D5D62E /* Frameworks */ = {
+		83D8204D2C59582100209B03 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		834AB1C32C48C1DB00D5D62E /* Frameworks */ = {
+		83D820572C59582100209B03 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,59 +79,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		834AB1A32C48C1D900D5D62E = {
+		83D820312C59582000209B03 = {
 			isa = PBXGroup;
 			children = (
-				834AB1AE2C48C1D900D5D62E /* Cookiee */,
-				834AB1BF2C48C1DB00D5D62E /* CookieeTests */,
-				834AB1C92C48C1DB00D5D62E /* CookieeUITests */,
-				834AB1AD2C48C1D900D5D62E /* Products */,
+				83D8203C2C59582000209B03 /* Cookiee */,
+				83D820532C59582100209B03 /* CookieeTests */,
+				83D8205D2C59582100209B03 /* CookieeUITests */,
+				83D8203B2C59582000209B03 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		834AB1AD2C48C1D900D5D62E /* Products */ = {
+		83D8203B2C59582000209B03 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				834AB1AC2C48C1D900D5D62E /* Cookiee.app */,
-				834AB1BC2C48C1DB00D5D62E /* CookieeTests.xctest */,
-				834AB1C62C48C1DB00D5D62E /* CookieeUITests.xctest */,
+				83D8203A2C59582000209B03 /* Cookiee.app */,
+				83D820502C59582100209B03 /* CookieeTests.xctest */,
+				83D8205A2C59582100209B03 /* CookieeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		834AB1AE2C48C1D900D5D62E /* Cookiee */ = {
+		83D8203C2C59582000209B03 /* Cookiee */ = {
 			isa = PBXGroup;
 			children = (
-				83666FE22C50CEE40021CF9C /* Cookiee.entitlements */,
-				834AB1AF2C48C1D900D5D62E /* CookieeApp.swift */,
-				834AB1B12C48C1D900D5D62E /* LoginView.swift */,
-				834AB1B32C48C1DB00D5D62E /* Assets.xcassets */,
-				834AB1B52C48C1DB00D5D62E /* Preview Content */,
+				83D8206D2C5958E200209B03 /* Cookiee.entitlements */,
+				83D8203D2C59582000209B03 /* AppDelegate.swift */,
+				83D8203F2C59582000209B03 /* SceneDelegate.swift */,
+				83D820412C59582000209B03 /* ViewController.swift */,
+				832A3AAA2C663F02009F1A3D /* LoginViewController.swift */,
+				83D820432C59582000209B03 /* Main.storyboard */,
+				83D820462C59582100209B03 /* Assets.xcassets */,
+				83D820482C59582100209B03 /* LaunchScreen.storyboard */,
+				83D8204B2C59582100209B03 /* Info.plist */,
 			);
 			path = Cookiee;
 			sourceTree = "<group>";
 		};
-		834AB1B52C48C1DB00D5D62E /* Preview Content */ = {
+		83D820532C59582100209B03 /* CookieeTests */ = {
 			isa = PBXGroup;
 			children = (
-				834AB1B62C48C1DB00D5D62E /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		834AB1BF2C48C1DB00D5D62E /* CookieeTests */ = {
-			isa = PBXGroup;
-			children = (
-				834AB1C02C48C1DB00D5D62E /* CookieeTests.swift */,
+				83D820542C59582100209B03 /* CookieeTests.swift */,
 			);
 			path = CookieeTests;
 			sourceTree = "<group>";
 		};
-		834AB1C92C48C1DB00D5D62E /* CookieeUITests */ = {
+		83D8205D2C59582100209B03 /* CookieeUITests */ = {
 			isa = PBXGroup;
 			children = (
-				834AB1CA2C48C1DB00D5D62E /* CookieeUITests.swift */,
-				834AB1CC2C48C1DB00D5D62E /* CookieeUITestsLaunchTests.swift */,
+				83D8205E2C59582100209B03 /* CookieeUITests.swift */,
+				83D820602C59582100209B03 /* CookieeUITestsLaunchTests.swift */,
 			);
 			path = CookieeUITests;
 			sourceTree = "<group>";
@@ -132,13 +135,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		834AB1AB2C48C1D900D5D62E /* Cookiee */ = {
+		83D820392C59582000209B03 /* Cookiee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 834AB1D02C48C1DB00D5D62E /* Build configuration list for PBXNativeTarget "Cookiee" */;
+			buildConfigurationList = 83D820642C59582100209B03 /* Build configuration list for PBXNativeTarget "Cookiee" */;
 			buildPhases = (
-				834AB1A82C48C1D900D5D62E /* Sources */,
-				834AB1A92C48C1D900D5D62E /* Frameworks */,
-				834AB1AA2C48C1D900D5D62E /* Resources */,
+				83D820362C59582000209B03 /* Sources */,
+				83D820372C59582000209B03 /* Frameworks */,
+				83D820382C59582000209B03 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -146,69 +149,69 @@
 			);
 			name = Cookiee;
 			productName = Cookiee;
-			productReference = 834AB1AC2C48C1D900D5D62E /* Cookiee.app */;
+			productReference = 83D8203A2C59582000209B03 /* Cookiee.app */;
 			productType = "com.apple.product-type.application";
 		};
-		834AB1BB2C48C1DB00D5D62E /* CookieeTests */ = {
+		83D8204F2C59582100209B03 /* CookieeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 834AB1D32C48C1DB00D5D62E /* Build configuration list for PBXNativeTarget "CookieeTests" */;
+			buildConfigurationList = 83D820672C59582100209B03 /* Build configuration list for PBXNativeTarget "CookieeTests" */;
 			buildPhases = (
-				834AB1B82C48C1DB00D5D62E /* Sources */,
-				834AB1B92C48C1DB00D5D62E /* Frameworks */,
-				834AB1BA2C48C1DB00D5D62E /* Resources */,
+				83D8204C2C59582100209B03 /* Sources */,
+				83D8204D2C59582100209B03 /* Frameworks */,
+				83D8204E2C59582100209B03 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				834AB1BE2C48C1DB00D5D62E /* PBXTargetDependency */,
+				83D820522C59582100209B03 /* PBXTargetDependency */,
 			);
 			name = CookieeTests;
 			productName = CookieeTests;
-			productReference = 834AB1BC2C48C1DB00D5D62E /* CookieeTests.xctest */;
+			productReference = 83D820502C59582100209B03 /* CookieeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		834AB1C52C48C1DB00D5D62E /* CookieeUITests */ = {
+		83D820592C59582100209B03 /* CookieeUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 834AB1D62C48C1DB00D5D62E /* Build configuration list for PBXNativeTarget "CookieeUITests" */;
+			buildConfigurationList = 83D8206A2C59582100209B03 /* Build configuration list for PBXNativeTarget "CookieeUITests" */;
 			buildPhases = (
-				834AB1C22C48C1DB00D5D62E /* Sources */,
-				834AB1C32C48C1DB00D5D62E /* Frameworks */,
-				834AB1C42C48C1DB00D5D62E /* Resources */,
+				83D820562C59582100209B03 /* Sources */,
+				83D820572C59582100209B03 /* Frameworks */,
+				83D820582C59582100209B03 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				834AB1C82C48C1DB00D5D62E /* PBXTargetDependency */,
+				83D8205C2C59582100209B03 /* PBXTargetDependency */,
 			);
 			name = CookieeUITests;
 			productName = CookieeUITests;
-			productReference = 834AB1C62C48C1DB00D5D62E /* CookieeUITests.xctest */;
+			productReference = 83D8205A2C59582100209B03 /* CookieeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		834AB1A42C48C1D900D5D62E /* Project object */ = {
+		83D820322C59582000209B03 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					834AB1AB2C48C1D900D5D62E = {
+					83D820392C59582000209B03 = {
 						CreatedOnToolsVersion = 15.4;
 					};
-					834AB1BB2C48C1DB00D5D62E = {
+					83D8204F2C59582100209B03 = {
 						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 834AB1AB2C48C1D900D5D62E;
+						TestTargetID = 83D820392C59582000209B03;
 					};
-					834AB1C52C48C1DB00D5D62E = {
+					83D820592C59582100209B03 = {
 						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 834AB1AB2C48C1D900D5D62E;
+						TestTargetID = 83D820392C59582000209B03;
 					};
 				};
 			};
-			buildConfigurationList = 834AB1A72C48C1D900D5D62E /* Build configuration list for PBXProject "Cookiee" */;
+			buildConfigurationList = 83D820352C59582000209B03 /* Build configuration list for PBXProject "Cookiee" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -216,36 +219,37 @@
 				en,
 				Base,
 			);
-			mainGroup = 834AB1A32C48C1D900D5D62E;
-			productRefGroup = 834AB1AD2C48C1D900D5D62E /* Products */;
+			mainGroup = 83D820312C59582000209B03;
+			productRefGroup = 83D8203B2C59582000209B03 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				834AB1AB2C48C1D900D5D62E /* Cookiee */,
-				834AB1BB2C48C1DB00D5D62E /* CookieeTests */,
-				834AB1C52C48C1DB00D5D62E /* CookieeUITests */,
+				83D820392C59582000209B03 /* Cookiee */,
+				83D8204F2C59582100209B03 /* CookieeTests */,
+				83D820592C59582100209B03 /* CookieeUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		834AB1AA2C48C1D900D5D62E /* Resources */ = {
+		83D820382C59582000209B03 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834AB1B72C48C1DB00D5D62E /* Preview Assets.xcassets in Resources */,
-				834AB1B42C48C1DB00D5D62E /* Assets.xcassets in Resources */,
+				83D820472C59582100209B03 /* Assets.xcassets in Resources */,
+				83D8204A2C59582100209B03 /* Base in Resources */,
+				83D820452C59582000209B03 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		834AB1BA2C48C1DB00D5D62E /* Resources */ = {
+		83D8204E2C59582100209B03 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		834AB1C42C48C1DB00D5D62E /* Resources */ = {
+		83D820582C59582100209B03 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -255,49 +259,70 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		834AB1A82C48C1D900D5D62E /* Sources */ = {
+		83D820362C59582000209B03 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834AB1B22C48C1D900D5D62E /* LoginView.swift in Sources */,
-				834AB1B02C48C1D900D5D62E /* CookieeApp.swift in Sources */,
+				832A3AAB2C663F02009F1A3D /* LoginViewController.swift in Sources */,
+				83D820422C59582000209B03 /* ViewController.swift in Sources */,
+				83D8203E2C59582000209B03 /* AppDelegate.swift in Sources */,
+				83D820402C59582000209B03 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		834AB1B82C48C1DB00D5D62E /* Sources */ = {
+		83D8204C2C59582100209B03 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834AB1C12C48C1DB00D5D62E /* CookieeTests.swift in Sources */,
+				83D820552C59582100209B03 /* CookieeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		834AB1C22C48C1DB00D5D62E /* Sources */ = {
+		83D820562C59582100209B03 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834AB1CD2C48C1DB00D5D62E /* CookieeUITestsLaunchTests.swift in Sources */,
-				834AB1CB2C48C1DB00D5D62E /* CookieeUITests.swift in Sources */,
+				83D820612C59582100209B03 /* CookieeUITestsLaunchTests.swift in Sources */,
+				83D8205F2C59582100209B03 /* CookieeUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		834AB1BE2C48C1DB00D5D62E /* PBXTargetDependency */ = {
+		83D820522C59582100209B03 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 834AB1AB2C48C1D900D5D62E /* Cookiee */;
-			targetProxy = 834AB1BD2C48C1DB00D5D62E /* PBXContainerItemProxy */;
+			target = 83D820392C59582000209B03 /* Cookiee */;
+			targetProxy = 83D820512C59582100209B03 /* PBXContainerItemProxy */;
 		};
-		834AB1C82C48C1DB00D5D62E /* PBXTargetDependency */ = {
+		83D8205C2C59582100209B03 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 834AB1AB2C48C1D900D5D62E /* Cookiee */;
-			targetProxy = 834AB1C72C48C1DB00D5D62E /* PBXContainerItemProxy */;
+			target = 83D820392C59582000209B03 /* Cookiee */;
+			targetProxy = 83D8205B2C59582100209B03 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		83D820432C59582000209B03 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83D820442C59582000209B03 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		83D820482C59582100209B03 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83D820492C59582100209B03 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
-		834AB1CE2C48C1DB00D5D62E /* Debug */ = {
+		83D820622C59582100209B03 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -360,7 +385,7 @@
 			};
 			name = Debug;
 		};
-		834AB1CF2C48C1DB00D5D62E /* Release */ = {
+		83D820632C59582100209B03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -416,7 +441,7 @@
 			};
 			name = Release;
 		};
-		834AB1D12C48C1DB00D5D62E /* Debug */ = {
+		83D820652C59582100209B03 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -424,15 +449,13 @@
 				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Cookiee/Preview Content\"";
 				DEVELOPMENT_TEAM = ATV75VJ92J;
-				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Cookiee/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -440,13 +463,17 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.cookiee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		834AB1D22C48C1DB00D5D62E /* Release */ = {
+		83D820662C59582100209B03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -454,15 +481,13 @@
 				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Cookiee/Preview Content\"";
 				DEVELOPMENT_TEAM = ATV75VJ92J;
-				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Cookiee/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,19 +495,24 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.cookiee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		834AB1D42C48C1DB00D5D62E /* Debug */ = {
+		83D820682C59582100209B03 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ATV75VJ92J;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
@@ -495,13 +525,14 @@
 			};
 			name = Debug;
 		};
-		834AB1D52C48C1DB00D5D62E /* Release */ = {
+		83D820692C59582100209B03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ATV75VJ92J;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
@@ -514,7 +545,7 @@
 			};
 			name = Release;
 		};
-		834AB1D72C48C1DB00D5D62E /* Debug */ = {
+		83D8206B2C59582100209B03 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -523,7 +554,7 @@
 				DEVELOPMENT_TEAM = ATV75VJ92J;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.cookiee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.CookieeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -532,7 +563,7 @@
 			};
 			name = Debug;
 		};
-		834AB1D82C48C1DB00D5D62E /* Release */ = {
+		83D8206C2C59582100209B03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -541,7 +572,7 @@
 				DEVELOPMENT_TEAM = ATV75VJ92J;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = site.cookiee.cookiee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.CookieeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -553,43 +584,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		834AB1A72C48C1D900D5D62E /* Build configuration list for PBXProject "Cookiee" */ = {
+		83D820352C59582000209B03 /* Build configuration list for PBXProject "Cookiee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				834AB1CE2C48C1DB00D5D62E /* Debug */,
-				834AB1CF2C48C1DB00D5D62E /* Release */,
+				83D820622C59582100209B03 /* Debug */,
+				83D820632C59582100209B03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		834AB1D02C48C1DB00D5D62E /* Build configuration list for PBXNativeTarget "Cookiee" */ = {
+		83D820642C59582100209B03 /* Build configuration list for PBXNativeTarget "Cookiee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				834AB1D12C48C1DB00D5D62E /* Debug */,
-				834AB1D22C48C1DB00D5D62E /* Release */,
+				83D820652C59582100209B03 /* Debug */,
+				83D820662C59582100209B03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		834AB1D32C48C1DB00D5D62E /* Build configuration list for PBXNativeTarget "CookieeTests" */ = {
+		83D820672C59582100209B03 /* Build configuration list for PBXNativeTarget "CookieeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				834AB1D42C48C1DB00D5D62E /* Debug */,
-				834AB1D52C48C1DB00D5D62E /* Release */,
+				83D820682C59582100209B03 /* Debug */,
+				83D820692C59582100209B03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		834AB1D62C48C1DB00D5D62E /* Build configuration list for PBXNativeTarget "CookieeUITests" */ = {
+		83D8206A2C59582100209B03 /* Build configuration list for PBXNativeTarget "CookieeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				834AB1D72C48C1DB00D5D62E /* Debug */,
-				834AB1D82C48C1DB00D5D62E /* Release */,
+				83D8206B2C59582100209B03 /* Debug */,
+				83D8206C2C59582100209B03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 834AB1A42C48C1D900D5D62E /* Project object */;
+	rootObject = 83D820322C59582000209B03 /* Project object */;
 }
