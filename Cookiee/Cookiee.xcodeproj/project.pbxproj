@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369B3742C6905F6005ACDBD /* ColorExtension.swift */; };
 		83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79872C68BB570044C453 /* CookieeApp.swift */; };
 		83BD798A2C68BB570044C453 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79892C68BB570044C453 /* ContentView.swift */; };
 		83BD798C2C68BB580044C453 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83BD798B2C68BB580044C453 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8369B3742C6905F6005ACDBD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		83BD79842C68BB570044C453 /* Cookiee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookiee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83BD79872C68BB570044C453 /* CookieeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeApp.swift; sourceTree = "<group>"; };
 		83BD79892C68BB570044C453 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				83BD79872C68BB570044C453 /* CookieeApp.swift */,
 				83BD79892C68BB570044C453 /* ContentView.swift */,
 				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
+				8369B3742C6905F6005ACDBD /* ColorExtension.swift */,
 				83BD798B2C68BB580044C453 /* Assets.xcassets */,
 				83BD798D2C68BB580044C453 /* Preview Content */,
 			);
@@ -265,6 +268,7 @@
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
+				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
