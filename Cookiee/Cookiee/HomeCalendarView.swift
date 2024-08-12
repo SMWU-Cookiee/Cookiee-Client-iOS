@@ -38,9 +38,13 @@ struct HomeCalendarView: View {
                 
                 // 캘린더
                 VStack {
-                  headerView
-                  calendarGridView
+                    headerView
+                    calendarGridView
+                    Spacer()
                 }
+                .background(Color.Beige)
+                
+
             }
         }
     }
@@ -50,6 +54,7 @@ struct HomeCalendarView: View {
         VStack(alignment: .center) {
             yearMonthView
                 .padding(.bottom, 5)
+                .padding(.top, 5)
             
             HStack {
                 ForEach(Self.weekdaySymbols.indices, id: \.self) { symbol in
@@ -59,10 +64,9 @@ struct HomeCalendarView: View {
                         .font(.Body1_R)
                 }
             }
-            .padding(.bottom, 5)
+            .padding(.top, 5)
         }
-        .frame(height: 70)
-        .background(Color.Beige)
+        .frame(height: 75)
     }
 
     // 연월 표기
@@ -102,7 +106,7 @@ struct HomeCalendarView: View {
     }
 
       
-      // MARK: - 날짜 그리드 뷰
+      // 캘린더 그리드 뷰
       private var calendarGridView: some View {
         let daysInMonth: Int = numberOfDays(in: month)
         let firstWeekday: Int = firstWeekdayOfMonth(in: month) - 1
@@ -110,7 +114,7 @@ struct HomeCalendarView: View {
         let numberOfRows = Int(ceil(Double(daysInMonth + firstWeekday) / 7.0))
         let visibleDaysOfNextMonth = numberOfRows * 7 - (daysInMonth + firstWeekday)
         
-        return LazyVGrid(columns: Array(repeating: GridItem(), count: 7)) {
+          return LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0, alignment: .top), count: 7), spacing: 1) {
           ForEach(-firstWeekday ..< daysInMonth + visibleDaysOfNextMonth, id: \.self) { index in
             Group {
               if index > -1 && index < daysInMonth {
@@ -138,11 +142,11 @@ struct HomeCalendarView: View {
             }
           }
         }
-      }
+    }
 }
 
 
-// MARK: - 일자 셀 뷰
+// 캘린더 셀
 private struct CellView: View {
   private var day: Int
   private var clicked: Bool
@@ -150,7 +154,7 @@ private struct CellView: View {
   private var isCurrentMonthDay: Bool
   private var textColor: Color {
     if clicked {
-      return Color.white
+      return Color.black
     } else if isCurrentMonthDay {
       return Color.black
     } else {
@@ -159,9 +163,9 @@ private struct CellView: View {
   }
   private var backgroundColor: Color {
     if clicked {
-      return Color.black
-    } else if isToday {
       return Color.gray
+    } else if isToday {
+      return Color.white
     } else {
       return Color.white
     }
@@ -181,23 +185,12 @@ private struct CellView: View {
   
   fileprivate var body: some View {
     VStack {
-      Circle()
-        .fill(backgroundColor)
-        .overlay(Text(String(day)))
-        .foregroundColor(textColor)
-      
-      Spacer()
-      
-      if clicked {
-        RoundedRectangle(cornerRadius: 10)
-          .fill(.red)
-          .frame(width: 10, height: 10)
-      } else {
-        Spacer()
-          .frame(height: 10)
-      }
+        RoundedRectangle(cornerRadius: 2)
+            .fill(backgroundColor)
+            .overlay(Text(String(day)))
+            .foregroundColor(textColor)
     }
-    .frame(height: 50)
+    .frame(width: 55, height: 95)
   }
 }
 
