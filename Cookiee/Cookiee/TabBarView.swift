@@ -40,7 +40,7 @@ struct CustomTabView: View {
         HStack {
             HStack {
                 Spacer()
-                Button { 
+                Button {
                     selectedTab = .first
                 } label: {
                     VStack {
