@@ -23,7 +23,38 @@ struct HomeCalendarView: View {
                     }
                     .padding(.leading, 340 )
                 }
-                .frame(width: geometry.size.width ,height: 45)
+                .frame(width: geometry.size.width, height: 45)
+                
+                // 캘린더 헤더
+                HStack {
+                    HStack {
+                        Button {
+                            // action
+                        } label: {
+                            Image("ChevronLeftIcon")
+                        }
+                        .padding(.leading, 5)
+                        Spacer()
+                        Text("2024년 06월")
+                            .foregroundStyle(Color.Brown00)
+                        Spacer()
+                        Button {
+                            // action
+                        } label: {
+                            Image("ChevronRightIcon")
+                        }
+                        .padding(.trailing, 5)
+                    }
+                    HStack {
+                        // 요일 표시 부분
+                    }
+                }
+                .frame(width: geometry.size.width, height: 45)
+                .background(Color.Beige)
+                
+                // 캘린더 셀
+                
+
             }
         }
     }
