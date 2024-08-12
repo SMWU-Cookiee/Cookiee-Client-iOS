@@ -8,7 +8,22 @@
 import SwiftUI
 
 struct DateView: View {
+    // Back 버튼 커스텀
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    var backButton : some View {
+            Button{
+                self.presentationMode.wrappedValue.dismiss()
+            } label: {
+                HStack {
+                    Image("ChevronLeftIcon")
+                        .aspectRatio(contentMode: .fit)
+                }
+            }
+        }
+
     var date: Date?
+    
     
     var body: some View {
         VStack {
@@ -21,6 +36,8 @@ struct DateView: View {
             }
         }
         .padding()
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
     }
     
     static let dateFormatter: DateFormatter = {
