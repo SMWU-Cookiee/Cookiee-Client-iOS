@@ -46,9 +46,9 @@ struct DateView: View {
                 }
                 .edgesIgnoringSafeArea(.top)
             }
-            .navigationBarBackButtonHidden(true) // Back 버튼 커스텀
-            .navigationBarItems(leading: backButton)
         }
+        .navigationBarBackButtonHidden(true) // Back 버튼 커스텀
+        .navigationBarItems(leading: backButton)
     }
 }
 
