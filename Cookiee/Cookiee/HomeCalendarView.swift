@@ -20,31 +20,33 @@ struct HomeCalendarView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                // 쿠키 타이틀 헤더
-                ZStack {
-                    Image("cookiee_icon_small")
-                    HStack {
-                        Button {
-                            // action
-                        } label: {
-                            Image("Download")
-                        }
-                    }
-                    .padding(.leading, 340)
-                }
-                .frame(width: geometry.size.width, height: 45)
-                
-                // 캘린더
+        NavigationStack {
+            GeometryReader { geometry in
                 VStack {
-                    headerView
-                    calendarGridView
-                    Spacer()
-                }
-                .background(Color.Beige)
-                
+                    // 쿠키 타이틀 헤더
+                    ZStack {
+                        Image("cookiee_icon_small")
+                        HStack {
+                            Button {
+                                // action
+                            } label: {
+                                Image("Download")
+                            }
+                        }
+                        .padding(.leading, 340)
+                    }
+                    .frame(width: geometry.size.width, height: 45)
+                    
+                    // 캘린더
+                    VStack {
+                        headerView
+                        calendarGridView
+                        Spacer()
+                    }
+                    .background(Color.Beige)
+                    
 
+                }
             }
         }
     }
@@ -121,7 +123,12 @@ struct HomeCalendarView: View {
                 let clicked = clickedCurrentMonthDates == date
                 let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
                 
-                CellView(day: day, clicked: clicked, isToday: isToday)
+                  NavigationLink(
+                      destination: DateView(date: date),
+                      label: {
+                          CellView(day: day, clicked: clicked, isToday: isToday)
+                      }
+                  )
               } else if let prevMonthDate = Calendar.current.date(
                 byAdding: .day,
                 value: index + lastDayOfMonthBefore,

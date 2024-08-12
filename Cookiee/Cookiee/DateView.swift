@@ -8,10 +8,26 @@
 import SwiftUI
 
 struct DateView: View {
-    @State var date: Date?
+    var date: Date?
+    
     var body: some View {
-        Text("\(String(describing: date))")
+        VStack {
+            if let date = date {
+                Text("Selected Date: \(date, formatter: Self.dateFormatter)")
+                    .font(.title)
+            } else {
+                Text("No Date Selected")
+                    .font(.title)
+            }
+        }
+        .padding()
     }
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        return formatter
+    }()
 }
 
 #Preview {
