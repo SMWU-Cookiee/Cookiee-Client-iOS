@@ -20,11 +20,11 @@ struct TabBarView : View {
             Spacer()
             switch selectedTab {
             case .first:
-                Text("The First Tab")
+                HomeCalendarView()
             case .second:
-                Text("The Second Tab")
+                Text("모아보기")
             case .third:
-                Text("The Third Tab")
+                Text("마이페이지")
             }
             Spacer()
             CustomTabView(selectedTab: $selectedTab)            

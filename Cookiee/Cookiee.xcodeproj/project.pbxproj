@@ -27,6 +27,7 @@
 		83BD79A32C68BB590044C453 /* CookieeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79A22C68BB590044C453 /* CookieeUITests.swift */; };
 		83BD79A52C68BB590044C453 /* CookieeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */; };
 		83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */; };
+		83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		83BD79B12C68BBA10044C453 /* Cookiee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cookiee.entitlements; sourceTree = "<group>"; };
 		83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
+		83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,9 +104,9 @@
 		83B5CA8C2C6910F800C69ED1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				83B5CA8D2C69118000C69ED1 /* Font */,
 				8369B3742C6905F6005ACDBD /* ColorExtension.swift */,
 				83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */,
-				83B5CA8D2C69118000C69ED1 /* Font */,
 				83BD798B2C68BB580044C453 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -155,6 +157,7 @@
 				83BD79892C68BB570044C453 /* ContentView.swift */,
 				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
 				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
+				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
 				83B5CA8C2C6910F800C69ED1 /* Resource */,
 				83BD798D2C68BB580044C453 /* Preview Content */,
 			);
@@ -325,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */,
 				83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
