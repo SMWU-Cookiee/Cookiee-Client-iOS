@@ -29,7 +29,7 @@ struct TabBarView : View {
             Spacer()
             CustomTabView(selectedTab: $selectedTab)            
                 .background(Color.White)
-                .shadow(color: .black.opacity(0.05), radius: 15, x: 0, y: -10)
+                .shadow(color: .black.opacity(0.05), radius: 60, x: 0, y: -10)
         }
     }
 }

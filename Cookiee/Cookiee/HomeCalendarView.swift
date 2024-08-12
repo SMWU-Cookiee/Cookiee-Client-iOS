@@ -80,7 +80,6 @@ struct HomeCalendarView: View {
                     Image("ChevronLeftIcon")
                 }
             )
-            .disabled(!canMoveToPreviousMonth())
             .padding(.leading, 7)
             
             Spacer()
@@ -99,7 +98,6 @@ struct HomeCalendarView: View {
                     Image("ChevronRightIcon")
                 }
             )
-            .disabled(!canMoveToNextMonth())
             .padding(.trailing, 7)
         }
         .frame(maxWidth: .infinity)
@@ -264,30 +262,6 @@ private extension HomeCalendarView {
   /// 월 변경
   func changeMonth(by value: Int) {
     self.month = adjustedMonth(by: value)
-  }
-  
-  /// 이전 월로 이동 가능한지 확인
-  func canMoveToPreviousMonth() -> Bool {
-    let currentDate = Date()
-    let calendar = Calendar.current
-    let targetDate = calendar.date(byAdding: .month, value: -3, to: currentDate) ?? currentDate
-    
-    if adjustedMonth(by: -1) < targetDate {
-      return false
-    }
-    return true
-  }
-  
-  /// 다음 월로 이동 가능한지 확인
-  func canMoveToNextMonth() -> Bool {
-    let currentDate = Date()
-    let calendar = Calendar.current
-    let targetDate = calendar.date(byAdding: .month, value: 3, to: currentDate) ?? currentDate
-    
-    if adjustedMonth(by: 1) > targetDate {
-      return false
-    }
-    return true
   }
   
   /// 변경하려는 월 반환
