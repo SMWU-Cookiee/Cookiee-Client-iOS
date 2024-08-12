@@ -185,6 +185,10 @@ private struct CellView: View {
     VStack {
         RoundedRectangle(cornerRadius: 2)
             .fill(backgroundColor)
+//            .overlay(Image("testimage")
+//                .resizable()
+//                .clipShape(RoundedRectangle(cornerRadius: 2))
+//            )
             .overlay(Text(String(day)))
             .foregroundColor(textColor)
     }
