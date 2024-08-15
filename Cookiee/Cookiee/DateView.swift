@@ -142,22 +142,8 @@ private struct EventCardCellView: View {
                                 image
                                     .resizable()
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                                Label {
-                                    Text("#" + firstCategory)
-                                        .font(.Body1_M)
-                                        .foregroundColor(.black)
-                                        .padding(.horizontal, 7)
-                                        .padding(.vertical, 4)
-                                        .background(firstCategoryColor)
-                                        .cornerRadius(8)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .stroke(Color.white, lineWidth: 1)
-                                        )
-                                } icon: {
-                                    EmptyView()
-                                }
-                                .padding(.trailing, 8)
+                                CategoryLabel(name: firstCategory, color: firstCategoryColor)
+                                .padding(.trailing, 6)
                                 .padding(.bottom, 8)
                             }
                         case .failure:
