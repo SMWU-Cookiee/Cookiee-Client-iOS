@@ -118,6 +118,69 @@ class EventListViewModel: ObservableObject {
                             "categoryColor": "#a3ffb6"
                         }
                     ]
+                },
+                {
+                    "eventId": 60,
+                    "what": "1/30 수정 테스트",
+                    "eventWhere": "잠실에서",
+                    "withWho": "황수연이랑",
+                    "EventYear": 2023,
+                    "EventMonth": 12,
+                    "EventDate": 24,
+                    "startTime": "13:00",
+                    "endTime": "18:00",
+                    "imageUrlList": [
+                        "https://picsum.photos/200/300"
+                    ],
+                    "categories": [
+                        {
+                            "categoryId": 4,
+                            "categoryName": "동기들",
+                            "categoryColor": "#a3ffb6"
+                        }
+                    ]
+                },
+                {
+                    "eventId": 61,
+                    "what": "1/30 수정 테스트",
+                    "eventWhere": "잠실에서",
+                    "withWho": "황수연이랑",
+                    "EventYear": 2023,
+                    "EventMonth": 12,
+                    "EventDate": 24,
+                    "startTime": "13:00",
+                    "endTime": "18:00",
+                    "imageUrlList": [
+                        "https://picsum.photos/200/300"
+                    ],
+                    "categories": [
+                        {
+                            "categoryId": 4,
+                            "categoryName": "동기들",
+                            "categoryColor": "#a3ffb6"
+                        }
+                    ]
+                },
+                {
+                    "eventId": 65,
+                    "what": "1/30 수정 테스트",
+                    "eventWhere": "잠실에서",
+                    "withWho": "황수연이랑",
+                    "EventYear": 2023,
+                    "EventMonth": 12,
+                    "EventDate": 24,
+                    "startTime": "13:00",
+                    "endTime": "18:00",
+                    "imageUrlList": [
+                        "https://picsum.photos/200/300"
+                    ],
+                    "categories": [
+                        {
+                            "categoryId": 4,
+                            "categoryName": "동기들",
+                            "categoryColor": "#a3ffb6"
+                        }
+                    ]
                 }
             ]
         }
