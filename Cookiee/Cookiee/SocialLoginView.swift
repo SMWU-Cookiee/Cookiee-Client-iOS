@@ -58,8 +58,8 @@ struct AppleSignInButton : View {
                        let tokenString = String(data: identityToken, encoding: .utf8) {
                        print("authorizationCode: \(authorizationCode)")
                        print("identityToken: \(identityToken)")
-                       print("authString: \(authString)")
-                       print("tokenString: \(tokenString)")
+                       print("authorizationCode to String: \(authString)")
+                       print("identityToken to String: \(tokenString)")
                    }
                     
                     print("userId: \(userId)")
