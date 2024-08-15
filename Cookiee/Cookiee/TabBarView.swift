@@ -38,7 +38,7 @@ struct CustomTabView: View {
     @Binding var selectedTab: Tab
     var body: some View {
         HStack {
-            HStack {
+            HStack() {
                 Spacer()
                 Button {
                     selectedTab = .first
@@ -50,6 +50,7 @@ struct CustomTabView: View {
                             .foregroundColor(selectedTab == .first ? .Brown00 : .Gray03)
                     }
                 }
+                .frame(width: 70)
                 Spacer()
                 Button {
                     selectedTab = .second
@@ -61,6 +62,7 @@ struct CustomTabView: View {
                             .foregroundColor(selectedTab == .second ? .Brown00 : .Gray03)
                     }
                 }
+                .frame(width: 70)
                 Spacer()
                 Button {
                     selectedTab = .third
@@ -72,6 +74,7 @@ struct CustomTabView: View {
                             .foregroundColor(selectedTab == .third ? .Brown00 : .Gray03)
                     }
                 }
+                .frame(width: 70)
                 Spacer()
             }
             .padding(.top, 15)

@@ -29,6 +29,7 @@
 		83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */; };
 		83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */; };
 		83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F822C6A2A1D002AB210 /* DateView.swift */; };
+		83E540172C6CE6B900509671 /* EventListSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E540162C6CE6B900509671 /* EventListSample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
 		83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
 		83DC7F822C6A2A1D002AB210 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		83E540162C6CE6B900509671 /* EventListSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListSample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
 				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
+				83E540152C6CE6A300509671 /* SampleData */,
 				83B5CA8C2C6910F800C69ED1 /* Resource */,
 				83BD798D2C68BB580044C453 /* Preview Content */,
 			);
@@ -190,6 +193,14 @@
 				83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */,
 			);
 			path = CookieeUITests;
+			sourceTree = "<group>";
+		};
+		83E540152C6CE6A300509671 /* SampleData */ = {
+			isa = PBXGroup;
+			children = (
+				83E540162C6CE6B900509671 /* EventListSample.swift */,
+			);
+			path = SampleData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +349,7 @@
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
 				83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */,
+				83E540172C6CE6B900509671 /* EventListSample.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
