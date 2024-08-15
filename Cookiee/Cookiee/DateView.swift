@@ -8,20 +8,22 @@
 import SwiftUI
 
 struct DateView: View {
-    // Back 버튼 커스텀
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    var backButton : some View {
-            Button{
-                self.presentationMode.wrappedValue.dismiss()
-            } label: {
-                HStack {
-                    Image("ChevronLeftIcon")
-                        .aspectRatio(contentMode: .fit)
-                }
+    @StateObject private var viewModel = EventListViewModel()
+    @State private var isModalOpen: Bool = false
+    var date: Date?
+
+    var backButton: some View {
+        Button {
+            self.presentationMode.wrappedValue.dismiss()
+        } label: {
+            HStack {
+                Image("ChevronLeftIcon")
+                    .aspectRatio(contentMode: .fit)
             }
         }
+    }
 
-    var date: Date?
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -32,23 +34,26 @@ struct DateView: View {
                             .scaledToFill()
                             .frame(width: geometry.size.width, height: 265)
                             .clipped()
-                        
                     }
                     .overlay(
                         LinearGradient(
-                            gradient: Gradient(colors: [Color.white.opacity(1.0), Color.white.opacity(0.6), .clear]), startPoint: .bottom, endPoint: .top
+                            gradient: Gradient(colors: [Color.white.opacity(1.0), Color.white.opacity(0.6), .clear]),
+                            startPoint: .bottom,
+                            endPoint: .top
                         )
-                        .frame(height: 40), alignment: .bottom)
+                        .frame(height: 40), alignment: .bottom
+                    )
                     HStack {
                         Text("\(date!, formatter: Self.dateFormatter)")
                             .foregroundStyle(Color.Brown00)
                             .font(.Head0_B_22)
                     }
                     .padding(.leading, 7)
-                    
                 }
                 ScrollView {
-                    EventCardGridView
+                    EventCardGridView(eventList: viewModel.eventListData?.result ?? [], toggleModal: {
+                        isModalOpen.toggle()
+                    })
                 }
                 HStack {
                     Button {
@@ -65,9 +70,16 @@ struct DateView: View {
                 }
             }
             .edgesIgnoringSafeArea(.top)
+            .sheet(isPresented: $isModalOpen) {
+                EventDetailView(eventId: "58")
+                    .presentationDetents([.fraction(0.99)])
+            }
         }
-        .navigationBarBackButtonHidden(true) // Back 버튼 커스텀
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+        .onAppear {
+            viewModel.loadEventListData()
+        }
     }
 }
 
@@ -79,38 +91,44 @@ extension DateView {
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MM월 dd일"
-
         return formatter
     }()
 }
 
+
+
 // 이벤트 카드 셀
 private struct EventCardCellView: View {
     private var thumbnailUrl: String
-    private var first_category: String
-    private var first_category_color: String
+    private var firstCategory: String
+    private var firstCategoryColor: Color
+    private var eventId: String
+    private var toggleModal: () -> Void
     
-    fileprivate init(thumbnailUrl: String, first_category: String, first_category_color: String) {
+    fileprivate init(thumbnailUrl: String, firstCategory: String, firstCategoryColor: String, eventId: String, toggleModal: @escaping () -> Void) {
         self.thumbnailUrl = thumbnailUrl
-        self.first_category = first_category
-        self.first_category_color = first_category_color
+        self.firstCategory = firstCategory
+        self.firstCategoryColor = Color(hex: firstCategoryColor)
+        self.eventId = eventId
+        self.toggleModal = toggleModal
     }
     
     fileprivate var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            RoundedRectangle(cornerRadius: 5)
-                .fill(Color.Beige)
-                .overlay(
+            Button {
+                toggleModal()
+            } label: {
+                ZStack {
                     AsyncImage(url: URL(string: thumbnailUrl)) { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
+                                .frame(width: .infinity, height: 240)
                         case .success(let image):
                             image
                                 .resizable()
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                                 .frame(width: .infinity, height: 240)
-                                
                         case .failure:
                             Image(systemName: "photo")
                                 .resizable()
@@ -120,14 +138,16 @@ private struct EventCardCellView: View {
                             EmptyView()
                         }
                     }
-                )
+                }
+                .cornerRadius(5)
+            }
             Label {
-                Text("#" + first_category)
+                Text("#" + firstCategory)
                     .font(.Body1_M)
                     .foregroundColor(.black)
                     .padding(.horizontal, 7)
                     .padding(.vertical, 4)
-                    .background(Color(hex: first_category_color))
+                    .background(firstCategoryColor)
                     .cornerRadius(8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
@@ -138,46 +158,55 @@ private struct EventCardCellView: View {
             }
             .padding(.trailing, 8)
             .padding(.bottom, 8)
-                
         }
         .frame(width: .infinity, height: 240)
     }
 }
 
 
-// 이벤트 카드 뷰
-private var EventCardGridView: some View {
-    let card_data = getFirstImageUrlAndCategory(from: EventDataSample) ?? []
 
-    return LazyVGrid(
-        columns: Array(repeating: GridItem(.flexible(), spacing: 7, alignment: .center), count: 2),
-        spacing: 7
-    ) {
-        ForEach(card_data.indices, id: \.self) { index in
-            let data = card_data[index]
-            EventCardCellView(thumbnailUrl: data.imageUrl,
-                              first_category: data.category["categoryName"] as? String ?? "",
-                              first_category_color: data.category["categoryColor"] as? String ?? "")
+// 이벤트 카드 뷰
+import SwiftUI
+
+private struct EventCardGridView: View {
+    var eventList: [Event]
+    var toggleModal: () -> Void
+
+    var body: some View {
+        LazyVGrid(
+            columns: Array(repeating: GridItem(.flexible(), spacing: 7, alignment: .center), count: 2),
+            spacing: 7
+        ) {
+            ForEach(eventList) { event in
+                EventCardCellView(
+                    thumbnailUrl: event.imageUrlList.first ?? "",
+                    firstCategory: event.categories.first?.name ?? "",
+                    firstCategoryColor: event.categories.first?.color ?? "#FFFFFF",
+                    eventId: "\(event.id)",
+                    toggleModal: toggleModal
+                )
+            }
         }
+        .padding(.horizontal, 7)
     }
-    .padding(.horizontal, 7)
 }
 
-// API Response에서 이벤트 첫번째 사진, 첫번째 카테고리 추출
-private func getFirstImageUrlAndCategory(from response: [String: Any]) -> [(imageUrl: String, category: [String: Any])]? {
+
+// API Response에서 이벤트 첫번째 사진, 첫번째 카테고리, eventId 추출
+private func getFirstImageUrlAndCategory(from response: [String: Any]) -> [(imageUrl: String, category: [String: Any], eventId: String)]? {
     guard let resultArray = response["result"] as? [[String: Any]] else {
         return nil
     }
-    
-    var results: [(String, [String: Any])] = []
-    
+
+    var results: [(String, [String: Any], String)] = []
+
     for event in resultArray {
-        if let imageUrlList = event["imageUrlList"] as? [String], let firstImageUrl = imageUrlList.first,
+        if let eventId = event["eventId"] as? String,
+           let imageUrlList = event["imageUrlList"] as? [String], let firstImageUrl = imageUrlList.first,
            let categories = event["categories"] as? [[String: Any]], let firstCategory = categories.first {
-            results.append((imageUrl: firstImageUrl, category: firstCategory))
+            results.append((imageUrl: firstImageUrl, category: firstCategory, eventId: eventId))
         }
     }
-    
+
     return results
 }
-
