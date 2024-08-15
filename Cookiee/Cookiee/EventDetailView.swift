@@ -31,17 +31,49 @@ struct EventDetailView: View {
                             } label: {
                                 Image("TrashIcon")
                             }
-                            
                         }
                     }
                     .padding(.top, 20)
                     .padding(.bottom, 10)
-                
-                    Text("Event: \(eventData.result.what)")
-                    Text("Location: \(eventData.result.eventWhere)")
                     
+                    HStack {
+                        // 사진
+                        ScrollView {
+                            Image("testimage")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: .infinity, height: 265)
+                                .clipped()
+
+                        }
+                    }
+                    
+                    VStack {
+                        Text(eventData.result.title)
+                            .font(.Body0_SB)
+                        HStack {
+                            ForEach(eventData.result.categories, id: \.categoryId) { category in
+                                CategoryLabel(name: category.categoryName, color: category.categoryColor)
+                                    .padding(.horizontal, 1)
+                            }
+                        }
+
+                    }
+                    
+                    ScrollView {
+                        VStack (alignment: .leading) {
+                            EventInfoDetailView(title: "장소", decription: eventData.result.eventWhere)
+                            EventInfoDetailView(title: "내용", decription: eventData.result.what)
+                            EventInfoDetailView(title: "함께한 사람", decription: eventData.result.withWho)
+                        }
+                        
+
+                    }
+ 
                 } else {
-                    Text("Loading...")
+                    Spacer()
+                    ProgressView()
+                    Spacer()
                 }
             }
             Spacer()
@@ -66,4 +98,28 @@ extension EventDetailView {
     }()
 }
 
+struct EventInfoDetailView: View {
+    let title: String
+    let decription: String
+
+    var body: some View {
+        VStack (alignment: .leading) {
+            HStack{
+                Image("CookieeIcon_fill")
+                Text(title)
+                    .font(.Body1_R)
+                    .foregroundStyle(Color.Brown01)
+            }
+            
+            HStack {
+                Text(decription)
+                    .font(.Body1_R)
+                    .padding(10)
+                    .background(Color.Beige)
+                    .cornerRadius(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+    }
+}
 

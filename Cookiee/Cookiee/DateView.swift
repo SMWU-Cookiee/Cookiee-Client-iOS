@@ -141,7 +141,7 @@ private struct EventCardCellView: View {
                             ZStack (alignment: .bottomTrailing) {
                                 image
                                     .resizable()
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                                    .clipShape(RoundedRectangle(cornerRadius: 5))
                                 CategoryLabel(name: firstCategory, color: firstCategoryColor)
                                 .padding(.trailing, 6)
                                 .padding(.bottom, 8)
