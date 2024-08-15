@@ -125,7 +125,7 @@ private struct EventCardCellView: View {
     }
     
     fileprivate var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        ZStack {
             Button {
                 toggleModal()
             } label: {
@@ -133,42 +133,47 @@ private struct EventCardCellView: View {
                     AsyncImage(url: URL(string: thumbnailUrl)) { phase in
                         switch phase {
                         case .empty:
-                            ProgressView()
-                                .frame(width: .infinity, height: 240)
+                            VStack {
+                                ProgressView()
+                                    .frame(width: .infinity, height: 240)
+                            }
                         case .success(let image):
-                            image
-                                .resizable()
+                            ZStack (alignment: .bottomTrailing) {
+                                image
+                                    .resizable()
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                                .frame(width: .infinity, height: 240)
+                                Label {
+                                    Text("#" + firstCategory)
+                                        .font(.Body1_M)
+                                        .foregroundColor(.black)
+                                        .padding(.horizontal, 7)
+                                        .padding(.vertical, 4)
+                                        .background(firstCategoryColor)
+                                        .cornerRadius(8)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(Color.white, lineWidth: 1)
+                                        )
+                                } icon: {
+                                    EmptyView()
+                                }
+                                .padding(.trailing, 8)
+                                .padding(.bottom, 8)
+                            }
                         case .failure:
                             Image(systemName: "photo")
                                 .resizable()
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                                .frame(width: 185, height: 240)
+                                
                         @unknown default:
                             EmptyView()
                         }
                     }
                 }
                 .cornerRadius(5)
+                .frame(width: .infinity, height: 240)
             }
-            Label {
-                Text("#" + firstCategory)
-                    .font(.Body1_M)
-                    .foregroundColor(.black)
-                    .padding(.horizontal, 7)
-                    .padding(.vertical, 4)
-                    .background(firstCategoryColor)
-                    .cornerRadius(8)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.white, lineWidth: 1)
-                    )
-            } icon: {
-                EmptyView()
-            }
-            .padding(.trailing, 8)
-            .padding(.bottom, 8)
+            
         }
         .frame(width: .infinity, height: 240)
     }
