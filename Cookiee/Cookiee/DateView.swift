@@ -70,10 +70,21 @@ struct DateView: View {
                 }
             }
             .edgesIgnoringSafeArea(.top)
+//            .overlay(
+//                isModalOpen ?
+//                Rectangle()
+//                    .edgesIgnoringSafeArea(.all)
+//                    .background(Color.Black)
+//                    .opacity(0.5)
+//                    .transition(.opacity.animation(.easeInOut(duration: 0.1)))
+//                : nil
+//            )
             .sheet(isPresented: $isModalOpen) {
                 EventDetailView(eventId: "58")
                     .presentationDetents([.fraction(0.99)])
+                    .presentationDragIndicator(Visibility.visible)
             }
+            
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
