@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CategoryLabel: View {
     @State var name: String
-    @State var color: Color
+    @State var color: String
     
     var body: some View {
         Label {
@@ -19,7 +19,7 @@ struct CategoryLabel: View {
                 .foregroundColor(.black)
                 .padding(.horizontal, 7)
                 .padding(.vertical, 4)
-                .background(color)
+                .background(Color(hex: color))
                 .cornerRadius(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)

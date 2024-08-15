@@ -112,14 +112,14 @@ extension DateView {
 private struct EventCardCellView: View {
     private var thumbnailUrl: String
     private var firstCategory: String
-    private var firstCategoryColor: Color
+    private var firstCategoryColor: String
     private var eventId: String
     private var toggleModal: () -> Void
     
     fileprivate init(thumbnailUrl: String, firstCategory: String, firstCategoryColor: String, eventId: String, toggleModal: @escaping () -> Void) {
         self.thumbnailUrl = thumbnailUrl
         self.firstCategory = firstCategory
-        self.firstCategoryColor = Color(hex: firstCategoryColor)
+        self.firstCategoryColor = firstCategoryColor
         self.eventId = eventId
         self.toggleModal = toggleModal
     }
