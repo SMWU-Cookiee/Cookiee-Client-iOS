@@ -15,6 +15,7 @@ struct EventCategory: Codable {
 
 struct EventResult: Codable {
     let eventId: Int
+    let title: String
     let what: String
     let eventWhere: String
     let withWho: String
@@ -47,7 +48,8 @@ class EventViewModel: ObservableObject {
             "message": "이벤트 조회에 성공하였습니다.",
             "result": {
                 "eventId": 58,
-                "what": "도파민 넘치는 코타키나발루",
+                "title": "도파민 넘치는 코타키나발루",
+                "what": "매니매니 물고기가 있는 마무틱에서 스노클링도 하고, 사피에서는 스노클링 장비도 빠뜨리고.. 뭔 하루가 도파민만 나오다가 끝났니",
                 "eventWhere": "코타키나발루 마무틱",
                 "withWho": "작.변.시",
                 "eventYear": 2024,
