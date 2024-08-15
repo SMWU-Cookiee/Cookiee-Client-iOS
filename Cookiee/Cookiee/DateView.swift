@@ -80,7 +80,7 @@ struct DateView: View {
 //                : nil
 //            )
             .sheet(isPresented: $isModalOpen) {
-                EventDetailView(eventId: "58")
+                EventDetailView(eventId: "58", date: date ?? Date.now)
                     .presentationDetents([.fraction(0.99)])
                     .presentationDragIndicator(Visibility.visible)
             }
