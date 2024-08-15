@@ -1,5 +1,5 @@
 //
-//  UIComponent.swift
+//  CategoryLabelView.swift
 //  Cookiee
 //
 //  Created by minseo Kyung on 8/16/24.
