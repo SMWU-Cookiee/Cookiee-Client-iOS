@@ -55,6 +55,7 @@ struct EventDetailView: View {
                         }
                     }
                     .padding(.bottom, 3)
+                    .padding(.top, 15)
                     
                     ScrollView {
                         VStack (alignment: .leading) {
@@ -78,6 +79,7 @@ struct EventDetailView: View {
         .onAppear() {
             eventViewModel.loadEventData()
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
