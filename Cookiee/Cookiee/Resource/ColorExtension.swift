@@ -13,6 +13,7 @@ extension Color {
     static let Brown01 = Color(hex: "#756767")
     static let Brown02 = Color(hex: "#8F8181")
     static let Brown03 = Color(hex: "#AA9E9E")
+    static let Brown04 = Color(hex: "#D1C4C4")
     static let Black = Color(hex: "#000000")
     static let Gray07 = Color(hex: "#23272B")
     static let Gray06 = Color(hex: "#40464B")
