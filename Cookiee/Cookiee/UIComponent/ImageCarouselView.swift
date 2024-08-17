@@ -78,7 +78,6 @@ struct SnapCarousel: View {
                     }
                 }
             }
-            .padding(.bottom, 10)
         }
     }
 }
