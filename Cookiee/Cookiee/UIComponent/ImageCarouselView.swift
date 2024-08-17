@@ -74,7 +74,7 @@ struct SnapCarousel: View {
                     }) {
                         Circle()
                             .fill(i == currentIndex ? Color.Brown00 : Color.Brown04)
-                            .frame(width: 10, height: 10)
+                            .frame(width: 6, height: 6)
                     }
                 }
             }
