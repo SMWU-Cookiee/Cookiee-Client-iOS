@@ -123,6 +123,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		832CE9AE2C70EFC100DD45A0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		835F7AD02C70CD23006AEE89 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +206,7 @@
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
 				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
 				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
+				832CE9AE2C70EFC100DD45A0 /* Network */,
 				835F7AD02C70CD23006AEE89 /* Utils */,
 				8385C5A92C6E6AF900D1DD21 /* UIComponent */,
 				83E540152C6CE6A300509671 /* SampleData */,

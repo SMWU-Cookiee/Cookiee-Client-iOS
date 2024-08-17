@@ -74,12 +74,12 @@ struct EventDetailView: View {
                 }
             }
             Spacer()
-        }.padding()
+        }
+        .padding(.horizontal, 15)
         
         .onAppear() {
             eventViewModel.loadEventData()
         }
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
