@@ -11,6 +11,9 @@ struct EventDetailView: View {
     @StateObject private var eventViewModel = EventViewModel()
     @State var eventId: String
     @State var date: Date
+    
+    @State private var currentIndex: Int = 0
+    @State private var imageList: [String] = []
 
     var body: some View {
         VStack {
@@ -37,15 +40,8 @@ struct EventDetailView: View {
                     .padding(.bottom, 10)
                     
                     HStack {
-                        // 사진
-                        ScrollView {
-                            Image("testimage")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: .infinity, height: 265)
-                                .clipped()
-
-                        }
+                        SnapCarousel(index: $currentIndex, imageUrls: eventData.result.imageUrlList)
+                            .frame(height: 365)
                     }
                     
                     VStack {
@@ -57,8 +53,8 @@ struct EventDetailView: View {
                                     .padding(.horizontal, 1)
                             }
                         }
-
                     }
+                    .padding(.bottom, 3)
                     
                     ScrollView {
                         VStack (alignment: .leading) {
