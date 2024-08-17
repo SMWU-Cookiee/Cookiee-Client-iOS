@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */; };
 		8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369B3742C6905F6005ACDBD /* ColorExtension.swift */; };
+		8385C5A42C6E1EE600D1DD21 /* EventDetailSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5A32C6E1EE600D1DD21 /* EventDetailSample.swift */; };
+		8385C5A62C6E229800D1DD21 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5A52C6E229800D1DD21 /* EventDetailView.swift */; };
+		8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5AA2C6E6B1500D1DD21 /* CategoryLabelView.swift */; };
+		8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5AC2C6E6B5E00D1DD21 /* ImageCarouselView.swift */; };
 		83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CA882C690DCE00C69ED1 /* TabBarView.swift */; };
 		83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */; };
 		83B5CA972C6911AF00C69ED1 /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA8E2C6911AE00C69ED1 /* Pretendard-Black.ttf */; };
@@ -50,7 +55,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageByURL.swift; sourceTree = "<group>"; };
 		8369B3742C6905F6005ACDBD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		8385C5A32C6E1EE600D1DD21 /* EventDetailSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailSample.swift; sourceTree = "<group>"; };
+		8385C5A52C6E229800D1DD21 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		8385C5AA2C6E6B1500D1DD21 /* CategoryLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLabelView.swift; sourceTree = "<group>"; };
+		8385C5AC2C6E6B5E00D1DD21 /* ImageCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselView.swift; sourceTree = "<group>"; };
 		83B5CA882C690DCE00C69ED1 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		83B5CA8E2C6911AE00C69ED1 /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Black.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-Black.ttf"; sourceTree = "<group>"; };
@@ -105,6 +115,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		835F7AD02C70CD23006AEE89 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8385C5A92C6E6AF900D1DD21 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				8385C5AA2C6E6B1500D1DD21 /* CategoryLabelView.swift */,
+				8385C5AC2C6E6B5E00D1DD21 /* ImageCarouselView.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
 		83B5CA8C2C6910F800C69ED1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +190,9 @@
 				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
 				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
+				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
+				835F7AD02C70CD23006AEE89 /* Utils */,
+				8385C5A92C6E6AF900D1DD21 /* UIComponent */,
 				83E540152C6CE6A300509671 /* SampleData */,
 				83B5CA8C2C6910F800C69ED1 /* Resource */,
 				83BD798D2C68BB580044C453 /* Preview Content */,
@@ -198,6 +228,7 @@
 		83E540152C6CE6A300509671 /* SampleData */ = {
 			isa = PBXGroup;
 			children = (
+				8385C5A32C6E1EE600D1DD21 /* EventDetailSample.swift */,
 				83E540162C6CE6B900509671 /* EventListSample.swift */,
 			);
 			path = SampleData;
@@ -345,11 +376,16 @@
 				83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */,
 				83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */,
 				83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */,
+				8385C5A42C6E1EE600D1DD21 /* EventDetailSample.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
+				8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */,
+				835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
 				83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */,
 				83E540172C6CE6B900509671 /* EventListSample.swift in Sources */,
+				8385C5A62C6E229800D1DD21 /* EventDetailView.swift in Sources */,
+				8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

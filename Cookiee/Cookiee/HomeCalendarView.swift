@@ -25,7 +25,7 @@ struct HomeCalendarView: View {
                 VStack {
                     // 쿠키 타이틀 헤더
                     ZStack {
-                        Image("cookiee_icon_small")
+                        Image("cookiee_typo_small")
                         HStack {
                             Button {
                                 // action
