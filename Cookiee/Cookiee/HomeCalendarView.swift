@@ -20,33 +20,29 @@ struct HomeCalendarView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            GeometryReader { geometry in
-                VStack {
-                    // 쿠키 타이틀 헤더
-                    ZStack {
-                        Image("cookiee_typo_small")
-                        HStack {
-                            Button {
-                                // action
-                            } label: {
-                                Image("Download")
-                            }
+        GeometryReader { geometry in
+            VStack {
+                // 쿠키 타이틀 헤더
+                ZStack {
+                    Image("cookiee_typo_small")
+                    HStack {
+                        Button {
+                            // action
+                        } label: {
+                            Image("Download")
                         }
-                        .padding(.leading, 340)
                     }
-                    .frame(width: geometry.size.width, height: 45)
-                    
-                    // 캘린더
-                    VStack {
-                        headerView
-                        calendarGridView
-                        Spacer()
-                    }
-                    .background(Color.Beige)
-                    
-
+                    .padding(.leading, 340)
                 }
+                .frame(width: geometry.size.width, height: 45)
+                
+                // 캘린더
+                VStack {
+                    headerView
+                    calendarGridView
+                    Spacer()
+                }
+                .background(Color.Beige)
             }
         }
     }
