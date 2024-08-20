@@ -73,14 +73,17 @@ struct MyPageView: View {
                 Divider()
                 
                 HStack {
-                    Link(destination: URL(string: "https://thunder-syrup-94d.notion.site/4ec4be702c97409293c6bd8d8f2744f2?pvs=4")!) {
-                        Text("약관 및 개인정보 활용")
-                            .font(.Body1_M)
-                            .foregroundStyle(Color.black)
-                        Spacer()
-                        Image("ChevronRightSmall")
-                            .padding(.horizontal, 10)
-                    }
+                    NavigationLink(
+                        destination: PrivacyPolicyView(),
+                        label: {
+                            Text("약관 및 개인정보 활용")
+                                .font(.Body1_M)
+                                .foregroundStyle(Color.black)
+                            Spacer()
+                            Image("ChevronRightSmall")
+                                .padding(.horizontal, 10)
+                        }
+                    )
                     .frame(height: 32)
                 }
                 
