@@ -16,20 +16,29 @@ enum Tab {
 struct TabBarView : View {
     @State var selectedTab: Tab = .first
     var body: some View {
-        VStack {
-            Spacer()
-            switch selectedTab {
-            case .first:
-                HomeCalendarView()
-            case .second:
-                Text("모아보기")
-            case .third:
-                Text("마이페이지")
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                Spacer()
+                VStack {
+                    switch selectedTab {
+                    case .first:
+                        HomeCalendarView()
+                    case .second:
+                        VStack {
+                            Spacer()
+                            Text("모아보기")
+                            Spacer()
+                        }
+                    case .third:
+                        MyPageView()
+                    }
+                }
+                .padding(.bottom, 50)
+                Spacer()
+                CustomTabView(selectedTab: $selectedTab)            
+                    .background(Color.White)
+                    .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -10)
             }
-            Spacer()
-            CustomTabView(selectedTab: $selectedTab)            
-                .background(Color.White)
-                .shadow(color: .black.opacity(0.05), radius: 60, x: 0, y: -10)
         }
     }
 }
