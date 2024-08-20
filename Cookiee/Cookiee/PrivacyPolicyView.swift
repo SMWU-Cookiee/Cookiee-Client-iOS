@@ -9,9 +9,6 @@ import SwiftUI
 
 struct PrivacyPolicyView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject private var viewModel = EventListViewModel()
-    @State private var isModalOpen: Bool = false
-    var date: Date?
 
     var backButton: some View {
         Button {
