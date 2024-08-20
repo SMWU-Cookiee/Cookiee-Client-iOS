@@ -14,7 +14,7 @@ struct MyPageView: View {
                 HStack {
                     Image("testimage")
                         .resizable()
-                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        .clipShape(Circle())
                         .frame(width: 70, height: 70)
                     VStack(alignment: .leading) {
                         Text("김쿠키")
@@ -28,11 +28,11 @@ struct MyPageView: View {
                     .frame(height: 50)
                     .padding()
                     Spacer()
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {}, label: {
                         HStack {
                             Text("프로필 수정")
                                 .font(.Body2_R)
-                            .foregroundColor(Color.Gray04)
+                                .foregroundColor(Color.Gray04)
                             Image("ChevronRightSmall")
                         }
                     })
@@ -47,7 +47,7 @@ struct MyPageView: View {
                         // 카테고리 관리로 이동
                     }
                     Spacer()
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {}, label: {
                         Image("ChevronRightSmall")
                             .padding(.horizontal, 10)
                     })
@@ -58,7 +58,7 @@ struct MyPageView: View {
                         
                     }
                     Spacer()
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {}, label: {
                         Image("ChevronRightSmall")
                             .padding(.horizontal, 10)
                     })
@@ -69,7 +69,7 @@ struct MyPageView: View {
                         
                     }
                     Spacer()
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {}, label: {
                         Image("ChevronRightSmall")
                             .padding(.horizontal, 10)
                     })
@@ -101,9 +101,11 @@ struct MyPageView: View {
             Text(verbatim: "Contact: apps.cookiee@gmail.com")
                 .font(.Body1_R)
                 .foregroundStyle(Color.Gray03)
-                
+            
         }
-        .padding()
+        .padding(.horizontal, 15)
+        .padding(.top, 15)
+        .padding(.bottom, 10)
     }
 }
 
