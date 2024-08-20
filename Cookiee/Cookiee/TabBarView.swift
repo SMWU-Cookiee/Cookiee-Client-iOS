@@ -24,7 +24,7 @@ struct TabBarView : View {
             case .second:
                 Text("모아보기")
             case .third:
-                Text("마이페이지")
+                MyPageView()
             }
             Spacer()
             CustomTabView(selectedTab: $selectedTab)            
