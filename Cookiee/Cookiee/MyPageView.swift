@@ -41,61 +41,94 @@ struct MyPageView: View {
                 .background(Color.Gray00)
                 .cornerRadius(10)
             }
+            .padding(.bottom, 30)
+            
             VStack(alignment: .leading) {
                 HStack {
-                    MenuButton(menuName: "카테고리 관리") {
-                        // 카테고리 관리로 이동
-                    }
-                    Spacer()
-                    Button(action: {}, label: {
+                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Text("카테고리 관리")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.black)
+                        Spacer()
                         Image("ChevronRightSmall")
                             .padding(.horizontal, 10)
                     })
+                    .frame(height: 32)
                 }
+                
                 Divider()
+                
                 HStack {
-                    MenuButton(menuName: "사용 가이드") {
-                        
-                    }
-                    Spacer()
-                    Button(action: {}, label: {
+                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Text("사용 가이드")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.black)
+                        Spacer()
                         Image("ChevronRightSmall")
                             .padding(.horizontal, 10)
                     })
+                    .frame(height: 32)
                 }
+                
                 Divider()
+                
                 HStack {
-                    MenuButton(menuName: "약관 및 개인정보 활용") {
-                        
-                    }
-                    Spacer()
-                    Button(action: {}, label: {
+                    Link(destination: URL(string: "https://thunder-syrup-94d.notion.site/4ec4be702c97409293c6bd8d8f2744f2?pvs=4")!) {
+                        Text("약관 및 개인정보 활용")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.black)
+                        Spacer()
                         Image("ChevronRightSmall")
                             .padding(.horizontal, 10)
-                    })
-                }
-                Divider()
-                MenuButton(menuName: "개발자 정보") {
-                    
-                }
-                Divider()
-                MenuButton(menuName: "로그아웃") {
-                    
-                }
-                Divider()
-                MenuButton(menuName: "회원 탈퇴") {
-                    
-                }
-                Divider()
-                HStack {
-                    MenuButton(menuName: "버전 정보") {
-                        
                     }
+                    .frame(height: 32)
+                }
+                
+                Divider()
+                
+                HStack {
+                    Link(destination: URL(string: "https://thunder-syrup-94d.notion.site/Cookiee-d564b6af1ba0404aad8a0a03da45b943?pvs=25")!) {
+                        Text("개발자 정보")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.black)
+                        Spacer()
+                    }
+                    .frame(height: 32)
+                }
+                
+                Divider()
+                
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Text("로그아웃")
+                        .font(.Body1_M)
+                        .foregroundStyle(Color.black)
                     Spacer()
-                    Text("v 1.0.1")
+                })
+                .frame(height: 32)
+                
+                Divider()
+                
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Text("회원 탈퇴")
+                        .font(.Body1_M)
+                        .foregroundStyle(Color.black)
+                    Spacer()
+                })
+                .frame(height: 32)
+                
+                Divider()
+                
+                HStack {
+                    Text("버전 정보")
+                        .font(.Body1_M)
+                        .foregroundStyle(Color.black)
+                    Spacer()
+                    Text("v 1.0.0")
                         .font(.Body1_M)
                         .foregroundStyle(Color.Gray05)
                 }
+                .frame(height: 32)
+                
             }
             Spacer()
             Text(verbatim: "Contact: apps.cookiee@gmail.com")
@@ -111,18 +144,4 @@ struct MyPageView: View {
 
 #Preview {
     MyPageView()
-}
-
-struct MenuButton: View {
-    var menuName: String
-    var menuAction: () -> Void
-    
-    var body: some View {
-        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-            Text(menuName)
-                .font(.Body1_M)
-                .foregroundStyle(Color.black)
-        })
-        .frame(height: 32)
-    }
 }
