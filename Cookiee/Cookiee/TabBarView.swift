@@ -16,16 +16,19 @@ enum Tab {
 struct TabBarView : View {
     @State var selectedTab: Tab = .first
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             Spacer()
-            switch selectedTab {
-            case .first:
-                HomeCalendarView()
-            case .second:
-                Text("모아보기")
-            case .third:
-                MyPageView()
+            VStack {
+                switch selectedTab {
+                case .first:
+                    HomeCalendarView()
+                case .second:
+                    Text("모아보기")
+                case .third:
+                    MyPageView()
+                }
             }
+            .padding(.bottom, 50)
             Spacer()
             CustomTabView(selectedTab: $selectedTab)            
                 .background(Color.White)
