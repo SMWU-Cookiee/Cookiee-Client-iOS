@@ -15,7 +15,7 @@ enum HeaderType {
 }
 
 protocol BaseTargetType: TargetType {
-    var headerType: HeaderType { get }
+//    var headerType: HeaderType { get }
 }
 
 extension BaseTargetType {
