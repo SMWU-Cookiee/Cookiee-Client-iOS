@@ -25,8 +25,9 @@ struct CategoryEditView: View {
     }
     
     var body: some View {
-        VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            CategoryListView(color: "#000000")
+            Spacer()
         }
         .navigationBarTitle(
             Text("카테고리 관리")
@@ -41,4 +42,40 @@ struct CategoryEditView: View {
 
 #Preview {
     CategoryEditView()
+}
+
+struct CategoryListView: View {
+    @State var name: String = ""
+    @State var color: String
+    
+    var body: some View {
+        VStack {
+            HStack {
+                // 색상
+                Rectangle()
+                    .frame(width: 25, height: 25)
+                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(Color(hex: color))
+                // 이름
+                HStack {
+                    TextField("카테고리 이름을 입력해주세요", text: $name)
+                    // 편집 버튼
+                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Image("EditIconBrown")
+                    })
+                }
+                .padding(10)
+                .font(.Body1_M)
+                .frame(height: 35)
+                .background(Color.Gray01)
+                .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                            
+                // 삭제 버튼
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Image("TrashIconRed")
+                })
+            }
+            Divider()
+        }
+    }
 }
