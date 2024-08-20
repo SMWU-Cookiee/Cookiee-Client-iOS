@@ -38,6 +38,7 @@ struct AppleSignInButton : View {
     @AppStorage("email") var email:String = ""
     @AppStorage("fullName") var fullName:String = ""
 
+    let loginService = AppleLoginService()
     
     var body: some View {
         SignInWithAppleButton(onRequest: { request in
@@ -47,24 +48,29 @@ struct AppleSignInButton : View {
             case .success(let auth):
                 switch auth.credential {
                 case let credential as ASAuthorizationAppleIDCredential:
-                    // User ID
-                    let userId = credential.user
-                    let fullName = credential.fullName
-                    let email = credential.email
-                              
-                    if  let authorizationCode = credential.authorizationCode,
+                    if let authorizationCode = credential.authorizationCode,
                        let identityToken = credential.identityToken,
                        let authString = String(data: authorizationCode, encoding: .utf8),
                        let tokenString = String(data: identityToken, encoding: .utf8) {
-                       print("authorizationCode: \(authorizationCode)")
-                       print("identityToken: \(identityToken)")
-                       print("authorizationCode to String: \(authString)")
-                       print("identityToken to String: \(tokenString)")
+                        let request = AppleLoginRequestDTO(IdentityToken: tokenString, AuthorizationCode: authString)
+                        loginService.postAppleLogin(request: request) { result in
+                            switch result {
+                            case .success(let response):
+                                print("Login success: \(response)")
+                                print()
+                                print()
+                                print("authString: \(authString)")
+                                print("tokenString: \(tokenString)")
+                            case .failure(let error):
+                                print("Login failed: \(error)")
+                                print()
+                                print()
+                                print("authString: \(authString)")
+                                print("tokenString: \(tokenString)")
+                                
+                            }
+                        }
                    }
-                    
-                    print("userId: \(userId)")
-                    print("fullName: \(String(describing: fullName))")
-                    print("email: \(String(describing: email))")
                     
                 default:
                     break
