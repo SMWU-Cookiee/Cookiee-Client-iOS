@@ -9,9 +9,8 @@ import SwiftUI
 
 struct CategoryEditView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject private var viewModel = EventListViewModel()
-    @State private var isModalOpen: Bool = false
-    var date: Date?
+    @StateObject private var viewModel = CategoryListViewModel()
+    @State var isModalOpen: Bool = false
 
     var backButton: some View {
         Button {
@@ -26,9 +25,11 @@ struct CategoryEditView: View {
     
     var body: some View {
         ScrollView {
-            CategoryListView(color: "#000000")
-            Spacer()
+            ForEach(viewModel.categoryListData?.result ?? []) { category in
+                CategoryListView(name: category.name, color: category.color)
+            }
         }
+
         .navigationBarTitle(
             Text("카테고리 관리")
                 .font(.Head1_B)
@@ -37,6 +38,9 @@ struct CategoryEditView: View {
         .navigationBarItems(leading: backButton)
         .padding()
         .padding(.top, 10)
+        .onAppear {
+            viewModel.loadCategoryListData()
+        }
     }
 }
 
@@ -53,10 +57,13 @@ struct CategoryListView: View {
         VStack {
             HStack {
                 // 색상
-                Rectangle()
-                    .frame(width: 25, height: 25)
-                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(Color(hex: color))
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Rectangle()
+                        .frame(width: 25, height: 25)
+                        .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(Color(hex: color))
+                })
+                
                 // 이름
                 HStack {
                     TextField("카테고리 이름을 입력해주세요", text: $name)

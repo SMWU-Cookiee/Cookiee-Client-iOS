@@ -43,7 +43,7 @@ struct Event: Codable, Identifiable {
     }
 }
 
-struct Category: Codable {
+struct Category: Codable, Identifiable {
     let id: Int
     let name: String
     let color: String

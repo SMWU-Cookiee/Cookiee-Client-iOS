@@ -38,6 +38,7 @@
 		83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */; };
 		83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F822C6A2A1D002AB210 /* DateView.swift */; };
 		83E540172C6CE6B900509671 /* EventListSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E540162C6CE6B900509671 /* EventListSample.swift */; };
+		83EC9F862C76FD2F00816E58 /* CategoryListSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC9F852C76FD2F00816E58 /* CategoryListSample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
 		83DC7F822C6A2A1D002AB210 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		83E540162C6CE6B900509671 /* EventListSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListSample.swift; sourceTree = "<group>"; };
+		83EC9F852C76FD2F00816E58 /* CategoryListSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListSample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 			children = (
 				8385C5A32C6E1EE600D1DD21 /* EventDetailSample.swift */,
 				83E540162C6CE6B900509671 /* EventListSample.swift */,
+				83EC9F852C76FD2F00816E58 /* CategoryListSample.swift */,
 			);
 			path = SampleData;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
 				8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */,
 				835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */,
+				83EC9F862C76FD2F00816E58 /* CategoryListSample.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
 				83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */,
 				83C861BC2C74E1DC004FDF7A /* PrivacyPolicyView.swift in Sources */,
