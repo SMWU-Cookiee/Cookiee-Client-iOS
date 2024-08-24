@@ -28,14 +28,15 @@ struct MyPageView: View {
                     .frame(height: 50)
                     .padding()
                     Spacer()
-                    Button(action: {}, label: {
-                        HStack {
+                    NavigationLink(
+                        destination: ProfileEditView(),
+                        label: {
                             Text("프로필 수정")
                                 .font(.Body2_R)
                                 .foregroundColor(Color.Gray04)
                             Image("ChevronRightSmall")
                         }
-                    })
+                    )
                 }
                 .padding()
                 .background(Color.Gray00)
