@@ -93,12 +93,17 @@ struct MyPageView: View {
                 Divider()
                 
                 HStack {
-                    Link(destination: URL(string: "https://thunder-syrup-94d.notion.site/Cookiee-d564b6af1ba0404aad8a0a03da45b943?pvs=25")!) {
-                        Text("개발자 정보")
-                            .font(.Body1_M)
-                            .foregroundStyle(Color.black)
-                        Spacer()
-                    }
+                    NavigationLink(
+                        destination: DevelopersView(),
+                        label: {
+                            Text("개발자 정보")
+                                .font(.Body1_M)
+                                .foregroundStyle(Color.black)
+                            Spacer()
+                            Image("ChevronRightSmall")
+                                .padding(.horizontal, 10)
+                        }
+                    )
                     .frame(height: 32)
                 }
                 
