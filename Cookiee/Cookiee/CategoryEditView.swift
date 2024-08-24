@@ -12,6 +12,7 @@ struct CategoryEditView: View {
     @StateObject private var viewModel = CategoryListViewModel()
     @State var isModalOpen: Bool = false
 
+    // 백 버튼 커스텀
     var backButton: some View {
         Button {
             self.presentationMode.wrappedValue.dismiss()
@@ -24,12 +25,13 @@ struct CategoryEditView: View {
     }
     
     var body: some View {
-        ScrollView {
-            ForEach(viewModel.categoryListData?.result ?? []) { category in
-                CategoryListView(name: category.name, color: category.color)
+        VStack {
+            ScrollView {
+                ForEach(viewModel.categoryListData?.result ?? []) { category in
+                    CategoryListView(name: category.name, color: category.color)
+                }
             }
         }
-
         .navigationBarTitle(
             Text("카테고리 관리")
                 .font(.Head1_B)
@@ -52,17 +54,12 @@ struct CategoryListView: View {
     @State var name: String = ""
     @State var color: String
     @FocusState private var isTextFieldFocused: Bool
-    
+
     var body: some View {
         VStack {
             HStack {
                 // 색상
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Rectangle()
-                        .frame(width: 25, height: 25)
-                        .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(Color(hex: color))
-                })
+                ColorPickerView(selectedColor: UIColor(Color(hex: color)))
                 
                 // 이름
                 HStack {
