@@ -45,15 +45,17 @@ struct MyPageView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                        Text("카테고리 관리")
-                            .font(.Body1_M)
-                            .foregroundStyle(Color.black)
-                        Spacer()
-                        Image("ChevronRightSmall")
-                            .padding(.horizontal, 10)
-                    })
-                    .frame(height: 32)
+                    NavigationLink(
+                        destination: CategoryEditView(),
+                        label: {
+                            Text("카테고리 관리")
+                                .font(.Body1_M)
+                                .foregroundStyle(Color.black)
+                            Spacer()
+                            Image("ChevronRightSmall")
+                                .padding(.horizontal, 10)
+                        }
+                    )
                 }
                 
                 Divider()

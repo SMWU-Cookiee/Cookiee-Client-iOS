@@ -14,6 +14,7 @@
 		8385C5A62C6E229800D1DD21 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5A52C6E229800D1DD21 /* EventDetailView.swift */; };
 		8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5AA2C6E6B1500D1DD21 /* CategoryLabelView.swift */; };
 		8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5AC2C6E6B5E00D1DD21 /* ImageCarouselView.swift */; };
+		83B1C6B32C74E76900740EA3 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1C6B22C74E76900740EA3 /* CategoryEditView.swift */; };
 		83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CA882C690DCE00C69ED1 /* TabBarView.swift */; };
 		83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */; };
 		83B5CA972C6911AF00C69ED1 /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B5CA8E2C6911AE00C69ED1 /* Pretendard-Black.ttf */; };
@@ -37,6 +38,8 @@
 		83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */; };
 		83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F822C6A2A1D002AB210 /* DateView.swift */; };
 		83E540172C6CE6B900509671 /* EventListSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E540162C6CE6B900509671 /* EventListSample.swift */; };
+		83EC9F862C76FD2F00816E58 /* CategoryListSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC9F852C76FD2F00816E58 /* CategoryListSample.swift */; };
+		83F80D492C79AD18001231A9 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F80D482C79AD18001231A9 /* ColorPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,7 @@
 		8385C5A52C6E229800D1DD21 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		8385C5AA2C6E6B1500D1DD21 /* CategoryLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLabelView.swift; sourceTree = "<group>"; };
 		8385C5AC2C6E6B5E00D1DD21 /* ImageCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselView.swift; sourceTree = "<group>"; };
+		83B1C6B22C74E76900740EA3 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
 		83B5CA882C690DCE00C69ED1 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		83B5CA8E2C6911AE00C69ED1 /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Black.ttf"; path = "../../../../../../../Downloads/Pretendard-1.3.9/public/static/alternative/Pretendard-Black.ttf"; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 		83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
 		83DC7F822C6A2A1D002AB210 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		83E540162C6CE6B900509671 /* EventListSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListSample.swift; sourceTree = "<group>"; };
+		83EC9F852C76FD2F00816E58 /* CategoryListSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListSample.swift; sourceTree = "<group>"; };
+		83F80D482C79AD18001231A9 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +138,7 @@
 			children = (
 				8385C5AA2C6E6B1500D1DD21 /* CategoryLabelView.swift */,
 				8385C5AC2C6E6B5E00D1DD21 /* ImageCarouselView.swift */,
+				83F80D482C79AD18001231A9 /* ColorPickerView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -192,11 +199,12 @@
 				83BD79892C68BB570044C453 /* ContentView.swift */,
 				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
 				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
-				8383B48B2C74C74700C9127F /* MyPageView.swift */,
-				83C861BB2C74E1DC004FDF7A /* PrivacyPolicyView.swift */,
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
 				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
 				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
+				8383B48B2C74C74700C9127F /* MyPageView.swift */,
+				83C861BB2C74E1DC004FDF7A /* PrivacyPolicyView.swift */,
+				83B1C6B22C74E76900740EA3 /* CategoryEditView.swift */,
 				835F7AD02C70CD23006AEE89 /* Utils */,
 				8385C5A92C6E6AF900D1DD21 /* UIComponent */,
 				83E540152C6CE6A300509671 /* SampleData */,
@@ -236,6 +244,7 @@
 			children = (
 				8385C5A32C6E1EE600D1DD21 /* EventDetailSample.swift */,
 				83E540162C6CE6B900509671 /* EventListSample.swift */,
+				83EC9F852C76FD2F00816E58 /* CategoryListSample.swift */,
 			);
 			path = SampleData;
 			sourceTree = "<group>";
@@ -388,11 +397,14 @@
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
 				8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */,
 				835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */,
+				83EC9F862C76FD2F00816E58 /* CategoryListSample.swift in Sources */,
+				83F80D492C79AD18001231A9 /* ColorPickerView.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
 				83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */,
 				83C861BC2C74E1DC004FDF7A /* PrivacyPolicyView.swift in Sources */,
 				83E540172C6CE6B900509671 /* EventListSample.swift in Sources */,
 				8385C5A62C6E229800D1DD21 /* EventDetailView.swift in Sources */,
+				83B1C6B32C74E76900740EA3 /* CategoryEditView.swift in Sources */,
 				8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
 			);
