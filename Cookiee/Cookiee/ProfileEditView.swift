@@ -25,13 +25,48 @@ struct ProfileEditView: View {
     @State var nickname: String = "nickname_sample"
     @State var introduction: String = "introduction_sample"
     
+    @State var showImagePicker = false
+    @State var selectedUIImage: UIImage?
+    @State var image: Image?
+    
+    func loadImage() {
+        guard let selectedImage = selectedUIImage else { return }
+        image = Image(uiImage: selectedImage)
+    }
+    
     var body: some View {
         VStack {
+            // 프로필 이미지
             HStack {
-                Circle()
-                    .frame(width: 129, height: 129)
+                if let image = image {
+                    image
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: 129, height: 129)
+                } else {
+                    Circle()
+                        .foregroundColor(Color.Gray01)
+                        .frame(width: 129, height: 129)
+                        .overlay(
+                            Button(action: {
+                                showImagePicker.toggle()
+                            }, label: {
+                                Image("Photo")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                            })
+                            
+                        )
+                }
+            }
+            .sheet(isPresented: $showImagePicker, onDismiss: {
+                loadImage()
+            }) {
+                ImagePicker(image: $selectedUIImage)
             }
             .padding(.bottom, 35)
+        
+            // 닉네임 편집
             HStack() {
                 Text("닉네임")
                     .font(.Body0_SB)
@@ -44,6 +79,8 @@ struct ProfileEditView: View {
                     .cornerRadius(5)
             }
             .padding(.bottom, 5)
+            
+            // 한 줄 소개 편집
             HStack {
                 Text("한 줄 소개")
                     .font(.Body0_SB)
