@@ -25,7 +25,7 @@ struct DevelopersView: View {
         VStack (alignment: .leading) {
             HStack {
                 DevelopersInfoCardView(name: "경민서", role: "iOS Developer", email: "kyungminseo10@gmail.com", image: "kyungminseo")
-                DevelopersInfoCardView(name: "조영서", role: "Backend Developer", email: "dudrhy12@gmail.com", image: "kyungminseo")
+                DevelopersInfoCardView(name: "조영서", role: "Backend Developer", email: "dudrhy12@gmail.com", image: "choyoungseo")
             }
             HStack {
                 DevelopersInfoCardView(name: "황수연", role: "Design, Backend Developer", email: "syhhwang1231@gmail.com", image: "kyungminseo")
