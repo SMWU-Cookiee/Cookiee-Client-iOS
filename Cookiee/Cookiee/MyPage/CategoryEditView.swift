@@ -38,7 +38,9 @@ struct CategoryEditView: View {
             
         }
         .sheet(isPresented: $isAddButtonTapped) {
-            CategoryAddView()
+            CategoryAddView(toggleIsOpenCategoryAddSheet: {
+                isAddButtonTapped.toggle()
+            })
                 .presentationDetents([.fraction(0.95)])
                 .presentationDragIndicator(Visibility.visible)
         }
