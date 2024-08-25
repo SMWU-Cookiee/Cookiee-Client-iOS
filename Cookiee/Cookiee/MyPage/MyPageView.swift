@@ -47,7 +47,7 @@ struct MyPageView: View {
             VStack(alignment: .leading) {
                 HStack {
                     NavigationLink(
-                        destination: CategoryEditView(),
+                        destination: CategoryListView(),
                         label: {
                             Text("카테고리 관리")
                                 .font(.Body1_M)

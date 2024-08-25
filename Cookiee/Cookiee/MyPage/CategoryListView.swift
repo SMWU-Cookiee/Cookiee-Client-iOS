@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CategoryEditView: View {
+struct CategoryListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var viewModel = CategoryListViewModel()
     @State var isModalOpen: Bool = false
@@ -29,13 +29,20 @@ struct CategoryEditView: View {
         VStack {
             ScrollView {
                 ForEach(viewModel.categoryListData?.result ?? []) { category in
-                    CategoryListView(name: category.name, color: category.color)
+                    CategoryListRowView(name: category.name, color: category.color)
                 }
                 CategoryAddButtonView(toggleIsTapped: {
                     isAddButtonTapped.toggle()
                 })
             }
             
+        }
+        .sheet(isPresented: $isAddButtonTapped) {
+            CategoryAddAndEditView(toggleIsOpenCategoryAddSheet: {
+                isAddButtonTapped.toggle()
+            })
+                .presentationDetents([.fraction(0.95)])
+                .presentationDragIndicator(Visibility.visible)
         }
         .navigationBarTitle(
             Text("카테고리 관리")
@@ -52,27 +59,31 @@ struct CategoryEditView: View {
 }
 
 #Preview {
-    CategoryEditView()
+    CategoryListView()
 }
 
-struct CategoryListView: View {
+struct CategoryListRowView: View {
+    @State var id: String = ""
     @State var name: String = ""
     @State var color: String
-    @FocusState private var isTextFieldFocused: Bool
-
+    
+    @State private var isEditButtonTapped = false
+    
     var body: some View {
         VStack {
             HStack {
                 // 색상
-                ColorPickerView(selectedColor: UIColor(Color(hex: color)))
+                Rectangle()
+                    .fill(Color(hex: color))
+                    .frame(width: 25, height: 25)
+                    .cornerRadius(3.0)
                 
                 // 이름
                 HStack {
-                    TextField("카테고리 이름을 입력해주세요", text: $name)
-                        .focused($isTextFieldFocused)
-                    // 편집 버튼
+                    Text(name)
+                    Spacer()
                     Button(action: {
-                        isTextFieldFocused = true
+                        isEditButtonTapped = true
                     }, label: {
                         Image("EditIconBrown")
                     })
@@ -81,7 +92,7 @@ struct CategoryListView: View {
                 .font(.Body1_M)
                 .frame(height: 35)
                 .background(Color.Gray01)
-                .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                .cornerRadius(3.0)
                             
                 // 삭제 버튼
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
@@ -90,12 +101,23 @@ struct CategoryListView: View {
             }
             Divider()
         }
+        .sheet(isPresented: $isEditButtonTapped) {
+            CategoryAddAndEditView(
+                isNewCategory: false,
+                id: id,
+                name: name,
+                selectedColor: color,
+                toggleIsOpenCategoryAddSheet: {
+                isEditButtonTapped.toggle()
+            })
+                .presentationDetents([.fraction(0.95)])
+                .presentationDragIndicator(Visibility.visible)
+        }
     }
 }
 
 struct CategoryAddButtonView: View {
     @State var name: String = ""
-    @FocusState private var isTextFieldFocused: Bool
     @State var toggleIsTapped: () -> Void
     
     var body: some View {
