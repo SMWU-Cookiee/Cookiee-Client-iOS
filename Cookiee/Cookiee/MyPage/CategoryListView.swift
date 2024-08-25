@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CategoryEditView: View {
+struct CategoryListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var viewModel = CategoryListViewModel()
     @State var isModalOpen: Bool = false
@@ -29,7 +29,7 @@ struct CategoryEditView: View {
         VStack {
             ScrollView {
                 ForEach(viewModel.categoryListData?.result ?? []) { category in
-                    CategoryListView(name: category.name, color: category.color)
+                    CategoryListRowView(name: category.name, color: category.color)
                 }
                 CategoryAddButtonView(toggleIsTapped: {
                     isAddButtonTapped.toggle()
@@ -38,7 +38,7 @@ struct CategoryEditView: View {
             
         }
         .sheet(isPresented: $isAddButtonTapped) {
-            CategoryAddView(toggleIsOpenCategoryAddSheet: {
+            CategoryAddAndEditView(toggleIsOpenCategoryAddSheet: {
                 isAddButtonTapped.toggle()
             })
                 .presentationDetents([.fraction(0.95)])
@@ -59,12 +59,15 @@ struct CategoryEditView: View {
 }
 
 #Preview {
-    CategoryEditView()
+    CategoryListView()
 }
 
-struct CategoryListView: View {
+struct CategoryListRowView: View {
+    @State var id: String = ""
     @State var name: String = ""
     @State var color: String
+    
+    @State private var isEditButtonTapped = false
     
     var body: some View {
         VStack {
@@ -79,7 +82,11 @@ struct CategoryListView: View {
                 HStack {
                     Text(name)
                     Spacer()
-                    Image("EditIconBrown")
+                    Button(action: {
+                        isEditButtonTapped = true
+                    }, label: {
+                        Image("EditIconBrown")
+                    })
                 }
                 .padding(10)
                 .font(.Body1_M)
@@ -93,6 +100,18 @@ struct CategoryListView: View {
                 })
             }
             Divider()
+        }
+        .sheet(isPresented: $isEditButtonTapped) {
+            CategoryAddAndEditView(
+                isNewCategory: false,
+                id: id,
+                name: name,
+                selectedColor: color,
+                toggleIsOpenCategoryAddSheet: {
+                isEditButtonTapped.toggle()
+            })
+                .presentationDetents([.fraction(0.95)])
+                .presentationDragIndicator(Visibility.visible)
         }
     }
 }
