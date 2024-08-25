@@ -38,9 +38,7 @@ struct CategoryEditView: View {
             
         }
         .sheet(isPresented: $isAddButtonTapped) {
-            CategoryAddView(toggleIsTapped: {
-                isAddButtonTapped.toggle()
-            })
+            CategoryAddView(isShowColorPicker: isAddButtonTapped)
                 .presentationDetents([.fraction(0.95)])
                 .presentationDragIndicator(Visibility.visible)
         }
@@ -65,12 +63,17 @@ struct CategoryEditView: View {
 struct CategoryListView: View {
     @State var name: String = ""
     @State var color: String
+    
+    @State private var showColorPicker: Bool = false
 
     var body: some View {
         VStack {
             HStack {
                 // 색상
-                ColorPickerView(selectedColor: UIColor(Color(hex: color)), isNew: false)
+                Rectangle()
+                    .fill(Color(hex: color))
+                    .frame(width: 25, height: 25)
+                    .cornerRadius(3.0)
                 
                 // 이름
                 HStack {
@@ -82,7 +85,7 @@ struct CategoryListView: View {
                 .font(.Body1_M)
                 .frame(height: 35)
                 .background(Color.Gray01)
-                .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                .cornerRadius(3.0)
                             
                 // 삭제 버튼
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
