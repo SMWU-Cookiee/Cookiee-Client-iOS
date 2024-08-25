@@ -38,9 +38,11 @@ struct CategoryEditView: View {
             
         }
         .sheet(isPresented: $isAddButtonTapped) {
-//            EventDetailView(eventId: "58", date: date ?? Date.now)
-//                .presentationDetents([.fraction(0.99)])
-//                .presentationDragIndicator(Visibility.visible)
+            CategoryAddView(toggleIsTapped: {
+                isAddButtonTapped.toggle()
+            })
+                .presentationDetents([.fraction(0.95)])
+                .presentationDragIndicator(Visibility.visible)
         }
         .navigationBarTitle(
             Text("카테고리 관리")
@@ -68,7 +70,7 @@ struct CategoryListView: View {
         VStack {
             HStack {
                 // 색상
-                ColorPickerView(selectedColor: UIColor(Color(hex: color)))
+                ColorPickerView(selectedColor: UIColor(Color(hex: color)), isNew: false)
                 
                 // 이름
                 HStack {
