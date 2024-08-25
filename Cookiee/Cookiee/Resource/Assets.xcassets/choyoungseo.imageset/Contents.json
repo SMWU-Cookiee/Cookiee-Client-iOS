@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "kyungminseo.png",
+      "filename" : "choyoungseo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "kyungminseo@2x.png",
+      "filename" : "choyoungseo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "kyungminseo@3x.png",
+      "filename" : "choyoungseo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

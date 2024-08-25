@@ -150,6 +150,18 @@
 			path = UIComponent;
 			sourceTree = "<group>";
 		};
+		83A3E2682C7A203A00ADDB55 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				8383B48B2C74C74700C9127F /* MyPageView.swift */,
+				83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */,
+				83A3E2662C7A193B00ADDB55 /* DevelopersView.swift */,
+				83C861BB2C74E1DC004FDF7A /* PrivacyPolicyView.swift */,
+				83B1C6B22C74E76900740EA3 /* CategoryEditView.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		83B5CA8C2C6910F800C69ED1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,11 +221,7 @@
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
 				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
 				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
-				8383B48B2C74C74700C9127F /* MyPageView.swift */,
-				83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */,
-				83A3E2662C7A193B00ADDB55 /* DevelopersView.swift */,
-				83C861BB2C74E1DC004FDF7A /* PrivacyPolicyView.swift */,
-				83B1C6B22C74E76900740EA3 /* CategoryEditView.swift */,
+				83A3E2682C7A203A00ADDB55 /* MyPage */,
 				835F7AD02C70CD23006AEE89 /* Utils */,
 				8385C5A92C6E6AF900D1DD21 /* UIComponent */,
 				83E540152C6CE6A300509671 /* SampleData */,
