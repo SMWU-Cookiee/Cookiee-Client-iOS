@@ -66,8 +66,6 @@ struct CategoryListView: View {
     @State var name: String = ""
     @State var color: String
     
-    @State private var showColorPicker: Bool = false
-
     var body: some View {
         VStack {
             HStack {
