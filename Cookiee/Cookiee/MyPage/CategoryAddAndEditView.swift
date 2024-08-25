@@ -55,7 +55,6 @@ struct CategoryAddAndEditView: View {
                     )
                         .padding(10)
                         .font(.Body0_M)
-                        .foregroundStyle(Color.Gray04)
                         .frame(height: 40)
                         .background(Color.Gray01)
                         .cornerRadius(5)
