@@ -9,9 +9,13 @@ import SwiftUI
 
 import SwiftUI
 
-struct CategoryAddView: View {
-    @State private var name: String = ""
-    @State private var selectedColor: String = ""
+struct CategoryAddAndEditView: View {
+    @State var isNewCategory: Bool = true
+    
+    @State var id: String = ""
+    @State var name: String = ""
+    @State var selectedColor: String = ""
+    
     @State private var isShowColorPicker: Bool = false
     @State var toggleIsOpenCategoryAddSheet: () -> Void
 
@@ -26,7 +30,7 @@ struct CategoryAddView: View {
                     })
                     
                     Spacer()
-                    Text("카테고리 추가하기")
+                    Text(isNewCategory ? "카테고리 추가하기" : "카테고리 수정하기")
                         .font(.Head1_B)
                     Spacer()
                     Button(action: {
