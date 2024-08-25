@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct CategoryAddView: View {
-    @State var name: String = ""
-    @State var color: String = ""
-    @State var toggleIsTapped: () -> Void
+    @State private var name: String = ""
+    @State private var selectedColor: String = ""
+    @State private var isShowColorPicker: Bool = false
     
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
-                    toggleIsTapped()
+                    //
                 }, label: {
                     Image("XmarkIcon")
                 })
@@ -57,11 +57,17 @@ struct CategoryAddView: View {
                     .font(.Body1_M)
                     .foregroundStyle(Color.Gray05)
                     .frame(width: 92, alignment: .leading)
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    if color == "" {
-                        ColorPickerView(selectedColor: UIColor(Color(hex: color)), isNew: true)
+                Button(action: {
+                    isShowColorPicker.toggle()
+                }, label: {
+                    if selectedColor == "" {
+                        Text("탭하여 색 선택하기")
+                            .foregroundStyle(Color.Gray04)
                     } else {
-                        ColorPickerView(selectedColor: UIColor(Color(hex: color)), isNew: false)
+                        Rectangle()
+                            .fill(Color(hex: selectedColor))
+                            .frame(width: 25, height: 25)
+                            .cornerRadius(3.0)
                     }
                     
                     Spacer()
@@ -72,6 +78,12 @@ struct CategoryAddView: View {
                     .frame(height: 40)
                     .background(Color.Gray01)
                     .cornerRadius(5)
+                    .sheet(isPresented: $isShowColorPicker) {
+                        UIColorPickerViewControllerWrapper(selectedColor: $selectedColor) {
+                            isShowColorPicker = false
+                        }
+                        .presentationDetents([.fraction(0.70)])
+                    }
                 
             }
             
@@ -80,4 +92,8 @@ struct CategoryAddView: View {
         .padding()
         .padding(.top, 20)
     }
+}
+
+#Preview {
+    CategoryAddView()
 }
