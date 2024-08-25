@@ -43,14 +43,18 @@ struct UIColorPickerViewControllerWrapper: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> UIColorPickerViewController {
         let colorPicker = UIColorPickerViewController()
-        colorPicker.selectedColor = UIColor(Color(hex: selectedColor))
+        if let uiColor = UIColor(named: selectedColor) {
+            colorPicker.selectedColor = uiColor
+        }
         colorPicker.delegate = context.coordinator
         colorPicker.supportsAlpha = false
         return colorPicker
     }
 
     func updateUIViewController(_ uiViewController: UIColorPickerViewController, context: Context) {
-        uiViewController.selectedColor = UIColor(Color(hex: selectedColor))
+        if let uiColor = UIColor(named: selectedColor) {
+            uiViewController.selectedColor = uiColor
+        }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -68,8 +72,9 @@ struct UIColorPickerViewControllerWrapper: UIViewControllerRepresentable {
             parent.onDismiss()
         }
 
-        private func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: String, continuously: Bool) {
-            parent.selectedColor = color
+        func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+            parent.selectedColor = color.toHexString()
         }
     }
 }
+
