@@ -37,6 +37,11 @@ struct CategoryEditView: View {
             }
             
         }
+        .sheet(isPresented: $isAddButtonTapped) {
+//            EventDetailView(eventId: "58", date: date ?? Date.now)
+//                .presentationDetents([.fraction(0.99)])
+//                .presentationDragIndicator(Visibility.visible)
+        }
         .navigationBarTitle(
             Text("카테고리 관리")
                 .font(.Head1_B)
@@ -58,7 +63,6 @@ struct CategoryEditView: View {
 struct CategoryListView: View {
     @State var name: String = ""
     @State var color: String
-    @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
         VStack {
@@ -68,14 +72,9 @@ struct CategoryListView: View {
                 
                 // 이름
                 HStack {
-                    TextField("카테고리 이름을 입력해주세요", text: $name)
-                        .focused($isTextFieldFocused)
-                    // 편집 버튼
-                    Button(action: {
-                        isTextFieldFocused = true
-                    }, label: {
-                        Image("EditIconBrown")
-                    })
+                    Text(name)
+                    Spacer()
+                    Image("EditIconBrown")
                 }
                 .padding(10)
                 .font(.Body1_M)
@@ -95,7 +94,6 @@ struct CategoryListView: View {
 
 struct CategoryAddButtonView: View {
     @State var name: String = ""
-    @FocusState private var isTextFieldFocused: Bool
     @State var toggleIsTapped: () -> Void
     
     var body: some View {
