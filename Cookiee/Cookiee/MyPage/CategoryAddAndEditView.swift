@@ -22,25 +22,35 @@ struct CategoryAddAndEditView: View {
     var body: some View {
         ZStack {
             VStack {
-                HStack {
-                    Button(action: {
-                        toggleIsOpenCategoryAddSheet()
-                    }, label: {
-                        Image("XmarkIcon")
-                    })
+                ZStack {
+                    HStack {
+                        Button(action: {
+                            toggleIsOpenCategoryAddSheet()
+                        }, label: {
+                            Image("XmarkIcon")
+                        })
+                        .frame(alignment: .leading)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            // Save action
+                        }, label: {
+                            Text("완료")
+                                .font(.Body0_B)
+                                .foregroundStyle(Color.Gray03)
+                        })
+                        .padding(.trailing, 10)
+                    }
+                    
                     
                     Spacer()
                     Text(isNewCategory ? "카테고리 추가하기" : "카테고리 수정하기")
                         .font(.Head1_B)
-                    Spacer()
-                    Button(action: {
-                        // Save action
-                    }, label: {
-                        Text("완료")
-                            .font(.Body0_B)
-                            .foregroundStyle(Color.Gray03)
-                    })
+                        .frame(alignment: .center)
+
                 }
+                .frame(maxWidth: .infinity)
                 .padding(.bottom, 25)
                 
                 HStack {
@@ -60,6 +70,7 @@ struct CategoryAddAndEditView: View {
                         .cornerRadius(5)
                 }
                 .padding(.bottom, 10)
+                .frame(width: 353)
                 
                 HStack {
                     Text("카테고리 색")
@@ -90,10 +101,11 @@ struct CategoryAddAndEditView: View {
                         .background(Color.Gray01)
                         .cornerRadius(5)
                 }
+                .frame(width: 353)
                 
                 Spacer()
             }
-            .padding()
+            .padding(10)
             
             if isShowColorPicker {
                 ColorPickerBottomSheetView(isPresented: $isShowColorPicker, selectedColor: $selectedColor)
@@ -130,4 +142,10 @@ struct ColorPickerBottomSheetView: View {
             .zIndex(1)
         }
     }
+}
+
+#Preview{
+    CategoryAddAndEditView(toggleIsOpenCategoryAddSheet: {
+        //
+    })
 }
