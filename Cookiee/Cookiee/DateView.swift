@@ -56,13 +56,14 @@ struct DateView: View {
                     })
                 }
                 HStack {
-                    Button {
-                        // action
-                    } label: {
-                        Text("쿠키 추가하기")
-                            .foregroundStyle(Color.white)
-                            .font(.Body0_SB)
-                    }
+                    NavigationLink(
+                        destination: EventAddView(),
+                        label: {
+                            Text("쿠키 추가하기")
+                                .foregroundStyle(Color.white)
+                                .font(.Body0_SB)
+                        }
+                    )
                     .frame(width: 355, height: 44)
                     .background(Color.Brown00)
                     .cornerRadius(10)
