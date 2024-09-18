@@ -22,10 +22,49 @@ struct EventAddView: View {
         }
     }
     
+    @State var title: String = "쿠키의 제목을 입력해주세요."
+    @State var place: String = "장소를 입력해주세요."
+    @State var content: String = "어떤 활동을 하셨나요?"
+    @State var people: String = "함께한 사람들을 입력해주세요."
+    
+    
    
     var body: some View {
         VStack {
-           
+            VStack {
+                EventInfoTextField(fieldName: "쿠키 제목", field: title)
+                EventInfoTextField(fieldName: "장소", field: place)
+                EventInfoTextField(fieldName: "내용", field: content)
+                EventInfoTextField(fieldName: "함께한 사람", field: people)
+                
+                VStack(alignment: .leading) {
+                    Text("카테고리")
+                        .font(.Body1_M)
+                        .foregroundStyle(Color.Gray05)
+                        .frame(width: 75, alignment: .leading)
+                    Button(action: {
+                        
+                    }) {
+                        HStack {
+                            Text("카테고리를 선택해주세요.")
+                                .font(.Body0_M)
+                                .foregroundStyle(Color.Black)
+                            Spacer()
+                            Image("UnderDropBlack")
+                                .padding(2)
+                        }
+                        .padding(10)
+                        .frame(height: 40)
+                        .background(Color.Gray01)
+                        .cornerRadius(5)
+                        
+                    }
+                        
+                }
+                .padding(.bottom, 25)
+                
+            }
+            Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -44,6 +83,29 @@ struct EventAddView: View {
 
         .padding()
         .padding(.top, 10)
+    }
+}
+
+struct EventInfoTextField : View {
+    
+    var fieldName: String
+    @State var field: String
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(fieldName)
+                .font(.Body1_M)
+                .foregroundStyle(Color.Gray05)
+                .frame(width: 75, alignment: .leading)
+            TextField("\(field)", text: $field)
+                .padding(10)
+                .font(.Body0_M)
+                .frame(height: 40)
+                .background(Color.Gray01)
+                .foregroundStyle(Color.Gray04)
+                .cornerRadius(5)
+        }
+        .padding(.bottom, 25)
     }
 }
 
