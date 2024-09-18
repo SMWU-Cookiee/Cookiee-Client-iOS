@@ -22,20 +22,20 @@ struct EventAddView: View {
         }
     }
     
-    @State var title: String = "쿠키의 제목을 입력해주세요."
-    @State var place: String = "장소를 입력해주세요."
-    @State var content: String = "어떤 활동을 하셨나요?"
-    @State var people: String = "함께한 사람들을 입력해주세요."
+    @State var title: String = ""
+    @State var place: String = ""
+    @State var content: String = ""
+    @State var people: String = ""
     
     
    
     var body: some View {
         VStack {
             VStack {
-                EventInfoTextField(fieldName: "쿠키 제목", field: title)
-                EventInfoTextField(fieldName: "장소", field: place)
-                EventInfoTextField(fieldName: "내용", field: content)
-                EventInfoTextField(fieldName: "함께한 사람", field: people)
+                EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
+                EventInfoTextField(fieldName: "장소", placeholder: "장소를 입력해주세요.", field: place)
+                EventInfoTextField(fieldName: "내용", placeholder: "어떤 활동을 하셨나요?", field: content)
+                EventInfoTextField(fieldName: "함께한 사람", placeholder: "함께한 사람들을 입력해주세요.", field: people)
                 
                 VStack(alignment: .leading) {
                     Text("카테고리")
@@ -89,6 +89,7 @@ struct EventAddView: View {
 struct EventInfoTextField : View {
     
     var fieldName: String
+    var placeholder: String
     @State var field: String
     
     var body: some View {
@@ -97,15 +98,31 @@ struct EventInfoTextField : View {
                 .font(.Body1_M)
                 .foregroundStyle(Color.Gray05)
                 .frame(width: 75, alignment: .leading)
-            TextField("\(field)", text: $field)
-                .padding(10)
-                .font(.Body0_M)
-                .frame(height: 40)
-                .background(Color.Gray01)
-                .foregroundStyle(Color.Gray04)
-                .cornerRadius(5)
+            
+            TextField("", text: $field)
+                .placeholder(when: field.isEmpty) {
+                    Text(placeholder)
+                        .foregroundStyle(Color.Gray04)
+                        .font(.Body0_M)
+            }
+            .padding(10)
+            .frame(height: 40)
+            .background(Color.Gray01)
+            .cornerRadius(5)
         }
         .padding(.bottom, 25)
+    }
+}
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+        ZStack(alignment: .leading) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
     }
 }
 
