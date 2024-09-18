@@ -223,10 +223,8 @@
 				83BD79892C68BB570044C453 /* ContentView.swift */,
 				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
 				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
-				83DEB9872C9B05BC0049F7CD /* EventAddView.swift */,
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
-				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
-				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
+				83DEB9892C9B0B440049F7CD /* Event */,
 				83A3E2682C7A203A00ADDB55 /* MyPage */,
 				835F7AD02C70CD23006AEE89 /* Utils */,
 				8385C5A92C6E6AF900D1DD21 /* UIComponent */,
@@ -260,6 +258,16 @@
 				83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */,
 			);
 			path = CookieeUITests;
+			sourceTree = "<group>";
+		};
+		83DEB9892C9B0B440049F7CD /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
+				83DEB9872C9B05BC0049F7CD /* EventAddView.swift */,
+				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
+			);
+			path = Event;
 			sourceTree = "<group>";
 		};
 		83E540152C6CE6A300509671 /* SampleData */ = {
