@@ -44,10 +44,13 @@ struct CategoryListView: View {
                 .presentationDetents([.fraction(0.95)])
                 .presentationDragIndicator(Visibility.visible)
         }
-        .navigationBarTitle(
-            Text("카테고리 관리")
-                .font(.Head1_B)
-        )
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("카테고리 관리")
+                    .font(.Head1_B)
+            }
+        }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .padding()

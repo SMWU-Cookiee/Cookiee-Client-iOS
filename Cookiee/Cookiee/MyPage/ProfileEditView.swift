@@ -94,10 +94,13 @@ struct ProfileEditView: View {
             }
             Spacer()
         }
-        .navigationBarTitle(
-            Text("프로필 수정")
-                .font(.Head1_B)
-        )
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("프로필 수정")
+                    .font(.Head1_B)
+            }
+        }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {

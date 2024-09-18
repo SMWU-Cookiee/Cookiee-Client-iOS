@@ -33,13 +33,15 @@ struct DevelopersView: View {
             Spacer()
             
         }
-        .navigationBarTitle(
-            Text("Cookiee-를 만든 사람들👩‍🍳")
-                .font(.Head1_B)
-        )
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Cookiee-를 만든 사람들👩‍🍳")
+                    .font(.Head1_B)
+            }
+        }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
-        .padding()
         .padding(.top, 10)
     }
 }

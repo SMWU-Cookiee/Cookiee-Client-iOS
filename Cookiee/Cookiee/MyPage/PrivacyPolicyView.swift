@@ -48,14 +48,17 @@ struct PrivacyPolicyView: View {
             }
             Spacer()
         }
-        .navigationBarTitle(
-            Text("약관 및 개인정보 활용")
-                .font(.Head1_B)
-        )
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("약관 및 개인정보 활용")
+                    .font(.Head1_B)
+            }
+        }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .padding()
-        .padding(.top, 10)
+        
     }
 }
 
