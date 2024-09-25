@@ -135,6 +135,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		833707C22CA4319E0050D1C7 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				83BD79892C68BB570044C453 /* ContentView.swift */,
+				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
+				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
+				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
+				83DEB9892C9B0B440049F7CD /* Event */,
+				83A3E2682C7A203A00ADDB55 /* MyPage */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		835F7AD02C70CD23006AEE89 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,12 +233,7 @@
 				83B5CAA02C6911EB00C69ED1 /* Info.plist */,
 				83BD79B12C68BBA10044C453 /* Cookiee.entitlements */,
 				83BD79872C68BB570044C453 /* CookieeApp.swift */,
-				83BD79892C68BB570044C453 /* ContentView.swift */,
-				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
-				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
-				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
-				83DEB9892C9B0B440049F7CD /* Event */,
-				83A3E2682C7A203A00ADDB55 /* MyPage */,
+				833707C22CA4319E0050D1C7 /* Presentation */,
 				835F7AD02C70CD23006AEE89 /* Utils */,
 				8385C5A92C6E6AF900D1DD21 /* UIComponent */,
 				83E540152C6CE6A300509671 /* SampleData */,
