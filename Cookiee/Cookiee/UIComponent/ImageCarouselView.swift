@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SnapCarousel: View {
+struct ImageCarouselView: View {
     var imageUrls: [String]
     var spacing: CGFloat
     var trialingSpace: CGFloat

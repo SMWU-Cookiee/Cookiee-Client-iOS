@@ -40,7 +40,7 @@ struct EventDetailView: View {
                     .padding(.bottom, 10)
                     
                     HStack {
-                        SnapCarousel(index: $currentIndex, imageUrls: eventData.result.imageUrlList)
+                        ImageCarouselView(index: $currentIndex, imageUrls: eventData.result.imageUrlList)
                             .frame(height: 365)
                     }
                     
