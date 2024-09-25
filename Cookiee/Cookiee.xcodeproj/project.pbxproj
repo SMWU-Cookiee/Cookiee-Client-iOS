@@ -148,6 +148,13 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		833707C32CA431EC0050D1C7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		835F7AD02C70CD23006AEE89 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +240,7 @@
 				83B5CAA02C6911EB00C69ED1 /* Info.plist */,
 				83BD79B12C68BBA10044C453 /* Cookiee.entitlements */,
 				83BD79872C68BB570044C453 /* CookieeApp.swift */,
+				833707C32CA431EC0050D1C7 /* Network */,
 				833707C22CA4319E0050D1C7 /* Presentation */,
 				835F7AD02C70CD23006AEE89 /* Utils */,
 				8385C5A92C6E6AF900D1DD21 /* UIComponent */,
