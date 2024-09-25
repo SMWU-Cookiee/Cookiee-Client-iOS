@@ -25,6 +25,10 @@ struct SocialLoginView: View {
                 }
                
                 HStack {
+                    GoogleLoginInButton()
+                }.padding(.bottom, 11)
+                
+                HStack {
                     AppleSignInButton()
                 }.padding(.bottom, 90)
             }
@@ -76,6 +80,27 @@ struct AppleSignInButton : View {
         .frame(width : UIScreen.main.bounds.width * 0.7, height:45)
     }
 }
+
+// 구글 로그인
+struct GoogleLoginInButton: View {
+    
+    var body: some View {
+        Button {
+            // 구글 로그인 로직
+        } label: {
+            Image("GoogleLogos")
+            Text("Google 계정으로 로그인")
+                .font(Font.Body1_SB)
+                .foregroundStyle(Color.Gray06)
+        }
+        .frame(width: 265, height: 37)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.Gray04, lineWidth: 1)
+            )
+    }
+}
+
 
 
 #Preview {
