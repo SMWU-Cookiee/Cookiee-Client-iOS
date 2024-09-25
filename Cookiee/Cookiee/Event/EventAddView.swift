@@ -31,38 +31,41 @@ struct EventAddView: View {
    
     var body: some View {
         VStack {
-            VStack {
-                EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
-                EventInfoTextField(fieldName: "장소", placeholder: "장소를 입력해주세요.", field: place)
-                EventInfoTextField(fieldName: "내용", placeholder: "어떤 활동을 하셨나요?", field: content)
-                EventInfoTextField(fieldName: "함께한 사람", placeholder: "함께한 사람들을 입력해주세요.", field: people)
-                
-                VStack(alignment: .leading) {
-                    Text("카테고리")
-                        .font(.Body1_M)
-                        .foregroundStyle(Color.Gray05)
-                        .frame(width: 75, alignment: .leading)
-                    Button(action: {
-                        
-                    }) {
-                        HStack {
-                            Text("카테고리를 선택해주세요.")
-                                .font(.Body0_M)
-                                .foregroundStyle(Color.Black)
-                            Spacer()
-                            Image("UnderDropBlack")
-                                .padding(2)
+            InitialAddMessageCardView()
+            
+            ScrollView {
+                VStack {
+                    EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
+                    EventInfoTextField(fieldName: "장소", placeholder: "장소를 입력해주세요.", field: place)
+                    EventInfoTextField(fieldName: "내용", placeholder: "어떤 활동을 하셨나요?", field: content)
+                    EventInfoTextField(fieldName: "함께한 사람", placeholder: "함께한 사람들을 입력해주세요.", field: people)
+                    
+                    VStack(alignment: .leading) {
+                        Text("카테고리")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.Gray05)
+                            .frame(width: 75, alignment: .leading)
+                        Button(action: {
+                            
+                        }) {
+                            HStack {
+                                Text("카테고리를 선택해주세요.")
+                                    .font(.Body0_M)
+                                    .foregroundStyle(Color.Black)
+                                Spacer()
+                                Image("UnderDropBlack")
+                                    .padding(2)
+                            }
+                            .padding(10)
+                            .frame(height: 40)
+                            .background(Color.Gray01)
+                            .cornerRadius(5)
+                            
                         }
-                        .padding(10)
-                        .frame(height: 40)
-                        .background(Color.Gray01)
-                        .cornerRadius(5)
-                        
+                            
                     }
-                        
+                    .padding(.bottom, 25)
                 }
-                .padding(.bottom, 25)
-                
             }
             Spacer()
         }
@@ -111,6 +114,30 @@ struct EventInfoTextField : View {
             .cornerRadius(5)
         }
         .padding(.bottom, 25)
+    }
+}
+
+struct InitialAddMessageCardView: View {
+    var body: some View {
+        HStack {
+            Button(action: {}, label: {
+                VStack {
+                    Image("Photo")
+                        .resizable()
+                        .frame(width: 35, height: 35)
+                        .padding(10)
+                    
+                    Text("최대 5장까지 추가할 수 있어요.")
+                        .foregroundStyle(Color.Gray04)
+                        .font(Font.Body1_M)
+                }
+            })
+        }
+        .frame(width: 270, height: 360)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.Gray04, lineWidth: 1)
+        )
     }
 }
 
