@@ -8,6 +8,9 @@
 import SwiftUI
 import AuthenticationServices
 
+import GoogleSignIn
+import GoogleSignInSwift
+
 
 struct SocialLoginView: View {
     var body: some View {
@@ -86,7 +89,13 @@ struct GoogleLoginInButton: View {
     
     var body: some View {
         Button {
-            // 구글 로그인 로직
+            Task {
+                 do {
+                     try await handleSignInButton()
+                 } catch {
+                     print("Google login failed with error: \(error)")
+                 }
+             }
         } label: {
             Image("GoogleLogos")
             Text("Google 계정으로 로그인")
@@ -99,8 +108,18 @@ struct GoogleLoginInButton: View {
                     .stroke(Color.Gray04, lineWidth: 1)
             )
     }
+    
 }
 
+func handleSignInButton() async throws {
+    guard let TopUIViewController = FindTopUIViewController() else {
+        throw URLError(.cannotFindHost)
+    }
+    let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: TopUIViewController)
+    
+    print("======google login======")
+    print(gidSignInResult)
+}
 
 
 #Preview {
