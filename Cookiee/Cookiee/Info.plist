@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.321644116751-etll7dfe9ue4v1070i03tv74kcust1cb</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Bold.ttf</string>
@@ -9,5 +20,15 @@
 		<string>Pretendard-Medium.ttf</string>
 		<string></string>
 	</array>
+    <key>CLIENT_ID</key>
+    <string>321644116751-etll7dfe9ue4v1070i03tv74kcust1cb.apps.googleusercontent.com</string>
+    <key>GIDClientID</key>
+    <string>321644116751-etll7dfe9ue4v1070i03tv74kcust1cb.apps.googleusercontent.com</string>
+    <key>REVERSED_CLIENT_ID</key>
+    <string>com.googleusercontent.apps.321644116751-etll7dfe9ue4v1070i03tv74kcust1cb</string>
+    <key>PLIST_VERSION</key>
+    <string>1</string>
+    <key>BUNDLE_ID</key>
+    <string>site.apps.cookiee</string>
 </dict>
 </plist>
