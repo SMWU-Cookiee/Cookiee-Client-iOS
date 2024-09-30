@@ -40,7 +40,7 @@ struct SocialLoginView: View {
     }
 }
 
-// * 애플 로그인 버튼
+//MARK: - 애플 로그인 버튼 & auth 처리
 struct AppleSignInButton : View {
     @AppStorage("email") var email:String = ""
     @AppStorage("fullName") var fullName:String = ""
@@ -79,19 +79,20 @@ struct AppleSignInButton : View {
             case .failure(let error):
                 print(error)
             };
-        })                
+        })
         .frame(width : UIScreen.main.bounds.width * 0.7, height:45)
     }
 }
 
-// 구글 로그인
+//MARK: - 구글 로그인 버튼 & auth 처리
 struct GoogleLoginInButton: View {
     
     var body: some View {
         Button {
             Task {
                  do {
-                     try await handleSignInButton()
+                     try await getGoogleUserID()
+                     
                  } catch {
                      print("Google login failed with error: \(error)")
                  }
@@ -109,18 +110,22 @@ struct GoogleLoginInButton: View {
             )
     }
     
-}
-
-func handleSignInButton() async throws {
-    guard let TopUIViewController = FindTopUIViewController() else {
-        throw URLError(.cannotFindHost)
+    func getGoogleUserID() async throws {
+        guard let TopUIViewController = FindTopUIViewController() else {
+            throw URLError(.cannotFindHost)
+        }
+        let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: TopUIViewController)
+        
+        print("======google login======")
+        let user = gidSignInResult.user
+        print("User ID: \(user.userID ?? "No User ID")")
+        print("========================")
+        
+        // API 처리
+           
     }
-    let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: TopUIViewController)
     
-    print("======google login======")
-    print(gidSignInResult)
 }
-
 
 #Preview {
     SocialLoginView()
