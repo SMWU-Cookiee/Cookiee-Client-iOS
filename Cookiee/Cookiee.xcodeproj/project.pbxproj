@@ -169,9 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				83BD79892C68BB570044C453 /* ContentView.swift */,
-				83F02CBB2CAC11D0001E8329 /* Account */,
 				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
+				83F02CBB2CAC11D0001E8329 /* Account */,
 				83DEB9892C9B0B440049F7CD /* Event */,
 				83A3E2682C7A203A00ADDB55 /* MyPage */,
 			);
