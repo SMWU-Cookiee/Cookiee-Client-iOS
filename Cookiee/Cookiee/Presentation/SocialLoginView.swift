@@ -114,14 +114,27 @@ struct GoogleLoginInButton: View {
         guard let TopUIViewController = FindTopUIViewController() else {
             throw URLError(.cannotFindHost)
         }
+        
         let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: TopUIViewController)
         
-        print("======google login======")
         let user = gidSignInResult.user
-        print("User ID: \(user.userID ?? "No User ID")")
-        print("========================")
-        
+        guard let userID = user.userID else {
+            print("Error: No User ID found")
+            return
+        }
+
         // API 처리
+        let googleLoginService = GoogleLoginService()
+        googleLoginService.getGoogleLogin(socialId: userID) { result in
+            switch result {
+            case .success(let response):
+                print("API Response: \(response)")
+                print("response accessToken:\(String(describing: response.result.accessToken))")
+            case .failure(let error):
+                print("API Error: \(error)")
+                return
+            }
+        }
            
     }
     
