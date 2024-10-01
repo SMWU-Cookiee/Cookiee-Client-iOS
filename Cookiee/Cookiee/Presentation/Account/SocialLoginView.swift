@@ -13,32 +13,43 @@ import GoogleSignInSwift
 
 
 struct SocialLoginView: View {
+    @State private var navigateToSignUp: Bool = false // 네비게이션 상태
+
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                HStack {
+        NavigationStack {
+            GeometryReader { geometry in
+                VStack {
                     HStack {
-                        Image("cookiee_icon_big")
+                        HStack {
+                            Image("cookiee_icon_big")
+                        }
+                        .position(x: geometry.size.width / 2, y: 216)
+                        HStack {
+                            Image("cookiee_typo")
+                        }
+                        .position(x: 0, y: 350)
                     }
-                    .position(x: geometry.size.width / 2, y: 216)
+
                     HStack {
-                        Image("cookiee_typo")
+                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp) // 상태 전달
                     }
-                    .position(x: 0, y: 350)
+                    .padding(.bottom, 11)
+
+                    HStack {
+                        AppleSignInButton()
+                    }
+                    .padding(.bottom, 90)
                 }
-               
-                HStack {
-                    GoogleLoginInButton()
-                }.padding(.bottom, 11)
-                
-                HStack {
-                    AppleSignInButton()
-                }.padding(.bottom, 90)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            // 로그인 성공 시 SignUpView로 이동
+            .navigationDestination(isPresented: $navigateToSignUp) {
+                SignUpView()
+            }
         }
     }
 }
+
 
 //MARK: - 애플 로그인 버튼 & auth 처리
 struct AppleSignInButton : View {
@@ -85,18 +96,22 @@ struct AppleSignInButton : View {
 }
 
 //MARK: - 구글 로그인 버튼 & auth 처리
+// GoogleLoginInButton 수정
 struct GoogleLoginInButton: View {
-    
+    @Binding var navigateToSignUp: Bool // 네비게이션 상태를 부모에서 전달받음
+
     var body: some View {
         Button {
             Task {
-                 do {
-                     try await getGoogleUserID()
-                     
-                 } catch {
-                     print("Google login failed with error: \(error)")
-                 }
-             }
+                do {
+                    let loginSuccess = try await getGoogleUserID()
+                    if loginSuccess {
+                        navigateToSignUp = true // 로그인 성공 시 SignUpView로 이동
+                    }
+                } catch {
+                    print("Google login failed with error: \(error)")
+                }
+            }
         } label: {
             Image("GoogleLogos")
             Text("Google 계정으로 로그인")
@@ -104,13 +119,13 @@ struct GoogleLoginInButton: View {
                 .foregroundStyle(Color.Gray06)
         }
         .frame(width: 265, height: 37)
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color.Gray04, lineWidth: 1)
-            )
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.Gray04, lineWidth: 1)
+        )
     }
     
-    func getGoogleUserID() async throws {
+    func getGoogleUserID() async throws -> Bool {
         guard let TopUIViewController = FindTopUIViewController() else {
             throw URLError(.cannotFindHost)
         }
@@ -120,25 +135,28 @@ struct GoogleLoginInButton: View {
         let user = gidSignInResult.user
         guard let userID = user.userID else {
             print("Error: No User ID found")
-            return
+            return false // 실패 시 false 반환
         }
 
         // API 처리
-        let googleLoginService = GoogleLoginService()
-        googleLoginService.getGoogleLogin(socialId: userID) { result in
-            switch result {
-            case .success(let response):
-                print("API Response: \(response)")
-                print("response accessToken:\(String(describing: response.result.accessToken))")
-            case .failure(let error):
-                print("API Error: \(error)")
-                return
+        return try await withCheckedThrowingContinuation { continuation in
+            let googleLoginService = GoogleLoginService()
+            googleLoginService.getGoogleLogin(socialId: userID) { result in
+                switch result {
+                case .success(let response):
+                    print("API Response: \(response)")
+                    print("response accessToken: \(String(describing: response.result.accessToken))")
+                    continuation.resume(returning: true) // 성공 시 true 반환
+                case .failure(let error):
+                    print("API Error: \(error)")
+                    continuation.resume(returning: false) // 실패 시 false 반환
+                }
             }
         }
-           
     }
-    
 }
+
+
 
 #Preview {
     SocialLoginView()

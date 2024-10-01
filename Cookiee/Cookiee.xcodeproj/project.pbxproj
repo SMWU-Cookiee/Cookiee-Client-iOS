@@ -57,6 +57,8 @@
 		83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB42CAC0A8E001E8329 /* GoogleLoginAPI.swift */; };
 		83F02CB82CAC0ACE001E8329 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB62CAC0ACE001E8329 /* BaseTargetType.swift */; };
 		83F02CBA2CAC0B24001E8329 /* GoogleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB92CAC0B24001E8329 /* GoogleLoginService.swift */; };
+		83F02CBD2CAC11F2001E8329 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CBC2CAC11F2001E8329 /* SignUpView.swift */; };
+		83F02CBF2CAC3189001E8329 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CBE2CAC3189001E8329 /* Placeholder.swift */; };
 		83F80D492C79AD18001231A9 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F80D482C79AD18001231A9 /* ColorPickerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +127,8 @@
 		83F02CB42CAC0A8E001E8329 /* GoogleLoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginAPI.swift; sourceTree = "<group>"; };
 		83F02CB62CAC0ACE001E8329 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		83F02CB92CAC0B24001E8329 /* GoogleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginService.swift; sourceTree = "<group>"; };
+		83F02CBC2CAC11F2001E8329 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		83F02CBE2CAC3189001E8329 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		83F80D482C79AD18001231A9 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,9 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				83BD79892C68BB570044C453 /* ContentView.swift */,
-				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
 				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
+				83F02CBB2CAC11D0001E8329 /* Account */,
 				83DEB9892C9B0B440049F7CD /* Event */,
 				83A3E2682C7A203A00ADDB55 /* MyPage */,
 			);
@@ -179,6 +183,7 @@
 			children = (
 				835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */,
 				833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */,
+				83F02CBE2CAC3189001E8329 /* Placeholder.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -367,6 +372,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		83F02CBB2CAC11D0001E8329 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
+				83F02CBC2CAC11F2001E8329 /* SignUpView.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -526,10 +540,12 @@
 				83DEB9882C9B05BC0049F7CD /* EventAddView.swift in Sources */,
 				8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */,
 				835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */,
+				83F02CBD2CAC11F2001E8329 /* SignUpView.swift in Sources */,
 				83F02CBA2CAC0B24001E8329 /* GoogleLoginService.swift in Sources */,
 				83EC9F862C76FD2F00816E58 /* CategoryListSample.swift in Sources */,
 				83F80D492C79AD18001231A9 /* ColorPickerView.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
+				83F02CBF2CAC3189001E8329 /* Placeholder.swift in Sources */,
 				83F02CB32CAC0920001E8329 /* GoogleLoginResponseDTO.swift in Sources */,
 				83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */,
 				83C861BC2C74E1DC004FDF7A /* PrivacyPolicyView.swift in Sources */,
