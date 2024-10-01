@@ -8,6 +8,9 @@
 import SwiftUI
 import AuthenticationServices
 
+import GoogleSignIn
+import GoogleSignInSwift
+
 
 struct SocialLoginView: View {
     var body: some View {
@@ -25,6 +28,10 @@ struct SocialLoginView: View {
                 }
                
                 HStack {
+                    GoogleLoginInButton()
+                }.padding(.bottom, 11)
+                
+                HStack {
                     AppleSignInButton()
                 }.padding(.bottom, 90)
             }
@@ -33,7 +40,7 @@ struct SocialLoginView: View {
     }
 }
 
-// * 애플 로그인 버튼
+//MARK: - 애플 로그인 버튼 & auth 처리
 struct AppleSignInButton : View {
     @AppStorage("email") var email:String = ""
     @AppStorage("fullName") var fullName:String = ""
@@ -72,11 +79,66 @@ struct AppleSignInButton : View {
             case .failure(let error):
                 print(error)
             };
-        })                
+        })
         .frame(width : UIScreen.main.bounds.width * 0.7, height:45)
     }
 }
 
+//MARK: - 구글 로그인 버튼 & auth 처리
+struct GoogleLoginInButton: View {
+    
+    var body: some View {
+        Button {
+            Task {
+                 do {
+                     try await getGoogleUserID()
+                     
+                 } catch {
+                     print("Google login failed with error: \(error)")
+                 }
+             }
+        } label: {
+            Image("GoogleLogos")
+            Text("Google 계정으로 로그인")
+                .font(Font.Body1_SB)
+                .foregroundStyle(Color.Gray06)
+        }
+        .frame(width: 265, height: 37)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.Gray04, lineWidth: 1)
+            )
+    }
+    
+    func getGoogleUserID() async throws {
+        guard let TopUIViewController = FindTopUIViewController() else {
+            throw URLError(.cannotFindHost)
+        }
+        
+        let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: TopUIViewController)
+        
+        let user = gidSignInResult.user
+        guard let userID = user.userID else {
+            print("Error: No User ID found")
+            return
+        }
+
+        // API 처리
+        let googleLoginService = GoogleLoginService()
+        googleLoginService.getGoogleLogin(socialId: userID) { result in
+            switch result {
+            case .success(let response):
+                print("API Response: \(response)")
+                print("response accessToken:\(String(describing: response.result.accessToken))")
+            case .failure(let error):
+                print("API Error: \(error)")
+                return
+            }
+        }
+           
+    }
+    
+}
 
 #Preview {
     SocialLoginView()
