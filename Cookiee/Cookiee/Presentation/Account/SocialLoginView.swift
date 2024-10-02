@@ -21,6 +21,7 @@ struct SocialLoginView: View {
     @State private var socialLoginType: String = ""
     @State private var socialRefreshToken: String = ""
     @State private var socialAccessToken: String = ""
+    @State private var userId: Int64 = 0
 
     var body: some View {
         NavigationStack {
@@ -38,7 +39,7 @@ struct SocialLoginView: View {
                     }
 
                     HStack {
-                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken) // 상태 전달
+                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken, userId: $userId) // 상태 전달
                     }
                     .padding(.bottom, 11)
 
@@ -54,7 +55,7 @@ struct SocialLoginView: View {
                 SignUpView(email: email, socialId: socialId, socialLoginType: socialLoginType, socialRefreshToken: socialRefreshToken, socialAccessToken: socialAccessToken)
             }
             .navigationDestination(isPresented: $navigateToHome, destination: {
-                HomeCalendarView()
+                TabBarView()
             })
         }
     }
@@ -117,6 +118,7 @@ struct GoogleLoginInButton: View {
     @Binding var socialLoginType: String
     @Binding var socialRefreshToken: String
     @Binding var socialAccessToken: String
+    @Binding var userId: Int64
     
     @State var isNewMember: Bool = false
     
