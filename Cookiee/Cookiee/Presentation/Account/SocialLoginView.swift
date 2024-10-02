@@ -14,6 +14,12 @@ import GoogleSignInSwift
 
 struct SocialLoginView: View {
     @State private var navigateToSignUp: Bool = false // 네비게이션 상태
+    
+    @State private var email: String = ""
+    @State private var socialId: String = ""
+    @State private var socialLoginType: String = ""
+    @State private var socialRefreshToken: String = ""
+    @State private var socialAccessToken: String = ""
 
     var body: some View {
         NavigationStack {
@@ -31,7 +37,7 @@ struct SocialLoginView: View {
                     }
 
                     HStack {
-                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp) // 상태 전달
+                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken) // 상태 전달
                     }
                     .padding(.bottom, 11)
 
@@ -44,7 +50,7 @@ struct SocialLoginView: View {
             }
             // 로그인 성공 시 SignUpView로 이동
             .navigationDestination(isPresented: $navigateToSignUp) {
-                SignUpView()
+                SignUpView(email: email, socialId: socialId, socialLoginType: socialLoginType, socialRefreshToken: socialRefreshToken, socialAccessToken: socialAccessToken)
             }
         }
     }
@@ -99,6 +105,14 @@ struct AppleSignInButton : View {
 // GoogleLoginInButton 수정
 struct GoogleLoginInButton: View {
     @Binding var navigateToSignUp: Bool // 네비게이션 상태를 부모에서 전달받음
+    
+    //Auth 값 바인딩
+    @Binding var email: String
+    @Binding var socialId: String
+    @Binding var socialLoginType: String
+    @Binding var socialRefreshToken: String
+    @Binding var socialAccessToken: String
+    
 
     var body: some View {
         Button {
@@ -146,6 +160,14 @@ struct GoogleLoginInButton: View {
                 case .success(let response):
                     print("API Response: \(response)")
                     print("response accessToken: \(String(describing: response.result.accessToken))")
+                    
+                    // Auth 값 설정
+                    email = response.result.email ?? ""
+                    socialId = response.result.socialId
+                    socialLoginType = "google"
+                    socialRefreshToken = response.result.refreshToken ?? ""
+                    socialAccessToken = response.result.accessToken ?? ""
+                    
                     continuation.resume(returning: true) // 성공 시 true 반환
                 case .failure(let error):
                     print("API Error: \(error)")

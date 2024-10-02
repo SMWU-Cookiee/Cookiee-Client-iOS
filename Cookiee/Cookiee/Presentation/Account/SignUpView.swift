@@ -22,12 +22,22 @@ struct SignUpView: View {
         }
     }
     
+    // 회원가입에 필요한 Auth 값
+    var email: String
+    var socialId: String
+    var socialLoginType: String
+    var socialRefreshToken: String
+    var socialAccessToken: String
+
+    // 사용자 입력 필드
     @State var nickname: String = ""
     @State var introduction: String = ""
     
+    // 프로필 사진 관련 필드
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
     @State var image: Image?
+    
     
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
@@ -120,11 +130,19 @@ struct SignUpView: View {
         }))
         .padding()
         .padding(.top, 10)
+        .onAppear() {
+            print("==============================================")
+            print(email)
+            print(socialId)
+            print(socialLoginType)
+            print(socialRefreshToken)
+            print(socialAccessToken)
+        }
     }
 }
 
 
 
 #Preview {
-    SignUpView()
+    SignUpView(email: "kyungminseo10@gmail.com", socialId: "112220849520980734309", socialLoginType: "google", socialRefreshToken: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzA0NjYzMjJ9.TplAJ40kUwIFr9Z4zgaY4Mc9P1HnlvGB_Q-rHj8veho", socialAccessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NCIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3Mjc4NzQzMjIsImV4cCI6MTcyNzg3NzkyMn0.h6obkYeeBPf4PTcBygIa3KIf8XjhtsXKCBRDLCq-KE0")
 }
