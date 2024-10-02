@@ -13,7 +13,15 @@ import GoogleSignInSwift
 
 
 struct SocialLoginView: View {
-    @State private var navigateToSignUp: Bool = false // 네비게이션 상태
+    @State private var navigateToSignUp: Bool = false // 회원가입으로 이동
+    @State private var navigateToHome: Bool = false // 홈으로 이동
+    
+    @State private var email: String = ""
+    @State private var socialId: String = ""
+    @State private var socialLoginType: String = ""
+    @State private var socialRefreshToken: String = ""
+    @State private var socialAccessToken: String = ""
+    @State private var userId: Int64 = 0
 
     var body: some View {
         NavigationStack {
@@ -31,7 +39,7 @@ struct SocialLoginView: View {
                     }
 
                     HStack {
-                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp) // 상태 전달
+                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken, userId: $userId) // 상태 전달
                     }
                     .padding(.bottom, 11)
 
@@ -44,8 +52,11 @@ struct SocialLoginView: View {
             }
             // 로그인 성공 시 SignUpView로 이동
             .navigationDestination(isPresented: $navigateToSignUp) {
-                SignUpView()
+                SignUpView(email: email, socialId: socialId, socialLoginType: socialLoginType, socialRefreshToken: socialRefreshToken, socialAccessToken: socialAccessToken)
             }
+            .navigationDestination(isPresented: $navigateToHome, destination: {
+                TabBarView()
+            })
         }
     }
 }
@@ -99,14 +110,31 @@ struct AppleSignInButton : View {
 // GoogleLoginInButton 수정
 struct GoogleLoginInButton: View {
     @Binding var navigateToSignUp: Bool // 네비게이션 상태를 부모에서 전달받음
+    @Binding var navigateToHome: Bool
+    
+    //Auth 값 바인딩
+    @Binding var email: String
+    @Binding var socialId: String
+    @Binding var socialLoginType: String
+    @Binding var socialRefreshToken: String
+    @Binding var socialAccessToken: String
+    @Binding var userId: Int64
+    
+    @State var isNewMember: Bool = false
+    
 
     var body: some View {
         Button {
             Task {
                 do {
                     let loginSuccess = try await getGoogleUserID()
-                    if loginSuccess {
-                        navigateToSignUp = true // 로그인 성공 시 SignUpView로 이동
+                    
+                    if loginSuccess { // 구글 로그인 성공 여부 확인
+                        if isNewMember {
+                            navigateToSignUp = true // 신규 가입이면 회원가입으로
+                        } else {
+                            navigateToHome = true // 신규 가입이 아니면 홈으로
+                        }
                     }
                 } catch {
                     print("Google login failed with error: \(error)")
@@ -146,6 +174,15 @@ struct GoogleLoginInButton: View {
                 case .success(let response):
                     print("API Response: \(response)")
                     print("response accessToken: \(String(describing: response.result.accessToken))")
+                    
+                    // Auth 값 설정
+                    email = response.result.email ?? ""
+                    socialId = response.result.socialId
+                    socialLoginType = "google"
+                    socialRefreshToken = response.result.refreshToken ?? ""
+                    socialAccessToken = response.result.accessToken ?? ""
+                    isNewMember = response.result.isNewMember
+                    
                     continuation.resume(returning: true) // 성공 시 true 반환
                 case .failure(let error):
                     print("API Error: \(error)")

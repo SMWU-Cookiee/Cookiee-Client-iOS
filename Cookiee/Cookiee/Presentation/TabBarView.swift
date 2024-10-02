@@ -15,6 +15,7 @@ enum Tab {
 
 struct TabBarView : View {
     @State var selectedTab: Tab = .first
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -35,11 +36,12 @@ struct TabBarView : View {
                 }
                 .padding(.bottom, 50)
                 Spacer()
-                CustomTabView(selectedTab: $selectedTab)            
+                CustomTabView(selectedTab: $selectedTab)
                     .background(Color.White)
                     .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -10)
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
@@ -90,8 +92,6 @@ struct CustomTabView: View {
 
         }
         .frame(height: 50, alignment: .center)
-
-
     }
     
 }
