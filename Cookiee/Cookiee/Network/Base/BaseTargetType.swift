@@ -11,7 +11,7 @@ import Moya
 enum HeaderType {
     case noneHeader
     case accessTokenHeaderForGet
-    case accessTokenHeaderForGeneral
+    case refreshTokenHeader
 }
 
 protocol BaseTargetType: TargetType {
@@ -34,12 +34,19 @@ extension BaseTargetType {
                 let header = ["Authorization": "Bearer \(accessToken)"]
                 
                 return header
-            case .accessTokenHeaderForGeneral:
+            case .refreshTokenHeader:
                 guard let accessToken = loadFromKeychain(key: "accessToken") else { return [:] }
+                guard let refreshToken = loadFromKeychain(key: "accessToken") else { return [:] }
+        
 
                 let header = ["Content-Type": "application/json",
-                              "Authorization": "Bearer \(accessToken)"]
+                              "Authorization": "Bearer \(accessToken)",
+                              "RefreshToken": "Bearer \(refreshToken)"]
                 return header
         }
+    }
+    
+    var validationType: ValidationType {
+        return .successCodes
     }
 }
