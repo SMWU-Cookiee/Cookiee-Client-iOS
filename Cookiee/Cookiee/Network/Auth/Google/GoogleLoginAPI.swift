@@ -13,6 +13,10 @@ enum GoogleLoginAPI {
 }
 
 extension GoogleLoginAPI: BaseTargetType {
+    var headerType: HeaderType {
+        .accessTokenHeaderForGet
+    }
+    
     var headers: [String: String]? {
             switch self {
             case .getGoogleLogin(let socialId):

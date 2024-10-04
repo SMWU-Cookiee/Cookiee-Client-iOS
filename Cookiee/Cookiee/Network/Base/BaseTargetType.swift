@@ -15,7 +15,7 @@ enum HeaderType {
 }
 
 protocol BaseTargetType: TargetType {
-//    var headerType: HeaderType { get }
+    var headerType: HeaderType { get }
 }
 
 extension BaseTargetType {
@@ -24,23 +24,22 @@ extension BaseTargetType {
             return URL(string: "https://cookiee.info")!
         }
         
-//    var headers: [String: String]? {
-//        
-//        switch headerType {
-//        case .noneHeader:
-//            return .none
-//        case .accessTokenHeaderForGet:
-//            guard let accessToken = KeychainManager.shared.loadAccessToken() else { return [:] }
-//            
-//            let header = ["Authorization": "Bearer \(accessToken)"]
-//            
-//            return header
-//        case .accessTokenHeaderForGeneral:
-//            guard let accessToken = KeychainManager.shared.loadAccessToken() else { return [:] }
-//            
-//            let header = ["Content-Type": "application/json",
-//                          "Authorization": "Bearer \(accessToken)"]
-//            return header
-//        }
-//    }
+    var headers: [String: String]? {
+        switch headerType {
+            case .noneHeader:
+                return .none
+            case .accessTokenHeaderForGet:
+                guard let accessToken = loadFromKeychain(key: "accessToken") else { return [:] }
+                
+                let header = ["Authorization": "Bearer \(accessToken)"]
+                
+                return header
+            case .accessTokenHeaderForGeneral:
+                guard let accessToken = loadFromKeychain(key: "accessToken") else { return [:] }
+
+                let header = ["Content-Type": "application/json",
+                              "Authorization": "Bearer \(accessToken)"]
+                return header
+        }
+    }
 }
