@@ -17,6 +17,9 @@
 		833707E42CA4392B0050D1C7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 833707E32CA4392B0050D1C7 /* GoogleSignIn */; };
 		833707E62CA4392B0050D1C7 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 833707E52CA4392B0050D1C7 /* GoogleSignInSwift */; };
 		833707E82CA43EED0050D1C7 /* FindTopUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */; };
+		8349F5F02CB0030700746163 /* saveToKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F5EF2CB0030700746163 /* saveToKeychain.swift */; };
+		8349F5F22CB0036E00746163 /* loadFromKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F5F12CB0036E00746163 /* loadFromKeychain.swift */; };
+		8349F5F42CB003EA00746163 /* deleteFromKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F5F32CB003EA00746163 /* deleteFromKeychain.swift */; };
 		835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */; };
 		8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369B3742C6905F6005ACDBD /* ColorExtension.swift */; };
 		8383B48C2C74C74700C9127F /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8383B48B2C74C74700C9127F /* MyPageView.swift */; };
@@ -82,6 +85,9 @@
 /* Begin PBXFileReference section */
 		833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddAndEditView.swift; sourceTree = "<group>"; };
 		833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTopUIViewController.swift; sourceTree = "<group>"; };
+		8349F5EF2CB0030700746163 /* saveToKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveToKeychain.swift; sourceTree = "<group>"; };
+		8349F5F12CB0036E00746163 /* loadFromKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadFromKeychain.swift; sourceTree = "<group>"; };
+		8349F5F32CB003EA00746163 /* deleteFromKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteFromKeychain.swift; sourceTree = "<group>"; };
 		835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageByURL.swift; sourceTree = "<group>"; };
 		8369B3742C6905F6005ACDBD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		8383B48B2C74C74700C9127F /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
@@ -178,6 +184,16 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		8349F5EE2CB0018C00746163 /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				8349F5EF2CB0030700746163 /* saveToKeychain.swift */,
+				8349F5F12CB0036E00746163 /* loadFromKeychain.swift */,
+				8349F5F32CB003EA00746163 /* deleteFromKeychain.swift */,
+			);
+			path = KeyChain;
+			sourceTree = "<group>";
+		};
 		835F7AD02C70CD23006AEE89 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +281,7 @@
 				83B5CAA02C6911EB00C69ED1 /* Info.plist */,
 				83BD79B12C68BBA10044C453 /* Cookiee.entitlements */,
 				83BD79872C68BB570044C453 /* CookieeApp.swift */,
+				8349F5EE2CB0018C00746163 /* KeyChain */,
 				83F02CAB2CAC0794001E8329 /* Network */,
 				833707C22CA4319E0050D1C7 /* Presentation */,
 				835F7AD02C70CD23006AEE89 /* Utils */,
@@ -537,11 +554,14 @@
 				8385C5A42C6E1EE600D1DD21 /* EventDetailSample.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
+				8349F5F02CB0030700746163 /* saveToKeychain.swift in Sources */,
 				83DEB9882C9B05BC0049F7CD /* EventAddView.swift in Sources */,
+				8349F5F22CB0036E00746163 /* loadFromKeychain.swift in Sources */,
 				8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */,
 				835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */,
 				83F02CBD2CAC11F2001E8329 /* SignUpView.swift in Sources */,
 				83F02CBA2CAC0B24001E8329 /* GoogleLoginService.swift in Sources */,
+				8349F5F42CB003EA00746163 /* deleteFromKeychain.swift in Sources */,
 				83EC9F862C76FD2F00816E58 /* CategoryListSample.swift in Sources */,
 				83F80D492C79AD18001231A9 /* ColorPickerView.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
