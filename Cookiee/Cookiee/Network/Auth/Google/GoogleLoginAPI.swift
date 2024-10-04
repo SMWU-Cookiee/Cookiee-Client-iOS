@@ -17,15 +17,6 @@ extension GoogleLoginAPI: BaseTargetType {
         .accessTokenHeaderForGet
     }
     
-    var headers: [String: String]? {
-            switch self {
-            case .getGoogleLogin(let socialId):
-                return [
-                    "Content-Type": "application/json"
-                ]
-            }
-        }
-    
     var path: String {
         switch self {
         case .getGoogleLogin(let socialId):
