@@ -14,7 +14,7 @@ enum GoogleLoginAPI {
 
 extension GoogleLoginAPI: BaseTargetType {
     var headerType: HeaderType {
-        .accessTokenHeaderForJson
+        .noneHeader
     }
     
     var path: String {
