@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoryListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject private var viewModel = CategoryListViewModel()
+    @StateObject var categoryListViewModel = CategoryListViewModel()
     @State var isModalOpen: Bool = false
     @State private var isAddButtonTapped = false
 
@@ -28,14 +28,13 @@ struct CategoryListView: View {
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(viewModel.categoryListData?.result ?? []) { category in
-                    CategoryListRowView(name: category.name, color: category.color)
-                }
+                ForEach(categoryListViewModel.categories) { category in
+                    CategoryListRowView(name: category.categoryName, color: category.categoryColor)
+                    }
                 CategoryAddButtonView(toggleIsTapped: {
                     isAddButtonTapped.toggle()
                 })
             }
-            
         }
         .sheet(isPresented: $isAddButtonTapped) {
             CategoryAddAndEditView(toggleIsOpenCategoryAddSheet: {
@@ -56,7 +55,7 @@ struct CategoryListView: View {
         .padding()
         .padding(.top, 10)
         .onAppear {
-            viewModel.loadCategoryListData()
+            categoryListViewModel.loadCategoryListData()
         }
     }
 }
@@ -116,6 +115,9 @@ struct CategoryListRowView: View {
                 .presentationDetents([.fraction(0.95)])
                 .presentationDragIndicator(Visibility.visible)
         }
+        .onAppear() {
+            getCategoryListInfo()
+        }
     }
 }
 
@@ -149,6 +151,25 @@ struct CategoryAddButtonView: View {
                 
                 Spacer()
             }
+        }
+    }
+}
+
+// MARK: - 카테고리 리스트 불러오기 API
+
+private func getCategoryListInfo() {
+    guard let userId = loadFromKeychain(key: "userId") else {
+        print("getCategoryListInfo : userId를 찾을 수 없음")
+        return
+    }
+    
+    let categoryService = CategoryService()
+    categoryService.getCategoryList(userId: userId) { result in
+        switch result {
+            case .success(let categoryList):
+            print(categoryList)
+        case .failure(let error):
+            print(error)
         }
     }
 }
