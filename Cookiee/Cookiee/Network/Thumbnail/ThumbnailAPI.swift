@@ -1,40 +1,42 @@
 //
-//  GoogleLoginAPI.swift
+//  ThumbnailAPI.swift
 //  Cookiee
 //
-//  Created by minseo Kyung on 10/1/24.
+//  Created by minseo Kyung on 10/4/24.
 //
 
 import Foundation
 import Moya
 
-enum GoogleLoginAPI {
-    case getGoogleLogin(socialId: String)
+enum ThumbnailAPI {
+    case getThumbnailList(userId: String)
 }
 
-extension GoogleLoginAPI: BaseTargetType {
+extension ThumbnailAPI: BaseTargetType {
     var headerType: HeaderType {
         .accessTokenHeaderForGet
     }
     
     var path: String {
         switch self {
-        case .getGoogleLogin(let socialId):
-            return "/api/google/\(socialId)"
+        case .getThumbnailList(userId: let userId):
+            return "/api/v2/thumbnails/\(userId)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getGoogleLogin:
+        case .getThumbnailList:
             return .get
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .getGoogleLogin(_):
+        case .getThumbnailList(_):
             return .requestPlain
         }
     }
+    
+    
 }

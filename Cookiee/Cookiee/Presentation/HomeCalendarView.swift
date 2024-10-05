@@ -45,6 +45,9 @@ struct HomeCalendarView: View {
                 .background(Color.Beige)
             }
         }
+        .onAppear() {
+            getThumbnailListInfo()
+        }
     }
     
     // 헤더
@@ -147,6 +150,28 @@ struct HomeCalendarView: View {
 }
 
 
+// MARK: - 캘린더 썸네일 불러오기 API
+
+private func getThumbnailListInfo() {
+    guard let userId = loadFromKeychain(key: "userId") else {
+        print("getThumbnailListInfo : userId를 찾을 수 없음")
+        return
+    }
+    
+    let thumbnailService = ThumbnailService()
+    thumbnailService.getThumbnailList(userId: userId) { result in
+        switch result {
+            case .success(let thumbnailList):
+            print(thumbnailList)
+        case .failure(let error):
+            print(error)
+        }
+    }
+}
+
+
+
+// MARK: - 캘린더 셀, 캘린더 뷰 및 캘린더 관련 함수
 // 캘린더 셀
 private struct CellView: View {
   private var day: Int

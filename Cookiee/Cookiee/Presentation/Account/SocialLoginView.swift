@@ -133,6 +133,11 @@ struct GoogleLoginInButton: View {
                         if isNewMember {
                             navigateToSignUp = true // 신규 가입이면 회원가입으로
                         } else {
+                            // 임시로 신규 회원이 아닐때에 키체인 등록
+                            saveToKeychain(key: "accessToken", data: socialAccessToken)
+                            saveToKeychain(key: "refreshToken", data: socialAccessToken)
+                            saveToKeychain(key: "userId", data: userId.description)
+                            
                             navigateToHome = true // 신규 가입이 아니면 홈으로
                         }
                     }
@@ -182,6 +187,7 @@ struct GoogleLoginInButton: View {
                     socialRefreshToken = response.result.refreshToken ?? ""
                     socialAccessToken = response.result.accessToken ?? ""
                     isNewMember = response.result.isNewMember
+                    userId = response.result.userId ?? 54 // 임시로 54 등록
                     
                     continuation.resume(returning: true) // 성공 시 true 반환
                 case .failure(let error):

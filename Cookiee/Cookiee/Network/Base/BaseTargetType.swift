@@ -31,7 +31,8 @@ extension BaseTargetType {
             case .accessTokenHeaderForGet:
                 guard let accessToken = loadFromKeychain(key: "accessToken") else { return [:] }
                 
-                let header = ["Authorization": "Bearer \(accessToken)"]
+                let header = ["Authorization": "Bearer \(accessToken)",
+                            "Content-Type": "application/json"]
                 
                 return header
             case .refreshTokenHeader:
