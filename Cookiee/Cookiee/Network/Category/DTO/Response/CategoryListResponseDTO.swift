@@ -14,8 +14,12 @@ struct CategoryListResponseDTO : Codable {
     let result: [CategoryResultData]
 }
 
-struct CategoryResultData: Codable {
+struct CategoryResultData: Codable, Identifiable {
     let categoryId: Int64
     let categoryName: String
     let categoryColor: String
+    
+    var id: Int64 {
+        return categoryId
+    }
 }
