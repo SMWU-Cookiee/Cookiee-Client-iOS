@@ -14,7 +14,7 @@ enum ThumbnailAPI {
 
 extension ThumbnailAPI: BaseTargetType {
     var headerType: HeaderType {
-        .accessTokenHeaderForGet
+        .accessTokenHeaderForJson
     }
     
     var path: String {

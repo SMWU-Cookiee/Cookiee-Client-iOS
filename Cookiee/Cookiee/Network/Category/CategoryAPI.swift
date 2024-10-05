@@ -10,16 +10,24 @@ import Moya
 
 enum CategoryAPI {
     case getCategoryList(userId: String)
+    case postCategory(userId: String)
 }
 
 extension CategoryAPI: BaseTargetType {
     var headerType: HeaderType {
-        .accessTokenHeaderForGet
+        switch self {
+        case .getCategoryList:
+            return .accessTokenHeaderForJson
+        case .postCategory:
+            return .accessTokenHeaderForJson
+        }
     }
     
     var path: String {
         switch self {
         case .getCategoryList(userId: let userId):
+            return "/api/v2/categories/\(userId)"
+        case .postCategory(userId: let userId):
             return "/api/v2/categories/\(userId)"
         }
     }
@@ -28,12 +36,17 @@ extension CategoryAPI: BaseTargetType {
         switch self {
         case .getCategoryList:
             return .get
+        case .postCategory:
+            return .post
         }
+
     }
     
     var task: Moya.Task {
         switch self {
         case .getCategoryList(_):
+            return .requestPlain
+        case .postCategory(_):
             return .requestPlain
         }
     }
