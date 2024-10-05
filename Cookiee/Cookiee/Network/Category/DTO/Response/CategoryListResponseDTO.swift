@@ -9,9 +9,16 @@ import Foundation
 
 struct CategoryListResponseDTO : Codable {
     let isSuccess: Bool
-    let statusCode: Int
+    let statusCode: Int32
     let message: String
     let result: [CategoryResultData]
+}
+
+struct CategoryPostResponseDTO: Codable {
+    let isSuccess: Bool
+    let statusCode: Int32
+    let message: String
+    let result: CategoryResultData
 }
 
 struct CategoryResultData: Codable, Identifiable {

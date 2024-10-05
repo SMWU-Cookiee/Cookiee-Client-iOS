@@ -11,13 +11,8 @@ class CategoryListViewModel: ObservableObject {
     @Published var categories: [CategoryResultData] = []
 
     func loadCategoryListData() {
-        guard let userId = loadFromKeychain(key: "userId") else {
-            print("loadCategoryListData: userId를 찾을 수 없음")
-            return
-        }
-
         let categoryService = CategoryService()
-        categoryService.getCategoryList(userId: userId) { result in
+        categoryService.getCategoryList() { result in
             switch result {
             case .success(let categoryList):
                 DispatchQueue.main.async {
@@ -25,6 +20,23 @@ class CategoryListViewModel: ObservableObject {
                 }
             case .failure(let error):
                 print(error)
+            }
+        }
+    }
+    
+    func addCategory(categoryName: String, categoryColor: String) {
+        let categoryService = CategoryService()
+        let categoryRequest = CategoryRequestDTO(categoryName: categoryName, categoryColor: categoryColor)
+        
+        categoryService.postCategory(requestBody: categoryRequest) { result in
+            switch result {
+            case .success(let categoryResponse):
+                print("categoryResponse - ", categoryResponse)
+                DispatchQueue.main.async {
+                    self.loadCategoryListData()
+                }
+            case .failure(let error):
+                print("addCategory error:", error)
             }
         }
     }

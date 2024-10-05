@@ -10,7 +10,7 @@ import Moya
 
 enum CategoryAPI {
     case getCategoryList(userId: String)
-    case postCategory(userId: String)
+    case postCategory(userId: String, requestBody: CategoryRequestDTO)
 }
 
 extension CategoryAPI: BaseTargetType {
@@ -27,7 +27,7 @@ extension CategoryAPI: BaseTargetType {
         switch self {
         case .getCategoryList(userId: let userId):
             return "/api/v2/categories/\(userId)"
-        case .postCategory(userId: let userId):
+        case .postCategory(userId: let userId, requestBody: _):
             return "/api/v2/categories/\(userId)"
         }
     }
@@ -46,8 +46,8 @@ extension CategoryAPI: BaseTargetType {
         switch self {
         case .getCategoryList(_):
             return .requestPlain
-        case .postCategory(_):
-            return .requestPlain
+        case .postCategory(_,  let requestBody):
+            return .requestJSONEncodable(requestBody)
         }
     }
 }
