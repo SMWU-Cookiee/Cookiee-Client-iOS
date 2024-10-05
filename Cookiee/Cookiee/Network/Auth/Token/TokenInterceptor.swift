@@ -19,6 +19,7 @@ final class TokenInterceptor: RequestInterceptor {
         guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401
         else {
             completion(.doNotRetryWithError(error))
+            print("retry : 401이 아님")
             return
         }
 
