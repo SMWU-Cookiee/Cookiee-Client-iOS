@@ -29,7 +29,7 @@ struct CategoryListView: View {
         VStack {
             ScrollView {
                 ForEach(categoryListViewModel.categories) { category in
-                    CategoryListRowView(name: category.categoryName, color: category.categoryColor)
+                    CategoryListRowView(name: category.categoryName, color: category.categoryColor, categoryListViewModel: categoryListViewModel)
                     }
                 CategoryAddButtonView(toggleIsTapped: {
                     isAddButtonTapped.toggle()
@@ -37,7 +37,7 @@ struct CategoryListView: View {
             }
         }
         .sheet(isPresented: $isAddButtonTapped) {
-            CategoryAddAndEditView(toggleIsOpenCategoryAddSheet: {
+            CategoryAddAndEditView(categoryListViewModel: categoryListViewModel, toggleIsOpenCategoryAddSheet: {
                 isAddButtonTapped.toggle()
             })
                 .presentationDetents([.fraction(0.95)])
@@ -70,6 +70,7 @@ struct CategoryListRowView: View {
     @State var color: String
     
     @State private var isEditButtonTapped = false
+    @ObservedObject var categoryListViewModel: CategoryListViewModel
     
     var body: some View {
         VStack {
@@ -105,7 +106,7 @@ struct CategoryListRowView: View {
         }
         .sheet(isPresented: $isEditButtonTapped) {
             CategoryAddAndEditView(
-                isNewCategory: false,
+                categoryListViewModel: categoryListViewModel, isNewCategory: false,
                 id: id,
                 name: name,
                 selectedColor: color,
@@ -164,7 +165,7 @@ private func getCategoryListInfo() {
     }
     
     let categoryService = CategoryService()
-    categoryService.getCategoryList(userId: userId) { result in
+    categoryService.getCategoryList() { result in
         switch result {
             case .success(let categoryList):
             print(categoryList)

@@ -10,8 +10,19 @@ import Moya
 
 class ThumbnailService {
     let provider = MoyaProvider<ThumbnailAPI>(session: Session(interceptor: TokenInterceptor.shared))
+    
+    private var userId: String
 
-    func getThumbnailList(userId: String, completion: @escaping (Result<ThumbnailListResponseDTO, Error>) -> Void) {
+    init() {
+        if let id = loadFromKeychain(key: "userId") {
+            self.userId = id
+        } else {
+            self.userId = ""
+            print("CategoryService init : userId를 찾을 수 없음")
+        }
+    }
+
+    func getThumbnailList(completion: @escaping (Result<ThumbnailListResponseDTO, Error>) -> Void) {
         provider.request(.getThumbnailList(userId: userId)) { result in
             switch result {
             case .success(let response):

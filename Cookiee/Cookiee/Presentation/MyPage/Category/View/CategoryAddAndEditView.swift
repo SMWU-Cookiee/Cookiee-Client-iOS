@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftUI
 
 struct CategoryAddAndEditView: View {
+    @ObservedObject var categoryListViewModel: CategoryListViewModel
     @State var isNewCategory: Bool = true
     
     @State var id: String = ""
@@ -34,7 +35,8 @@ struct CategoryAddAndEditView: View {
                         Spacer()
                         
                         Button(action: {
-                            // Save action
+                            categoryListViewModel.addCategory(categoryName: name, categoryColor: selectedColor)
+                            toggleIsOpenCategoryAddSheet()
                         }, label: {
                             Text("완료")
                                 .font(.Body0_B)
@@ -145,7 +147,7 @@ struct ColorPickerBottomSheetView: View {
 }
 
 #Preview{
-    CategoryAddAndEditView(toggleIsOpenCategoryAddSheet: {
+    CategoryAddAndEditView(categoryListViewModel: CategoryListViewModel(), toggleIsOpenCategoryAddSheet: {
         //
     })
 }
