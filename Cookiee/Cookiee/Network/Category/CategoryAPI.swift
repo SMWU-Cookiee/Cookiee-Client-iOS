@@ -11,6 +11,7 @@ import Moya
 enum CategoryAPI {
     case getCategoryList(userId: String)
     case postCategory(userId: String, requestBody: CategoryRequestDTO)
+    case putCategory(userId: String, cateId: String, requestBody: CategoryRequestDTO)
 }
 
 extension CategoryAPI: BaseTargetType {
@@ -19,6 +20,8 @@ extension CategoryAPI: BaseTargetType {
         case .getCategoryList:
             return .accessTokenHeaderForJson
         case .postCategory:
+            return .accessTokenHeaderForJson
+        case .putCategory:
             return .accessTokenHeaderForJson
         }
     }
@@ -29,6 +32,8 @@ extension CategoryAPI: BaseTargetType {
             return "/api/v2/categories/\(userId)"
         case .postCategory(userId: let userId, requestBody: _):
             return "/api/v2/categories/\(userId)"
+        case .putCategory(userId: let userId, cateId: let cateId, requestBody: _):
+            return "/api/v2/categories/\(userId)/\(cateId)"
         }
     }
     
@@ -38,6 +43,8 @@ extension CategoryAPI: BaseTargetType {
             return .get
         case .postCategory:
             return .post
+        case .putCategory:
+            return .put
         }
 
     }
@@ -47,6 +54,8 @@ extension CategoryAPI: BaseTargetType {
         case .getCategoryList(_):
             return .requestPlain
         case .postCategory(_,  let requestBody):
+            return .requestJSONEncodable(requestBody)
+        case .putCategory(_, _, let requestBody):
             return .requestJSONEncodable(requestBody)
         }
     }

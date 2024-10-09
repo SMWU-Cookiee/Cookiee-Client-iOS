@@ -40,12 +40,12 @@ class CategoryService {
         }
     }
     
-    func postCategory(requestBody: CategoryRequestDTO, completion: @escaping (Result<CategoryPostResponseDTO, Error>) -> Void) {
+    func postCategory(requestBody: CategoryRequestDTO, completion: @escaping (Result<CategoryPostPutResponseDTO, Error>) -> Void) {
         provider.request(.postCategory(userId: userId, requestBody: requestBody)) { result in
             switch result {
             case .success(let response):
                 do {
-                    let categoryResponse = try JSONDecoder().decode(CategoryPostResponseDTO.self, from: response.data)
+                    let categoryResponse = try JSONDecoder().decode(CategoryPostPutResponseDTO.self, from: response.data)
                     completion(.success(categoryResponse))
                 } catch {
                     completion(.failure(error))
@@ -58,6 +58,22 @@ class CategoryService {
         }
     }
 
-
+    func putCategory(cateId: String, requestBody: CategoryRequestDTO, completion: @escaping (Result<CategoryPostPutResponseDTO, Error>) -> Void) {
+        provider.request(.putCategory(userId: userId, cateId: cateId, requestBody: requestBody)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let categoryResponse = try JSONDecoder().decode(CategoryPostPutResponseDTO.self, from: response.data)
+                    completion(.success(categoryResponse))
+                } catch {
+                    completion(.failure(error))
+                    print("putCategory Decoding error:", error)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+                print("putCategory error:", error.errorDescription as Any)
+            }
+        }
+    }
 
 }

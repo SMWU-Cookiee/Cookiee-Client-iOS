@@ -14,14 +14,14 @@ struct CategoryListResponseDTO : Codable {
     let result: [CategoryResultData]
 }
 
-struct CategoryPostResponseDTO: Codable {
+struct CategoryPostPutResponseDTO: Codable {
     let isSuccess: Bool
     let statusCode: Int32
     let message: String
     let result: CategoryResultData
 }
 
-struct CategoryResultData: Codable, Identifiable {
+struct CategoryResultData: Codable, Identifiable, Equatable {
     let categoryId: Int64
     let categoryName: String
     let categoryColor: String

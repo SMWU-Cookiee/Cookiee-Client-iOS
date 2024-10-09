@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoryListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject var categoryListViewModel = CategoryListViewModel()
+    @StateObject var stateCategoryListViewModel = CategoryListViewModel()
     @State var isModalOpen: Bool = false
     @State private var isAddButtonTapped = false
 
@@ -28,20 +28,28 @@ struct CategoryListView: View {
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(categoryListViewModel.categories) { category in
-                    CategoryListRowView(name: category.categoryName, color: category.categoryColor, categoryListViewModel: categoryListViewModel)
-                    }
+                ForEach(stateCategoryListViewModel.categories, id:\.id) { category in
+                    CategoryListRowView(
+                        id: category.categoryId.description,
+                        name: category.categoryName,
+                        color: category.categoryColor,
+                        categoryListViewModel: stateCategoryListViewModel
+                    )
+                }
                 CategoryAddButtonView(toggleIsTapped: {
                     isAddButtonTapped.toggle()
                 })
             }
         }
-        .sheet(isPresented: $isAddButtonTapped) {
-            CategoryAddAndEditView(categoryListViewModel: categoryListViewModel, toggleIsOpenCategoryAddSheet: {
+        .sheet(isPresented: $isAddButtonTapped, onDismiss: {
+            print("카테고리 추가 onDismiss")
+            stateCategoryListViewModel.loadCategoryListData()
+        }) {
+            CategoryAddAndEditView(categoryListViewModel: stateCategoryListViewModel, toggleIsOpenCategoryAddSheet: {
                 isAddButtonTapped.toggle()
             })
-                .presentationDetents([.fraction(0.95)])
-                .presentationDragIndicator(Visibility.visible)
+            .presentationDetents([.fraction(0.95)])
+            .presentationDragIndicator(Visibility.visible)
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -55,7 +63,11 @@ struct CategoryListView: View {
         .padding()
         .padding(.top, 10)
         .onAppear {
-            categoryListViewModel.loadCategoryListData()
+            DispatchQueue.main.async {
+                print("🔥 카테고리-리스트-뷰 onAppear")
+                stateCategoryListViewModel.loadCategoryListData()
+           }
+            
         }
     }
 }
@@ -64,13 +76,14 @@ struct CategoryListView: View {
     CategoryListView()
 }
 
+// MARK: - 카테고리 리스트 (수정 버튼, 삭제 버튼)
 struct CategoryListRowView: View {
     @State var id: String = ""
     @State var name: String = ""
     @State var color: String
     
     @State private var isEditButtonTapped = false
-    @ObservedObject var categoryListViewModel: CategoryListViewModel
+    @ObservedObject var categoryListViewModel : CategoryListViewModel
     
     var body: some View {
         VStack {
@@ -85,6 +98,7 @@ struct CategoryListRowView: View {
                 HStack {
                     Text(name)
                     Spacer()
+                    // 수정 버튼
                     Button(action: {
                         isEditButtonTapped = true
                     }, label: {
@@ -104,9 +118,14 @@ struct CategoryListRowView: View {
             }
             Divider()
         }
-        .sheet(isPresented: $isEditButtonTapped) {
+        .sheet(isPresented: $isEditButtonTapped, onDismiss: {
+            print("카테고리 수정 onDismiss")
+            categoryListViewModel.loadCategoryListData()
+            
+        }) {
             CategoryAddAndEditView(
-                categoryListViewModel: categoryListViewModel, isNewCategory: false,
+                categoryListViewModel: categoryListViewModel,
+                isNewCategory: false,
                 id: id,
                 name: name,
                 selectedColor: color,
@@ -116,12 +135,10 @@ struct CategoryListRowView: View {
                 .presentationDetents([.fraction(0.95)])
                 .presentationDragIndicator(Visibility.visible)
         }
-        .onAppear() {
-            getCategoryListInfo()
-        }
     }
 }
 
+// MARK: - 카테고리 추가 버튼
 struct CategoryAddButtonView: View {
     @State var name: String = ""
     @State var toggleIsTapped: () -> Void
@@ -129,14 +146,11 @@ struct CategoryAddButtonView: View {
     var body: some View {
         VStack {
             HStack {
-                // 색상
                 Rectangle()
                     .fill(Color.Gray02)
                     .frame(width: 25, height: 25)
                     .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                     .overlay(Image("Plus"))
-                
-                // 이름
                 HStack {
                     Button(action: {
                         toggleIsTapped()
@@ -145,32 +159,11 @@ struct CategoryAddButtonView: View {
                             .font(.Body1_M)
                             .foregroundColor(.black)
                     })
-                    
                 }
                 .font(.Body1_M)
                 .frame(height: 35)
-                
                 Spacer()
             }
-        }
-    }
-}
-
-// MARK: - 카테고리 리스트 불러오기 API
-
-private func getCategoryListInfo() {
-    guard let userId = loadFromKeychain(key: "userId") else {
-        print("getCategoryListInfo : userId를 찾을 수 없음")
-        return
-    }
-    
-    let categoryService = CategoryService()
-    categoryService.getCategoryList() { result in
-        switch result {
-            case .success(let categoryList):
-            print(categoryList)
-        case .failure(let error):
-            print(error)
         }
     }
 }
