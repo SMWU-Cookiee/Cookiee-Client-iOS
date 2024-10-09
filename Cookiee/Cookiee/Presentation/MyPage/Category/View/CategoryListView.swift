@@ -9,11 +9,15 @@ import SwiftUI
 
 struct CategoryListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @StateObject var stateCategoryListViewModel = CategoryListViewModel()
-    @State var isModalOpen: Bool = false
-    @State private var isAddButtonTapped = false
-    @State private var isDeleteButtonTapped = false
 
+    @State private var isAddButtonTapped = false
+    
+    @State private var isDeleteButtonTapped = false
+    @State private var categoryNameToDelete: String?
+    @State private var categoryIdToDelete: String?
+    
 
     // 백 버튼 커스텀
     var backButton: some View {
@@ -35,6 +39,9 @@ struct CategoryListView: View {
                         id: category.categoryId.description,
                         name: category.categoryName,
                         color: category.categoryColor,
+                        isDeleteButtonTapped: $isDeleteButtonTapped,
+                        categoryNameToDelete: $categoryNameToDelete,
+                        categoryIdToDelete: $categoryIdToDelete,
                         categoryListViewModel: stateCategoryListViewModel
                     )
                 }
@@ -69,8 +76,36 @@ struct CategoryListView: View {
                 print("🔥 카테고리-리스트-뷰 onAppear")
                 stateCategoryListViewModel.loadCategoryListData()
            }
-            
         }
+        .showCustomAlert(
+            isPresented: $isDeleteButtonTapped,
+            content: {
+                AnyView(
+                    VStack {
+                        Text(categoryNameToDelete!)
+                            .font(.Head1_B)
+                            .foregroundStyle(Color.Brown01)
+                        Text("카테고리를 삭제할까요?")
+                            .font(.Head1_B)
+                            .padding(.bottom, 9)
+                        Text("삭제하면 복구가 어렵습니다.")
+                            .font(.Body1_R)
+                    }
+                )
+            },
+            firstButton:
+                CustomAlertButton(
+                    action: { isDeleteButtonTapped = false },
+                    title: Text("취소").foregroundColor(Color.Gray04)
+                ),
+            secondButton:
+                CustomAlertButton(
+                    action: {
+                        isDeleteButtonTapped = false
+                        stateCategoryListViewModel.removeCategory(categoryId: categoryIdToDelete!)
+                    },
+                    title: Text("삭제하기").foregroundColor(Color.Brown00))
+        )
     }
 }
 
@@ -83,8 +118,12 @@ struct CategoryListRowView: View {
     @State var id: String = ""
     @State var name: String = ""
     @State var color: String
-    
     @State private var isEditButtonTapped = false
+    
+    @Binding var isDeleteButtonTapped: Bool
+    @Binding var categoryNameToDelete: String?
+    @Binding var categoryIdToDelete: String?
+    
     @ObservedObject var categoryListViewModel : CategoryListViewModel
     
     var body: some View {
@@ -115,7 +154,9 @@ struct CategoryListRowView: View {
                             
                 // 삭제 버튼
                 Button(action: {
-                    categoryListViewModel.removeCategory(categoryId: id)
+                    categoryNameToDelete = name
+                    categoryIdToDelete = id
+                    isDeleteButtonTapped = true
                 }, label: {
                     Image("TrashIconRed")
                 })
