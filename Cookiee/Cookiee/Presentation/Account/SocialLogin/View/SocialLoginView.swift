@@ -16,12 +16,12 @@ struct SocialLoginView: View {
     @State private var navigateToSignUp: Bool = false // 회원가입으로 이동
     @State private var navigateToHome: Bool = false // 홈으로 이동
     
+    @State private var name:String = ""
     @State private var email: String = ""
     @State private var socialId: String = ""
     @State private var socialLoginType: String = ""
     @State private var socialRefreshToken: String = ""
     @State private var socialAccessToken: String = ""
-    @State private var userId: Int64 = 0
 
     var body: some View {
         NavigationStack {
@@ -39,7 +39,7 @@ struct SocialLoginView: View {
                     }
 
                     HStack {
-                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken, userId: $userId) // 상태 전달
+                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, name: $name, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken) // 상태 전달
                     }
                     .padding(.bottom, 11)
 
@@ -52,7 +52,7 @@ struct SocialLoginView: View {
             }
             // 로그인 성공 시 SignUpView로 이동
             .navigationDestination(isPresented: $navigateToSignUp) {
-                SignUpView(email: email, socialId: socialId, socialLoginType: socialLoginType, socialRefreshToken: socialRefreshToken, socialAccessToken: socialAccessToken)
+                SignUpView(email: email, name: name, socialId: socialId, socialLoginType: socialLoginType, socialRefreshToken: socialRefreshToken, socialAccessToken: socialAccessToken)
             }
             .navigationDestination(isPresented: $navigateToHome, destination: {
                 TabBarView()
@@ -113,12 +113,12 @@ struct GoogleLoginInButton: View {
     @Binding var navigateToHome: Bool
     
     //Auth 값 바인딩
+    @Binding var name: String
     @Binding var email: String
     @Binding var socialId: String
     @Binding var socialLoginType: String
     @Binding var socialRefreshToken: String
     @Binding var socialAccessToken: String
-    @Binding var userId: Int64
     
     @State var isNewMember: Bool = false
     
@@ -136,7 +136,6 @@ struct GoogleLoginInButton: View {
                             // 임시로 신규 회원이 아닐때에 키체인 등록
                             saveToKeychain(key: "accessToken", data: socialAccessToken)
                             saveToKeychain(key: "refreshToken", data: socialAccessToken)
-                            saveToKeychain(key: "userId", data: userId.description)
                             
                             navigateToHome = true // 신규 가입이 아니면 홈으로
                         }
@@ -166,28 +165,28 @@ struct GoogleLoginInButton: View {
         let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: TopUIViewController)
         
         let user = gidSignInResult.user
-        guard let userID = user.userID else {
+        guard let googleSocialId = user.userID else {
             print("Error: No User ID found")
             return false // 실패 시 false 반환
         }
+        email = user.profile!.email
+        name = user.profile!.name
 
         // API 처리
         return try await withCheckedThrowingContinuation { continuation in
             let googleLoginService = GoogleLoginService()
-            googleLoginService.getGoogleLogin(socialId: userID) { result in
+            googleLoginService.getGoogleLogin(socialId: googleSocialId) { result in
                 switch result {
                 case .success(let response):
                     print("API Response: \(response)")
                     print("response accessToken: \(String(describing: response.result.accessToken))")
                     
                     // Auth 값 설정
-                    email = response.result.email ?? ""
                     socialId = response.result.socialId
                     socialLoginType = "google"
                     socialRefreshToken = response.result.refreshToken ?? ""
                     socialAccessToken = response.result.accessToken ?? ""
                     isNewMember = response.result.isNewMember
-                    userId = response.result.userId ?? 54 // 임시로 54 등록
                     
                     continuation.resume(returning: true) // 성공 시 true 반환
                 case .failure(let error):

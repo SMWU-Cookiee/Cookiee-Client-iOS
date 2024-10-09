@@ -24,6 +24,7 @@ struct SignUpView: View {
     
     // 회원가입에 필요한 Auth 값
     var email: String
+    var name: String
     var socialId: String
     var socialLoginType: String
     var socialRefreshToken: String
@@ -38,6 +39,7 @@ struct SignUpView: View {
     @State var selectedUIImage: UIImage?
     @State var image: Image?
     
+    @ObservedObject var signUpViewModel = SignUpViewModel()
     
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
@@ -117,32 +119,27 @@ struct SignUpView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("쿠키 추가하기")
+                Text("회원가입")
                     .font(.Head1_B)
             }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
-        .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-            Text("완료")
-                .font(.Body0_B)
-                .foregroundColor(.Gray03)
-        }))
+        .navigationBarItems(
+            trailing:
+                Button(action: {
+                    signUpViewModel.postSignUp(email: email, name: name, nickname: nickname, selfDescription: introduction, socialId: socialId, socialLoginType: socialLoginType, selectedUIImage: selectedUIImage)
+                }, label: {
+                    Text("완료")
+                        .font(.Body0_B)
+                        .foregroundColor(.Gray03)
+                })
+        )
         .padding()
         .padding(.top, 10)
-        .onAppear() {
-            print("==============================================")
-            print(email)
-            print(socialId)
-            print(socialLoginType)
-            print(socialRefreshToken)
-            print(socialAccessToken)
+        .navigationDestination(isPresented: $signUpViewModel.isSignUpSuccess) {
+            TabBarView()
         }
     }
 }
 
-
-
-#Preview {
-    SignUpView(email: "kyungminseo10@gmail.com", socialId: "112220849520980734309", socialLoginType: "google", socialRefreshToken: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzA0NjYzMjJ9.TplAJ40kUwIFr9Z4zgaY4Mc9P1HnlvGB_Q-rHj8veho", socialAccessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NCIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3Mjc4NzQzMjIsImV4cCI6MTcyNzg3NzkyMn0.h6obkYeeBPf4PTcBygIa3KIf8XjhtsXKCBRDLCq-KE0")
-}
