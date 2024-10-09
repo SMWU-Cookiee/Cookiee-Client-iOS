@@ -64,6 +64,7 @@
 		83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F822C6A2A1D002AB210 /* DateView.swift */; };
 		83DEB9882C9B05BC0049F7CD /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DEB9872C9B05BC0049F7CD /* EventAddView.swift */; };
 		83E540172C6CE6B900509671 /* EventListSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E540162C6CE6B900509671 /* EventListSample.swift */; };
+		83E76C6E2CB6AE88000FEA67 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */; };
 		83EE1DA82CB0372B009E4488 /* ThumbnailListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DA72CB0372B009E4488 /* ThumbnailListResponseDTO.swift */; };
 		83EE1DAA2CB038F0009E4488 /* ThumbnailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */; };
 		83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */; };
@@ -148,6 +149,7 @@
 		83DC7F822C6A2A1D002AB210 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		83DEB9872C9B05BC0049F7CD /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
 		83E540162C6CE6B900509671 /* EventListSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListSample.swift; sourceTree = "<group>"; };
+		83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		83EE1DA72CB0372B009E4488 /* ThumbnailListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailListResponseDTO.swift; sourceTree = "<group>"; };
 		83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailAPI.swift; sourceTree = "<group>"; };
 		83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailService.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				8385C5AC2C6E6B5E00D1DD21 /* ImageCarouselView.swift */,
 				83F80D482C79AD18001231A9 /* ColorPickerView.swift */,
 				83DA00602C79C55500B8CD46 /* ImagePicker.swift */,
+				83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				83C861BC2C74E1DC004FDF7A /* PrivacyPolicyView.swift in Sources */,
 				83E540172C6CE6B900509671 /* EventListSample.swift in Sources */,
 				8385C5A62C6E229800D1DD21 /* EventDetailView.swift in Sources */,
+				83E76C6E2CB6AE88000FEA67 /* CustomAlertView.swift in Sources */,
 				83B1C6B32C74E76900740EA3 /* CategoryListView.swift in Sources */,
 				8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
