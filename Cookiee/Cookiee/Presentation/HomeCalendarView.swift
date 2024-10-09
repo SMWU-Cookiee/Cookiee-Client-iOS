@@ -159,7 +159,7 @@ private func getThumbnailListInfo() {
     }
     
     let thumbnailService = ThumbnailService()
-    thumbnailService.getThumbnailList(userId: userId) { result in
+    thumbnailService.getThumbnailList() { result in
         switch result {
             case .success(let thumbnailList):
             print(thumbnailList)

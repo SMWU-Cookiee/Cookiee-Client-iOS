@@ -10,7 +10,8 @@ import Moya
 
 enum HeaderType {
     case noneHeader
-    case accessTokenHeaderForGet
+    case accessTokenHeaderForJson
+    case accessTokenHeaderForMultipart
     case refreshTokenHeader
 }
 
@@ -28,13 +29,22 @@ extension BaseTargetType {
         switch headerType {
             case .noneHeader:
                 return .none
-            case .accessTokenHeaderForGet:
+            
+            case .accessTokenHeaderForJson:
                 guard let accessToken = loadFromKeychain(key: "accessToken") else { return [:] }
                 
                 let header = ["Authorization": "Bearer \(accessToken)",
                             "Content-Type": "application/json"]
-                
                 return header
+            
+            case .accessTokenHeaderForMultipart:
+                guard let accessToken = loadFromKeychain(key: "accessToken") else { return [:] }
+                
+                let header = ["Authorization": "Bearer \(accessToken)",
+                            "Content-Type": "multipart/form-data"]
+                return header
+                
+                
             case .refreshTokenHeader:
                 guard let accessToken = loadFromKeychain(key: "accessToken") else { return [:] }
                 guard let refreshToken = loadFromKeychain(key: "accessToken") else { return [:] }
