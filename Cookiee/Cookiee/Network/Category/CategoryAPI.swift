@@ -12,6 +12,7 @@ enum CategoryAPI {
     case getCategoryList(userId: String)
     case postCategory(userId: String, requestBody: CategoryRequestDTO)
     case putCategory(userId: String, cateId: String, requestBody: CategoryRequestDTO)
+    case deleteCategory(userId: String, cateId: String)
 }
 
 extension CategoryAPI: BaseTargetType {
@@ -22,6 +23,8 @@ extension CategoryAPI: BaseTargetType {
         case .postCategory:
             return .accessTokenHeaderForJson
         case .putCategory:
+            return .accessTokenHeaderForJson
+        case .deleteCategory:
             return .accessTokenHeaderForJson
         }
     }
@@ -34,6 +37,8 @@ extension CategoryAPI: BaseTargetType {
             return "/api/v2/categories/\(userId)"
         case .putCategory(userId: let userId, cateId: let cateId, requestBody: _):
             return "/api/v2/categories/\(userId)/\(cateId)"
+        case .deleteCategory(userId: let userId, cateId: let cateId):
+            return "/api/v2/categories/\(userId)/\(cateId)"
         }
     }
     
@@ -45,6 +50,8 @@ extension CategoryAPI: BaseTargetType {
             return .post
         case .putCategory:
             return .put
+        case .deleteCategory:
+            return .delete
         }
 
     }
@@ -57,6 +64,8 @@ extension CategoryAPI: BaseTargetType {
             return .requestJSONEncodable(requestBody)
         case .putCategory(_, _, let requestBody):
             return .requestJSONEncodable(requestBody)
+        case .deleteCategory(userId: _, cateId: _):
+            return .requestPlain
         }
     }
 }

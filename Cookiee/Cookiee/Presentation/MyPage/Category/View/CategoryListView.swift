@@ -12,6 +12,8 @@ struct CategoryListView: View {
     @StateObject var stateCategoryListViewModel = CategoryListViewModel()
     @State var isModalOpen: Bool = false
     @State private var isAddButtonTapped = false
+    @State private var isDeleteButtonTapped = false
+
 
     // 백 버튼 커스텀
     var backButton: some View {
@@ -112,7 +114,9 @@ struct CategoryListRowView: View {
                 .cornerRadius(3.0)
                             
                 // 삭제 버튼
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {
+                    categoryListViewModel.removeCategory(categoryId: id)
+                }, label: {
                     Image("TrashIconRed")
                 })
             }

@@ -75,5 +75,23 @@ class CategoryService {
             }
         }
     }
+    
+    func deleteCategory(cateId: String, completion: @escaping (Result<CategoryDeleteResponseDTO, Error>) -> Void) {
+        provider.request(.deleteCategory(userId: userId, cateId: cateId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let categoryResponse = try JSONDecoder().decode(CategoryDeleteResponseDTO.self, from: response.data)
+                    completion(.success(categoryResponse))
+                } catch {
+                    completion(.failure(error))
+                    print("deleteCategoryList Decoding error:", error)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+                print("deleteCategoryList error:", error)
+            }
+        }
+    }
 
 }

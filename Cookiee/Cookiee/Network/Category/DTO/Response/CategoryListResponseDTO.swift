@@ -21,6 +21,13 @@ struct CategoryPostPutResponseDTO: Codable {
     let result: CategoryResultData
 }
 
+struct CategoryDeleteResponseDTO: Codable {
+    let isSuccess: Bool
+    let statusCode: Int32
+    let message: String
+    let result: String?
+}
+
 struct CategoryResultData: Codable, Identifiable, Equatable {
     let categoryId: Int64
     let categoryName: String
