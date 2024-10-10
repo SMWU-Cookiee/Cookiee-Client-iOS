@@ -69,6 +69,7 @@
 		83E6F6032CB7BC2700DCDF32 /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F5FC2CB7BC2700DCDF32 /* AppleLoginService.swift */; };
 		83E6F6042CB7BC2700DCDF32 /* AppleLoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F5FF2CB7BC2700DCDF32 /* AppleLoginResponseDTO.swift */; };
 		83E6F6052CB7BC2700DCDF32 /* AppleLoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F5FD2CB7BC2700DCDF32 /* AppleLoginRequestDTO.swift */; };
+		83E6F6082CB7D0CE00DCDF32 /* SocialLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F6072CB7D0CE00DCDF32 /* SocialLoginViewModel.swift */; };
 		83E76C6E2CB6AE88000FEA67 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */; };
 		83E76C792CB6D0A9000FEA67 /* SignOutResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C782CB6D0A9000FEA67 /* SignOutResponseDTO.swift */; };
 		83E76C7B2CB6D10E000FEA67 /* SignOutAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C7A2CB6D10E000FEA67 /* SignOutAPI.swift */; };
@@ -167,6 +168,7 @@
 		83E6F5FC2CB7BC2700DCDF32 /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		83E6F5FD2CB7BC2700DCDF32 /* AppleLoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginRequestDTO.swift; sourceTree = "<group>"; };
 		83E6F5FF2CB7BC2700DCDF32 /* AppleLoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginResponseDTO.swift; sourceTree = "<group>"; };
+		83E6F6072CB7D0CE00DCDF32 /* SocialLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewModel.swift; sourceTree = "<group>"; };
 		83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		83E76C782CB6D0A9000FEA67 /* SignOutResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutResponseDTO.swift; sourceTree = "<group>"; };
 		83E76C7A2CB6D10E000FEA67 /* SignOutAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutAPI.swift; sourceTree = "<group>"; };
@@ -527,6 +529,14 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		83E6F6062CB7D09C00DCDF32 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				83E6F6072CB7D0CE00DCDF32 /* SocialLoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		83E76C732CB6CDF6000FEA67 /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,6 +602,7 @@
 		83E76C8A2CB6DA95000FEA67 /* SocialLogin */ = {
 			isa = PBXGroup;
 			children = (
+				83E6F6062CB7D09C00DCDF32 /* ViewModel */,
 				83E76C8B2CB6DAA0000FEA67 /* View */,
 			);
 			path = SocialLogin;
@@ -865,6 +876,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */,
+				83E6F6082CB7D0CE00DCDF32 /* SocialLoginViewModel.swift in Sources */,
 				83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */,
 				83DA005F2C79BE7400B8CD46 /* ProfileEditView.swift in Sources */,
 				83EE1DA82CB0372B009E4488 /* ThumbnailListResponseDTO.swift in Sources */,
