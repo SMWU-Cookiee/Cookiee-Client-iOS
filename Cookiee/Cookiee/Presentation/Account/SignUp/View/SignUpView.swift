@@ -53,6 +53,7 @@ struct SignUpView: View {
                 if let image = image {
                     image
                         .resizable()
+                        .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
                         .frame(width: 129, height: 129)
                 } else {
@@ -142,4 +143,3 @@ struct SignUpView: View {
         }
     }
 }
-
