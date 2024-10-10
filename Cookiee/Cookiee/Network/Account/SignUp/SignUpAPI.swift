@@ -48,7 +48,7 @@ extension SignUpAPI: BaseTargetType {
         multipartData.append(Moya.MultipartFormData(provider: .data(requestBody.socialId.data(using: .utf8)!), name: "socialId"))
         multipartData.append(Moya.MultipartFormData(provider: .data(requestBody.socialLoginType.data(using: .utf8)!), name: "socialLoginType"))
         if requestBody.image != nil {
-            multipartData.append(Moya.MultipartFormData(provider: .data(requestBody.image!), name: "image", fileName: "name", mimeType: "image/jpeg"))
+            multipartData.append(Moya.MultipartFormData(provider: .data(requestBody.image!), name: "image", fileName: "profileImage", mimeType: "image/jpeg"))
         }
         
         return multipartData
