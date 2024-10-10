@@ -36,7 +36,7 @@ struct SignUpView: View {
     
     // 프로필 사진 관련 필드
     @State var showImagePicker = false
-    @State var selectedUIImage: UIImage?
+    @State var selectedUIImage: UIImage? = nil
     @State var image: Image?
     
     @ObservedObject var signUpViewModel = SignUpViewModel()

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MyPageView: View {
+    @ObservedObject var signOutViewModel = SignOutViewModel()
+    @State var isSignOutButtonTapped: Bool = false
+    
     var body: some View {
         VStack (alignment: .leading) {
             VStack {
@@ -57,6 +60,7 @@ struct MyPageView: View {
                                 .padding(.horizontal, 10)
                         }
                     )
+                    .frame(height: 32)
                 }
                 
                 Divider()
@@ -119,7 +123,9 @@ struct MyPageView: View {
                 
                 Divider()
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {
+                    isSignOutButtonTapped = true
+                }, label: {
                     Text("회원 탈퇴")
                         .font(.Body1_M)
                         .foregroundStyle(Color.black)
@@ -150,6 +156,33 @@ struct MyPageView: View {
         .padding(.horizontal, 15)
         .padding(.top, 15)
         .padding(.bottom, 10)
+        .showCustomAlert(
+            isPresented: $isSignOutButtonTapped,
+            content: {
+                    VStack {
+                        Text("회원탈퇴할까요?")
+                            .font(.Head1_B)
+                            .padding(.bottom, 9)
+                        Text("회원 탈퇴 시, 개인 정보 및 기존에 등록된 \n이벤트, 카테고리 정보가 모두 삭제됩니다")
+                            .font(.Body1_R)
+                    }
+            },
+            firstButton:
+                CustomAlertButton(
+                    action: { isSignOutButtonTapped = false },
+                    title: Text("취소").foregroundColor(Color.Gray04)
+                ),
+            secondButton:
+                CustomAlertButton(
+                    action: {
+                        isSignOutButtonTapped = false
+                        signOutViewModel.deleteSignOut()
+                    },
+                    title: Text("탈퇴하기").foregroundColor(Color.Brown00))
+        )
+        .navigationDestination(isPresented: $signOutViewModel.isSignOutSuccess, destination: {
+            ContentView()
+        })
     }
 }
 

@@ -155,7 +155,9 @@ struct GoogleLoginInButton: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.Gray04, lineWidth: 1)
         )
+        .navigationBarBackButtonHidden(true)
     }
+    
     
     func getGoogleUserID() async throws -> Bool {
         guard let TopUIViewController = FindTopUIViewController() else {
@@ -178,9 +180,10 @@ struct GoogleLoginInButton: View {
             googleLoginService.getGoogleLogin(socialId: googleSocialId) { result in
                 switch result {
                 case .success(let response):
-                    print("API Response: \(response)")
-                    print("response accessToken: \(String(describing: response.result.accessToken))")
-                    
+                    print("=====================================")
+                    print("구글 로그인 결과: \(response)")
+                    print("=====================================")
+
                     // Auth 값 설정
                     socialId = response.result.socialId
                     socialLoginType = "google"

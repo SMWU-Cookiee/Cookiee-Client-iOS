@@ -18,7 +18,7 @@ struct CustomAlertView<Content: View>: View {
 
             VStack(spacing: 0){
                 content
-                    .padding(25)
+                    .padding(.vertical, 25)
                 Divider()
                 HStack(spacing: 0){
                     firstButton

@@ -23,7 +23,7 @@ func loadFromKeychain(key: String) -> String? {
     
     if status == errSecSuccess {
         if let data = item as? Data, let result = String(data: data, encoding: .utf8) {
-            print("loadFromKeychain : \(key) 불러오기 성공")
+            print("loadFromKeychain : \(key)=\(result) 불러오기 성공")
             return result
         }
     } else {

@@ -37,6 +37,10 @@ class SignUpViewModel: ObservableObject {
         signUpService.postSignUp(requestBody: signUpRequest) { result in
             switch result {
             case .success(let response):
+                saveToKeychain(key: "accessToken", data: response.result.accessToken)
+                saveToKeychain(key: "refreshToken", data: response.result.refreshToken)
+                saveToKeychain(key: "userId", data: response.result.userId.description)
+                
                 self.isSignUpSuccess = true
                 print(response)
         
