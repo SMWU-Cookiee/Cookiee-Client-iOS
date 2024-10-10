@@ -161,11 +161,7 @@ struct GoogleLoginInButton: View {
     var body: some View {
         Button {
             Task {
-                do {
-                    try await socialLoginViewModel.getGoogleUserID()
-                } catch {
-                    print("Google login failed with error: \(error)")
-                }
+                await socialLoginViewModel.getGoogleUserID()
             }
         } label: {
             Image("GoogleLogos")
