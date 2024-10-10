@@ -27,26 +27,27 @@ struct SocialLoginView: View {
         NavigationStack {
             GeometryReader { geometry in
                 VStack {
-                    HStack {
+                    VStack(spacing: 15) {
                         HStack {
                             Image("cookiee_icon_big")
                         }
-                        .position(x: geometry.size.width / 2, y: 216)
+                        .frame(width: 184, height: 184)
                         HStack {
                             Image("cookiee_typo")
                         }
-                        .position(x: 0, y: 350)
                     }
+                    .position(x: geometry.size.width / 2, y: 280)
+
 
                     HStack {
-                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, name: $name, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken) // 상태 전달
+                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, name: $name, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken)
                     }
-                    .padding(.bottom, 11)
+                    .padding(.bottom, 5)
 
                     HStack {
-                        AppleSignInButton()
+                        AppleSignInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, name: $name, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken)
                     }
-                    .padding(.bottom, 90)
+                    .padding(.bottom, 145)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -64,55 +65,94 @@ struct SocialLoginView: View {
 
 //MARK: - 애플 로그인 버튼 & auth 처리
 struct AppleSignInButton : View {
-    @AppStorage("email") var email:String = ""
-    @AppStorage("fullName") var fullName:String = ""
-
+    @Binding var navigateToSignUp: Bool
+    @Binding var navigateToHome: Bool
+    
+    @Binding var name: String
+    @Binding var email: String
+    @Binding var socialId: String
+    @Binding var socialLoginType: String
+    @Binding var socialRefreshToken: String
+    @Binding var socialAccessToken: String
+    
+    @State var isNewMember: Bool = false
+    
     
     var body: some View {
-        SignInWithAppleButton(onRequest: { request in
-            request.requestedScopes = [.email, .fullName]
-        }, onCompletion: { result in
+        HStack {
+            Image("AppleIcon")
+            Text("Apple 계정으로 로그인")
+                .font(Font.Body1_SB)
+                .foregroundStyle(Color.White)
+        }
+        .frame(width: 265, height: 37)
+        .background(Color.Black)
+        .cornerRadius(5)
+        .overlay {
+            SignInWithAppleButton(onRequest: { request in
+                    request.requestedScopes = [.email, .fullName]
+                }, onCompletion: { result in
+                    switch result {
+                    case .success(let auth):
+                        switch auth.credential {
+                        case let credential as ASAuthorizationAppleIDCredential:
+                            name = String(describing: credential.fullName)
+                            email =  String(describing: credential.email)
+        
+                            if  let authorizationCode = credential.authorizationCode,
+                               let identityToken = credential.identityToken,
+                               let authString = String(data: authorizationCode, encoding: .utf8),
+                               let tokenString = String(data: identityToken, encoding: .utf8) {
+                               print("authorizationCode to String: \(authString)")
+                               print("identityToken to String: \(tokenString)")
+                                
+                                postAppleLogin(IdentityToken: tokenString, AuthorizationCode: authString)
+                                
+                           }
+
+                        default:
+                            break
+                        }
+                    case .failure(let error):
+                        print(error)
+                    };
+                })
+            .blendMode(.overlay)
+        }
+    }
+    
+    
+    func postAppleLogin(IdentityToken: String, AuthorizationCode: String) {
+        let apppleLoginService = AppleLoginService()
+        let appleLoginRequest: AppleLoginRequestDTO = AppleLoginRequestDTO(IdentityToken: IdentityToken, AuthorizationCode: AuthorizationCode)
+        
+            
+        apppleLoginService.postAppleLogin(request: appleLoginRequest){ result in
             switch result {
-            case .success(let auth):
-                switch auth.credential {
-                case let credential as ASAuthorizationAppleIDCredential:
-                    // User ID
-                    let userId = credential.user
-                    let fullName = credential.fullName
-                    let email = credential.email
-                              
-                    if  let authorizationCode = credential.authorizationCode,
-                       let identityToken = credential.identityToken,
-                       let authString = String(data: authorizationCode, encoding: .utf8),
-                       let tokenString = String(data: identityToken, encoding: .utf8) {
-                       print("authorizationCode: \(authorizationCode)")
-                       print("identityToken: \(identityToken)")
-                       print("authorizationCode to String: \(authString)")
-                       print("identityToken to String: \(tokenString)")
-                   }
-                    
-                    print("userId: \(userId)")
-                    print("fullName: \(String(describing: fullName))")
-                    print("email: \(String(describing: email))")
-                    
-                default:
-                    break
-                }
+            case .success(let response):
+                print("=====================================")
+                print("애플 로그인 결과: \(response)")
+                print("=====================================")
+
+                // Auth 값 설정
+                socialId = response.result?.socialId ?? ""
+                socialLoginType = "apple"
+                socialRefreshToken = response.result?.refreshToken ?? ""
+                socialAccessToken = response.result?.accessToken ?? ""
+                isNewMember = response.result?.isNewMember ?? false
+                
             case .failure(let error):
-                print(error)
-            };
-        })
-        .frame(width : UIScreen.main.bounds.width * 0.7, height:45)
+                print("API Error: \(error)")
+            }
+        }
     }
 }
 
 //MARK: - 구글 로그인 버튼 & auth 처리
-// GoogleLoginInButton 수정
 struct GoogleLoginInButton: View {
-    @Binding var navigateToSignUp: Bool // 네비게이션 상태를 부모에서 전달받음
+    @Binding var navigateToSignUp: Bool
     @Binding var navigateToHome: Bool
     
-    //Auth 값 바인딩
     @Binding var name: String
     @Binding var email: String
     @Binding var socialId: String
@@ -150,12 +190,11 @@ struct GoogleLoginInButton: View {
                 .font(Font.Body1_SB)
                 .foregroundStyle(Color.Gray06)
         }
-        .frame(width: 265, height: 37)
+        .frame(width: 264, height: 36)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.Gray04, lineWidth: 1)
         )
-        .navigationBarBackButtonHidden(true)
     }
     
     

@@ -37,16 +37,17 @@ struct SplashView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                HStack {
+                VStack(spacing: 15) {
                     HStack {
                         Image("cookiee_icon_big")
                     }
-                    .position(x: geometry.size.width / 2, y: 216)
+                    .frame(width: 184, height: 184)
                     HStack {
                         Image("cookiee_typo")
                     }
-                    .position(x: 0, y: 350)
                 }
+                .position(x: geometry.size.width / 2, y: 280)
+
                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
