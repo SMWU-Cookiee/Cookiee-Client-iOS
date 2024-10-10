@@ -65,6 +65,10 @@
 		83DEB9882C9B05BC0049F7CD /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DEB9872C9B05BC0049F7CD /* EventAddView.swift */; };
 		83E540172C6CE6B900509671 /* EventListSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E540162C6CE6B900509671 /* EventListSample.swift */; };
 		83E6F5F82CB7A9AC00DCDF32 /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F5F72CB7A9AC00DCDF32 /* SignOutViewModel.swift */; };
+		83E6F6022CB7BC2700DCDF32 /* AppleLoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F5FB2CB7BC2700DCDF32 /* AppleLoginAPI.swift */; };
+		83E6F6032CB7BC2700DCDF32 /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F5FC2CB7BC2700DCDF32 /* AppleLoginService.swift */; };
+		83E6F6042CB7BC2700DCDF32 /* AppleLoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F5FF2CB7BC2700DCDF32 /* AppleLoginResponseDTO.swift */; };
+		83E6F6052CB7BC2700DCDF32 /* AppleLoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F5FD2CB7BC2700DCDF32 /* AppleLoginRequestDTO.swift */; };
 		83E76C6E2CB6AE88000FEA67 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */; };
 		83E76C792CB6D0A9000FEA67 /* SignOutResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C782CB6D0A9000FEA67 /* SignOutResponseDTO.swift */; };
 		83E76C7B2CB6D10E000FEA67 /* SignOutAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C7A2CB6D10E000FEA67 /* SignOutAPI.swift */; };
@@ -159,6 +163,10 @@
 		83DEB9872C9B05BC0049F7CD /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
 		83E540162C6CE6B900509671 /* EventListSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListSample.swift; sourceTree = "<group>"; };
 		83E6F5F72CB7A9AC00DCDF32 /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
+		83E6F5FB2CB7BC2700DCDF32 /* AppleLoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginAPI.swift; sourceTree = "<group>"; };
+		83E6F5FC2CB7BC2700DCDF32 /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
+		83E6F5FD2CB7BC2700DCDF32 /* AppleLoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginRequestDTO.swift; sourceTree = "<group>"; };
+		83E6F5FF2CB7BC2700DCDF32 /* AppleLoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginResponseDTO.swift; sourceTree = "<group>"; };
 		83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		83E76C782CB6D0A9000FEA67 /* SignOutResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutResponseDTO.swift; sourceTree = "<group>"; };
 		83E76C7A2CB6D10E000FEA67 /* SignOutAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutAPI.swift; sourceTree = "<group>"; };
@@ -484,6 +492,41 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		83E6F5F92CB7BBA300DCDF32 /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				83E6F6012CB7BC2700DCDF32 /* DTO */,
+				83E6F5FB2CB7BC2700DCDF32 /* AppleLoginAPI.swift */,
+				83E6F5FC2CB7BC2700DCDF32 /* AppleLoginService.swift */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
+		83E6F5FE2CB7BC2700DCDF32 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				83E6F5FD2CB7BC2700DCDF32 /* AppleLoginRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		83E6F6002CB7BC2700DCDF32 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				83E6F5FF2CB7BC2700DCDF32 /* AppleLoginResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		83E6F6012CB7BC2700DCDF32 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				83E6F5FE2CB7BC2700DCDF32 /* Request */,
+				83E6F6002CB7BC2700DCDF32 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		83E76C732CB6CDF6000FEA67 /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,6 +671,7 @@
 		83F02CAC2CAC07B6001E8329 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				83E6F5F92CB7BBA300DCDF32 /* Apple */,
 				8349F5F92CB011BD00746163 /* Token */,
 				83F02CAD2CAC08BE001E8329 /* Google */,
 			);
@@ -637,9 +681,9 @@
 		83F02CAD2CAC08BE001E8329 /* Google */ = {
 			isa = PBXGroup;
 			children = (
+				83F02CAE2CAC08C8001E8329 /* DTO */,
 				83F02CB42CAC0A8E001E8329 /* GoogleLoginAPI.swift */,
 				83F02CB92CAC0B24001E8329 /* GoogleLoginService.swift */,
-				83F02CAE2CAC08C8001E8329 /* DTO */,
 			);
 			path = Google;
 			sourceTree = "<group>";
@@ -860,6 +904,10 @@
 				83E76C792CB6D0A9000FEA67 /* SignOutResponseDTO.swift in Sources */,
 				8349F5F42CB003EA00746163 /* deleteFromKeychain.swift in Sources */,
 				83F80D492C79AD18001231A9 /* ColorPickerView.swift in Sources */,
+				83E6F6022CB7BC2700DCDF32 /* AppleLoginAPI.swift in Sources */,
+				83E6F6032CB7BC2700DCDF32 /* AppleLoginService.swift in Sources */,
+				83E6F6042CB7BC2700DCDF32 /* AppleLoginResponseDTO.swift in Sources */,
+				83E6F6052CB7BC2700DCDF32 /* AppleLoginRequestDTO.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
 				83F02CBF2CAC3189001E8329 /* Placeholder.swift in Sources */,
 				83E76C822CB6D575000FEA67 /* SignUpRequestDTO.swift in Sources */,
