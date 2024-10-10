@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import GoogleSignIn
-import GoogleSignInSwift
+import UIKit
 
 class SignUpViewModel: ObservableObject {
     @Published var isSignUpSuccess: Bool = false
