@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8305BACC2CBE864200658590 /* CalendarControlFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BACB2CBE864200658590 /* CalendarControlFunctions.swift */; };
 		833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */; };
 		833707C62CA433A80050D1C7 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C52CA433A80050D1C7 /* CombineMoya */; };
 		833707C82CA433A80050D1C7 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C72CA433A80050D1C7 /* Moya */; };
@@ -111,6 +112,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8305BACB2CBE864200658590 /* CalendarControlFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarControlFunctions.swift; sourceTree = "<group>"; };
 		833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddAndEditView.swift; sourceTree = "<group>"; };
 		833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTopUIViewController.swift; sourceTree = "<group>"; };
 		8349F5EF2CB0030700746163 /* saveToKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveToKeychain.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 			children = (
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
 				837D74EC2CBE8473005D20DC /* CalendarCellView.swift */,
+				8305BACB2CBE864200658590 /* CalendarControlFunctions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -936,6 +939,7 @@
 				83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */,
 				8385C5A42C6E1EE600D1DD21 /* EventDetailSample.swift in Sources */,
 				8349F5FD2CB0139200746163 /* TokenRefreshService.swift in Sources */,
+				8305BACC2CBE864200658590 /* CalendarControlFunctions.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83E6F5F82CB7A9AC00DCDF32 /* SignOutViewModel.swift in Sources */,
 				837D74E42CBE428B005D20DC /* ProfileViewModel.swift in Sources */,

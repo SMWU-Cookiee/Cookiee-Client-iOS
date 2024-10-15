@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension HomeCalendarView {
+ extension HomeCalendarView {
     struct CellView: View {
         private var day: Int
         private var clicked: Bool
