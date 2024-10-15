@@ -32,7 +32,7 @@ struct ImageCarouselView: View {
                 HStack(spacing: spacing) {
                     ForEach(Array(imageUrls.enumerated()), id: \.offset) { offset, url in
                         fetchImageByURL(url: url)
-                        .frame(width: proxy.size.width - trialingSpace, height: .infinity)
+                        .frame(width: proxy.size.width - trialingSpace)
                     }
                 }
                 .padding(.horizontal, spacing)
