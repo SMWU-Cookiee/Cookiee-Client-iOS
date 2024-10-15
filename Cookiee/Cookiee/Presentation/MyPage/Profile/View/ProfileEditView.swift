@@ -35,6 +35,8 @@ struct ProfileEditView: View {
         newImage = selectedImage
     }
     
+    @State var submitButtonColor: Color = .Gray02
+    
     var body: some View {
         VStack {
             HStack {
@@ -83,6 +85,13 @@ struct ProfileEditView: View {
                     .frame(height: 40)
                     .background(Color.Gray01)
                     .cornerRadius(5)
+                    .onChange(of: nickname) {
+                        if nickname != profileViewModel.profile.nickname {
+                            submitButtonColor = .Brown01
+                        } else {
+                            submitButtonColor = .Gray02
+                        }
+                    }
             }
             .padding(.bottom, 5)
             
@@ -101,6 +110,13 @@ struct ProfileEditView: View {
                     .frame(height: 40)
                     .background(Color.Gray01)
                     .cornerRadius(5)
+                    .onChange(of: introduction) {
+                        if introduction != profileViewModel.profile.selfDescription {
+                            submitButtonColor = .Brown01
+                        } else {
+                            submitButtonColor = .Gray02
+                        }
+                    }
             }
             Spacer()
         }
@@ -118,7 +134,7 @@ struct ProfileEditView: View {
         }, label: {
             Text("완료")
                 .font(.Body0_B)
-                .foregroundColor((introduction.isEmpty || nickname.isEmpty || newImage != nil) ? .Gray03 : .Brown01)
+                .foregroundColor(submitButtonColor)
         }))
 
         .padding()
