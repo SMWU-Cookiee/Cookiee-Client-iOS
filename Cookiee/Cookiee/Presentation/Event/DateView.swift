@@ -136,7 +136,7 @@ private struct EventCardCellView: View {
                         case .empty:
                             VStack {
                                 ProgressView()
-                                    .frame(width: .infinity, height: 240)
+                                    .frame(height: 240)
                             }
                         case .success(let image):
                             ZStack (alignment: .bottomTrailing) {
@@ -158,11 +158,11 @@ private struct EventCardCellView: View {
                     }
                 }
                 .cornerRadius(5)
-                .frame(width: .infinity, height: 240)
+                .frame(height: 240)
             }
             
         }
-        .frame(width: .infinity, height: 240)
+        .frame(height: 240)
     }
 }
 
