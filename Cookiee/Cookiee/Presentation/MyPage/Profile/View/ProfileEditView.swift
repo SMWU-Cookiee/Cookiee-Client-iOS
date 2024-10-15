@@ -59,7 +59,6 @@ struct ProfileEditView: View {
                                     .resizable()
                                     .frame(width: 30, height: 30)
                             })
-                            
                         )
                 }
             }
