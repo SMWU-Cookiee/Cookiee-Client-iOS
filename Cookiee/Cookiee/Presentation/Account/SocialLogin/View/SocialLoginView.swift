@@ -136,6 +136,8 @@ struct GoogleLoginInButton: View {
                             // 임시로 신규 회원이 아닐때에 키체인 등록
                             saveToKeychain(key: "accessToken", data: socialAccessToken)
                             saveToKeychain(key: "refreshToken", data: socialAccessToken)
+                            saveToKeychain(key: "userId", data: "71")
+                            
                             
                             navigateToHome = true // 신규 가입이 아니면 홈으로
                         }
