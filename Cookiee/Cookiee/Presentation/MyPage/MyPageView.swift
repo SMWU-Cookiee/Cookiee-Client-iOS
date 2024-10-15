@@ -9,22 +9,33 @@ import SwiftUI
 
 struct MyPageView: View {
     @ObservedObject var signOutViewModel = SignOutViewModel()
+    @ObservedObject var profileViewModel = ProfileViewModel()
+
     @State var isSignOutButtonTapped: Bool = false
     
     var body: some View {
         VStack (alignment: .leading) {
             VStack {
                 HStack {
-                    Image("testimage")
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 70, height: 70)
+                    if let imageURL = profileViewModel.profile.profileImage {
+                        AsyncImage(url: URL(string: imageURL)) { result in
+                            result.image?
+                                .resizable()
+                                .clipShape(Circle())
+                                .frame(width: 129, height: 129)
+                        }
+                    } else {
+                        Circle()
+                            .foregroundColor(Color.Gray01)
+                            .frame(width: 70, height: 70)
+                    }
+                    
                     VStack(alignment: .leading) {
-                        Text("김쿠키")
+                        Text(profileViewModel.profile.nickname)
                             .font(.Body0_SB)
                             .foregroundColor(Color.Brown00)
                         Spacer()
-                        Text("맛있는거 많이 먹기")
+                        Text(profileViewModel.profile.selfDescription)
                             .font(.Body1_M)
                             .foregroundColor(Color.Brown02)
                     }
@@ -183,6 +194,9 @@ struct MyPageView: View {
         .navigationDestination(isPresented: $signOutViewModel.isSignOutSuccess, destination: {
             ContentView()
         })
+        .onAppear() {
+            profileViewModel.loadUserProfile()
+        }
     }
 }
 
