@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ProfileEditView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
-    // 백 버튼 커스텀
     var backButton: some View {
         Button {
             self.presentationMode.wrappedValue.dismiss()
@@ -29,12 +27,12 @@ struct ProfileEditView: View {
     
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
-    @State var image:UIImage = UIImage()
+    @State var newImage: UIImage?
     @State var imageURL: String?
 
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
-        image = selectedImage
+        newImage = selectedImage
     }
     
     var body: some View {
@@ -115,10 +113,12 @@ struct ProfileEditView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
-        .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+        .navigationBarItems(trailing: Button(action: {
+            profileViewModel.updateUserProfile(nickname: nickname, selfDescription: introduction, newUIImage: newImage)
+        }, label: {
             Text("완료")
                 .font(.Body0_B)
-                .foregroundColor(.Gray03)
+                .foregroundColor((introduction.isEmpty || nickname.isEmpty || newImage != nil) ? .Gray03 : .Brown01)
         }))
 
         .padding()
@@ -126,8 +126,12 @@ struct ProfileEditView: View {
         .onAppear() {
             profileViewModel.loadUserProfile()
         }
+        .onChange(of: profileViewModel.isSuccess) {
+            if profileViewModel.isSuccess {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
-    
 }
 
 #Preview {

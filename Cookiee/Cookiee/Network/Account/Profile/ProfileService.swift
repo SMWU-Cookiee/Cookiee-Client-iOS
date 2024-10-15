@@ -41,4 +41,23 @@ class ProfileService {
             }
         }
     }
+    
+    func putProfile(requestBody: ProfilePutRequestDTO, completion: @escaping (Result<ProfileResponseDTO, Error>) -> Void) {
+        provider.request(.putUserProfile(userId: userId, requestBody: requestBody)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    print(String(data: response.data, encoding: .utf8) ?? "No response data")
+                    let response = try JSONDecoder().decode(ProfileResponseDTO.self, from: response.data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                    print("❌ putUserProfile Decoding error:", error)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+                print("❌ putUserProfile error:", error.errorDescription as Any)
+            }
+        }
+    }
 }
