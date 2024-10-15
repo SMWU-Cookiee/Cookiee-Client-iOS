@@ -60,8 +60,19 @@ struct DateView: View {
                                 }
                             }
                         } else {
-                            RoundedRectangle(cornerRadius: 2)
+                            Button(action: {
+                            }, label: {
+                                VStack(alignment: .center) {
+                                    Image("ThumbnailPhoto")
+                                        .frame(width: 31, height: 31)
+                                        .padding(.vertical, 7)
+                                    Text("탭하여 썸네일 추가하기")
+                                        .font(.Body1_M)
+                                        .foregroundStyle(Color.Gray05)
+                                }
                                 .frame(width: geometry.size.width, height: 265)
+                                .background(Color.Gray01)
+                            })
                         }
                     }
                     .overlay(
@@ -173,4 +184,8 @@ private func getFirstImageUrlAndCategory(from response: [String: Any]) -> [(imag
     }
 
     return results
+}
+
+#Preview {
+    DateView(date: Date.now)
 }
