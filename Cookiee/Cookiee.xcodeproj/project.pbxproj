@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8305BACC2CBE864200658590 /* CalendarControlFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BACB2CBE864200658590 /* CalendarControlFunctions.swift */; };
+		8305BAD02CBE8B6100658590 /* EventCardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BACF2CBE8B6100658590 /* EventCardCellView.swift */; };
 		833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */; };
 		833707C62CA433A80050D1C7 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C52CA433A80050D1C7 /* CombineMoya */; };
 		833707C82CA433A80050D1C7 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C72CA433A80050D1C7 /* Moya */; };
@@ -113,6 +114,7 @@
 
 /* Begin PBXFileReference section */
 		8305BACB2CBE864200658590 /* CalendarControlFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarControlFunctions.swift; sourceTree = "<group>"; };
+		8305BACF2CBE8B6100658590 /* EventCardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardCellView.swift; sourceTree = "<group>"; };
 		833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddAndEditView.swift; sourceTree = "<group>"; };
 		833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTopUIViewController.swift; sourceTree = "<group>"; };
 		8349F5EF2CB0030700746163 /* saveToKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveToKeychain.swift; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 		83DEB9892C9B0B440049F7CD /* Event */ = {
 			isa = PBXGroup;
 			children = (
+				8305BACF2CBE8B6100658590 /* EventCardCellView.swift */,
 				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
 				83DEB9872C9B05BC0049F7CD /* EventAddView.swift */,
 				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
@@ -933,6 +936,7 @@
 				83DA00612C79C55500B8CD46 /* ImagePicker.swift in Sources */,
 				8383B48C2C74C74700C9127F /* MyPageView.swift in Sources */,
 				837D74EB2CBE6603005D20DC /* CalendarThumnailViewModel.swift in Sources */,
+				8305BAD02CBE8B6100658590 /* EventCardCellView.swift in Sources */,
 				83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */,
 				83A3E2672C7A193B00ADDB55 /* DevelopersView.swift in Sources */,
 				833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */,

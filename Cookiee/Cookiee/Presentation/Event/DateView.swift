@@ -12,6 +12,7 @@ struct DateView: View {
     @StateObject private var viewModel = EventListViewModel()
     @State private var isModalOpen: Bool = false
     var date: Date?
+    @State var thumbnailURL: String?
 
     var backButton: some View {
         Button {
@@ -95,10 +96,6 @@ struct DateView: View {
     }
 }
 
-#Preview {
-    DateView(date: Date.now)
-}
-
 extension DateView {
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -106,70 +103,6 @@ extension DateView {
         return formatter
     }()
 }
-
-
-
-// 이벤트 카드 셀
-private struct EventCardCellView: View {
-    private var thumbnailUrl: String
-    private var firstCategory: String
-    private var firstCategoryColor: String
-    private var eventId: String
-    private var toggleModal: () -> Void
-    
-    fileprivate init(thumbnailUrl: String, firstCategory: String, firstCategoryColor: String, eventId: String, toggleModal: @escaping () -> Void) {
-        self.thumbnailUrl = thumbnailUrl
-        self.firstCategory = firstCategory
-        self.firstCategoryColor = firstCategoryColor
-        self.eventId = eventId
-        self.toggleModal = toggleModal
-    }
-    
-    fileprivate var body: some View {
-        ZStack {
-            Button {
-                toggleModal()
-            } label: {
-                ZStack {
-                    AsyncImage(url: URL(string: thumbnailUrl)) { phase in
-                        switch phase {
-                        case .empty:
-                            VStack {
-                                ProgressView()
-                                    .frame(height: 240)
-                            }
-                        case .success(let image):
-                            ZStack (alignment: .bottomTrailing) {
-                                image
-                                    .resizable()
-                                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                                CategoryLabel(name: firstCategory, color: firstCategoryColor)
-                                .padding(.trailing, 6)
-                                .padding(.bottom, 8)
-                            }
-                        case .failure:
-                            Image(systemName: "photo")
-                                .resizable()
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                                
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                }
-                .cornerRadius(5)
-                .frame(height: 240)
-            }
-            
-        }
-        .frame(height: 240)
-    }
-}
-
-
-
-// 이벤트 카드 뷰
-import SwiftUI
 
 private struct EventCardGridView: View {
     var eventList: [Event]

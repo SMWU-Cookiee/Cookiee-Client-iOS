@@ -38,8 +38,8 @@ struct HomeCalendarView: View {
                 .frame(width: geometry.size.width, height: 45)
                 
                 VStack {
-                    headerView
-                    calendarGridView
+                    CalendarHeaderView
+                    CalendarGridView
                     Spacer()
                 }
                 .background(Color.Beige)
@@ -50,9 +50,9 @@ struct HomeCalendarView: View {
         }
     }
     
-    private var headerView: some View {
+    private var CalendarHeaderView: some View {
         VStack(alignment: .center) {
-            yearMonthView
+            YearMonthControllerView
                 .padding(.bottom, 5)
                 .padding(.top, 5)
             
@@ -69,7 +69,7 @@ struct HomeCalendarView: View {
         .frame(height: 75)
     }
 
-    private var yearMonthView: some View {
+    private var YearMonthControllerView: some View {
         HStack {
             Button(
                 action: {
@@ -103,46 +103,54 @@ struct HomeCalendarView: View {
     }
 
       
-    private var calendarGridView: some View {
-        let daysInMonth: Int = numberOfDays(in: month)
-        let firstWeekday: Int = firstWeekdayOfMonth(in: month) - 1
+    private var CalendarGridView: some View {
+        let daysInMonth = numberOfDays(in: month)
+        let firstWeekday = firstWeekdayOfMonth(in: month) - 1
         let lastDayOfMonthBefore = numberOfDays(in: previousMonth())
         let numberOfRows = Int(ceil(Double(daysInMonth + firstWeekday) / 7.0))
         let visibleDaysOfNextMonth = numberOfRows * 7 - (daysInMonth + firstWeekday)
-        
+
         return LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0, alignment: .top), count: 7), spacing: 2) {
             ForEach(-firstWeekday ..< daysInMonth + visibleDaysOfNextMonth, id: \.self) { index in
-                Group {
-                    if index > -1 && index < daysInMonth {
-                        let date = getDate(for: index)
-                        let day = Calendar.current.component(.day, from: date)
-                        let clicked = clickedCurrentMonthDates == date
-                        let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
-                        
-                        let thumbnailUrl = filterThumbnailUrlByDate(date: date)
-                        
-                        NavigationLink(
-                            destination: DateView(date: date),
-                            label: {
-                                CellView(day: day, clicked: clicked, isToday: isToday, thumbnailUrl: thumbnailUrl)
-                            }
-                        )
-                    } else if let prevMonthDate = Calendar.current.date(
-                        byAdding: .day,
-                        value: index + lastDayOfMonthBefore,
-                        to: previousMonth()
-                    ) {
-                        let day = Calendar.current.component(.day, from: prevMonthDate)
-                        CellView(day: day, isCurrentMonthDay: false, thumbnailUrl: nil)
-                    }
-                }
-                .onTapGesture {
-                    if 0 <= index && index < daysInMonth {
-                        let date = getDate(for: index)
-                        clickedCurrentMonthDates = date
-                    }
-                }
+                CalendarGridGroupCellView(index: index, daysInMonth: daysInMonth, firstWeekday: firstWeekday, lastDayOfMonthBefore: lastDayOfMonthBefore)
             }
         }
     }
+
+    private func CalendarGridGroupCellView(index: Int, daysInMonth: Int, firstWeekday: Int, lastDayOfMonthBefore: Int) -> some View {
+        Group {
+            if index >= 0 && index < daysInMonth {
+                let date = getDate(for: index)
+                let day = Calendar.current.component(.day, from: date)
+                let clicked = clickedCurrentMonthDates == date
+                let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
+                let thumbnailUrl = filterThumbnailUrlByDate(date: date)
+                
+                NavigationLink(
+                    destination: DateView(date: date, thumbnailURL: thumbnailUrl),
+                    label: {
+                        CellView(day: day, clicked: clicked, isToday: isToday, thumbnailUrl: thumbnailUrl)
+                    }
+                )
+            } else if let prevMonthDate = Calendar.current.date(
+                byAdding: .day,
+                value: index + lastDayOfMonthBefore,
+                to: previousMonth()
+            ) {
+                let day = Calendar.current.component(.day, from: prevMonthDate)
+                CellView(day: day, isCurrentMonthDay: false, thumbnailUrl: nil)
+            }
+        }
+        .onTapGesture {
+            handleTap(index: index, daysInMonth: daysInMonth)
+        }
+    }
+
+    private func handleTap(index: Int, daysInMonth: Int) {
+        if index >= 0 && index < daysInMonth {
+            let date = getDate(for: index)
+            clickedCurrentMonthDates = date
+        }
+    }
+
 }
