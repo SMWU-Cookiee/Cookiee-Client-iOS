@@ -11,6 +11,7 @@ struct DateView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var viewModel = EventListViewModel()
     @State private var isModalOpen: Bool = false
+    
     var date: Date?
     @State var thumbnailURL: String?
 
@@ -30,11 +31,38 @@ struct DateView: View {
             VStack {
                 ZStack(alignment: .bottomLeading) {
                     HStack {
-                        Image("testimage")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: geometry.size.width, height: 265)
-                            .clipped()
+                        if let url = thumbnailURL, !url.isEmpty {
+                            AsyncImage(url: URL(string: url)) { phase in
+                                switch phase {
+                                case .empty:
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .fill(Color.white)
+                                        .overlay(ProgressView())
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: geometry.size.width, height: 265)
+                                        .clipped()
+                                    
+                                case .failure(_):
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .fill(Color.white)
+                                        .overlay(
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .frame(width: 30, height: 30)
+                                                .aspectRatio(contentMode: .fit)
+                                                .foregroundStyle(Color.gray)
+                                        )
+                                @unknown default:
+                                    EmptyView()
+                                }
+                            }
+                        } else {
+                            RoundedRectangle(cornerRadius: 2)
+                                .frame(width: geometry.size.width, height: 265)
+                        }
                     }
                     .overlay(
                         LinearGradient(
