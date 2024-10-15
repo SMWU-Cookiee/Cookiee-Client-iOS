@@ -32,35 +32,40 @@ struct DateView: View {
                 ZStack(alignment: .bottomLeading) {
                     HStack {
                         if let url = thumbnailURL, !url.isEmpty {
-                            AsyncImage(url: URL(string: url)) { phase in
-                                switch phase {
-                                case .empty:
-                                    RoundedRectangle(cornerRadius: 2)
-                                        .fill(Color.white)
-                                        .overlay(ProgressView())
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: geometry.size.width, height: 265)
-                                        .clipped()
-                                    
-                                case .failure(_):
-                                    RoundedRectangle(cornerRadius: 2)
-                                        .fill(Color.white)
-                                        .overlay(
-                                            Image(systemName: "photo")
-                                                .resizable()
-                                                .frame(width: 30, height: 30)
-                                                .aspectRatio(contentMode: .fit)
-                                                .foregroundStyle(Color.gray)
-                                        )
-                                @unknown default:
-                                    EmptyView()
+                            Button(action: {
+                                print("썸네일 수정/삭제")
+                            }, label: {
+                                AsyncImage(url: URL(string: url)) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .fill(Color.white)
+                                            .overlay(ProgressView())
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: geometry.size.width, height: 265)
+                                            .clipped()
+                                        
+                                    case .failure(_):
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .fill(Color.white)
+                                            .overlay(
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .frame(width: 30, height: 30)
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .foregroundStyle(Color.gray)
+                                            )
+                                    @unknown default:
+                                        EmptyView()
+                                    }
                                 }
-                            }
+                            })
                         } else {
                             Button(action: {
+                                print("썸네일 추가")
                             }, label: {
                                 VStack(alignment: .center) {
                                     Image("ThumbnailPhoto")
