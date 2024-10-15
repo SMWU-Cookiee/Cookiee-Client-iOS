@@ -11,6 +11,8 @@ struct HomeCalendarView: View {
     @State private var month: Date = Date()
     @State private var clickedCurrentMonthDates: Date?
     
+    @ObservedObject var homeCalendarViewModel = CalendarThumnailViewModel()
+    
     init(
         month: Date = Date(),
         clickedCurrentMonthDates: Date? = nil
@@ -46,7 +48,7 @@ struct HomeCalendarView: View {
             }
         }
         .onAppear() {
-            getThumbnailListInfo()
+            homeCalendarViewModel.loadThumbnailList()
         }
     }
     
@@ -113,7 +115,7 @@ struct HomeCalendarView: View {
         let numberOfRows = Int(ceil(Double(daysInMonth + firstWeekday) / 7.0))
         let visibleDaysOfNextMonth = numberOfRows * 7 - (daysInMonth + firstWeekday)
         
-          return LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0, alignment: .top), count: 7), spacing: 1) {
+          return LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0, alignment: .top), count: 7), spacing: 2) {
           ForEach(-firstWeekday ..< daysInMonth + visibleDaysOfNextMonth, id: \.self) { index in
             Group {
               if index > -1 && index < daysInMonth {
@@ -121,11 +123,13 @@ struct HomeCalendarView: View {
                 let day = Calendar.current.component(.day, from: date)
                 let clicked = clickedCurrentMonthDates == date
                 let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
-                
+                  
+                  let thumbnailUrl = filterThumbnailUrlByDate(date: date)
+                                
                   NavigationLink(
                       destination: DateView(date: date),
                       label: {
-                          CellView(day: day, clicked: clicked, isToday: isToday)
+                          CellView(day: day, clicked: clicked, isToday: isToday, thumbnailUrl: thumbnailUrl)
                       }
                   )
               } else if let prevMonthDate = Calendar.current.date(
@@ -134,8 +138,7 @@ struct HomeCalendarView: View {
                 to: previousMonth()
               ) {
                 let day = Calendar.current.component(.day, from: prevMonthDate)
-                
-                CellView(day: day, isCurrentMonthDay: false)
+                  CellView(day: day, isCurrentMonthDay: false, thumbnailUrl: nil)
               }
             }
             .onTapGesture {
@@ -149,75 +152,107 @@ struct HomeCalendarView: View {
     }
 }
 
+// MARK: - 날짜에 맞는 썸네일 URL 반환
+private extension HomeCalendarView {
+    func filterThumbnailUrlByDate(date: Date) -> String? {
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
 
-// MARK: - 캘린더 썸네일 불러오기 API
+        return homeCalendarViewModel.thumbnailList.first(where: {
+            $0.eventYear == year &&
+            $0.eventMonth == month &&
+            $0.eventDate == day
+        })?.thumbnailUrl
+    }
+}
 
-private func getThumbnailListInfo() {    
-    let thumbnailService = ThumbnailService()
-    thumbnailService.getThumbnailList() { result in
-        switch result {
-            case .success(let thumbnailList):
-            print(thumbnailList)
-        case .failure(let error):
-            print(error)
+
+// MARK: - 캘린더 셀, 캘린더 뷰 및 캘린더 관련 함수
+private extension HomeCalendarView {
+    struct CellView: View {
+        private var day: Int
+        private var clicked: Bool
+        private var isToday: Bool
+        private var isCurrentMonthDay: Bool
+        private var textColor: Color {
+            if clicked {
+                return Color.black
+            } else if isCurrentMonthDay {
+                return Color.black
+            } else {
+                return Color.gray
+            }
+        }
+        private var backgroundColor: Color {
+            if clicked {
+                return Color.gray
+            } else if isToday {
+                return Color.white
+            } else {
+                return Color.white
+            }
+        }
+        private var thumbnailUrl: String?
+
+
+        fileprivate init(
+            day: Int,
+            clicked: Bool = false,
+            isToday: Bool = false,
+            isCurrentMonthDay: Bool = true,
+            thumbnailUrl: String?
+        ) {
+            self.day = day
+            self.clicked = clicked
+            self.isToday = isToday
+            self.isCurrentMonthDay = isCurrentMonthDay
+            self.thumbnailUrl = thumbnailUrl
+        }
+
+        fileprivate var body: some View {
+            VStack {
+                if let url = thumbnailUrl, !url.isEmpty {
+                    AsyncImage(url: URL(string: url)) { phase in
+                        switch phase {
+                        case .empty:
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color.white)
+                                .overlay(ProgressView())
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 55, height: 95)
+                                .clipShape(RoundedRectangle(cornerRadius: 2))
+                            
+                        case .failure(_):
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color.white)
+                                .overlay(
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .aspectRatio(contentMode: .fit)
+                                        .foregroundStyle(Color.gray)
+                                )
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                } else {
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(backgroundColor)
+                        .overlay(Text(String(day)).foregroundColor(textColor))
+                }
+            }
+            .frame(width: 55, height: 95)
         }
     }
 }
 
 
-
-// MARK: - 캘린더 셀, 캘린더 뷰 및 캘린더 관련 함수
-// 캘린더 셀
-private struct CellView: View {
-  private var day: Int
-  private var clicked: Bool
-  private var isToday: Bool
-  private var isCurrentMonthDay: Bool
-  private var textColor: Color {
-    if clicked {
-      return Color.black
-    } else if isCurrentMonthDay {
-      return Color.black
-    } else {
-      return Color.gray
-    }
-  }
-  private var backgroundColor: Color {
-    if clicked {
-      return Color.gray
-    } else if isToday {
-      return Color.white
-    } else {
-      return Color.white
-    }
-  }
-  
-  fileprivate init(
-    day: Int,
-    clicked: Bool = false,
-    isToday: Bool = false,
-    isCurrentMonthDay: Bool = true
-  ) {
-    self.day = day
-    self.clicked = clicked
-    self.isToday = isToday
-    self.isCurrentMonthDay = isCurrentMonthDay
-  }
-  
-  fileprivate var body: some View {
-    VStack {
-        RoundedRectangle(cornerRadius: 2)
-            .fill(backgroundColor)
-//            .overlay(Image("testimage")
-//                .resizable()
-//                .clipShape(RoundedRectangle(cornerRadius: 2))
-//            )
-            .overlay(Text(String(day)))
-            .foregroundColor(textColor)
-    }
-    .frame(width: 55, height: 95)
-  }
-}
 
 #Preview {
     HomeCalendarView()

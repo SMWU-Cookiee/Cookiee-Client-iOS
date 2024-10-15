@@ -31,6 +31,7 @@
 		837D74DE2CBE40A0005D20DC /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837D74DD2CBE40A0005D20DC /* ProfileService.swift */; };
 		837D74E42CBE428B005D20DC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837D74E32CBE428B005D20DC /* ProfileViewModel.swift */; };
 		837D74E62CBE4EE5005D20DC /* ProfilePutRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837D74E52CBE4EE5005D20DC /* ProfilePutRequestDTO.swift */; };
+		837D74EB2CBE6603005D20DC /* CalendarThumnailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837D74EA2CBE6603005D20DC /* CalendarThumnailViewModel.swift */; };
 		8383B48C2C74C74700C9127F /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8383B48B2C74C74700C9127F /* MyPageView.swift */; };
 		8385C5A42C6E1EE600D1DD21 /* EventDetailSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5A32C6E1EE600D1DD21 /* EventDetailSample.swift */; };
 		8385C5A62C6E229800D1DD21 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5A52C6E229800D1DD21 /* EventDetailView.swift */; };
@@ -125,6 +126,7 @@
 		837D74DD2CBE40A0005D20DC /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		837D74E32CBE428B005D20DC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		837D74E52CBE4EE5005D20DC /* ProfilePutRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePutRequestDTO.swift; sourceTree = "<group>"; };
+		837D74EA2CBE6603005D20DC /* CalendarThumnailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarThumnailViewModel.swift; sourceTree = "<group>"; };
 		8383B48B2C74C74700C9127F /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		8385C5A32C6E1EE600D1DD21 /* EventDetailSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailSample.swift; sourceTree = "<group>"; };
 		8385C5A52C6E229800D1DD21 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
@@ -226,9 +228,9 @@
 		833707C22CA4319E0050D1C7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				837D74E72CBE65DC005D20DC /* Calendar */,
 				83BD79892C68BB570044C453 /* ContentView.swift */,
 				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
-				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
 				83F02CBB2CAC11D0001E8329 /* Account */,
 				83DEB9892C9B0B440049F7CD /* Event */,
 				83A3E2682C7A203A00ADDB55 /* MyPage */,
@@ -343,6 +345,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		837D74E72CBE65DC005D20DC /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				837D74E92CBE65EB005D20DC /* ViewModel */,
+				837D74E82CBE65E6005D20DC /* View */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		837D74E82CBE65E6005D20DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		837D74E92CBE65EB005D20DC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				837D74EA2CBE6603005D20DC /* CalendarThumnailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8385C5A92C6E6AF900D1DD21 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,12 +446,12 @@
 		83A3E2682C7A203A00ADDB55 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				8389AB332CB10FC500580F4D /* Category */,
 				837D74DF2CBE425C005D20DC /* Profile */,
 				83E6F5F52CB7A99500DCDF32 /* SignOut */,
 				8383B48B2C74C74700C9127F /* MyPageView.swift */,
 				83A3E2662C7A193B00ADDB55 /* DevelopersView.swift */,
 				83C861BB2C74E1DC004FDF7A /* PrivacyPolicyView.swift */,
-				8389AB332CB10FC500580F4D /* Category */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -899,6 +926,7 @@
 				837D74DA2CBE4051005D20DC /* ProfileResponseDTO.swift in Sources */,
 				83DA00612C79C55500B8CD46 /* ImagePicker.swift in Sources */,
 				8383B48C2C74C74700C9127F /* MyPageView.swift in Sources */,
+				837D74EB2CBE6603005D20DC /* CalendarThumnailViewModel.swift in Sources */,
 				83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */,
 				83A3E2672C7A193B00ADDB55 /* DevelopersView.swift in Sources */,
 				833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */,
