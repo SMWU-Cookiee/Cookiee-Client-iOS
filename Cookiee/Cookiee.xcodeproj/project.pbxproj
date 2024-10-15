@@ -32,6 +32,7 @@
 		837D74E42CBE428B005D20DC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837D74E32CBE428B005D20DC /* ProfileViewModel.swift */; };
 		837D74E62CBE4EE5005D20DC /* ProfilePutRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837D74E52CBE4EE5005D20DC /* ProfilePutRequestDTO.swift */; };
 		837D74EB2CBE6603005D20DC /* CalendarThumnailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837D74EA2CBE6603005D20DC /* CalendarThumnailViewModel.swift */; };
+		837D74ED2CBE8473005D20DC /* CalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837D74EC2CBE8473005D20DC /* CalendarCellView.swift */; };
 		8383B48C2C74C74700C9127F /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8383B48B2C74C74700C9127F /* MyPageView.swift */; };
 		8385C5A42C6E1EE600D1DD21 /* EventDetailSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5A32C6E1EE600D1DD21 /* EventDetailSample.swift */; };
 		8385C5A62C6E229800D1DD21 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8385C5A52C6E229800D1DD21 /* EventDetailView.swift */; };
@@ -127,6 +128,7 @@
 		837D74E32CBE428B005D20DC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		837D74E52CBE4EE5005D20DC /* ProfilePutRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePutRequestDTO.swift; sourceTree = "<group>"; };
 		837D74EA2CBE6603005D20DC /* CalendarThumnailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarThumnailViewModel.swift; sourceTree = "<group>"; };
+		837D74EC2CBE8473005D20DC /* CalendarCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCellView.swift; sourceTree = "<group>"; };
 		8383B48B2C74C74700C9127F /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		8385C5A32C6E1EE600D1DD21 /* EventDetailSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailSample.swift; sourceTree = "<group>"; };
 		8385C5A52C6E229800D1DD21 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */,
+				837D74EC2CBE8473005D20DC /* CalendarCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -956,6 +959,7 @@
 				83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */,
 				83E76C852CB6D5FF000FEA67 /* SignUpResponseDTO.swift in Sources */,
 				83F02CBD2CAC11F2001E8329 /* SignUpView.swift in Sources */,
+				837D74ED2CBE8473005D20DC /* CalendarCellView.swift in Sources */,
 				8389AB372CB10FF600580F4D /* CategoryListViewModel.swift in Sources */,
 				83E76C7B2CB6D10E000FEA67 /* SignOutAPI.swift in Sources */,
 				83F02CBA2CAC0B24001E8329 /* GoogleLoginService.swift in Sources */,
