@@ -21,3 +21,10 @@ struct ThumbnailResultData: Codable {
     let eventDate: Int32
     let thumbnailUrl: String
 }
+
+struct ThumbnailResponseDTO: Codable {
+    let isSuccess: Bool
+    let statusCode: Int
+    let message: String
+    let result: ThumbnailResultData
+}

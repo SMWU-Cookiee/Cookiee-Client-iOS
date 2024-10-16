@@ -18,7 +18,7 @@ class ThumbnailService {
             self.userId = id
         } else {
             self.userId = ""
-            print("CategoryService init : userId를 찾을 수 없음")
+            print("ThumbnailService init : userId를 찾을 수 없음")
         }
     }
 
@@ -36,6 +36,42 @@ class ThumbnailService {
             case .failure(let error):
                 completion(.failure(error))
                 print("getThumbnailList error:", error)
+            }
+        }
+    }
+    
+    func postThumbnail(requestBody: ThumbnailRequestDTO, completion: @escaping (Result<ThumbnailResponseDTO, Error>) -> Void) {
+        provider.request(.postThumbnail(userId: userId, requestBody: requestBody)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let response = try JSONDecoder().decode(ThumbnailResponseDTO.self, from: response.data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                    print("postThumbnail Decoding error:", error)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+                print("postThumbnail error:", error.errorDescription as Any)
+            }
+        }
+    }
+    
+    func getThumbnailByDate(year: Int, month: Int, day: Int, completion: @escaping (Result<ThumbnailResponseDTO, Error>) -> Void) {
+        provider.request(.getTumbnailByDate(userId: userId, year: year, month: month, day: day)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let thumbResponse = try JSONDecoder().decode(ThumbnailResponseDTO.self, from: response.data)
+                    completion(.success(thumbResponse))
+                } catch {
+                    completion(.failure(error))
+                    print("getThumbnailByDate Decoding error:", error)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+                print("getThumbnailByDate error:", error)
             }
         }
     }

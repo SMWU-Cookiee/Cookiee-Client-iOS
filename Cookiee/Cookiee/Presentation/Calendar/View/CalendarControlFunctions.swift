@@ -75,7 +75,7 @@ extension HomeCalendarView {
         return month
     }
     
-    func filterThumbnailUrlByDate(date: Date) -> String? {
+    func filterThumbnailUrlByDate(date: Date) -> ThumbnailResultData? {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
         let month = calendar.component(.month, from: date)
@@ -85,7 +85,7 @@ extension HomeCalendarView {
             $0.eventYear == year &&
             $0.eventMonth == month &&
             $0.eventDate == day
-        })?.thumbnailUrl
+        })
     }
 }
 

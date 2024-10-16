@@ -9,12 +9,6 @@ import SwiftUI
 
 struct DateView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject private var viewModel = EventListViewModel()
-    @State private var isModalOpen: Bool = false
-    
-    var date: Date?
-    @State var thumbnailURL: String?
-
     var backButton: some View {
         Button {
             self.presentationMode.wrappedValue.dismiss()
@@ -25,21 +19,38 @@ struct DateView: View {
             }
         }
     }
+    
+    @StateObject private var viewModel = EventListViewModel()
+    @ObservedObject private var thumbnailViewModel = ThumbnailViewModel()
+    @State private var isModalOpen: Bool = false
+    
+    var date: Date
+
+    @State var showImagePicker = false
+    @State var selectedUIImage: UIImage?
+    @State var newImage: UIImage?
+    @State var thumbnailId: Int64?
+    
+    func loadImage() {
+        guard let selectedImage = selectedUIImage else { return }
+        newImage = selectedImage
+    }
 
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 ZStack(alignment: .bottomLeading) {
                     HStack {
-                        if let url = thumbnailURL, !url.isEmpty {
+                        if !thumbnailViewModel.thumbnail.isEmpty {
                             Button(action: {
                                 print("썸네일 수정/삭제")
                             }, label: {
-                                AsyncImage(url: URL(string: url)) { phase in
+                                AsyncImage(url: URL(string: thumbnailViewModel.thumbnail)) { phase in
                                     switch phase {
                                     case .empty:
                                         RoundedRectangle(cornerRadius: 2)
                                             .fill(Color.white)
+                                            .frame(width: geometry.size.width, height: 265)
                                             .overlay(ProgressView())
                                     case .success(let image):
                                         image
@@ -66,6 +77,7 @@ struct DateView: View {
                         } else {
                             Button(action: {
                                 print("썸네일 추가")
+                                showImagePicker = true
                             }, label: {
                                 VStack(alignment: .center) {
                                     Image("ThumbnailPhoto")
@@ -89,7 +101,7 @@ struct DateView: View {
                         .frame(height: 40), alignment: .bottom
                     )
                     HStack {
-                        Text("\(date!, formatter: Self.dateFormatter)")
+                        Text("\(date, formatter: Self.dateFormatter)")
                             .foregroundStyle(Color.Brown00)
                             .font(.Head0_B_22)
                     }
@@ -126,16 +138,38 @@ struct DateView: View {
 //                : nil
 //            )
             .sheet(isPresented: $isModalOpen) {
-                EventDetailView(eventId: "58", date: date ?? Date.now)
+                EventDetailView(eventId: "58", date: date)
                     .presentationDetents([.fraction(0.99)])
                     .presentationDragIndicator(Visibility.visible)
             }
-            
+            .sheet(isPresented: $showImagePicker, onDismiss: {
+                showImagePicker = false
+                loadImage()
+            }) {
+                ImagePicker(image: $selectedUIImage)
+            }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .onAppear {
             viewModel.loadEventListData()
+            if (thumbnailId != nil) {
+                let calendar = Calendar.current
+                thumbnailViewModel.loadThumbnilByDate(year: calendar.component(.year, from: date), month: calendar.component(.month, from: date), day: calendar.component(.day, from: date))
+            }
+        }
+        .onChange(of: newImage) {
+            print("🔥 newImage 변경 감지")
+            if newImage != nil {
+                let calendar = Calendar.current
+                
+                thumbnailViewModel.registerThumbnail(
+                    year: calendar.component(.year, from: date),
+                    month: calendar.component(.month, from: date),
+                    day: calendar.component(.day, from: date),
+                    thumbnailImage: newImage!
+                )
+            }
         }
     }
 }
@@ -189,8 +223,4 @@ private func getFirstImageUrlAndCategory(from response: [String: Any]) -> [(imag
     }
 
     return results
-}
-
-#Preview {
-    DateView(date: Date.now)
 }

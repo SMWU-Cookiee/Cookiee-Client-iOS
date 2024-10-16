@@ -124,12 +124,12 @@ struct HomeCalendarView: View {
                 let day = Calendar.current.component(.day, from: date)
                 let clicked = clickedCurrentMonthDates == date
                 let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
-                let thumbnailUrl = filterThumbnailUrlByDate(date: date)
+                let thumbnailData = filterThumbnailUrlByDate(date: date)
                 
                 NavigationLink(
-                    destination: DateView(date: date, thumbnailURL: thumbnailUrl),
+                    destination: DateView(date: date, thumbnailId: thumbnailData?.thumbnailId),
                     label: {
-                        CellView(day: day, clicked: clicked, isToday: isToday, thumbnailUrl: thumbnailUrl)
+                        CellView(day: day, clicked: clicked, isToday: isToday, thumbnailUrl: thumbnailData?.thumbnailUrl)
                     }
                 )
             } else if let prevMonthDate = Calendar.current.date(
