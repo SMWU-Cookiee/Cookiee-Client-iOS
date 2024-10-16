@@ -9,10 +9,6 @@ import SwiftUI
 
 struct DateView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject private var viewModel = EventListViewModel()
-    @State private var isModalOpen: Bool = false
-    var date: Date?
-
     var backButton: some View {
         Button {
             self.presentationMode.wrappedValue.dismiss()
@@ -23,17 +19,78 @@ struct DateView: View {
             }
         }
     }
+    
+    @StateObject private var viewModel = EventListViewModel()
+    @ObservedObject private var thumbnailViewModel = ThumbnailViewModel()
+    @State private var isModalOpen: Bool = false
+    
+    var date: Date
+
+    @State var showImagePicker = false
+    @State var selectedUIImage: UIImage?
+    @State var newImage: UIImage?
+    @State var thumbnailId: Int64?
+    
+    func loadImage() {
+        guard let selectedImage = selectedUIImage else { return }
+        newImage = selectedImage
+    }
 
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 ZStack(alignment: .bottomLeading) {
                     HStack {
-                        Image("testimage")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: geometry.size.width, height: 265)
-                            .clipped()
+                        if !thumbnailViewModel.thumbnail.isEmpty {
+                            Button(action: {
+                                print("썸네일 수정/삭제")
+                            }, label: {
+                                AsyncImage(url: URL(string: thumbnailViewModel.thumbnail)) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .fill(Color.white)
+                                            .frame(width: geometry.size.width, height: 265)
+                                            .overlay(ProgressView())
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: geometry.size.width, height: 265)
+                                            .clipped()
+                                        
+                                    case .failure(_):
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .fill(Color.white)
+                                            .overlay(
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .frame(width: 30, height: 30)
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .foregroundStyle(Color.gray)
+                                            )
+                                    @unknown default:
+                                        EmptyView()
+                                    }
+                                }
+                            })
+                        } else {
+                            Button(action: {
+                                print("썸네일 추가")
+                                showImagePicker = true
+                            }, label: {
+                                VStack(alignment: .center) {
+                                    Image("ThumbnailPhoto")
+                                        .frame(width: 31, height: 31)
+                                        .padding(.vertical, 7)
+                                    Text("탭하여 썸네일 추가하기")
+                                        .font(.Body1_M)
+                                        .foregroundStyle(Color.Gray05)
+                                }
+                                .frame(width: geometry.size.width, height: 265)
+                                .background(Color.Gray01)
+                            })
+                        }
                     }
                     .overlay(
                         LinearGradient(
@@ -44,7 +101,7 @@ struct DateView: View {
                         .frame(height: 40), alignment: .bottom
                     )
                     HStack {
-                        Text("\(date!, formatter: Self.dateFormatter)")
+                        Text("\(date, formatter: Self.dateFormatter)")
                             .foregroundStyle(Color.Brown00)
                             .font(.Head0_B_22)
                     }
@@ -81,22 +138,40 @@ struct DateView: View {
 //                : nil
 //            )
             .sheet(isPresented: $isModalOpen) {
-                EventDetailView(eventId: "58", date: date ?? Date.now)
+                EventDetailView(eventId: "58", date: date)
                     .presentationDetents([.fraction(0.99)])
                     .presentationDragIndicator(Visibility.visible)
             }
-            
+            .sheet(isPresented: $showImagePicker, onDismiss: {
+                showImagePicker = false
+                loadImage()
+            }) {
+                ImagePicker(image: $selectedUIImage)
+            }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .onAppear {
             viewModel.loadEventListData()
+            if (thumbnailId != nil) {
+                let calendar = Calendar.current
+                thumbnailViewModel.loadThumbnilByDate(year: calendar.component(.year, from: date), month: calendar.component(.month, from: date), day: calendar.component(.day, from: date))
+            }
+        }
+        .onChange(of: newImage) {
+            print("🔥 newImage 변경 감지")
+            if newImage != nil {
+                let calendar = Calendar.current
+                
+                thumbnailViewModel.registerThumbnail(
+                    year: calendar.component(.year, from: date),
+                    month: calendar.component(.month, from: date),
+                    day: calendar.component(.day, from: date),
+                    thumbnailImage: newImage!
+                )
+            }
         }
     }
-}
-
-#Preview {
-    DateView(date: Date.now)
 }
 
 extension DateView {
@@ -106,70 +181,6 @@ extension DateView {
         return formatter
     }()
 }
-
-
-
-// 이벤트 카드 셀
-private struct EventCardCellView: View {
-    private var thumbnailUrl: String
-    private var firstCategory: String
-    private var firstCategoryColor: String
-    private var eventId: String
-    private var toggleModal: () -> Void
-    
-    fileprivate init(thumbnailUrl: String, firstCategory: String, firstCategoryColor: String, eventId: String, toggleModal: @escaping () -> Void) {
-        self.thumbnailUrl = thumbnailUrl
-        self.firstCategory = firstCategory
-        self.firstCategoryColor = firstCategoryColor
-        self.eventId = eventId
-        self.toggleModal = toggleModal
-    }
-    
-    fileprivate var body: some View {
-        ZStack {
-            Button {
-                toggleModal()
-            } label: {
-                ZStack {
-                    AsyncImage(url: URL(string: thumbnailUrl)) { phase in
-                        switch phase {
-                        case .empty:
-                            VStack {
-                                ProgressView()
-                                    .frame(height: 240)
-                            }
-                        case .success(let image):
-                            ZStack (alignment: .bottomTrailing) {
-                                image
-                                    .resizable()
-                                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                                CategoryLabel(name: firstCategory, color: firstCategoryColor)
-                                .padding(.trailing, 6)
-                                .padding(.bottom, 8)
-                            }
-                        case .failure:
-                            Image(systemName: "photo")
-                                .resizable()
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                                
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                }
-                .cornerRadius(5)
-                .frame(height: 240)
-            }
-            
-        }
-        .frame(height: 240)
-    }
-}
-
-
-
-// 이벤트 카드 뷰
-import SwiftUI
 
 private struct EventCardGridView: View {
     var eventList: [Event]
