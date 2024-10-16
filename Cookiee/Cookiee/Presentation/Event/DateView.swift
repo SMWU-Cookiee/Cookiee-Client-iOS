@@ -166,6 +166,7 @@ struct DateView: View {
                     
                     Button(action: {
                         thumbnailViewModel.removeThumbnail(thumbnailId: thumbnailId!.description)
+                        isThumbnailPutOrDeleteModalOpen = false
                     }, label: {
                         HStack {
                             Image("TrashIconRed")
@@ -214,7 +215,6 @@ struct DateView: View {
             }
         }
         .onChange(of: newImage) {
-            print("🔥 newImage 변경 감지")
             if newImage != nil {
                 let calendar = Calendar.current
                 

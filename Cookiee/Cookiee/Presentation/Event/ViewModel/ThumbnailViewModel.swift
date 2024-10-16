@@ -62,7 +62,7 @@ class ThumbnailViewModel : ObservableObject {
             case .success(let response):
                 DispatchQueue.main.async {
                     self.thumbnail = ""
-                    print("✅ removeThumbnail 성공")
+                    print("✅ removeThumbnail 성공", response)
                }
             case .failure(let error):
                 print("❌ removeThumbnail 실패:", error)
