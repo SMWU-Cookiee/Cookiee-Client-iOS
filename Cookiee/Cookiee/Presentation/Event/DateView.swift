@@ -22,7 +22,8 @@ struct DateView: View {
     
     @StateObject private var viewModel = EventListViewModel()
     @ObservedObject private var thumbnailViewModel = ThumbnailViewModel()
-    @State private var isModalOpen: Bool = false
+    @State private var isEventDetailViewModalOpen: Bool = false
+    @State private var isThumbnailPutOrDeleteModalOpen: Bool = false
     
     var date: Date
 
@@ -43,7 +44,7 @@ struct DateView: View {
                     HStack {
                         if !thumbnailViewModel.thumbnail.isEmpty {
                             Button(action: {
-                                print("썸네일 수정/삭제")
+                                isThumbnailPutOrDeleteModalOpen = true
                             }, label: {
                                 AsyncImage(url: URL(string: thumbnailViewModel.thumbnail)) { phase in
                                     switch phase {
@@ -109,7 +110,7 @@ struct DateView: View {
                 }
                 ScrollView {
                     EventCardGridView(eventList: viewModel.eventListData?.result ?? [], toggleModal: {
-                        isModalOpen.toggle()
+                        isEventDetailViewModalOpen.toggle()
                     })
                 }
                 HStack {
@@ -137,17 +138,72 @@ struct DateView: View {
 //                    .transition(.opacity.animation(.easeInOut(duration: 0.1)))
 //                : nil
 //            )
-            .sheet(isPresented: $isModalOpen) {
+            .sheet(isPresented: $isEventDetailViewModalOpen) {
                 EventDetailView(eventId: "58", date: date)
                     .presentationDetents([.fraction(0.99)])
                     .presentationDragIndicator(Visibility.visible)
             }
-            .sheet(isPresented: $showImagePicker, onDismiss: {
-                showImagePicker = false
-                loadImage()
-            }) {
-                ImagePicker(image: $selectedUIImage)
+            .sheet(isPresented: $isThumbnailPutOrDeleteModalOpen) {
+                VStack(spacing: 0) {
+                    Text("썸네일")
+                        .font(.Head1_B)
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        HStack {
+                            Image("EditIcon")
+                            Text("수정하기")
+                                .font(.Body0_M)
+                                .foregroundStyle(Color.black)
+                            Spacer()
+                        }
+                    })
+                    .frame(height: 44)
+                    .padding(.top, 10)
+                    
+                    Divider()
+                    
+                    Button(action: {
+                        thumbnailViewModel.removeThumbnail(thumbnailId: thumbnailId!.description)
+                        isThumbnailPutOrDeleteModalOpen = false
+                    }, label: {
+                        HStack {
+                            Image("TrashIconRed")
+                            Text("삭제하기")
+                                .font(.Body0_M)
+                                .foregroundStyle(Color.Error)
+                            Spacer()
+                        }
+                    })
+                    .frame(height: 44)
+
+                    Divider()
+                    
+                    Button(action: {
+                        isThumbnailPutOrDeleteModalOpen = false
+                    }, label: {
+                        HStack {
+                            Image("XmarkIcon")
+                            Text("취소")
+                                .font(.Body0_M)
+                                .foregroundStyle(Color.black)
+                            Spacer()
+                        }
+                    })
+                    .frame(height: 40)
+
+                }
+                .padding()
+                .presentationDetents([.fraction(0.27)])
+                .presentationDragIndicator(Visibility.visible)
             }
+//            .sheet(isPresented: $showImagePicker, onDismiss: {
+//                showImagePicker = false
+//                loadImage()
+//            }) {
+//                ImagePicker(image: $selectedUIImage)
+//            }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
@@ -159,7 +215,6 @@ struct DateView: View {
             }
         }
         .onChange(of: newImage) {
-            print("🔥 newImage 변경 감지")
             if newImage != nil {
                 let calendar = Calendar.current
                 
@@ -223,4 +278,8 @@ private func getFirstImageUrlAndCategory(from response: [String: Any]) -> [(imag
     }
 
     return results
+}
+
+#Preview {
+    DateView(date: Date.now)
 }

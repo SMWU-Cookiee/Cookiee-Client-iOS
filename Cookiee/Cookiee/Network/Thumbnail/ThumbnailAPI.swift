@@ -12,6 +12,7 @@ enum ThumbnailAPI {
     case getThumbnailList(userId: String)
     case getTumbnailByDate(userId: String, year: Int, month: Int, day: Int)
     case postThumbnail(userId: String, requestBody: ThumbnailRequestDTO)
+    case deleteThumbnail(userId: String, thumbnailId: String)
 }
 
 extension ThumbnailAPI: BaseTargetType {
@@ -22,6 +23,8 @@ extension ThumbnailAPI: BaseTargetType {
         case .getTumbnailByDate:
             return .accessTokenHeaderForJson
         case .postThumbnail:
+            return .accessTokenHeaderForJson
+        case .deleteThumbnail:
             return .accessTokenHeaderForJson
         }
     }
@@ -34,6 +37,8 @@ extension ThumbnailAPI: BaseTargetType {
             return "/api/v2/thumbnails/date/\(userId)"
         case .postThumbnail(userId: let userId, _):
             return "/api/v2/thumbnails/\(userId)"
+        case .deleteThumbnail(userId: let userId, thumbnailId: let thumbnailId):
+            return "/api/v2/thumbnails/\(userId)/\(thumbnailId)"
         }
     }
     
@@ -45,6 +50,8 @@ extension ThumbnailAPI: BaseTargetType {
             return .get
         case .postThumbnail:
             return .post
+        case .deleteThumbnail:
+            return .delete
         }
     }
     
@@ -56,6 +63,9 @@ extension ThumbnailAPI: BaseTargetType {
             return .requestParameters(parameters: ["year": year, "month" : month, "day" : day],encoding: URLEncoding.queryString)
         case .postThumbnail(_, requestBody: let requestBody):
             return .uploadMultipart(multipartData(for: requestBody))
+        case .deleteThumbnail(_, _):
+            return .requestPlain
+
         }
     }
     
