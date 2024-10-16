@@ -17,6 +17,7 @@ struct UserProfileData {
 class ProfileViewModel: ObservableObject {
     @Published var isSuccess: Bool = false
     @Published var profile = UserProfileData(nickname: "", selfDescription: "", profileImage: nil)
+    @Published var newSelectedImage: UIImage?
     
     let service = ProfileService()
     
