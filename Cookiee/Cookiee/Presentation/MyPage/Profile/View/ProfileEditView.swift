@@ -40,49 +40,51 @@ struct ProfileEditView: View {
     var body: some View {
         VStack {
             HStack {
-                if let imageURL = profileViewModel.profile.profileImage {
-                    AsyncImage(url: URL(string: imageURL)) { phase in
-                        switch phase {
-                        case .empty:
-                            Circle()
-                                .fill(Color.Gray01)
-                                .frame(width: 129, height: 129)
-                                .overlay(ProgressView())
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 129, height: 129)
-                                .clipShape(Circle())
-                            
-                        case .failure(_):
-                            RoundedRectangle(cornerRadius: 2)
-                                .fill(Color.white)
-                                .overlay(
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .frame(width: 129, height: 129)
-                                        .aspectRatio(contentMode: .fit)
-                                        .foregroundStyle(Color.gray)
-                                )
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                } else {
-                    Circle()
-                        .foregroundColor(Color.Gray01)
-                        .frame(width: 129, height: 129)
-                        .overlay(
-                            Button(action: {
-                                showImagePicker.toggle()
-                            }, label: {
-                                Image("Photo")
+                Button(action: {
+                    showImagePicker.toggle()
+                }, label: {
+                    if let imageURL = profileViewModel.profile.profileImage {
+                        AsyncImage(url: URL(string: imageURL)) { phase in
+                            switch phase {
+                            case .empty:
+                                Circle()
+                                    .fill(Color.Gray01)
+                                    .frame(width: 129, height: 129)
+                                    .overlay(ProgressView())
+                            case .success(let image):
+                                image
                                     .resizable()
-                                    .frame(width: 30, height: 30)
-                            })
-                        )
-                }
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 129, height: 129)
+                                    .clipShape(Circle())
+                                
+                            case .failure(_):
+                                RoundedRectangle(cornerRadius: 2)
+                                    .fill(Color.white)
+                                    .overlay(
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .frame(width: 129, height: 129)
+                                            .aspectRatio(contentMode: .fit)
+                                            .foregroundStyle(Color.gray)
+                                    )
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
+                    } else {
+                        Circle()
+                            .foregroundColor(Color.Gray01)
+                            .frame(width: 129, height: 129)
+                            .overlay(
+                                VStack {
+                                    Image("Photo")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                }
+                            )
+                    }
+                })
             }
             .sheet(isPresented: $showImagePicker, onDismiss: {
                 loadImage()
