@@ -22,7 +22,7 @@ struct DateView: View {
     
     @StateObject private var viewModel = EventListViewModel()
     @ObservedObject private var thumbnailViewModel = ThumbnailViewModel()
-    @State private var isModalOpen: Bool = false
+    @State private var isEventDetailViewModalOpen: Bool = false
     
     var date: Date
 
@@ -109,7 +109,7 @@ struct DateView: View {
                 }
                 ScrollView {
                     EventCardGridView(eventList: viewModel.eventListData?.result ?? [], toggleModal: {
-                        isModalOpen.toggle()
+                        isEventDetailViewModalOpen.toggle()
                     })
                 }
                 HStack {
@@ -137,7 +137,7 @@ struct DateView: View {
 //                    .transition(.opacity.animation(.easeInOut(duration: 0.1)))
 //                : nil
 //            )
-            .sheet(isPresented: $isModalOpen) {
+            .sheet(isPresented: $isEventDetailViewModalOpen) {
                 EventDetailView(eventId: "58", date: date)
                     .presentationDetents([.fraction(0.99)])
                     .presentationDragIndicator(Visibility.visible)
