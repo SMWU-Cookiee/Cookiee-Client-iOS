@@ -55,4 +55,19 @@ class ThumbnailViewModel : ObservableObject {
             }
         }
     }
+    
+    func removeThumbnail(thumbnailId: String) {
+        service.deleteThumbnail(thumbnailId: thumbnailId) { result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self.thumbnail = ""
+                    print("✅ removeThumbnail 성공")
+               }
+            case .failure(let error):
+                print("❌ removeThumbnail 실패:", error)
+            }
+        }
+    }
+    
 }

@@ -165,7 +165,7 @@ struct DateView: View {
                     Divider()
                     
                     Button(action: {
-                        
+                        thumbnailViewModel.removeThumbnail(thumbnailId: thumbnailId!.description)
                     }, label: {
                         HStack {
                             Image("TrashIconRed")

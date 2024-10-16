@@ -75,4 +75,22 @@ class ThumbnailService {
             }
         }
     }
+    
+    func deleteThumbnail(thumbnailId: String, completion: @escaping (Result<ThumbnailDeleteResponseDTO, Error>) -> Void) {
+        provider.request(.deleteThumbnail(userId: userId, thumbnailId: thumbnailId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let response = try JSONDecoder().decode(ThumbnailDeleteResponseDTO.self, from: response.data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                    print("deleteThumbnail Decoding error:", error)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+                print("deleteThumbnail error:", error)
+            }
+        }
+    }
 }

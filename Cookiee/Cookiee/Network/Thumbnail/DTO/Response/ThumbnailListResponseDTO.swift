@@ -28,3 +28,10 @@ struct ThumbnailResponseDTO: Codable {
     let message: String
     let result: ThumbnailResultData
 }
+
+struct ThumbnailDeleteResponseDTO: Codable {
+    let isSuccess: Bool
+    let statusCode: Int
+    let message: String
+    let result: String?
+}
