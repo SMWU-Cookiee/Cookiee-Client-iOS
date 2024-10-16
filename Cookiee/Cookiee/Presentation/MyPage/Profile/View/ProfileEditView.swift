@@ -27,12 +27,12 @@ struct ProfileEditView: View {
     
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
-    @State var newImage: UIImage?
     @State var imageURL: String?
+    @State var newImage: UIImage?
 
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
-        newImage = selectedImage
+        profileViewModel.newSelectedImage = selectedImage
     }
     
     @State var submitButtonColor: Color = .Gray02
@@ -44,32 +44,41 @@ struct ProfileEditView: View {
                     showImagePicker.toggle()
                 }, label: {
                     if let imageURL = profileViewModel.profile.profileImage {
-                        AsyncImage(url: URL(string: imageURL)) { phase in
-                            switch phase {
-                            case .empty:
-                                Circle()
-                                    .fill(Color.Gray01)
-                                    .frame(width: 129, height: 129)
-                                    .overlay(ProgressView())
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 129, height: 129)
-                                    .clipShape(Circle())
-                                
-                            case .failure(_):
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color.white)
-                                    .overlay(
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .frame(width: 129, height: 129)
-                                            .aspectRatio(contentMode: .fit)
-                                            .foregroundStyle(Color.gray)
-                                    )
-                            @unknown default:
-                                EmptyView()
+                        if (newImage != nil) {
+                            Image(uiImage: newImage!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 129, height: 129)
+                                .clipShape(Circle())
+                            
+                        } else {
+                            AsyncImage(url: URL(string: imageURL)) { phase in
+                                switch phase {
+                                case .empty:
+                                    Circle()
+                                        .fill(Color.Gray01)
+                                        .frame(width: 129, height: 129)
+                                        .overlay(ProgressView())
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 129, height: 129)
+                                        .clipShape(Circle())
+                                    
+                                case .failure(_):
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .fill(Color.white)
+                                        .overlay(
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .frame(width: 129, height: 129)
+                                                .aspectRatio(contentMode: .fit)
+                                                .foregroundStyle(Color.gray)
+                                        )
+                                @unknown default:
+                                    EmptyView()
+                                }
                             }
                         }
                     } else {
@@ -153,7 +162,7 @@ struct ProfileEditView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .navigationBarItems(trailing: Button(action: {
-            profileViewModel.updateUserProfile(nickname: nickname, selfDescription: introduction, newUIImage: newImage)
+            profileViewModel.updateUserProfile(nickname: nickname, selfDescription: introduction, newUIImage: profileViewModel.newSelectedImage)
         }, label: {
             Text("완료")
                 .font(.Body0_B)
@@ -169,6 +178,9 @@ struct ProfileEditView: View {
             if profileViewModel.isSuccess {
                 presentationMode.wrappedValue.dismiss()
             }
+        }
+        .onChange(of: profileViewModel.newSelectedImage) {
+            newImage = profileViewModel.newSelectedImage
         }
     }
 }
