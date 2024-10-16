@@ -41,11 +41,33 @@ struct ProfileEditView: View {
         VStack {
             HStack {
                 if let imageURL = profileViewModel.profile.profileImage {
-                    AsyncImage(url: URL(string: imageURL)) { result in
-                        result.image?
-                            .resizable()
-                            .clipShape(Circle())
-                            .frame(width: 129, height: 129)
+                    AsyncImage(url: URL(string: imageURL)) { phase in
+                        switch phase {
+                        case .empty:
+                            Circle()
+                                .fill(Color.Gray01)
+                                .frame(width: 129, height: 129)
+                                .overlay(ProgressView())
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 129, height: 129)
+                                .clipShape(Circle())
+                            
+                        case .failure(_):
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color.white)
+                                .overlay(
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .frame(width: 129, height: 129)
+                                        .aspectRatio(contentMode: .fit)
+                                        .foregroundStyle(Color.gray)
+                                )
+                        @unknown default:
+                            EmptyView()
+                        }
                     }
                 } else {
                     Circle()
