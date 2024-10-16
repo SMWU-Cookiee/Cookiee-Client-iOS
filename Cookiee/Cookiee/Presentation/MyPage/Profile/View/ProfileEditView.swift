@@ -181,6 +181,7 @@ struct ProfileEditView: View {
         }
         .onChange(of: profileViewModel.newSelectedImage) {
             newImage = profileViewModel.newSelectedImage
+            submitButtonColor = .Brown01
         }
     }
 }
