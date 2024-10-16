@@ -17,17 +17,41 @@ struct MyPageView: View {
         VStack (alignment: .leading) {
             VStack {
                 HStack {
-                    if let imageURL = profileViewModel.profile.profileImage {
-                        AsyncImage(url: URL(string: imageURL)) { result in
-                            result.image?
-                                .resizable()
-                                .clipShape(Circle())
-                                .frame(width: 129, height: 129)
+                    VStack {
+                        if let imageURL = profileViewModel.profile.profileImage {
+                            AsyncImage(url: URL(string: imageURL)) { phase in
+                                switch phase {
+                                case .empty:
+                                    Circle()
+                                        .fill(Color.Gray01)
+                                        .frame(width: 60, height: 60)
+                                        .overlay(ProgressView())
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 60, height: 60)
+                                        .clipShape(Circle())
+                                    
+                                case .failure(_):
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .fill(Color.white)
+                                        .overlay(
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .frame(width: 60, height: 60)
+                                                .aspectRatio(contentMode: .fit)
+                                                .foregroundStyle(Color.gray)
+                                        )
+                                @unknown default:
+                                    EmptyView()
+                                }
+                            }
+                        } else {
+                            Circle()
+                                .foregroundColor(Color.Gray01)
+                                .frame(width: 60, height: 60)
                         }
-                    } else {
-                        Circle()
-                            .foregroundColor(Color.Gray01)
-                            .frame(width: 70, height: 70)
                     }
                     
                     VStack(alignment: .leading) {
@@ -40,7 +64,7 @@ struct MyPageView: View {
                             .foregroundColor(Color.Brown02)
                     }
                     .frame(height: 50)
-                    .padding()
+                    .padding(.horizontal)
                     Spacer()
                     NavigationLink(
                         destination: ProfileEditView(),
@@ -52,7 +76,8 @@ struct MyPageView: View {
                         }
                     )
                 }
-                .padding()
+                .frame(height: 100)
+                .padding(.horizontal)
                 .background(Color.Gray00)
                 .cornerRadius(10)
             }
