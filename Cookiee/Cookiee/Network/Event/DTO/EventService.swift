@@ -57,4 +57,22 @@ class EventService {
             }
         }
     }
+    
+    func deleteEvent(eventId: Int64, completion: @escaping (Result<EventDeleteDTO, Error>) -> Void) {
+        provider.request(.deleteEvet(userId: userId, eventId: eventId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let response = try JSONDecoder().decode(EventDeleteDTO.self, from: response.data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                    print("deleteEvent Decoding error:", error)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+                print("deleteEvent error:", error)
+            }
+        }
+    }
 }

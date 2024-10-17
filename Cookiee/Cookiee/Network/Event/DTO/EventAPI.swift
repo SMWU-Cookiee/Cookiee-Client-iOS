@@ -11,6 +11,7 @@ import Moya
 enum EventAPI {
     case getEventList(userId: String, year: Int32, month: Int32, day: Int32)
     case getEventDetail(userId: String, eventId: Int64)
+    case deleteEvet(userId: String, eventId: Int64)
 }
 
 extension EventAPI: BaseTargetType {
@@ -19,6 +20,8 @@ extension EventAPI: BaseTargetType {
         case .getEventList:
             return .accessTokenHeaderForJson
         case .getEventDetail:
+            return .accessTokenHeaderForJson
+        case .deleteEvet:
             return .accessTokenHeaderForJson
         }
     }
@@ -29,6 +32,8 @@ extension EventAPI: BaseTargetType {
             return "/api/v2/events/\(userId)"
         case .getEventDetail(userId: let userId, eventId: let eventId):
             return "/api/v2/events/\(userId)/\(eventId)"
+        case .deleteEvet(userId: let userId, eventId: let eventId):
+            return "/api/v2/events/\(userId)/\(eventId)"
         }
     }
     
@@ -38,6 +43,8 @@ extension EventAPI: BaseTargetType {
             return .get
         case .getEventDetail:
             return .get
+        case .deleteEvet:
+            return .delete
         }
     }
     
@@ -46,6 +53,8 @@ extension EventAPI: BaseTargetType {
         case .getEventList(_, year: let year, month: let month, day: let day):
             return .requestParameters(parameters: ["eventYear": year, "eventMonth" : month, "eventDate" : day],encoding: URLEncoding.queryString)
         case .getEventDetail:
+            return .requestPlain
+        case .deleteEvet:
             return .requestPlain
         }
     }
