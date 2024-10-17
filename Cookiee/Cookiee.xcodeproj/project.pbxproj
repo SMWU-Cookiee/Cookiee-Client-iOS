@@ -310,6 +310,25 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		8362C3552CC10DDD0086D052 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8362C3562CC10DFD0086D052 /* EventListView */,
+				83DEB9872C9B05BC0049F7CD /* EventAddView.swift */,
+				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8362C3562CC10DFD0086D052 /* EventListView */ = {
+			isa = PBXGroup;
+			children = (
+				8305BACF2CBE8B6100658590 /* EventCardCellView.swift */,
+				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
+			);
+			path = EventListView;
+			sourceTree = "<group>";
+		};
 		837AFD202CC0E39E00BCDD34 /* Event */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,11 +625,8 @@
 		83DEB9892C9B0B440049F7CD /* Event */ = {
 			isa = PBXGroup;
 			children = (
+				8362C3552CC10DDD0086D052 /* View */,
 				8305BAD82CBE98B300658590 /* ViewModel */,
-				8305BACF2CBE8B6100658590 /* EventCardCellView.swift */,
-				83DC7F822C6A2A1D002AB210 /* DateView.swift */,
-				83DEB9872C9B05BC0049F7CD /* EventAddView.swift */,
-				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
