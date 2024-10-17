@@ -60,10 +60,8 @@ struct ImageCarouselView: View {
                         }
                 )
             }
-            .frame(height: .infinity)
             .animation(.easeInOut, value: offset == 0)
             
-            // 이미지 인디케이터
             HStack(spacing: 8) {
                 ForEach(0..<imageUrls.count, id: \.self) { i in
                     Button(action: {
