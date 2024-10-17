@@ -10,7 +10,7 @@ import Moya
 
 enum ThumbnailAPI {
     case getThumbnailList(userId: String)
-    case getTumbnailByDate(userId: String, year: Int, month: Int, day: Int)
+    case getTumbnailByDate(userId: String, year: Int32, month: Int32, day: Int32)
     case postThumbnail(userId: String, requestBody: ThumbnailRequestDTO)
     case deleteThumbnail(userId: String, thumbnailId: String)
     case putThumbnail(userId: String, thumbnailId: String, newThumbnail: Data)

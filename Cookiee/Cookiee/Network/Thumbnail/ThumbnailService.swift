@@ -58,7 +58,7 @@ class ThumbnailService {
         }
     }
     
-    func getThumbnailByDate(year: Int, month: Int, day: Int, completion: @escaping (Result<ThumbnailResponseDTO, Error>) -> Void) {
+    func getThumbnailByDate(year: Int32, month: Int32, day: Int32, completion: @escaping (Result<ThumbnailResponseDTO, Error>) -> Void) {
         provider.request(.getTumbnailByDate(userId: userId, year: year, month: month, day: day)) { result in
             switch result {
             case .success(let response):
