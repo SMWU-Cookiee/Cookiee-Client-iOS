@@ -18,17 +18,17 @@
 		<string>Pretendard-Bold.ttf</string>
 		<string>Pretendard-SemiBold.ttf</string>
 		<string>Pretendard-Medium.ttf</string>
-		<string></string>
+		<string>Pretendard-Regular.ttf</string>
 	</array>
-    <key>CLIENT_ID</key>
-    <string>321644116751-etll7dfe9ue4v1070i03tv74kcust1cb.apps.googleusercontent.com</string>
-    <key>GIDClientID</key>
-    <string>321644116751-etll7dfe9ue4v1070i03tv74kcust1cb.apps.googleusercontent.com</string>
-    <key>REVERSED_CLIENT_ID</key>
-    <string>com.googleusercontent.apps.321644116751-etll7dfe9ue4v1070i03tv74kcust1cb</string>
-    <key>PLIST_VERSION</key>
-    <string>1</string>
-    <key>BUNDLE_ID</key>
-    <string>site.apps.cookiee</string>
+	<key>CLIENT_ID</key>
+	<string>321644116751-etll7dfe9ue4v1070i03tv74kcust1cb.apps.googleusercontent.com</string>
+	<key>GIDClientID</key>
+	<string>321644116751-etll7dfe9ue4v1070i03tv74kcust1cb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.321644116751-etll7dfe9ue4v1070i03tv74kcust1cb</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>site.apps.cookiee</string>
 </dict>
 </plist>
