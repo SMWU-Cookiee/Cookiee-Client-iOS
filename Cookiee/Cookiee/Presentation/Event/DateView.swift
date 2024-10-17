@@ -20,20 +20,23 @@ struct DateView: View {
         }
     }
     
-    @StateObject private var viewModel = EventListViewModel()
+    @StateObject private var eventViewModel = EventViewModel()
     @ObservedObject private var thumbnailViewModel = ThumbnailViewModel()
     @State private var isEventDetailViewModalOpen: Bool = false
     @State private var isThumbnailPutOrDeleteModalOpen: Bool = false
+    @State var isRegisterImageModalOpen: Bool = false
+    @State var isUpdateImageModalOpen: Bool = false
     
     var date: Date
+    var calendar = Calendar.current
+    var yearOfEvent : Int32 { Int32(calendar.component(.year, from: date)) }
+    var monthOfEvent : Int32 { Int32(calendar.component(.month, from: date)) }
+    var dayOfEvent : Int32 { Int32(calendar.component(.day, from: date)) }
 
+    @State var thumbnailId: Int64?
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
     @State var newImage: UIImage?
-    @State var thumbnailId: Int64?
-    
-    @State var isRegisterImageModalOpen: Bool = false
-    @State var isUpdateImageModalOpen: Bool = false
     
     
     func loadImage() {
@@ -114,9 +117,21 @@ struct DateView: View {
                     .padding(.leading, 7)
                 }
                 ScrollView {
-                    EventCardGridView(eventList: viewModel.eventListData?.result ?? [], toggleModal: {
-                        isEventDetailViewModalOpen.toggle()
-                    })
+                    LazyVGrid(
+                        columns: Array(repeating: GridItem(.flexible(), spacing: 7, alignment: .center), count: 2),
+                        spacing: 7
+                    ) {
+                        ForEach(eventViewModel.eventListForCell) { event in
+                            EventCardCellView(
+                                thumbnailUrl: event.firstEventImage,
+                                firstCategory: event.firstCategory.categoryName,
+                                firstCategoryColor: event.firstCategory.categoryColor,
+                                eventId: "\(event.eventId)",
+                                toggleModal: {isEventDetailViewModalOpen.toggle()}
+                            )
+                        }
+                    }
+                    .padding(.horizontal, 7)
                 }
                 HStack {
                     NavigationLink(
@@ -215,26 +230,34 @@ struct DateView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .onAppear {
-            viewModel.loadEventListData()
+            eventViewModel.loadEventList(
+                year: yearOfEvent,
+                month: monthOfEvent,
+                day: dayOfEvent
+            )
             if (thumbnailId != nil) {
-                let calendar = Calendar.current
-                thumbnailViewModel.loadThumbnilByDate(year: calendar.component(.year, from: date), month: calendar.component(.month, from: date), day: calendar.component(.day, from: date))
+                thumbnailViewModel.loadThumbnilByDate(
+                    year: yearOfEvent,
+                    month: monthOfEvent,
+                    day: dayOfEvent
+                )
             }
         }
         .onChange(of: newImage) {
             if newImage != nil {
                 if isRegisterImageModalOpen {
-                    let calendar = Calendar.current
-                    
                     thumbnailViewModel.registerThumbnail(
-                        year: calendar.component(.year, from: date),
-                        month: calendar.component(.month, from: date),
-                        day: calendar.component(.day, from: date),
+                        year: yearOfEvent,
+                        month: monthOfEvent,
+                        day: dayOfEvent,
                         thumbnailImage: newImage!
                     )
                     isRegisterImageModalOpen = false
                 } else if isUpdateImageModalOpen {
-                    thumbnailViewModel.updateThumbnail(thumbnailId: thumbnailId!.description, newThumbnail: newImage!)
+                    thumbnailViewModel.updateThumbnail(
+                        thumbnailId: thumbnailId!.description,
+                        newThumbnail: newImage!
+                    )
                     isUpdateImageModalOpen = false
                 }
             }
@@ -250,48 +273,7 @@ extension DateView {
     }()
 }
 
-private struct EventCardGridView: View {
-    var eventList: [Event]
-    var toggleModal: () -> Void
 
-    var body: some View {
-        LazyVGrid(
-            columns: Array(repeating: GridItem(.flexible(), spacing: 7, alignment: .center), count: 2),
-            spacing: 7
-        ) {
-            ForEach(eventList) { event in
-                EventCardCellView(
-                    thumbnailUrl: event.imageUrlList.first ?? "",
-                    firstCategory: event.categories.first?.name ?? "",
-                    firstCategoryColor: event.categories.first?.color ?? "#FFFFFF",
-                    eventId: "\(event.id)",
-                    toggleModal: toggleModal
-                )
-            }
-        }
-        .padding(.horizontal, 7)
-    }
-}
-
-
-// API Response에서 이벤트 첫번째 사진, 첫번째 카테고리, eventId 추출
-private func getFirstImageUrlAndCategory(from response: [String: Any]) -> [(imageUrl: String, category: [String: Any], eventId: String)]? {
-    guard let resultArray = response["result"] as? [[String: Any]] else {
-        return nil
-    }
-
-    var results: [(String, [String: Any], String)] = []
-
-    for event in resultArray {
-        if let eventId = event["eventId"] as? String,
-           let imageUrlList = event["imageUrlList"] as? [String], let firstImageUrl = imageUrlList.first,
-           let categories = event["categories"] as? [[String: Any]], let firstCategory = categories.first {
-            results.append((imageUrl: firstImageUrl, category: firstCategory, eventId: eventId))
-        }
-    }
-
-    return results
-}
 
 #Preview {
     DateView(date: Date.now)

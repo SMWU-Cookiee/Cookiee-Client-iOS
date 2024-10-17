@@ -9,7 +9,7 @@ import Foundation
 
 struct ThumbnailRequestDTO : Codable {
     let thumbnail: Data?
-    let eventYear: Int
-    let eventMonth: Int
-    let eventDate: Int
+    let eventYear: Int32
+    let eventMonth: Int32
+    let eventDate: Int32
 }

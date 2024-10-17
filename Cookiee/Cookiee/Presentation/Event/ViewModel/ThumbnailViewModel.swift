@@ -13,7 +13,7 @@ class ThumbnailViewModel : ObservableObject {
     
     let service = ThumbnailService()
     
-    func registerThumbnail(year: Int, month: Int, day: Int, thumbnailImage: UIImage) {
+    func registerThumbnail(year: Int32, month: Int32, day: Int32, thumbnailImage: UIImage) {
         let imageData = thumbnailImage.jpegData(compressionQuality: 1.0)
         
         let request = ThumbnailRequestDTO(
@@ -37,7 +37,7 @@ class ThumbnailViewModel : ObservableObject {
     }
 
     
-    func loadThumbnilByDate(year: Int, month: Int, day: Int) {        
+    func loadThumbnilByDate(year: Int32, month: Int32, day: Int32) {
         service.getThumbnailByDate(year: year, month: month, day: day) { result in
             switch result {
             case .success(let response):
