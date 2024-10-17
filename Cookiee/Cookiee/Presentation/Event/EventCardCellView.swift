@@ -8,23 +8,17 @@
 import SwiftUI
 
 struct EventCardCellView: View {
-    private var thumbnailUrl: String
-    private var firstCategory: String
-    private var firstCategoryColor: String
-    private var eventId: String
-    private var toggleModal: () -> Void
-    
-    init(thumbnailUrl: String, firstCategory: String, firstCategoryColor: String, eventId: String, toggleModal: @escaping () -> Void) {
-        self.thumbnailUrl = thumbnailUrl
-        self.firstCategory = firstCategory
-        self.firstCategoryColor = firstCategoryColor
-        self.eventId = eventId
-        self.toggleModal = toggleModal
-    }
+    @StateObject var eventViewModel : EventViewModel
+    var thumbnailUrl: String
+    var firstCategory: String
+    var firstCategoryColor: String
+    var eventId: Int64
+    var toggleModal: () -> Void
     
     var body: some View {
         ZStack {
             Button {
+                eventViewModel.selectedEventId = eventId
                 toggleModal()
             } label: {
                 ZStack {
