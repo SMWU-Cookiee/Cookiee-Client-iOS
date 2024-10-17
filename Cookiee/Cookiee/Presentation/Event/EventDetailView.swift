@@ -14,23 +14,24 @@ struct EventDetailView: View {
     
     @State private var currentIndex: Int = 0
     @State private var imageList: [String] = []
+    
+    @State private var isDeleteButtonTapped: Bool = false
 
     var body: some View {
         VStack {
             VStack {
-                if let eventData = eventViewModel.eventDetail {
+                if eventViewModel.eventDetail != nil {
                     HStack (alignment: .bottom) {
                         Text("\(date, formatter: Self.dateFormatter)")
                             .font(.Head1_B)
                         Spacer()
                         HStack {
                             Button {
-                                // action
                             } label: {
                                 Image("EditIcon")
                             }
                             Button {
-                                // action
+                                isDeleteButtonTapped = true
                             } label: {
                                 Image("TrashIcon")
                             }
@@ -40,17 +41,23 @@ struct EventDetailView: View {
                     .padding(.bottom, 10)
                     
                     HStack {
-                        ImageCarouselView(index: $currentIndex, imageUrls: eventData.eventImageUrlList)
+                        ImageCarouselView(
+                            index: $currentIndex,
+                            imageUrls: eventViewModel.eventDetail!.eventImageUrlList
+                        )
                             .frame(height: 365)
                     }
                     
                     VStack {
-                        Text(eventData.title)
+                        Text(eventViewModel.eventDetail!.title)
                             .font(.Body0_SB)
                         HStack {
-                            ForEach(eventData.categories, id: \.categoryId) { category in
-                                CategoryLabel(name: category.categoryName, color: category.categoryColor)
-                                    .padding(.horizontal, 1)
+                            ForEach(eventViewModel.eventDetail!.categories, id: \.categoryId) { category in
+                                CategoryLabel(
+                                    name: category.categoryName,
+                                    color: category.categoryColor
+                                )
+                                .padding(.horizontal, 1)
                             }
                         }
                     }
@@ -59,9 +66,18 @@ struct EventDetailView: View {
                     
                     ScrollView {
                         VStack (alignment: .leading) {
-                            EventInfoDetailView(title: "장소", decription: eventData.eventWhere)
-                            EventInfoDetailView(title: "내용", decription: eventData.what)
-                            EventInfoDetailView(title: "함께한 사람", decription: eventData.withWho)
+                            EventInfoDetailView(
+                                title: "장소",
+                                decription: eventViewModel.eventDetail!.eventWhere
+                            )
+                            EventInfoDetailView(
+                                title: "내용",
+                                decription: eventViewModel.eventDetail!.what
+                            )
+                            EventInfoDetailView(
+                                title: "함께한 사람",
+                                decription: eventViewModel.eventDetail!.withWho
+                            )
                         }
                     }
  
@@ -73,6 +89,34 @@ struct EventDetailView: View {
             }
             Spacer()
         }.padding()
+    
+        .showCustomAlert(
+            isPresented: $isDeleteButtonTapped,
+            content: {
+                    VStack {
+                        Text(eventViewModel.eventDetail!.title)
+                            .font(.Head1_B)
+                            .foregroundStyle(Color.Brown01)
+                        Text("쿠키를 삭제할까요?")
+                            .font(.Head1_B)
+                            .padding(.bottom, 9)
+                        Text("삭제하면 복구가 어렵습니다.")
+                            .font(.Body1_R)
+                    }
+            },
+            firstButton:
+                CustomAlertButton(
+                    action: { isDeleteButtonTapped = false },
+                    title: Text("취소").foregroundColor(Color.Gray04)
+                ),
+            secondButton:
+                CustomAlertButton(
+                    action: {
+                        isDeleteButtonTapped = false
+                        eventViewModel.removeEvent(eventId: eventId)
+                    },
+                    title: Text("삭제하기").foregroundColor(Color.Brown00))
+        )
         
         .onAppear() {
             eventViewModel.loadEventDetail(eventId: eventId)

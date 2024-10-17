@@ -30,6 +30,7 @@
 		8349F6012CB0147B00746163 /* TokenRefreshResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F6002CB0147B00746163 /* TokenRefreshResponseDTO.swift */; };
 		835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */; };
 		8362C3522CC0F3EA0086D052 /* EventDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8362C3512CC0F3EA0086D052 /* EventDetailResponseDTO.swift */; };
+		8362C3542CC0FD060086D052 /* EventDeleteDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8362C3532CC0FD060086D052 /* EventDeleteDTO.swift */; };
 		8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369B3742C6905F6005ACDBD /* ColorExtension.swift */; };
 		837AFD272CC0E3F100BCDD34 /* EventListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837AFD262CC0E3F100BCDD34 /* EventListResponseDTO.swift */; };
 		837AFD2B2CC0E4BA00BCDD34 /* EventAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837AFD2A2CC0E4BA00BCDD34 /* EventAPI.swift */; };
@@ -128,6 +129,7 @@
 		8349F6002CB0147B00746163 /* TokenRefreshResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshResponseDTO.swift; sourceTree = "<group>"; };
 		835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageByURL.swift; sourceTree = "<group>"; };
 		8362C3512CC0F3EA0086D052 /* EventDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailResponseDTO.swift; sourceTree = "<group>"; };
+		8362C3532CC0FD060086D052 /* EventDeleteDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDeleteDTO.swift; sourceTree = "<group>"; };
 		8369B3742C6905F6005ACDBD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		837AFD262CC0E3F100BCDD34 /* EventListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListResponseDTO.swift; sourceTree = "<group>"; };
 		837AFD2A2CC0E4BA00BCDD34 /* EventAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAPI.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 			children = (
 				837AFD262CC0E3F100BCDD34 /* EventListResponseDTO.swift */,
 				8362C3512CC0F3EA0086D052 /* EventDetailResponseDTO.swift */,
+				8362C3532CC0FD060086D052 /* EventDeleteDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -975,6 +978,7 @@
 				837D74EB2CBE6603005D20DC /* CalendarThumnailViewModel.swift in Sources */,
 				8305BAD02CBE8B6100658590 /* EventCardCellView.swift in Sources */,
 				83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */,
+				8362C3542CC0FD060086D052 /* EventDeleteDTO.swift in Sources */,
 				83A3E2672C7A193B00ADDB55 /* DevelopersView.swift in Sources */,
 				833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */,
 				83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */,

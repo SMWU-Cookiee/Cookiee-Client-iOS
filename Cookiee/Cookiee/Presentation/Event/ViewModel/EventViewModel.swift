@@ -56,4 +56,15 @@ class EventViewModel : ObservableObject {
             }
         }
     }
+    
+    func removeEvent(eventId: Int64) {
+        service.deleteEvent(eventId: eventId){ result in
+            switch result {
+            case .success(let response):
+                print("✅ removeEvent 성공\n", response)
+            case .failure(let error):
+                print("❌ removeEvent 실패\n", error)
+            }
+        }
+    }
 }
