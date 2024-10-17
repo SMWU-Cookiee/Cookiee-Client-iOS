@@ -125,7 +125,6 @@ struct EventDetailView: View {
         .onAppear() {
             eventViewModel.loadEventDetail(eventId: eventId)
         }
-        
         .onChange(of: eventViewModel.isRemoveSuccess) {
             if eventViewModel.isRemoveSuccess {
                 presentationMode.wrappedValue.dismiss()

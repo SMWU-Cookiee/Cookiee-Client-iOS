@@ -21,6 +21,7 @@ class EventViewModel : ObservableObject {
     @Published var eventListForCell: [EventForCellDTO] = []
     @Published var eventDetail: EventResultData?
     @Published var selectedEventId: Int64?
+    @Published var isRemoveSuccess: Bool = false
     
     let service = EventService()
     
@@ -28,16 +29,18 @@ class EventViewModel : ObservableObject {
         service.getEventList(year: year, month: month, day: day){ result in
             switch result {
             case .success(let response):
-                print("✅ loadEventList 성공\n", response)
-                self.eventListForCell = []
-                for event in response.result {
-                    self.eventListForCell.append(
-                        EventForCellDTO(
-                            eventId: event.eventId,
-                            firstEventImage: event.eventImageUrlList.first!,
-                            firstCategory: event.categories.first!
+                DispatchQueue.main.async {
+                    self.eventListForCell = []
+                    for event in response.result {
+                        self.eventListForCell.append(
+                            EventForCellDTO(
+                                eventId: event.eventId,
+                                firstEventImage: event.eventImageUrlList.first!,
+                                firstCategory: event.categories.first!
+                            )
                         )
-                    )
+                    }
+                    print("✅ loadEventList 성공\n", response)
                 }
             case .failure(let error):
                 print("❌ loadEventList 실패\n", error)
@@ -61,8 +64,14 @@ class EventViewModel : ObservableObject {
         service.deleteEvent(eventId: eventId){ result in
             switch result {
             case .success(let response):
-                print("✅ removeEvent 성공\n", response)
+                DispatchQueue.main.async {
+                    self.objectWillChange.send()
+                    self.isRemoveSuccess = true
+                    print("✅ removeEvent 성공\n", response)
+               }
+
             case .failure(let error):
+                self.isRemoveSuccess = false
                 print("❌ removeEvent 실패\n", error)
             }
         }

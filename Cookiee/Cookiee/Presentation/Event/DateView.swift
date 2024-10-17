@@ -20,8 +20,8 @@ struct DateView: View {
         }
     }
     
-    @ObservedObject private var eventViewModel = EventViewModel()
-    @ObservedObject private var thumbnailViewModel = ThumbnailViewModel()
+    @StateObject private var eventViewModel = EventViewModel()
+    @StateObject private var thumbnailViewModel = ThumbnailViewModel()
     @State private var isEventDetailViewModalOpen: Bool = false
     @State private var isThumbnailPutOrDeleteModalOpen: Bool = false
     @State var isRegisterImageModalOpen: Bool = false
@@ -30,7 +30,7 @@ struct DateView: View {
     @State var selectedEventId: Int64?
     
     var date: Date
-    var calendar = Calendar.current
+    let calendar = Calendar.current
     var yearOfEvent : Int32 { Int32(calendar.component(.year, from: date)) }
     var monthOfEvent : Int32 { Int32(calendar.component(.month, from: date)) }
     var dayOfEvent : Int32 { Int32(calendar.component(.day, from: date)) }
@@ -163,7 +163,13 @@ struct DateView: View {
 //                    .transition(.opacity.animation(.easeInOut(duration: 0.1)))
 //                : nil
 //            )
-            .sheet(isPresented: $isEventDetailViewModalOpen) {
+            .sheet(isPresented: $isEventDetailViewModalOpen, onDismiss: {
+                eventViewModel.loadEventList(
+                    year: yearOfEvent,
+                    month: monthOfEvent,
+                    day: dayOfEvent
+                    )
+            }) {
                 if eventViewModel.selectedEventId != nil {
                     EventDetailView(eventId: eventViewModel.selectedEventId!, date: date)
                         .presentationDetents([.fraction(0.99)])
