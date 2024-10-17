@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class ThumbnailViewModel : ObservableObject {
-    @Published var isRegisterSuccess: Bool = false
     @Published var thumbnail: String = ""
     
     let service = ThumbnailService()
@@ -29,13 +28,9 @@ class ThumbnailViewModel : ObservableObject {
             case .success(let response):
                 DispatchQueue.main.async {
                     self.thumbnail = response.result.thumbnailUrl
-                    self.isRegisterSuccess = true
                     print("✅ registerThumbnail 성공\n")
                 }
             case .failure(let error):
-                DispatchQueue.main.async {
-                    self.isRegisterSuccess = false
-                }
                 print("❌ registerThumbnail 실패\n", error)
             }
         }
@@ -70,4 +65,21 @@ class ThumbnailViewModel : ObservableObject {
         }
     }
     
+    func updateThumbnail(thumbnailId: String, newThumbnail: UIImage) {
+        let imageData = newThumbnail.jpegData(compressionQuality: 1.0)
+
+        if imageData != nil {
+            service.putThumbnail(thumbnailId: thumbnailId, newThumbnail: imageData!){ result in
+                switch result {
+                case .success(let response):
+                    DispatchQueue.main.async {
+                        self.thumbnail = response.result.thumbnailUrl
+                        print("✅ updateThumbnail 성공", response)
+                   }
+                case .failure(let error):
+                    print("❌ updateThumbnail 실패:", error)
+                }
+            }
+        }
+    }
 }
