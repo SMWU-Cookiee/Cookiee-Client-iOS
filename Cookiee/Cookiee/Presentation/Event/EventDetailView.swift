@@ -108,7 +108,7 @@ struct EventInfoDetailView: View {
                     .padding(10)
                     .background(Color.Beige)
                     .cornerRadius(12)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(alignment: .leading)
             }
         }
     }
