@@ -19,6 +19,8 @@ struct EventForCellDTO : Identifiable {
 
 class EventViewModel : ObservableObject {
     @Published var eventListForCell: [EventForCellDTO] = []
+    @Published var eventDetail: EventResultData?
+    @Published var selectedEventId: Int64?
     
     let service = EventService()
     
@@ -39,6 +41,18 @@ class EventViewModel : ObservableObject {
                 }
             case .failure(let error):
                 print("❌ loadEventList 실패\n", error)
+            }
+        }
+    }
+    
+    func loadEventDetail(eventId: Int64) {
+        service.getEventDetail(eventId: eventId){ result in
+            switch result {
+            case .success(let response):
+                self.eventDetail = response.result
+                print("✅ loadEventDetail 성공\n", response)
+            case .failure(let error):
+                print("❌ loadEventDetail 실패\n", error)
             }
         }
     }

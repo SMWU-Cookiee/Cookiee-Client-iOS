@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct EventDetailView: View {
-    @StateObject private var eventViewModel = EventViewModelSample()
-    @State var eventId: String
+    @StateObject private var eventViewModel = EventViewModel()
+    @State var eventId: Int64
     @State var date: Date
     
     @State private var currentIndex: Int = 0
@@ -18,7 +18,7 @@ struct EventDetailView: View {
     var body: some View {
         VStack {
             VStack {
-                if let eventData = eventViewModel.eventData {
+                if let eventData = eventViewModel.eventDetail {
                     HStack (alignment: .bottom) {
                         Text("\(date, formatter: Self.dateFormatter)")
                             .font(.Head1_B)
@@ -40,15 +40,15 @@ struct EventDetailView: View {
                     .padding(.bottom, 10)
                     
                     HStack {
-                        ImageCarouselView(index: $currentIndex, imageUrls: eventData.result.imageUrlList)
+                        ImageCarouselView(index: $currentIndex, imageUrls: eventData.eventImageUrlList)
                             .frame(height: 365)
                     }
                     
                     VStack {
-                        Text(eventData.result.title)
+                        Text(eventData.title)
                             .font(.Body0_SB)
                         HStack {
-                            ForEach(eventData.result.categories, id: \.categoryId) { category in
+                            ForEach(eventData.categories, id: \.categoryId) { category in
                                 CategoryLabel(name: category.categoryName, color: category.categoryColor)
                                     .padding(.horizontal, 1)
                             }
@@ -59,12 +59,10 @@ struct EventDetailView: View {
                     
                     ScrollView {
                         VStack (alignment: .leading) {
-                            EventInfoDetailView(title: "장소", decription: eventData.result.eventWhere)
-                            EventInfoDetailView(title: "내용", decription: eventData.result.what)
-                            EventInfoDetailView(title: "함께한 사람", decription: eventData.result.withWho)
+                            EventInfoDetailView(title: "장소", decription: eventData.eventWhere)
+                            EventInfoDetailView(title: "내용", decription: eventData.what)
+                            EventInfoDetailView(title: "함께한 사람", decription: eventData.withWho)
                         }
-                        
-
                     }
  
                 } else {
@@ -77,16 +75,11 @@ struct EventDetailView: View {
         }.padding()
         
         .onAppear() {
-            eventViewModel.loadEventData()
+            eventViewModel.loadEventDetail(eventId: eventId)
         }
         .edgesIgnoringSafeArea(.bottom)
     }
 }
-
-#Preview {
-    EventDetailView(eventId: "58", date: Date.now)
-}
-
 
 extension EventDetailView {
     static let dateFormatter: DateFormatter = {
@@ -121,80 +114,6 @@ struct EventInfoDetailView: View {
     }
 }
 
-
-
-// 삭제 예정
-struct EventCategory: Codable {
-    let categoryId: Int
-    let categoryName: String
-    let categoryColor: String
-}
-
-struct EventResult: Codable {
-    let eventId: Int
-    let title: String
-    let what: String
-    let eventWhere: String
-    let withWho: String
-    let eventYear: Int
-    let eventMonth: Int
-    let eventDate: Int
-    let imageUrlList: [String]
-    let categories: [EventCategory]
-}
-
-struct EventData: Codable {
-    let isSuccess: Bool
-    let statusCode: Int
-    let message: String
-    let result: EventResult
-}
-
-class EventViewModelSample: ObservableObject {
-    @Published var eventData: EventData?
-
-    
-    func loadEventData() {
-        let jsonData = """
-        {
-            "isSuccess": true,
-            "statusCode": 1000,
-            "message": "이벤트 조회에 성공하였습니다.",
-            "result": {
-                "eventId": 58,
-                "title": "도파민 넘치는 코타키나발루",
-                "what": "매니매니 물고기가 있는 마무틱에서 스노클링도 하고, 사피에서는 스노클링 장비도 빠뜨리고.. 뭔 하루가 도파민만 나오다가 끝났니",
-                "eventWhere": "코타키나발루 마무틱",
-                "withWho": "작.변.시",
-                "eventYear": 2024,
-                "eventMonth": 8,
-                "eventDate": 15,
-                "imageUrlList": [
-                    "https://picsum.photos/200/300",
-                    "https://picsum.photos/300/300",
-                    "https://picsum.photos/300/150"
-                ],
-                "categories": [
-                    {
-                        "categoryId": 3,
-                        "categoryName": "여행",
-                        "categoryColor": "#f75eff"
-                    },
-                    {
-                        "categoryId": 4,
-                        "categoryName": "동기들",
-                        "categoryColor": "#a3ffb6"
-                    }
-                ]
-            }
-        }
-        """.data(using: .utf8)!
-        
-        do {
-            let decodedData = try JSONDecoder().decode(EventData.self, from: jsonData)
-            self.eventData = decodedData
-        } catch {
-            print("이벤트 상세 정보 조회 Decode 실패: \(error)")
-        }
-    }
+#Preview {
+    EventDetailView(eventId: 58, date: Date.now)
 }

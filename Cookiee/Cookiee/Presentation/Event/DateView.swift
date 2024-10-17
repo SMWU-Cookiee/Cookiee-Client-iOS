@@ -20,12 +20,14 @@ struct DateView: View {
         }
     }
     
-    @StateObject private var eventViewModel = EventViewModel()
+    @ObservedObject private var eventViewModel = EventViewModel()
     @ObservedObject private var thumbnailViewModel = ThumbnailViewModel()
     @State private var isEventDetailViewModalOpen: Bool = false
     @State private var isThumbnailPutOrDeleteModalOpen: Bool = false
     @State var isRegisterImageModalOpen: Bool = false
     @State var isUpdateImageModalOpen: Bool = false
+    
+    @State var selectedEventId: Int64?
     
     var date: Date
     var calendar = Calendar.current
@@ -123,11 +125,14 @@ struct DateView: View {
                     ) {
                         ForEach(eventViewModel.eventListForCell) { event in
                             EventCardCellView(
+                                eventViewModel: eventViewModel,
                                 thumbnailUrl: event.firstEventImage,
                                 firstCategory: event.firstCategory.categoryName,
                                 firstCategoryColor: event.firstCategory.categoryColor,
-                                eventId: "\(event.eventId)",
-                                toggleModal: {isEventDetailViewModalOpen.toggle()}
+                                eventId: event.eventId,
+                                toggleModal: {
+                                    isEventDetailViewModalOpen.toggle()
+                                }
                             )
                         }
                     }
@@ -159,9 +164,11 @@ struct DateView: View {
 //                : nil
 //            )
             .sheet(isPresented: $isEventDetailViewModalOpen) {
-                EventDetailView(eventId: "58", date: date)
-                    .presentationDetents([.fraction(0.99)])
-                    .presentationDragIndicator(Visibility.visible)
+                if eventViewModel.selectedEventId != nil {
+                    EventDetailView(eventId: eventViewModel.selectedEventId!, date: date)
+                        .presentationDetents([.fraction(0.99)])
+                        .presentationDragIndicator(Visibility.visible)
+                }
             }
             .sheet(isPresented: $isThumbnailPutOrDeleteModalOpen) {
                 VStack(spacing: 0) {
