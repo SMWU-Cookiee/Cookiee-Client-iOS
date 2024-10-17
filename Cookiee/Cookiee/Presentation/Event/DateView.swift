@@ -32,6 +32,10 @@ struct DateView: View {
     @State var newImage: UIImage?
     @State var thumbnailId: Int64?
     
+    @State var isRegisterImageModalOpen: Bool = false
+    @State var isUpdateImageModalOpen: Bool = false
+    
+    
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
         newImage = selectedImage
@@ -78,6 +82,7 @@ struct DateView: View {
                         } else {
                             Button(action: {
                                 print("썸네일 추가")
+                                isRegisterImageModalOpen = true
                                 showImagePicker = true
                             }, label: {
                                 VStack(alignment: .center) {
@@ -149,7 +154,9 @@ struct DateView: View {
                         .font(.Head1_B)
                     
                     Button(action: {
-                        
+                        isUpdateImageModalOpen = true
+                        showImagePicker = true
+                        isThumbnailPutOrDeleteModalOpen = false
                     }, label: {
                         HStack {
                             Image("EditIcon")
@@ -198,12 +205,12 @@ struct DateView: View {
                 .presentationDetents([.fraction(0.27)])
                 .presentationDragIndicator(Visibility.visible)
             }
-//            .sheet(isPresented: $showImagePicker, onDismiss: {
-//                showImagePicker = false
-//                loadImage()
-//            }) {
-//                ImagePicker(image: $selectedUIImage)
-//            }
+            .sheet(isPresented: $showImagePicker, onDismiss: {
+                showImagePicker = false
+                loadImage()
+            }) {
+                ImagePicker(image: $selectedUIImage)
+            }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
@@ -216,14 +223,20 @@ struct DateView: View {
         }
         .onChange(of: newImage) {
             if newImage != nil {
-                let calendar = Calendar.current
-                
-                thumbnailViewModel.registerThumbnail(
-                    year: calendar.component(.year, from: date),
-                    month: calendar.component(.month, from: date),
-                    day: calendar.component(.day, from: date),
-                    thumbnailImage: newImage!
-                )
+                if isRegisterImageModalOpen {
+                    let calendar = Calendar.current
+                    
+                    thumbnailViewModel.registerThumbnail(
+                        year: calendar.component(.year, from: date),
+                        month: calendar.component(.month, from: date),
+                        day: calendar.component(.day, from: date),
+                        thumbnailImage: newImage!
+                    )
+                    isRegisterImageModalOpen = false
+                } else if isUpdateImageModalOpen {
+                    thumbnailViewModel.updateThumbnail(thumbnailId: thumbnailId!.description, newThumbnail: newImage!)
+                    isUpdateImageModalOpen = false
+                }
             }
         }
     }
