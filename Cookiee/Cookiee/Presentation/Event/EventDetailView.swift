@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EventDetailView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     @StateObject private var eventViewModel = EventViewModel()
     @State var eventId: Int64
     @State var date: Date
@@ -37,8 +39,9 @@ struct EventDetailView: View {
                             }
                         }
                     }
-                    .padding(.top, 20)
-                    .padding(.bottom, 10)
+                    .padding(20)
+                    .padding(.top, 23)
+
                     
                     HStack {
                         ImageCarouselView(
@@ -80,6 +83,7 @@ struct EventDetailView: View {
                             )
                         }
                     }
+                    .padding(.horizontal, 15)
  
                 } else {
                     Spacer()
@@ -88,7 +92,7 @@ struct EventDetailView: View {
                 }
             }
             Spacer()
-        }.padding()
+        }
     
         .showCustomAlert(
             isPresented: $isDeleteButtonTapped,
@@ -121,7 +125,12 @@ struct EventDetailView: View {
         .onAppear() {
             eventViewModel.loadEventDetail(eventId: eventId)
         }
-        .edgesIgnoringSafeArea(.bottom)
+        
+        .onChange(of: eventViewModel.isRemoveSuccess) {
+            if eventViewModel.isRemoveSuccess {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }
 
@@ -155,6 +164,7 @@ struct EventInfoDetailView: View {
                     .frame(alignment: .leading)
             }
         }
+        .padding(.bottom, 7)
     }
 }
 
