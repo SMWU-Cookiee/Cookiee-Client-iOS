@@ -32,17 +32,17 @@ struct EventAddView: View {
     
     @ObservedObject var categoryListViewModel = CategoryListViewModel()
     @ObservedObject var categorySelectViewModel = CategorySelectViewModel()
-    @StateObject var viewModel = ImagePickerForEventViewModel()
+    @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
 
     
     var body: some View {
         ScrollView {
             
             VStack {
-                if (viewModel.selection.isEmpty) {
-                    InitialAddMessageCardView(viewModel: viewModel)
+                if (imagePickerForEventViewModel.selection.isEmpty) {
+                    InitialAddMessageCardView(viewModel: imagePickerForEventViewModel)
                 } else {
-                    ImageCarouselForUIImageView(viewModel: viewModel)
+                    ImageCarouselForUIImageView(viewModel: imagePickerForEventViewModel)
                 }
             }
             .padding(.bottom, 14)
@@ -139,8 +139,8 @@ struct EventAddView: View {
         }
         
         .photosPicker(
-            isPresented: $viewModel.isPhotoPickerPresented,
-            selection: $viewModel.selection,
+            isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
+            selection: $imagePickerForEventViewModel.selection,
             selectionBehavior: .continuousAndOrdered,
             matching: .images,
             preferredItemEncoding: .current,
