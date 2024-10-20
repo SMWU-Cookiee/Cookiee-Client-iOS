@@ -28,6 +28,8 @@ struct EventAddView: View {
     @State var people: String = ""
     
     @State var isCategorySelectButtonTapped: Bool = true
+    @ObservedObject var categoryListViewModel = CategoryListViewModel()
+
     
     
    
@@ -91,9 +93,14 @@ struct EventAddView: View {
                         .font(.Head1_B)
                         .padding(.top, 25)
                     
-                    VStack {
-                        CategorySelectButtonView(name: "카테고리", color: "#363636")
-                        CategorySelectButtonView(name: "카테고리2", color: "#367777")
+                    ScrollView {
+                        ForEach(categoryListViewModel.categories, id:\.id) { category in
+                            CategorySelectButtonView(
+                                id: category.categoryId,
+                                name: category.categoryName,
+                                color: category.categoryColor
+                            )
+                        }
                     }
                     
                     Spacer()
@@ -119,6 +126,9 @@ struct EventAddView: View {
                 .frame(height: 67)
                 .background(Color.White)
                 .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -10)
+            }
+            .onAppear() {
+                categoryListViewModel.loadCategoryListData()
             }
             .presentationDetents([.fraction(0.60)])
             .presentationDragIndicator(Visibility.visible)
@@ -182,6 +192,7 @@ struct InitialAddMessageCardView: View {
 }
 
 struct CategorySelectButtonView : View {
+    var id : Int64
     var name: String
     var color: String
     
