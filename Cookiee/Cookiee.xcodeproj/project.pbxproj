@@ -68,6 +68,7 @@
 		83BD79A32C68BB590044C453 /* CookieeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79A22C68BB590044C453 /* CookieeUITests.swift */; };
 		83BD79A52C68BB590044C453 /* CookieeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */; };
 		83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */; };
+		83C294A52CC513F4000799A3 /* CategorySelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C294A42CC513F4000799A3 /* CategorySelectViewModel.swift */; };
 		83C861BC2C74E1DC004FDF7A /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C861BB2C74E1DC004FDF7A /* PrivacyPolicyView.swift */; };
 		83DA005F2C79BE7400B8CD46 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */; };
 		83DA00612C79C55500B8CD46 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA00602C79C55500B8CD46 /* ImagePicker.swift */; };
@@ -172,6 +173,7 @@
 		83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		83BD79B12C68BBA10044C453 /* Cookiee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cookiee.entitlements; sourceTree = "<group>"; };
 		83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
+		83C294A42CC513F4000799A3 /* CategorySelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewModel.swift; sourceTree = "<group>"; };
 		83C861BB2C74E1DC004FDF7A /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		83DA00602C79C55500B8CD46 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				8305BAD92CBE98C500658590 /* ThumbnailViewModel.swift */,
 				837AFD2E2CC0E5C000BCDD34 /* EventViewModel.swift */,
+				83C294A42CC513F4000799A3 /* CategorySelectViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1018,6 +1021,7 @@
 				83EE1DAA2CB038F0009E4488 /* ThumbnailAPI.swift in Sources */,
 				8349F5F22CB0036E00746163 /* loadFromKeychain.swift in Sources */,
 				8389AB302CB10DC100580F4D /* CategoryService.swift in Sources */,
+				83C294A52CC513F4000799A3 /* CategorySelectViewModel.swift in Sources */,
 				8389AB312CB10DC100580F4D /* CategoryListResponseDTO.swift in Sources */,
 				8389AB322CB10DC100580F4D /* CategoryAPI.swift in Sources */,
 				8362C3522CC0F3EA0086D052 /* EventDetailResponseDTO.swift in Sources */,
