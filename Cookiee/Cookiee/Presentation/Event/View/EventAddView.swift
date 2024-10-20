@@ -27,6 +27,8 @@ struct EventAddView: View {
     @State var content: String = ""
     @State var people: String = ""
     
+    @State var isCategorySelectButtonTapped: Bool = true
+    
     
    
     var body: some View {
@@ -47,7 +49,7 @@ struct EventAddView: View {
                     .foregroundStyle(Color.Gray05)
                     .frame(width: 75, alignment: .leading)
                 Button(action: {
-                    
+                    isCategorySelectButtonTapped = true
                 }) {
                     HStack {
                         Text("카테고리를 선택해주세요.")
@@ -79,6 +81,48 @@ struct EventAddView: View {
                 .font(.Body0_B)
                 .foregroundColor(.Gray03)
         }))
+        
+        .sheet(isPresented: $isCategorySelectButtonTapped, onDismiss: {
+          
+        }) {
+            ZStack(alignment: .bottom) {
+                VStack(spacing: 18) {
+                    Text("내 카테고리")
+                        .font(.Head1_B)
+                        .padding(.top, 25)
+                    
+                    VStack {
+                        CategorySelectButtonView(name: "카테고리", color: "#363636")
+                        CategorySelectButtonView(name: "카테고리2", color: "#367777")
+                    }
+                    
+                    Spacer()
+                    
+                }
+                
+                VStack {
+                    Button(action: {
+                        
+                    }, label: {
+                        VStack {
+                            Text("카테고리 추가하기")
+                                .font(.Body0_SB)
+                                .foregroundStyle(Color.Gray00)
+                        }
+                        
+                    })
+                    .frame(width: 363, height: 44)
+                    .background(Color.Gray03)
+                    .cornerRadius(10)
+                }
+                .padding(10)
+                .frame(height: 67)
+                .background(Color.White)
+                .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -10)
+            }
+            .presentationDetents([.fraction(0.60)])
+            .presentationDragIndicator(Visibility.visible)
+        }
 
         .padding()
         .padding(.top, 10)
@@ -134,6 +178,30 @@ struct InitialAddMessageCardView: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.Gray04, lineWidth: 1)
         )
+    }
+}
+
+struct CategorySelectButtonView : View {
+    var name: String
+    var color: String
+    
+    var body: some View {
+        HStack(spacing: 10) {
+            Rectangle()
+                .fill(Color(hex: color))
+                .frame(width: 25, height: 25)
+                .cornerRadius(5.0)
+                .padding(.leading, 15)
+            
+            Text(name)
+                .font(.Body1_R)
+            
+            Spacer()
+        }
+        .frame(width: 348, height: 47)
+        .background(Color.Gray00)
+        .cornerRadius(8.0)
+
     }
 }
 
