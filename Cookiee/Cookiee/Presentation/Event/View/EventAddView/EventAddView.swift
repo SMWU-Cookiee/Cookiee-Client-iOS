@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct EventAddView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -31,12 +32,20 @@ struct EventAddView: View {
     
     @ObservedObject var categoryListViewModel = CategoryListViewModel()
     @ObservedObject var categorySelectViewModel = CategorySelectViewModel()
+    @StateObject var viewModel = ImagePickerForEventViewModel()
+
     
-   
     var body: some View {
         ScrollView {
-            InitialAddMessageCardView()
-                .padding(.bottom, 14)
+            
+            VStack {
+                if (viewModel.selection.isEmpty) {
+                    InitialAddMessageCardView(viewModel: viewModel)
+                        .padding(.bottom, 14)
+                } else {
+                    ImageCarouselForUIImageView(viewModel: viewModel)
+                }
+            }
             
             VStack {
                 EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
@@ -128,113 +137,19 @@ struct EventAddView: View {
             .presentationDetents([.fraction(0.60)])
             .presentationDragIndicator(Visibility.visible)
         }
+        
+        .photosPicker(
+            isPresented: $viewModel.isPhotoPickerPresented,
+            selection: $viewModel.selection,
+            selectionBehavior: .continuousAndOrdered,
+            matching: .images,
+            preferredItemEncoding: .current,
+            photoLibrary: .shared()
+        )
+        .photosPickerStyle(.presentation)
 
         .padding()
         .padding(.top, 10)
-    }
-}
-
-struct EventInfoTextField : View {
-    
-    var fieldName: String
-    var placeholder: String
-    @State var field: String
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(fieldName)
-                .font(.Body1_M)
-                .foregroundStyle(Color.Gray05)
-                .frame(width: 75, alignment: .leading)
-            
-            TextField("", text: $field)
-                .placeholder(when: field.isEmpty) {
-                    Text(placeholder)
-                        .foregroundStyle(Color.Gray04)
-                        .font(.Body0_M)
-            }
-            .padding(10)
-            .frame(height: 40)
-            .background(Color.Gray01)
-            .cornerRadius(5)
-        }
-        .padding(.bottom, 25)
-    }
-}
-
-struct InitialAddMessageCardView: View {
-    var body: some View {
-        HStack {
-            Button(action: {}, label: {
-                VStack {
-                    Image("Photo")
-                        .resizable()
-                        .frame(width: 35, height: 35)
-                        .padding(10)
-                    
-                    Text("최대 5장까지 추가할 수 있어요.")
-                        .foregroundStyle(Color.Gray04)
-                        .font(Font.Body1_M)
-                }
-            })
-        }
-        .frame(width: 270, height: 360)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.Gray04, lineWidth: 1)
-        )
-    }
-}
-
-struct CategorySelectButtonView : View {
-    var id : Int64
-    var name: String
-    var color: String
-    var viewModel: CategorySelectViewModel
-    @State var isSelected: Bool = false
-    
-    var body: some View {
-        Button(action: {
-            isSelected.toggle()
-            
-            if isSelected {
-                viewModel.countOfSelectedCategory += 1
-            } else  {
-                viewModel.countOfSelectedCategory -= 1
-            }
-        }, label: {
-            HStack(spacing: 10) {
-                Rectangle()
-                    .fill(Color(hex: color))
-                    .frame(width: 25, height: 25)
-                    .cornerRadius(5.0)
-                    .padding(.leading, 15)
-                
-                Text(name)
-                    .font(isSelected ? Font.Body1_SB : Font.Body1_R)
-                    .foregroundStyle(Color.black)
-                
-                Spacer()
-                
-                if isSelected {
-                    Image("CheckIcon")
-                        .frame(width: 24, height: 24)
-                        .padding(.trailing, 7)
-                }
-            }
-            .frame(width: 355, height: 47)
-            .background(Color.Gray00)
-            .cornerRadius(8.0)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .strokeBorder(isSelected ? .black : Color.white.opacity(0), lineWidth: 1)
-                    .frame(width: 348, height: 47)
-            )
-        })
-        .frame(width: 348, height: 47)
-        .background(Color.Gray00)
-        .cornerRadius(8.0)
-
     }
 }
 
