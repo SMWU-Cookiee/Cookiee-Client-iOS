@@ -30,44 +30,40 @@ struct EventAddView: View {
     
    
     var body: some View {
-        VStack {
+        ScrollView {
             InitialAddMessageCardView()
                 .padding(.bottom, 14)
             
-            ScrollView {
-                VStack {
-                    EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
-                    EventInfoTextField(fieldName: "장소", placeholder: "장소를 입력해주세요.", field: place)
-                    EventInfoTextField(fieldName: "내용", placeholder: "어떤 활동을 하셨나요?", field: content)
-                    EventInfoTextField(fieldName: "함께한 사람", placeholder: "함께한 사람들을 입력해주세요.", field: people)
-                }
-                .padding(.bottom, 15)
-                
-                VStack(alignment: .leading) {
-                    Text("카테고리")
-                        .font(.Body1_M)
-                        .foregroundStyle(Color.Gray05)
-                        .frame(width: 75, alignment: .leading)
-                    Button(action: {
-                        
-                    }) {
-                        HStack {
-                            Text("카테고리를 선택해주세요.")
-                                .font(.Body0_M)
-                                .foregroundStyle(Color.Black)
-                            Spacer()
-                            Image("UnderDropBlack")
-                                .padding(2)
-                        }
-                        .padding(10)
-                        .frame(height: 40)
-                        .background(Color.Gray01)
-                        .cornerRadius(5)
-                    }
-                }
-                .padding(.bottom, 25)
+            VStack {
+                EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
+                EventInfoTextField(fieldName: "장소", placeholder: "장소를 입력해주세요.", field: place)
+                EventInfoTextField(fieldName: "내용", placeholder: "어떤 활동을 하셨나요?", field: content)
+                EventInfoTextField(fieldName: "함께한 사람", placeholder: "함께한 사람들을 입력해주세요.", field: people)
             }
-            Spacer()
+            
+            VStack(alignment: .leading) {
+                Text("카테고리")
+                    .font(.Body1_M)
+                    .foregroundStyle(Color.Gray05)
+                    .frame(width: 75, alignment: .leading)
+                Button(action: {
+                    
+                }) {
+                    HStack {
+                        Text("카테고리를 선택해주세요.")
+                            .font(.Body0_M)
+                            .foregroundStyle(Color.Black)
+                        Spacer()
+                        Image("UnderDropBlack")
+                            .padding(2)
+                    }
+                    .padding(10)
+                    .frame(height: 40)
+                    .background(Color.Gray01)
+                    .cornerRadius(5)
+                }
+            }
+            .padding(.bottom, 25)
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
