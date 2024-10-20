@@ -41,11 +41,11 @@ struct EventAddView: View {
             VStack {
                 if (viewModel.selection.isEmpty) {
                     InitialAddMessageCardView(viewModel: viewModel)
-                        .padding(.bottom, 14)
                 } else {
                     ImageCarouselForUIImageView(viewModel: viewModel)
                 }
             }
+            .padding(.bottom, 14)
             
             VStack {
                 EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
