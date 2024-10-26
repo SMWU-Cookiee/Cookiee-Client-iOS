@@ -152,6 +152,7 @@ struct EventInfoDetailView: View {
                 Text(title)
                     .font(.Body1_R)
                     .foregroundStyle(Color.Brown01)
+                Spacer()
             }
             
             HStack {
@@ -161,6 +162,7 @@ struct EventInfoDetailView: View {
                     .background(Color.Beige)
                     .cornerRadius(12)
                     .frame(alignment: .leading)
+                Spacer()
             }
         }
         .padding(.bottom, 7)
