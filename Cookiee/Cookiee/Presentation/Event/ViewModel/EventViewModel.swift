@@ -89,19 +89,6 @@ class EventViewModel : ObservableObject {
                 images: imagesData
             )
             
-            print(request.eventTitle)
-            print(request.eventWhat)
-            print(request.eventWhere)
-            print(request.withWho)
-            print(request.eventYear)
-            print(request.eventMonth)
-            print(request.eventDate)
-            print(request.categoryIds.description)
-            print(request.images.description)
-            
-            
-            
-            
             service.postEvent(requestBody: request) { result in
                 switch result {
                 case .success(let response):
@@ -110,6 +97,44 @@ class EventViewModel : ObservableObject {
                 case .failure(let error):
                     self.isAddSuccess = false
                     print("❌ addEvent 실패\n", error)
+                }
+            }
+        }
+    }
+    
+    func updateEvent(eventId: Int64, eventTitle: String, eventWhat: String, eventWhere: String, withWho: String, year: Int32, month: Int32, date: Int32, categoryIds: [Int64], images: [Data]) {
+        
+        
+        Task {
+//            for image in images {
+//                if let data = image.jpegData(compressionQuality: 1.0) {
+//                    imagesData.append(data)
+//                } else {
+//                    print("Failed to load image data.")
+//                }
+//            }
+
+            
+            let request = EventRequestDTO(
+                eventTitle: eventTitle,
+                eventWhat: eventWhat,
+                eventWhere: eventWhere,
+                withWho: withWho,
+                eventYear: year,
+                eventMonth: month,
+                eventDate: date,
+                categoryIds: categoryIds,
+                images: images
+            )
+            
+            service.putEvent(eventId: eventId, requestBody: request) { result in
+                switch result {
+                case .success(let response):
+                    self.isAddSuccess = true
+                    print("✅ updateEvent 성공\n", response)
+                case .failure(let error):
+                    self.isAddSuccess = false
+                    print("❌ updateEvent 실패\n", error)
                 }
             }
         }

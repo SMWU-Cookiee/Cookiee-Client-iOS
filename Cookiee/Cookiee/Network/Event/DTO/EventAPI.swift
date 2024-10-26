@@ -12,6 +12,7 @@ enum EventAPI {
     case getEventList(userId: String, year: Int32, month: Int32, day: Int32)
     case getEventDetail(userId: String, eventId: Int64)
     case postEvent(userId: String, requestBody: EventRequestDTO)
+    case putEvent(userId: String, eventId: Int64, requestBody: EventRequestDTO)
     case deleteEvet(userId: String, eventId: Int64)
 }
 
@@ -23,6 +24,8 @@ extension EventAPI: BaseTargetType {
         case .getEventDetail:
             return .accessTokenHeaderForJson
         case .postEvent:
+            return .accessTokenHeaderForJson
+        case .putEvent:
             return .accessTokenHeaderForJson
         case .deleteEvet:
             return .accessTokenHeaderForJson
@@ -37,6 +40,8 @@ extension EventAPI: BaseTargetType {
             return "/api/v2/events/\(userId)/\(eventId)"
         case .postEvent(userId: let userId, _) :
             return "/api/v2/events/\(userId)"
+        case .putEvent(userId: let userId, eventId: let eventId, _):
+            return "/api/v2/events/\(userId)/\(eventId)"
         case .deleteEvet(userId: let userId, eventId: let eventId):
             return "/api/v2/events/\(userId)/\(eventId)"
         }
@@ -50,6 +55,8 @@ extension EventAPI: BaseTargetType {
             return .get
         case .postEvent:
             return .post
+        case .putEvent:
+            return .put
         case .deleteEvet:
             return .delete
         }
@@ -62,13 +69,15 @@ extension EventAPI: BaseTargetType {
         case .getEventDetail:
             return .requestPlain
         case .postEvent(_, requestBody: let requestBody):
-            return .uploadMultipart(multipartDataForPost(for: requestBody))
+            return .uploadMultipart(multipartDataForEvent(for: requestBody))
+        case .putEvent(_, _, requestBody: let requestBody):
+            return .uploadMultipart(multipartDataForEvent(for: requestBody))
         case .deleteEvet:
             return .requestPlain
         }
     }
     
-    private func multipartDataForPost(for requestBody: EventRequestDTO) -> [Moya.MultipartFormData] {
+    private func multipartDataForEvent(for requestBody: EventRequestDTO) -> [Moya.MultipartFormData] {
         var multipartData: [Moya.MultipartFormData] = []
         
         multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventTitle)".data(using: .utf8)!), name: "eventTitle"))

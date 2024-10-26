@@ -41,10 +41,6 @@ struct EventEditView: View {
     @StateObject var imageViewModelForPut = ImageViewModelForPut()
     
     @State var maxImageCount: Int = 5
-        
-    var isValidForm: Bool {
-        !title.isEmpty && !place.isEmpty && !content.isEmpty && !people.isEmpty && !categorySelectViewModel.selectedCategory.isEmpty && !imagePickerForEventViewModel.selection.isEmpty
-    }
     
     var body: some View {
         ScrollView {
@@ -141,8 +137,27 @@ struct EventEditView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .navigationBarItems(trailing: Button(action: {
-            if isValidForm {
-                eventViewModel.addEvent(
+            Task {
+                var imagesData: [Data] = []
+                
+                for image in imageViewModelForPut.uiImageList {
+                    if let data = image.jpegData(compressionQuality: 1.0) {
+                        imagesData.append(data)
+                    } else {
+                        print("Failed to load image data.")
+                    }
+                }
+                
+                for image in imagePickerForEventViewModel.selection {
+                    if let data = try? await image.loadTransferable(type: Data.self) {
+                        imagesData.append(data)
+                    } else {
+                        print("Failed to load image data.")
+                    }
+                }
+                
+                eventViewModel.updateEvent(
+                    eventId: eventViewModel.eventDetail!.eventId,
                     eventTitle: title,
                     eventWhat: content,
                     eventWhere: place,
@@ -151,12 +166,14 @@ struct EventEditView: View {
                     month: month,
                     date: date,
                     categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
-                    images: imagePickerForEventViewModel.selection)
+                    images: imagesData
+                )
             }
+           
         }, label: {
             Text("완료")
                 .font(.Body0_B)
-                .foregroundColor(isValidForm ? .Brown01 : .Gray03)
+                .foregroundColor(Color.Brown01)
         }))
         
         .sheet(isPresented: $isCategorySelectButtonTapped) {
