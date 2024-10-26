@@ -16,6 +16,7 @@ struct ImageCarouselForUIImage: View {
     
     @GestureState var offset: CGFloat = 0
     @State var currentIndex: Int = 0
+    @State var isDelete: Bool = false
     
     var body: some View {
         VStack {
@@ -24,13 +25,36 @@ struct ImageCarouselForUIImage: View {
                 let adjustmentWidth = (trialingSpace / 2) - spacing
                 
                 HStack(spacing: spacing) {
-                    ForEach(imageViewModelForPut.uiImageList, id: \.self) { uiImage in
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 360)
-                            .frame(width: proxy.size.width - trialingSpace)
+                    ForEach(Array(imageViewModelForPut.uiImageList.enumerated()), id: \.element) { index, uiImage in
+                        ZStack {
+                            
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 360)
+                                .onTapGesture {
+                                    isDelete.toggle()
+                                }
+                                .overlayIf(
+                                    isDelete,
+                                    VStack {
+                                        Button(action: {
+                                            if isDelete {
+                                                imageViewModelForPut.deleteFromList(index: index)
+                                            }
+                                        }, label: {
+                                            Image("TrashIconWhite")
+                                        })
+                                    }
+                                        .frame(width:  uiImage.size.width * 360 / uiImage.size.height, height: 360)
+                                        .aspectRatio(contentMode: .fit)
+                                        .background(Color.black.opacity(0.5))
+                                )
+                        }
+                        .frame(width: proxy.size.width - trialingSpace)
                     }
+
+
                     ForEach(imagePickerForEventViewModel.attachments) { imageAttachment in
                         ImageAttachmentView(imageAttachment: imageAttachment)
                         .frame(width: proxy.size.width - trialingSpace)
@@ -47,15 +71,14 @@ struct ImageCarouselForUIImage: View {
                                         .frame(width: 35, height: 35)
                                         .padding(10)
                                 }
-                                .frame(width: 270, height: 360)
                             })
+                            .frame(width: 270, height: 360)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.Gray04, lineWidth: 1)
                             )
                         }
                         .frame(width: proxy.size.width - trialingSpace)
-
                     }
                 }
                 .padding(.horizontal, spacing)
