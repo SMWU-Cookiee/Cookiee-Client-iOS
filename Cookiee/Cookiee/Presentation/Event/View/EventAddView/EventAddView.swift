@@ -41,6 +41,10 @@ struct EventAddView: View {
     
     @State var maxImageCount: Int = 5
     
+    var isValidForm: Bool {
+        !title.isEmpty && !place.isEmpty && !content.isEmpty && !people.isEmpty && !categorySelectViewModel.selectedCategory.isEmpty && !imagePickerForEventViewModel.selection.isEmpty
+    }
+    
     var body: some View {
         ScrollView {
             
@@ -140,20 +144,22 @@ struct EventAddView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .navigationBarItems(trailing: Button(action: {
-            eventViewModel.addEvent(
-                eventTitle: title,
-                eventWhat: content,
-                eventWhere: place,
-                withWho: people,
-                year: year,
-                month: month,
-                date: date,
-                categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
-                images: imagePickerForEventViewModel.selection)
+            if isValidForm {
+                eventViewModel.addEvent(
+                    eventTitle: title,
+                    eventWhat: content,
+                    eventWhere: place,
+                    withWho: people,
+                    year: year,
+                    month: month,
+                    date: date,
+                    categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
+                    images: imagePickerForEventViewModel.selection)
+            }
         }, label: {
             Text("완료")
                 .font(.Body0_B)
-                .foregroundColor(.Gray03)
+                .foregroundColor(isValidForm ? .Brown01 : .Gray03)
         }))
         
         .sheet(isPresented: $isCategorySelectButtonTapped) {
