@@ -52,7 +52,7 @@ struct EventAddView: View {
                 if (imagePickerForEventViewModel.selection.isEmpty) {
                     InitialAddMessageCardView(viewModel: imagePickerForEventViewModel)
                 } else {
-                    ImageCarouselForUIImageView(viewModel: imagePickerForEventViewModel)
+                    ImageCarouselForPhotoPicker(viewModel: imagePickerForEventViewModel)
                 }
             }
             .padding(.bottom, 14)

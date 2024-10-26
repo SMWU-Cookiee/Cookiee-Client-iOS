@@ -77,6 +77,8 @@
 		83C88E3D2CCCD86B001554A4 /* EventRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E3C2CCCD86B001554A4 /* EventRequestDTO.swift */; };
 		83C88E432CCCE3C4001554A4 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E422CCCE3C4001554A4 /* CustomTextField.swift */; };
 		83C88E462CCCF7E2001554A4 /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E452CCCF7E2001554A4 /* EventEditView.swift */; };
+		83C88E4A2CCD0DC5001554A4 /* urlToUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E492CCD0DC5001554A4 /* urlToUIImage.swift */; };
+		83C88E4C2CCD13B7001554A4 /* ImageViewModelForPut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E4B2CCD13B7001554A4 /* ImageViewModelForPut.swift */; };
 		83DA005F2C79BE7400B8CD46 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */; };
 		83DA00612C79C55500B8CD46 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA00602C79C55500B8CD46 /* ImagePicker.swift */; };
 		83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */; };
@@ -189,6 +191,8 @@
 		83C88E3C2CCCD86B001554A4 /* EventRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRequestDTO.swift; sourceTree = "<group>"; };
 		83C88E422CCCE3C4001554A4 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		83C88E452CCCF7E2001554A4 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
+		83C88E492CCD0DC5001554A4 /* urlToUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlToUIImage.swift; sourceTree = "<group>"; };
+		83C88E4B2CCD13B7001554A4 /* ImageViewModelForPut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModelForPut.swift; sourceTree = "<group>"; };
 		83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		83DA00602C79C55500B8CD46 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
@@ -264,6 +268,7 @@
 				837AFD2E2CC0E5C000BCDD34 /* EventViewModel.swift */,
 				83C294A42CC513F4000799A3 /* CategorySelectViewModel.swift */,
 				83202F3F2CC533F4000C9825 /* ImagePickerForEventViewModel.swift */,
+				83C88E4B2CCD13B7001554A4 /* ImageViewModelForPut.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 				835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */,
 				833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */,
 				83F02CBE2CAC3189001E8329 /* Placeholder.swift */,
+				83C88E492CCD0DC5001554A4 /* urlToUIImage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1041,6 +1047,7 @@
 				8349F5FD2CB0139200746163 /* TokenRefreshService.swift in Sources */,
 				8305BACC2CBE864200658590 /* CalendarControlFunctions.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
+				83C88E4C2CCD13B7001554A4 /* ImageViewModelForPut.swift in Sources */,
 				8305BAD72CBE953C00658590 /* ThumbnailRequestDTO.swift in Sources */,
 				83E6F5F82CB7A9AC00DCDF32 /* SignOutViewModel.swift in Sources */,
 				837D74E42CBE428B005D20DC /* ProfileViewModel.swift in Sources */,
@@ -1098,6 +1105,7 @@
 				8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */,
 				837AFD272CC0E3F100BCDD34 /* EventListResponseDTO.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
+				83C88E4A2CCD0DC5001554A4 /* urlToUIImage.swift in Sources */,
 				833707E82CA43EED0050D1C7 /* FindTopUIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

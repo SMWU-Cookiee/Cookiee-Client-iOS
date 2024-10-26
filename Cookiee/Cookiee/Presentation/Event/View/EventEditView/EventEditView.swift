@@ -38,9 +38,10 @@ struct EventEditView: View {
     @ObservedObject var categoryListViewModel = CategoryListViewModel()
     @StateObject var categorySelectViewModel = CategorySelectViewModel()
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
+    @StateObject var imageViewModelForPut = ImageViewModelForPut()
     
     @State var maxImageCount: Int = 5
-    
+        
     var isValidForm: Bool {
         !title.isEmpty && !place.isEmpty && !content.isEmpty && !people.isEmpty && !categorySelectViewModel.selectedCategory.isEmpty && !imagePickerForEventViewModel.selection.isEmpty
     }
@@ -49,11 +50,7 @@ struct EventEditView: View {
         ScrollView {
             
             VStack {
-                if (imagePickerForEventViewModel.selection.isEmpty) {
-                    InitialAddMessageCardView(viewModel: imagePickerForEventViewModel)
-                } else {
-                    ImageCarouselForUIImageView(viewModel: imagePickerForEventViewModel)
-                }
+                ImageCarouselForUIImage(imagePickerForEventViewModel: imagePickerForEventViewModel, imageViewModelForPut: imageViewModelForPut)
             }
             .padding(.bottom, 14)
             
@@ -209,7 +206,7 @@ struct EventEditView: View {
         .photosPicker(
             isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
             selection: $imagePickerForEventViewModel.selection,
-            maxSelectionCount: maxImageCount,
+            maxSelectionCount: maxImageCount - imageViewModelForPut.uiImageList.count,
             selectionBehavior: .continuousAndOrdered,
             matching: .images,
             preferredItemEncoding: .current,
@@ -233,7 +230,10 @@ struct EventEditView: View {
             
             categorySelectViewModel.selectedCategory = eventViewModel.eventDetail!.categories
             
-            print("🔥🔥🔥", categorySelectViewModel.selectedCategory)
+            for url in eventViewModel.eventDetail!.eventImageUrlList {
+                guard let image = urlToUIImage(url: url) else { continue }
+                imageViewModelForPut.uiImageList.append(image)
+            }
         }
     }
 }
