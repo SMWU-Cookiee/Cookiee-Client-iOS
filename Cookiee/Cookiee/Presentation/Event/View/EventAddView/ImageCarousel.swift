@@ -28,6 +28,27 @@ struct ImageCarouselForUIImageView: View {
                         ImageAttachmentView(imageAttachment: imageAttachment)
                         .frame(width: proxy.size.width - trialingSpace)
                     }
+                    if (viewModel.selection.count < 5) {
+                        VStack {
+                            Button(action: {
+                                viewModel.isPhotoPickerPresented = true
+                            }, label: {
+                                VStack {
+                                    Image("PlusGray")
+                                        .resizable()
+                                        .frame(width: 35, height: 35)
+                                        .padding(10)
+                                }
+                                .frame(width: 270, height: 360)
+                            })
+                        }
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.Gray04, lineWidth: 1)
+                        )
+                        .frame(width: proxy.size.width - trialingSpace)
+
+                    }
                 }
                 .padding(.horizontal, spacing)
                 .offset(x: (CGFloat(currentIndex) * -width) + (currentIndex != 0 ? adjustmentWidth : 0) + offset)
@@ -41,8 +62,12 @@ struct ImageCarouselForUIImageView: View {
                             let progress = -offsetX / width
                             let roundIndex = progress.rounded()
                             
-                            currentIndex = max(min(currentIndex + Int(roundIndex), viewModel.attachments.count - 1), 0)
-
+                            if (viewModel.selection.count < 5) {
+                                currentIndex = max(min(currentIndex + Int(roundIndex), viewModel.attachments.count), 0)
+                            } else {
+                                currentIndex = max(min(currentIndex + Int(roundIndex), viewModel.attachments.count - 1), 0)
+                            }
+                            
                         }
                         .onChanged { value in
                             let offsetX = value.translation.width
@@ -54,6 +79,10 @@ struct ImageCarouselForUIImageView: View {
             .animation(.easeInOut, value: offset == 0)
         }
         .frame(height: 360)
+        .onTapGesture(perform: {
+            print(viewModel.selection.count)
+            
+        })
     }
 }
 
@@ -107,3 +136,5 @@ struct InitialAddMessageCardView: View {
         )
     }
 }
+
+

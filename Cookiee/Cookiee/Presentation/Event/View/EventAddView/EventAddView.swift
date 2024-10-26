@@ -33,7 +33,8 @@ struct EventAddView: View {
     @ObservedObject var categoryListViewModel = CategoryListViewModel()
     @ObservedObject var categorySelectViewModel = CategorySelectViewModel()
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
-
+    
+    @State var maxImageCount: Int = 5
     
     var body: some View {
         ScrollView {
@@ -48,35 +49,38 @@ struct EventAddView: View {
             .padding(.bottom, 14)
             
             VStack {
-                EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
-                EventInfoTextField(fieldName: "장소", placeholder: "장소를 입력해주세요.", field: place)
-                EventInfoTextField(fieldName: "내용", placeholder: "어떤 활동을 하셨나요?", field: content)
-                EventInfoTextField(fieldName: "함께한 사람", placeholder: "함께한 사람들을 입력해주세요.", field: people)
-            }
-            
-            VStack(alignment: .leading) {
-                Text("카테고리")
-                    .font(.Body1_M)
-                    .foregroundStyle(Color.Gray05)
-                    .frame(width: 75, alignment: .leading)
-                Button(action: {
-                    isCategorySelectButtonTapped = true
-                }) {
-                    HStack {
-                        Text("카테고리를 선택해주세요.")
-                            .font(.Body0_M)
-                            .foregroundStyle(Color.Black)
-                        Spacer()
-                        Image("UnderDropBlack")
-                            .padding(2)
-                    }
-                    .padding(10)
-                    .frame(height: 40)
-                    .background(Color.Gray01)
-                    .cornerRadius(5)
+                VStack {
+                    EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
+                    EventInfoTextField(fieldName: "장소", placeholder: "장소를 입력해주세요.", field: place)
+                    EventInfoTextField(fieldName: "내용", placeholder: "어떤 활동을 하셨나요?", field: content)
+                    EventInfoTextField(fieldName: "함께한 사람", placeholder: "함께한 사람들을 입력해주세요.", field: people)
                 }
+                
+                VStack(alignment: .leading) {
+                    Text("카테고리")
+                        .font(.Body1_M)
+                        .foregroundStyle(Color.Gray05)
+                        .frame(width: 75, alignment: .leading)
+                    Button(action: {
+                        isCategorySelectButtonTapped = true
+                    }) {
+                        HStack {
+                            Text("카테고리를 선택해주세요.")
+                                .font(.Body0_M)
+                                .foregroundStyle(Color.Black)
+                            Spacer()
+                            Image("UnderDropBlack")
+                                .padding(2)
+                        }
+                        .padding(10)
+                        .frame(height: 40)
+                        .background(Color.Gray01)
+                        .cornerRadius(5)
+                    }
+                }
+                .padding(.bottom, 25)
             }
-            .padding(.bottom, 25)
+            .padding()
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -141,15 +145,13 @@ struct EventAddView: View {
         .photosPicker(
             isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
             selection: $imagePickerForEventViewModel.selection,
+            maxSelectionCount: maxImageCount,
             selectionBehavior: .continuousAndOrdered,
             matching: .images,
             preferredItemEncoding: .current,
             photoLibrary: .shared()
         )
         .photosPickerStyle(.presentation)
-
-        .padding()
-        .padding(.top, 10)
     }
 }
 

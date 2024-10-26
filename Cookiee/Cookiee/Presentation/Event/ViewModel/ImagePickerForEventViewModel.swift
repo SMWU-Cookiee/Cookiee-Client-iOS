@@ -41,6 +41,7 @@ import PhotosUI
             self.pickerItem = pickerItem
         }
         
+        
         func loadImage() async {
             guard imageStatus == nil || imageStatus?.isFailed == true else {
                 return
@@ -86,7 +87,6 @@ import PhotosUI
     private var attachmentByIdentifier = [String: ImageAttachment]()
     
     @Published var isPhotoPickerPresented: Bool = false
-
 }
 
 /// A extension that handles the situation in which a picker item lacks a photo library.
