@@ -79,6 +79,7 @@
 		83C88E462CCCF7E2001554A4 /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E452CCCF7E2001554A4 /* EventEditView.swift */; };
 		83C88E4A2CCD0DC5001554A4 /* urlToUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E492CCD0DC5001554A4 /* urlToUIImage.swift */; };
 		83C88E4C2CCD13B7001554A4 /* ImageViewModelForPut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E4B2CCD13B7001554A4 /* ImageViewModelForPut.swift */; };
+		83C88E4E2CCD1778001554A4 /* ImageCarouselForUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E4D2CCD1778001554A4 /* ImageCarouselForUIImage.swift */; };
 		83DA005F2C79BE7400B8CD46 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */; };
 		83DA00612C79C55500B8CD46 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA00602C79C55500B8CD46 /* ImagePicker.swift */; };
 		83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */; };
@@ -193,6 +194,7 @@
 		83C88E452CCCF7E2001554A4 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
 		83C88E492CCD0DC5001554A4 /* urlToUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlToUIImage.swift; sourceTree = "<group>"; };
 		83C88E4B2CCD13B7001554A4 /* ImageViewModelForPut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModelForPut.swift; sourceTree = "<group>"; };
+		83C88E4D2CCD1778001554A4 /* ImageCarouselForUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselForUIImage.swift; sourceTree = "<group>"; };
 		83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		83DA00602C79C55500B8CD46 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 			isa = PBXGroup;
 			children = (
 				83C88E452CCCF7E2001554A4 /* EventEditView.swift */,
+				83C88E4D2CCD1778001554A4 /* ImageCarouselForUIImage.swift */,
 			);
 			path = EventEditView;
 			sourceTree = "<group>";
@@ -1104,6 +1107,7 @@
 				83202F3E2CC5330B000C9825 /* ImageCarousel.swift in Sources */,
 				8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */,
 				837AFD272CC0E3F100BCDD34 /* EventListResponseDTO.swift in Sources */,
+				83C88E4E2CCD1778001554A4 /* ImageCarouselForUIImage.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
 				83C88E4A2CCD0DC5001554A4 /* urlToUIImage.swift in Sources */,
 				833707E82CA43EED0050D1C7 /* FindTopUIViewController.swift in Sources */,

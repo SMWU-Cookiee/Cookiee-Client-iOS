@@ -1,15 +1,15 @@
 //
-//  ImageCarousel.swift
+//  ImageCarouselForUIImage.swift
 //  Cookiee
 //
-//  Created by minseo Kyung on 10/20/24.
+//  Created by minseo Kyung on 10/26/24.
 //
 
 import SwiftUI
-import PhotosUI
 
-struct ImageCarouselForPhotoPicker: View {
-    @ObservedObject var viewModel: ImagePickerForEventViewModel
+struct ImageCarouselForUIImage: View {
+    @StateObject var imagePickerForEventViewModel: ImagePickerForEventViewModel
+    @StateObject var imageViewModelForPut: ImageViewModelForPut
 
     var spacing: CGFloat = 10
     var trialingSpace: CGFloat = 30
@@ -24,14 +24,22 @@ struct ImageCarouselForPhotoPicker: View {
                 let adjustmentWidth = (trialingSpace / 2) - spacing
                 
                 HStack(spacing: spacing) {
-                    ForEach(viewModel.attachments) { imageAttachment in
+                    ForEach(imageViewModelForPut.uiImageList, id: \.self) { uiImage in
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 360)
+                            .frame(width: proxy.size.width - trialingSpace)
+                    }
+                    ForEach(imagePickerForEventViewModel.attachments) { imageAttachment in
                         ImageAttachmentView(imageAttachment: imageAttachment)
                         .frame(width: proxy.size.width - trialingSpace)
                     }
-                    if (viewModel.selection.count < 5) {
+
+                    if (imageViewModelForPut.uiImageList.count + imagePickerForEventViewModel.attachments.count < 5) {
                         VStack {
                             Button(action: {
-                                viewModel.isPhotoPickerPresented = true
+                                imagePickerForEventViewModel.isPhotoPickerPresented = true
                             }, label: {
                                 VStack {
                                     Image("PlusGray")
@@ -41,11 +49,11 @@ struct ImageCarouselForPhotoPicker: View {
                                 }
                                 .frame(width: 270, height: 360)
                             })
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.Gray04, lineWidth: 1)
+                            )
                         }
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.Gray04, lineWidth: 1)
-                        )
                         .frame(width: proxy.size.width - trialingSpace)
 
                     }
@@ -62,10 +70,10 @@ struct ImageCarouselForPhotoPicker: View {
                             let progress = -offsetX / width
                             let roundIndex = progress.rounded()
                             
-                            if (viewModel.selection.count < 5) {
-                                currentIndex = max(min(currentIndex + Int(roundIndex), viewModel.attachments.count), 0)
+                            if (imageViewModelForPut.uiImageList.count + imagePickerForEventViewModel.attachments.count < 5) {
+                                currentIndex = max(min(currentIndex + Int(roundIndex), imageViewModelForPut.uiImageList.count + imagePickerForEventViewModel.attachments.count), 0)
                             } else {
-                                currentIndex = max(min(currentIndex + Int(roundIndex), viewModel.attachments.count - 1), 0)
+                                currentIndex = max(min(currentIndex + Int(roundIndex), imageViewModelForPut.uiImageList.count + imagePickerForEventViewModel.attachments.count - 1), 0)
                             }
                             
                         }
@@ -79,56 +87,5 @@ struct ImageCarouselForPhotoPicker: View {
             .animation(.easeInOut, value: offset == 0)
         }
         .frame(height: 360)
-    }
-}
-
-struct ImageAttachmentView: View {
-    
-    @ObservedObject var imageAttachment: ImagePickerForEventViewModel.ImageAttachment
-    
-    var body: some View {
-        HStack {
-            switch imageAttachment.imageStatus {
-            case .finished(let image):
-                image.resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 360)
-            case .failed:
-                Image(systemName: "exclamationmark.triangle.fill")
-            default:
-                ProgressView()
-            }
-        }.task {
-            await imageAttachment.loadImage()
-        }
-    }
-}
-
-struct InitialAddMessageCardView: View {
-    @ObservedObject var viewModel: ImagePickerForEventViewModel
-    
-    var body: some View {
-        VStack {
-            Button(action: {
-                viewModel.isPhotoPickerPresented = true
-            }, label: {
-                VStack {
-                    Image("Photo")
-                        .resizable()
-                        .frame(width: 35, height: 35)
-                        .padding(10)
-                    
-                    Text("최대 5장까지 추가할 수 있어요.")
-                        .foregroundStyle(Color.Gray04)
-                        .font(Font.Body1_M)
-                }
-                .frame(width: 270, height: 360)
-            })
-        }
-        
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.Gray04, lineWidth: 1)
-        )
     }
 }
