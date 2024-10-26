@@ -65,10 +65,9 @@ struct DateView: View {
                                     case .success(let image):
                                         image
                                             .resizable()
-                                            .scaledToFill()
+                                            .aspectRatio(contentMode: .fill)
                                             .frame(width: geometry.size.width, height: 265)
                                             .clipped()
-                                        
                                     case .failure(_):
                                         RoundedRectangle(cornerRadius: 2)
                                             .fill(Color.white)
@@ -119,25 +118,35 @@ struct DateView: View {
                     .padding(.leading, 7)
                 }
                 ScrollView {
-                    LazyVGrid(
-                        columns: Array(repeating: GridItem(.flexible(), spacing: 7, alignment: .center), count: 2),
-                        spacing: 7
-                    ) {
-                        ForEach(eventViewModel.eventListForCell) { event in
-                            EventCardCellView(
-                                eventViewModel: eventViewModel,
-                                thumbnailUrl: event.firstEventImage,
-                                firstCategory: event.firstCategory.categoryName,
-                                firstCategoryColor: event.firstCategory.categoryColor,
-                                eventId: event.eventId,
-                                toggleModal: {
-                                    isEventDetailViewModalOpen.toggle()
-                                }
-                            )
+                    VStack(alignment: .center){
+                        LazyVGrid(
+                            columns:
+                                Array(repeating:
+                                        GridItem(
+                                            .flexible(),
+                                            alignment: .center
+                                        ),
+                                          count: 2
+                                     )
+                        ) {
+                            ForEach(eventViewModel.eventListForCell) { event in
+                                EventCardCellView(
+                                    eventViewModel: eventViewModel,
+                                    thumbnailUrl: event.firstEventImage,
+                                    firstCategory: event.firstCategory.categoryName,
+                                    firstCategoryColor: event.firstCategory.categoryColor,
+                                    eventId: event.eventId,
+                                    toggleModal: {
+                                        isEventDetailViewModalOpen.toggle()
+                                    },
+                                    width: geometry.size.width / 2 - 14
+                                )
+                            }
                         }
                     }
-                    .padding(.horizontal, 7)
                 }
+                .padding(.horizontal, 7)
+                
                 HStack {
                     NavigationLink(
                         destination: EventAddView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent),

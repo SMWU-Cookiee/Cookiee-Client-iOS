@@ -14,6 +14,7 @@ struct EventCardCellView: View {
     var firstCategoryColor: String
     var eventId: Int64
     var toggleModal: () -> Void
+    var width: CGFloat
     
     var body: some View {
         ZStack {
@@ -27,12 +28,14 @@ struct EventCardCellView: View {
                         case .empty:
                             VStack {
                                 ProgressView()
-                                    .frame(height: 240)
+                                    .frame(width:width, height: 238)
                             }
                         case .success(let image):
                             ZStack (alignment: .bottomTrailing) {
                                 image
                                     .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width:width, height: 238)
                                     .clipShape(RoundedRectangle(cornerRadius: 5))
                                 CategoryLabel(name: firstCategory, color: firstCategoryColor)
                                 .padding(.trailing, 6)
@@ -41,6 +44,7 @@ struct EventCardCellView: View {
                         case .failure:
                             Image(systemName: "photo")
                                 .resizable()
+                                .frame(width: width, height: 238)
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                                 
                         @unknown default:
@@ -49,10 +53,10 @@ struct EventCardCellView: View {
                     }
                 }
                 .cornerRadius(5)
-                .frame(height: 240)
+                .frame(height: 238)
             }
             
         }
-        .frame(height: 240)
+        .frame(width: width, height: 238)
     }
 }
