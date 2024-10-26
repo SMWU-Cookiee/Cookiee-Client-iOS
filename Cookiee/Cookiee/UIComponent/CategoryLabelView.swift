@@ -17,13 +17,13 @@ struct CategoryLabel: View {
             Text("#" + name)
                 .font(.Body1_M)
                 .foregroundColor(.black)
-                .padding(.horizontal, 7)
+                .padding(.horizontal, 5)
                 .padding(.vertical, 4)
                 .background(Color(hex: color))
-                .cornerRadius(8)
+                .cornerRadius(10)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.white, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.Gray00, lineWidth: 1)
                 )
         } icon: {
             EmptyView()

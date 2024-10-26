@@ -65,9 +65,19 @@ struct EventAddView: View {
                         isCategorySelectButtonTapped = true
                     }) {
                         HStack {
-                            Text("카테고리를 선택해주세요.")
-                                .font(.Body0_M)
-                                .foregroundStyle(Color.Black)
+                            if (categorySelectViewModel.selectedCategory.isEmpty) {
+                                Text("카테고리를 선택해주세요.")
+                                    .font(.Body0_M)
+                                    .foregroundStyle(Color.Black)
+                            } else {
+                                ForEach(categorySelectViewModel.selectedCategory, id: \.categoryId) { category in
+                                    CategoryLabelViewDeletable(
+                                        name: category.categoryName,
+                                        color: category.categoryColor
+                                    )
+                                    .padding(.horizontal, 1)
+                                }
+                            }
                             Spacer()
                             Image("UnderDropBlack")
                                 .padding(2)
@@ -118,16 +128,14 @@ struct EventAddView: View {
                 
                 VStack {
                     Button(action: {
-                        
+                        isCategorySelectButtonTapped = false
                     }, label: {
-                        VStack {
-                            Text("카테고리 추가하기")
-                                .font(.Body0_SB)
-                                .foregroundStyle(Color.Gray00)
-                        }
+                        Text("카테고리 추가하기")
+                            .font(.Body0_SB)
+                            .foregroundStyle(Color.Gray00)
                     })
                     .frame(width: 363, height: 44)
-                    .background(categorySelectViewModel.isAnyCategorySelected() ? Color.Brown00 : Color.Gray03)
+                    .background(categorySelectViewModel.selectedCategory.isEmpty ? Color.Gray03 : Color.Brown00)
                     .cornerRadius(10)
                 }
                 .padding(10)

@@ -9,9 +9,20 @@ import Foundation
 
 class CategorySelectViewModel: ObservableObject {
     
-    @Published var countOfSelectedCategory: Int = 0
+    @Published var selectedCategory: [CategoryResultData] = []
+
     
-    func isAnyCategorySelected() -> Bool {
-        countOfSelectedCategory > 0
+    func addCategoryToEvent(id: Int64, name: String, color: String) {
+        let category = CategoryResultData(categoryId: id, categoryName: name, categoryColor: color)
+        selectedCategory.append(category)
+    }
+    
+    func removeCategoryFromEvent(id: Int64) {
+        selectedCategory.removeAll(where: { $0.categoryId == id })
+    }
+    
+    func isCategorySelected(id: Int64) -> Bool {
+        return selectedCategory.contains(where: { $0.categoryId == id })
     }
 }
+

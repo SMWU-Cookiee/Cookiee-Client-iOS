@@ -19,9 +19,9 @@ struct CategorySelectButtonView : View {
             isSelected.toggle()
             
             if isSelected {
-                viewModel.countOfSelectedCategory += 1
+                viewModel.addCategoryToEvent(id: id, name: name, color: color)
             } else  {
-                viewModel.countOfSelectedCategory -= 1
+                viewModel.removeCategoryFromEvent(id: id)
             }
         }, label: {
             HStack(spacing: 10) {
@@ -40,7 +40,7 @@ struct CategorySelectButtonView : View {
                 if isSelected {
                     Image("CheckIcon")
                         .frame(width: 24, height: 24)
-                        .padding(.trailing, 7)
+                        .padding(.trailing, 10)
                 }
             }
             .frame(width: 355, height: 47)
@@ -55,6 +55,9 @@ struct CategorySelectButtonView : View {
         .frame(width: 348, height: 47)
         .background(Color.Gray00)
         .cornerRadius(8.0)
-
+        
+        .onAppear {
+                isSelected = viewModel.isCategorySelected(id: id)
+        }
     }
 }
