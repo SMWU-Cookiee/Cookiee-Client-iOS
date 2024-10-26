@@ -70,10 +70,14 @@ class EventViewModel : ObservableObject {
         
         Task {
             for image in images {
-                if let data = try? await image.loadTransferable(type: Data.self) {
-                    imagesData.append(data)
+                if let imageData = try? await image.loadTransferable(type: Data.self) {
+                    if let image = UIImage(data: imageData) {
+                        imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000) ?? Data())
+                    } else {
+                        print("❌ addEvent : UIImage 변환 실패")
+                    }
                 } else {
-                    print("Failed to load image data.")
+                    print("❌ addEvent : Failed to load image data")
                 }
             }
             
@@ -106,15 +110,7 @@ class EventViewModel : ObservableObject {
         
         
         Task {
-//            for image in images {
-//                if let data = image.jpegData(compressionQuality: 1.0) {
-//                    imagesData.append(data)
-//                } else {
-//                    print("Failed to load image data.")
-//                }
-//            }
 
-            
             let request = EventRequestDTO(
                 eventTitle: eventTitle,
                 eventWhat: eventWhat,

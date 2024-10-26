@@ -13,6 +13,7 @@ class ImageViewModelForPut: ObservableObject {
     
     func deleteFromList(index: Int) {
         uiImageList.remove(at: index)
+        print(uiImageList)
     }
 
 }
