@@ -10,8 +10,7 @@ import SwiftUI
 struct EventDetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    @StateObject private var eventViewModel = EventViewModel()
-    @State var eventId: Int64
+    @StateObject var eventViewModel: EventViewModel
     @State var date: Date
     
     @State private var currentIndex: Int = 0
@@ -29,6 +28,8 @@ struct EventDetailView: View {
                         Spacer()
                         HStack {
                             Button {
+                                eventViewModel.isEditButtonTapped = true
+                                presentationMode.wrappedValue.dismiss()
                             } label: {
                                 Image("EditIcon")
                             }
@@ -117,13 +118,13 @@ struct EventDetailView: View {
                 CustomAlertButton(
                     action: {
                         isDeleteButtonTapped = false
-                        eventViewModel.removeEvent(eventId: eventId)
+                        eventViewModel.removeEvent(eventId: eventViewModel.selectedEventId!)
                     },
                     title: Text("삭제하기").foregroundColor(Color.Brown00))
         )
         
         .onAppear() {
-            eventViewModel.loadEventDetail(eventId: eventId)
+            eventViewModel.loadEventDetail(eventId: eventViewModel.selectedEventId!)
         }
         .onChange(of: eventViewModel.isRemoveSuccess) {
             if eventViewModel.isRemoveSuccess {
@@ -167,8 +168,4 @@ struct EventInfoDetailView: View {
         }
         .padding(.bottom, 7)
     }
-}
-
-#Preview {
-    EventDetailView(eventId: 58, date: Date.now)
 }

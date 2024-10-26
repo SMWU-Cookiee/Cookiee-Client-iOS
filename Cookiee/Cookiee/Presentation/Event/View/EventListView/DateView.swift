@@ -180,7 +180,7 @@ struct DateView: View {
                     )
             }) {
                 if eventViewModel.selectedEventId != nil {
-                    EventDetailView(eventId: eventViewModel.selectedEventId!, date: date)
+                    EventDetailView(eventViewModel: eventViewModel, date: date)
                         .presentationDetents([.fraction(0.99)])
                         .presentationDragIndicator(Visibility.visible)
                 }
@@ -284,6 +284,9 @@ struct DateView: View {
                 }
             }
         }
+        .navigationDestination(isPresented: $eventViewModel.isEditButtonTapped, destination: {
+            EventEditView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent)
+        })
     }
 }
 

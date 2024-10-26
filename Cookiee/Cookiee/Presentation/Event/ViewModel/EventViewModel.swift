@@ -24,6 +24,8 @@ class EventViewModel : ObservableObject {
     @Published var selectedEventId: Int64?
     @Published var isRemoveSuccess: Bool = false
     @Published var isAddSuccess: Bool = false
+    @Published var isEditButtonTapped: Bool = false
+
     
     let service = EventService()
     
