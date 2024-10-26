@@ -24,5 +24,9 @@ class CategorySelectViewModel: ObservableObject {
     func isCategorySelected(id: Int64) -> Bool {
         return selectedCategory.contains(where: { $0.categoryId == id })
     }
+    
+    func getSelectedCategoryIds() -> [Int64] {
+        return selectedCategory.map(\.self.categoryId)
+    }
 }
 

@@ -23,6 +23,10 @@ struct EventAddView: View {
         }
     }
     
+    var year: Int32
+    var month: Int32
+    var date: Int32
+    
     @State var title: String = ""
     @State var place: String = ""
     @State var content: String = ""
@@ -30,6 +34,7 @@ struct EventAddView: View {
     
     @State var isCategorySelectButtonTapped: Bool = false
     
+    @ObservedObject var eventViewModel = EventViewModel()
     @ObservedObject var categoryListViewModel = CategoryListViewModel()
     @ObservedObject var categorySelectViewModel = CategorySelectViewModel()
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
@@ -49,12 +54,42 @@ struct EventAddView: View {
             .padding(.bottom, 14)
             
             VStack {
-                VStack {
-                    EventInfoTextField(fieldName: "쿠키 제목", placeholder: "쿠키의 제목을 입력해주세요.", field: title)
-                    EventInfoTextField(fieldName: "장소", placeholder: "장소를 입력해주세요.", field: place)
-                    EventInfoTextField(fieldName: "내용", placeholder: "어떤 활동을 하셨나요?", field: content)
-                    EventInfoTextField(fieldName: "함께한 사람", placeholder: "함께한 사람들을 입력해주세요.", field: people)
+                VStack(alignment: .leading) {
+                    Text("쿠키 제목")
+                        .font(.Body1_M)
+                        .foregroundStyle(Color.Gray05)
+                        .frame(width: 75, alignment: .leading)
+                    
+                    CustomTextField(target: $title, placeholder: "쿠키의 제목을 입력해주세요.")
                 }
+                .padding(.bottom, 25)
+                VStack(alignment: .leading) {
+                    Text("장소")
+                        .font(.Body1_M)
+                        .foregroundStyle(Color.Gray05)
+                        .frame(width: 75, alignment: .leading)
+                    
+                    CustomTextField(target: $place, placeholder: "장소를 입력해주세요.")
+                }
+                .padding(.bottom, 25)
+                VStack(alignment: .leading) {
+                    Text("내용")
+                        .font(.Body1_M)
+                        .foregroundStyle(Color.Gray05)
+                        .frame(width: 75, alignment: .leading)
+                    
+                    CustomTextField(target: $content, placeholder: "어떤 활동을 하셨나요?")
+                }
+                .padding(.bottom, 25)
+                VStack(alignment: .leading) {
+                    Text("함께한 사람")
+                        .font(.Body1_M)
+                        .foregroundStyle(Color.Gray05)
+                        .frame(width: 75, alignment: .leading)
+                    
+                    CustomTextField(target: $people, placeholder: "함께한 사람들을 입력해주세요.")
+                }
+                .padding(.bottom, 25)
                 
                 VStack(alignment: .leading) {
                     Text("카테고리")
@@ -104,7 +139,18 @@ struct EventAddView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
-        .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+        .navigationBarItems(trailing: Button(action: {
+            eventViewModel.addEvent(
+                eventTitle: title,
+                eventWhat: content,
+                eventWhere: place,
+                withWho: people,
+                year: year,
+                month: month,
+                date: date,
+                categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
+                images: imagePickerForEventViewModel.selection)
+        }, label: {
             Text("완료")
                 .font(.Body0_B)
                 .foregroundColor(.Gray03)
@@ -165,8 +211,4 @@ struct EventAddView: View {
         )
         .photosPickerStyle(.presentation)
     }
-}
-
-#Preview {
-    EventAddView()
 }

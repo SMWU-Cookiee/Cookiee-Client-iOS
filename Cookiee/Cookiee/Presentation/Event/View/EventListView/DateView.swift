@@ -140,7 +140,7 @@ struct DateView: View {
                 }
                 HStack {
                     NavigationLink(
-                        destination: EventAddView(),
+                        destination: EventAddView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent),
                         label: {
                             Text("쿠키 추가하기")
                                 .foregroundStyle(Color.white)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import _PhotosUI_SwiftUI
 
 struct EventForCellDTO : Identifiable {
     let eventId: Int64
@@ -59,6 +60,56 @@ class EventViewModel : ObservableObject {
             }
         }
     }
+    
+    func addEvent(eventTitle: String, eventWhat: String, eventWhere: String, withWho: String, year: Int32, month: Int32, date: Int32, categoryIds: [Int64], images: [PhotosPickerItem]) {
+        
+        var imagesData: [Data] = []
+        
+        Task {
+            for image in images {
+                if let data = try? await image.loadTransferable(type: Data.self) {
+                    imagesData.append(data)
+                } else {
+                    print("Failed to load image data.")
+                }
+            }
+            
+            let request = EventRequestDTO(
+                eventTitle: eventTitle,
+                eventWhat: eventWhat,
+                eventWhere: eventWhere,
+                withWho: withWho,
+                eventYear: year,
+                eventMonth: month,
+                eventDate: date,
+                categoryIds: categoryIds,
+                images: imagesData
+            )
+            
+            print(request.eventTitle)
+            print(request.eventWhat)
+            print(request.eventWhere)
+            print(request.withWho)
+            print(request.eventYear)
+            print(request.eventMonth)
+            print(request.eventDate)
+            print(request.categoryIds.description)
+            print(request.images.description)
+            
+            
+            
+            
+            service.postEvent(requestBody: request) { result in
+                switch result {
+                case .success(let response):
+                    print("✅ addEvent 성공\n", response)
+                case .failure(let error):
+                    print("❌ addEvent 실패\n", error)
+                }
+            }
+        }
+    }
+
     
     func removeEvent(eventId: Int64) {
         service.deleteEvent(eventId: eventId){ result in

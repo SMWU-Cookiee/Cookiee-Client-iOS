@@ -58,6 +58,25 @@ class EventService {
         }
     }
     
+    
+    func postEvent(requestBody: EventRequestDTO, completion: @escaping (Result<EventDetailResponseDTO, Error>) -> Void) {
+        provider.request(.postEvent(userId: userId, requestBody: requestBody)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let response = try JSONDecoder().decode(EventDetailResponseDTO.self, from: response.data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                    print("postEvent Decoding error:", error)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+                print("postEvent error:", error.errorDescription as Any)
+            }
+        }
+    }
+    
     func deleteEvent(eventId: Int64, completion: @escaping (Result<EventDeleteDTO, Error>) -> Void) {
         provider.request(.deleteEvet(userId: userId, eventId: eventId)) { result in
             switch result {
