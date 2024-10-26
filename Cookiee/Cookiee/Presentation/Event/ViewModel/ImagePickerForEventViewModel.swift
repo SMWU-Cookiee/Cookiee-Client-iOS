@@ -61,11 +61,11 @@ import UIKit
         }
         
         var size: CGSize? {
-                    if case let .finished(image) = imageStatus {
-                        return image.size
-                    }
-                    return nil
-                }
+            if case let .finished(uiImage) = imageStatus {
+                return uiImage.size
+            }
+            return nil
+        }
     }
     
     /// An array of items for the picker's selected photos.

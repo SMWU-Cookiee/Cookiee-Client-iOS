@@ -16,7 +16,8 @@ struct ImageCarouselForUIImage: View {
     
     @GestureState var offset: CGFloat = 0
     @State var currentIndex: Int = 0
-    @State var indexToDelete: Int = -1
+    @State var indexToDeleteInUIImage: Int = -1
+    @State var indexToDeleteInImageAttachment: Int = -1
     
     
     var body: some View {
@@ -55,36 +56,38 @@ struct ImageCarouselForUIImage: View {
                     imageViewModelForPut.deleteFromList(index: index)
                 }, label: {
                     Image("TrashIconWhite")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 34, height: 34)
                 })
             }
             .frame(width: uiImage.size.width * 360 / uiImage.size.height, height: 360)
             .aspectRatio(contentMode: .fit)
             .background(Color.black.opacity(0.5))
             .onTapGesture {
-                if (indexToDelete == index) {
-                    indexToDelete = -1
+                if (indexToDeleteInUIImage == index) {
+                    indexToDeleteInUIImage = -1
                 }
             }
         }
 
     private func overlayForDeletion(at index: Int, imageAttachment: ImagePickerForEventViewModel.ImageAttachment) -> some View {
-        let width = imageAttachment.size?.width ?? 0 * 360 / (imageAttachment.size?.height ?? 1) 
-        
-        return VStack {
+        VStack {
             Button(action: {
                 imagePickerForEventViewModel.attachments.remove(at: index)
-                indexToDelete = -1
+                indexToDeleteInImageAttachment = -1
             }, label: {
                 Image("TrashIconWhite")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .frame(width: 34, height: 34)
             })
         }
-        .frame(width: width, height: 360)
+        .frame(width: (imageAttachment.size?.width ?? 360) * 360 / (imageAttachment.size?.height ?? 360), height: 360)
         .background(Color.black.opacity(0.5))
         .onTapGesture {
-            if (indexToDelete == index) {
-                indexToDelete = -1
+            if (indexToDeleteInImageAttachment == index) {
+                indexToDeleteInImageAttachment = -1
             }
         }
     }
@@ -97,9 +100,9 @@ struct ImageCarouselForUIImage: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 360)
                 .onTapGesture {
-                    indexToDelete = index
+                    indexToDeleteInUIImage = index
                 }
-                .overlayIf(indexToDelete == index, overlayForDeletion(at: index, uiImage: uiImage))
+                .overlayIf(indexToDeleteInUIImage == index, overlayForDeletion(at: index, uiImage: uiImage))
 
         }
         .frame(width: proxy.size.width - trialingSpace)
@@ -110,9 +113,9 @@ struct ImageCarouselForUIImage: View {
         ZStack {
             ImageAttachmentView(imageAttachment: imageAttachment)
                 .onTapGesture {
-                    indexToDelete = index
+                    indexToDeleteInImageAttachment = index
                 }
-                .overlayIf(indexToDelete == index, overlayForDeletion(at: index, imageAttachment: imageAttachment))
+                .overlayIf(indexToDeleteInImageAttachment == index, overlayForDeletion(at: index, imageAttachment: imageAttachment))
         }
         .frame(width: proxy.size.width - trialingSpace)
         .background(Color.white)
