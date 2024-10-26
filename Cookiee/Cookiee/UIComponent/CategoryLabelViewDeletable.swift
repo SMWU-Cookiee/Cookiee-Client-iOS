@@ -11,10 +11,11 @@ import SwiftUI
 struct CategoryLabelViewDeletable: View {
     @State var name: String
     @State var color: String
+    var action: () -> Void
     
     var body: some View {
         Button(action: {
-            
+            action()
         }, label: {
             Text("#" + name)
                 .font(.Body1_M)

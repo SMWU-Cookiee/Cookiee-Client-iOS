@@ -73,7 +73,10 @@ struct EventAddView: View {
                                 ForEach(categorySelectViewModel.selectedCategory, id: \.categoryId) { category in
                                     CategoryLabelViewDeletable(
                                         name: category.categoryName,
-                                        color: category.categoryColor
+                                        color: category.categoryColor,
+                                        action: {
+                                            categorySelectViewModel.removeCategoryFromEvent(id: category.categoryId)
+                                        }
                                     )
                                     .padding(.horizontal, 1)
                                 }
