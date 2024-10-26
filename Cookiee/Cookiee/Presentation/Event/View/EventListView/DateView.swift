@@ -284,8 +284,13 @@ struct DateView: View {
                 }
             }
         }
-        .navigationDestination(isPresented: $eventViewModel.isEditButtonTapped, destination: {
-            EventEditView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent)
+        .navigationDestination(
+            isPresented: $eventViewModel.isEditButtonTapped,
+            destination: {
+                EventEditView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent)
+                    .onDisappear() {
+                        isEventDetailViewModalOpen = true
+                    }
         })
     }
 }
