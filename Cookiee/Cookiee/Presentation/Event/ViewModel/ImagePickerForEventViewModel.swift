@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import UIKit
 
 @MainActor final class ImagePickerForEventViewModel: ObservableObject {
     
@@ -14,7 +15,7 @@ import PhotosUI
                 
         enum Status {
             case loading
-            case finished(Image)
+            case finished(UIImage)
             case failed(Error)
             
             var isFailed: Bool {
@@ -50,7 +51,7 @@ import PhotosUI
             do {
                 if let data = try await pickerItem.loadTransferable(type: Data.self),
                    let uiImage = UIImage(data: data) {
-                    imageStatus = .finished(Image(uiImage: uiImage))
+                    imageStatus = .finished(uiImage)
                 } else {
                     throw LoadingError.contentTypeNotSupported
                 }
@@ -58,6 +59,13 @@ import PhotosUI
                 imageStatus = .failed(error)
             }
         }
+        
+        var size: CGSize? {
+                    if case let .finished(image) = imageStatus {
+                        return image.size
+                    }
+                    return nil
+                }
     }
     
     /// An array of items for the picker's selected photos.

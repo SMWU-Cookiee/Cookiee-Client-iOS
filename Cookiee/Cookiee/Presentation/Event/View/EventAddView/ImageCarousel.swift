@@ -90,7 +90,8 @@ struct ImageAttachmentView: View {
         HStack {
             switch imageAttachment.imageStatus {
             case .finished(let image):
-                image.resizable()
+                Image(uiImage: image)
+                    .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 360)
             case .failed:
