@@ -34,9 +34,9 @@ struct EventEditView: View {
     
     @State var isCategorySelectButtonTapped: Bool = false
     
-    @ObservedObject var eventViewModel = EventViewModel()
+    @ObservedObject var eventViewModel: EventViewModel
     @ObservedObject var categoryListViewModel = CategoryListViewModel()
-    @ObservedObject var categorySelectViewModel = CategorySelectViewModel()
+    @StateObject var categorySelectViewModel = CategorySelectViewModel()
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
     
     @State var maxImageCount: Int = 5
@@ -221,6 +221,19 @@ struct EventEditView: View {
             if eventViewModel.isAddSuccess {
                 presentationMode.wrappedValue.dismiss()
             }
+        }
+        
+        .onAppear() {
+            eventViewModel.loadEventDetail(eventId: eventViewModel.selectedEventId!)
+            
+            title = eventViewModel.eventDetail!.title
+            place = eventViewModel.eventDetail!.eventWhere
+            content = eventViewModel.eventDetail!.what
+            people = eventViewModel.eventDetail!.withWho
+            
+            categorySelectViewModel.selectedCategory = eventViewModel.eventDetail!.categories
+            
+            print("🔥🔥🔥", categorySelectViewModel.selectedCategory)
         }
     }
 }

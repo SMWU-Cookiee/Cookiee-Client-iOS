@@ -26,9 +26,7 @@ struct DateView: View {
     @State private var isThumbnailPutOrDeleteModalOpen: Bool = false
     @State var isRegisterImageModalOpen: Bool = false
     @State var isUpdateImageModalOpen: Bool = false
-    
-    @State var selectedEventId: Int64?
-    
+        
     var date: Date
     let calendar = Calendar.current
     var yearOfEvent : Int32 { Int32(calendar.component(.year, from: date)) }
@@ -287,7 +285,7 @@ struct DateView: View {
         .navigationDestination(
             isPresented: $eventViewModel.isEditButtonTapped,
             destination: {
-                EventEditView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent)
+                EventEditView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent, eventViewModel: eventViewModel)
                     .onDisappear() {
                         isEventDetailViewModalOpen = true
                     }
