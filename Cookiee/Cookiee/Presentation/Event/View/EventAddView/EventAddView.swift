@@ -141,7 +141,8 @@ struct EventAddView: View {
             .presentationDetents([.fraction(0.60)])
             .presentationDragIndicator(Visibility.visible)
         }
-        
+        .padding(.top, 10)
+
         .photosPicker(
             isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
             selection: $imagePickerForEventViewModel.selection,
