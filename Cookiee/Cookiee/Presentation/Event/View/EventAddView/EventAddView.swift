@@ -216,5 +216,11 @@ struct EventAddView: View {
             photoLibrary: .shared()
         )
         .photosPickerStyle(.presentation)
+        
+        .onChange(of: eventViewModel.isAddSuccess) {
+            if eventViewModel.isAddSuccess {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }

@@ -23,6 +23,7 @@ class EventViewModel : ObservableObject {
     @Published var eventDetail: EventResultData?
     @Published var selectedEventId: Int64?
     @Published var isRemoveSuccess: Bool = false
+    @Published var isAddSuccess: Bool = false
     
     let service = EventService()
     
@@ -102,8 +103,10 @@ class EventViewModel : ObservableObject {
             service.postEvent(requestBody: request) { result in
                 switch result {
                 case .success(let response):
+                    self.isAddSuccess = true
                     print("✅ addEvent 성공\n", response)
                 case .failure(let error):
+                    self.isAddSuccess = false
                     print("❌ addEvent 실패\n", error)
                 }
             }
