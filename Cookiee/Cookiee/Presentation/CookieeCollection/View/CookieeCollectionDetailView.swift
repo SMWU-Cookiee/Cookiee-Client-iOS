@@ -36,7 +36,24 @@ struct CookieeCollectionDetailView: View {
             VStack {
                 if let cookieeCollectionDetail = cookieeCollectionViewModel.cookieeCollectionDetail {
                     if cookieeCollectionDetail.eventImageList.isEmpty {
-                        Text("등록된 이벤트가 없어요!")
+                        VStack(alignment: .center) {
+                            
+                            Image("CookieeWithQuestionMark")
+                                .frame(width: 74, height: 74)
+                                .padding(.top, geometry.size.height / 3)
+                                
+                            Text("등록된 이벤트가 없어요!")
+                                .font(Font.Body0_B)
+                                .foregroundStyle(Color.Brown00)
+                                .padding(.top, 13)
+                            
+                            Text("동기들 카테고리로 이벤트를 등록해서 쿠키를 모아보세요!")
+                                .font(Font.Body1_M)
+                                .foregroundStyle(Color.Brown03)
+                                .padding(.top, 5)
+                                
+                        }
+                        .frame(width: geometry.size.width)
                     } else {
                         ScrollView {
                             LazyVGrid(columns: columns, spacing: 1) {
@@ -83,4 +100,3 @@ struct CookieeCollectionDetailView: View {
 #Preview {
     CookieeCollectionDetailView(id: 1)
 }
-
