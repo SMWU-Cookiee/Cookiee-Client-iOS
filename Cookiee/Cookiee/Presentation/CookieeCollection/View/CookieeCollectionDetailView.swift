@@ -8,6 +8,18 @@
 import SwiftUI
 
 struct CookieeCollectionDetailView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var backButton: some View {
+        Button {
+            self.presentationMode.wrappedValue.dismiss()
+        } label: {
+            HStack {
+                Image("ChevronLeftIconBlack")
+                    .aspectRatio(contentMode: .fit)
+            }
+        }
+    }
+    
     @ObservedObject var cookieeCollectionViewModel = CookieeCollectionViewModel()
     
     var id: Int64
@@ -45,16 +57,26 @@ struct CookieeCollectionDetailView: View {
                             
                             Spacer()
                         }
-                        
                     }
                 } else {
                     Text("모아보기 데이터를 불러올 수 없습니다.")
                 }
             }
+            .padding(.top, 12)
             .onAppear {
                 cookieeCollectionViewModel.loadCookieeCollectionDetailData(categoryId: id)
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text((cookieeCollectionViewModel.cookieeCollectionDetail?.category.categoryName ?? "") + " 쿠키")
+                    .font(.Head1_B)
+                    .foregroundStyle(Color.Brown00)
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
     }
 }
 
