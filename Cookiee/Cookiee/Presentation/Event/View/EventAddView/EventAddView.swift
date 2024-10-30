@@ -40,6 +40,7 @@ struct EventAddView: View {
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
     
     @State var maxImageCount: Int = 5
+    @State var isSubmitting: Bool = false
     
     var isValidForm: Bool {
         !title.isEmpty && !place.isEmpty && !content.isEmpty && !people.isEmpty && !categorySelectViewModel.selectedCategory.isEmpty && !imagePickerForEventViewModel.selection.isEmpty
@@ -47,7 +48,6 @@ struct EventAddView: View {
     
     var body: some View {
         ScrollView {
-            
             VStack {
                 if (imagePickerForEventViewModel.selection.isEmpty) {
                     InitialAddMessageCardView(viewModel: imagePickerForEventViewModel)
@@ -134,6 +134,7 @@ struct EventAddView: View {
             }
             .padding()
         }
+
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -145,6 +146,7 @@ struct EventAddView: View {
         .navigationBarItems(leading: backButton)
         .navigationBarItems(trailing: Button(action: {
             if isValidForm {
+                isSubmitting = true
                 eventViewModel.addEvent(
                     eventTitle: title,
                     eventWhat: content,
@@ -154,13 +156,16 @@ struct EventAddView: View {
                     month: month,
                     date: date,
                     categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
-                    images: imagePickerForEventViewModel.selection)
+                    images: imagePickerForEventViewModel.selection
+                )
             }
         }, label: {
             Text("완료")
                 .font(.Body0_B)
-                .foregroundColor(isValidForm ? .Brown01 : .Gray03)
-        }))
+                .foregroundColor(isValidForm && !isSubmitting ? .Brown01 : .Gray03)
+        })
+            .disabled(!isValidForm || isSubmitting)
+        )
         
         .sheet(isPresented: $isCategorySelectButtonTapped) {
             VStack {
@@ -219,6 +224,8 @@ struct EventAddView: View {
         
         .onChange(of: eventViewModel.isAddSuccess) {
             if eventViewModel.isAddSuccess {
+                eventViewModel.isAddSuccess = false
+                isSubmitting = false
                 presentationMode.wrappedValue.dismiss()
             }
         }
