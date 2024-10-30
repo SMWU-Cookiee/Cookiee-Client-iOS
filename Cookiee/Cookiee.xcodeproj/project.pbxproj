@@ -19,6 +19,7 @@
 		832841E52CD294C400386308 /* CookieeCollectionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841E42CD294C400386308 /* CookieeCollectionAPI.swift */; };
 		832841E72CD294D000386308 /* CookieeCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841E62CD294D000386308 /* CookieeCollectionService.swift */; };
 		832841EC2CD2961200386308 /* CookieeCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841EB2CD2961200386308 /* CookieeCollectionViewModel.swift */; };
+		832841EE2CD2982A00386308 /* CookieeCollectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841ED2CD2982A00386308 /* CookieeCollectionDetailView.swift */; };
 		833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */; };
 		833707C62CA433A80050D1C7 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C52CA433A80050D1C7 /* CombineMoya */; };
 		833707C82CA433A80050D1C7 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C72CA433A80050D1C7 /* Moya */; };
@@ -144,6 +145,7 @@
 		832841E42CD294C400386308 /* CookieeCollectionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionAPI.swift; sourceTree = "<group>"; };
 		832841E62CD294D000386308 /* CookieeCollectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionService.swift; sourceTree = "<group>"; };
 		832841EB2CD2961200386308 /* CookieeCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionViewModel.swift; sourceTree = "<group>"; };
+		832841ED2CD2982A00386308 /* CookieeCollectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionDetailView.swift; sourceTree = "<group>"; };
 		833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddAndEditView.swift; sourceTree = "<group>"; };
 		833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTopUIViewController.swift; sourceTree = "<group>"; };
 		8349F5EF2CB0030700746163 /* saveToKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveToKeychain.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				832841DD2CD28CF800386308 /* CookieeCollectionView.swift */,
+				832841ED2CD2982A00386308 /* CookieeCollectionDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1102,6 +1105,7 @@
 				83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */,
 				8305BADA2CBE98C500658590 /* ThumbnailViewModel.swift in Sources */,
 				83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */,
+				832841EE2CD2982A00386308 /* CookieeCollectionDetailView.swift in Sources */,
 				837AFD2D2CC0E55B00BCDD34 /* EventService.swift in Sources */,
 				83DA005F2C79BE7400B8CD46 /* ProfileEditView.swift in Sources */,
 				83EE1DA82CB0372B009E4488 /* ThumbnailListResponseDTO.swift in Sources */,
