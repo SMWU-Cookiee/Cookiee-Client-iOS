@@ -24,6 +24,7 @@ class EventViewModel : ObservableObject {
     @Published var selectedEventId: Int64?
     @Published var isRemoveSuccess: Bool = false
     @Published var isAddSuccess: Bool = false
+    @Published var isUpdateSuccess: Bool = false
     @Published var isEditButtonTapped: Bool = false
 
     
@@ -108,7 +109,6 @@ class EventViewModel : ObservableObject {
     
     func updateEvent(eventId: Int64, eventTitle: String, eventWhat: String, eventWhere: String, withWho: String, year: Int32, month: Int32, date: Int32, categoryIds: [Int64], images: [Data]) {
         
-        
         Task {
 
             let request = EventRequestDTO(
@@ -126,10 +126,10 @@ class EventViewModel : ObservableObject {
             service.putEvent(eventId: eventId, requestBody: request) { result in
                 switch result {
                 case .success(let response):
-                    self.isAddSuccess = true
+                    self.isUpdateSuccess = true
                     print("✅ updateEvent 성공\n", response)
                 case .failure(let error):
-                    self.isAddSuccess = false
+                    self.isUpdateSuccess = false
                     print("❌ updateEvent 실패\n", error)
                 }
             }

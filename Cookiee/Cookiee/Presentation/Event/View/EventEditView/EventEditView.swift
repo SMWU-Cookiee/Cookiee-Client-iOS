@@ -41,6 +41,7 @@ struct EventEditView: View {
     @StateObject var imageViewModelForPut = ImageViewModelForPut()
     
     @State var maxImageCount: Int = 5
+    @State var isSubmitting: Bool = false
     
     var body: some View {
         ScrollView {
@@ -137,6 +138,7 @@ struct EventEditView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .navigationBarItems(trailing: Button(action: {
+            isSubmitting = true
             Task {
                 var imagesData: [Data] = []
                 
@@ -169,13 +171,17 @@ struct EventEditView: View {
                     categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
                     images: imagesData
                 )
+                
+                isSubmitting = false
             }
            
         }, label: {
             Text("완료")
                 .font(.Body0_B)
-                .foregroundColor(Color.Brown01)
-        }))
+                .foregroundColor(!isSubmitting ? .Brown01 : .Gray03)
+        })
+            .disabled(isSubmitting)
+        )
         
         .sheet(isPresented: $isCategorySelectButtonTapped) {
             VStack {
@@ -232,8 +238,9 @@ struct EventEditView: View {
         )
         .photosPickerStyle(.presentation)
         
-        .onChange(of: eventViewModel.isAddSuccess) {
-            if eventViewModel.isAddSuccess {
+        .onChange(of: eventViewModel.isUpdateSuccess) {
+            if eventViewModel.isUpdateSuccess {
+                eventViewModel.isUpdateSuccess = false
                 presentationMode.wrappedValue.dismiss()
             }
         }
