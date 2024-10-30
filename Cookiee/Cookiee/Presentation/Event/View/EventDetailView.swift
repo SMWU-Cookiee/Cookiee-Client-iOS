@@ -128,6 +128,7 @@ struct EventDetailView: View {
         }
         .onChange(of: eventViewModel.isRemoveSuccess) {
             if eventViewModel.isRemoveSuccess {
+                eventViewModel.isRemoveSuccess = false
                 presentationMode.wrappedValue.dismiss()
             }
         }
