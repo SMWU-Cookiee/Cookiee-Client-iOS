@@ -19,4 +19,8 @@ struct CookieeCollectionResultData: Codable {
     let categoryName: String
     let categoryColor: String
     let collectionExist: Bool
+    
+    var id: Int64 {
+        return categoryId
+    }
 }

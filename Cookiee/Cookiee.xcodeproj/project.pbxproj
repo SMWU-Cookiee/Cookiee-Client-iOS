@@ -18,6 +18,7 @@
 		832841E32CD293CD00386308 /* CookieeCollectionListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841E22CD293CD00386308 /* CookieeCollectionListResponseDTO.swift */; };
 		832841E52CD294C400386308 /* CookieeCollectionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841E42CD294C400386308 /* CookieeCollectionAPI.swift */; };
 		832841E72CD294D000386308 /* CookieeCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841E62CD294D000386308 /* CookieeCollectionService.swift */; };
+		832841EC2CD2961200386308 /* CookieeCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841EB2CD2961200386308 /* CookieeCollectionViewModel.swift */; };
 		833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */; };
 		833707C62CA433A80050D1C7 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C52CA433A80050D1C7 /* CombineMoya */; };
 		833707C82CA433A80050D1C7 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C72CA433A80050D1C7 /* Moya */; };
@@ -142,6 +143,7 @@
 		832841E22CD293CD00386308 /* CookieeCollectionListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionListResponseDTO.swift; sourceTree = "<group>"; };
 		832841E42CD294C400386308 /* CookieeCollectionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionAPI.swift; sourceTree = "<group>"; };
 		832841E62CD294D000386308 /* CookieeCollectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionService.swift; sourceTree = "<group>"; };
+		832841EB2CD2961200386308 /* CookieeCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionViewModel.swift; sourceTree = "<group>"; };
 		833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddAndEditView.swift; sourceTree = "<group>"; };
 		833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTopUIViewController.swift; sourceTree = "<group>"; };
 		8349F5EF2CB0030700746163 /* saveToKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveToKeychain.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 		832841DB2CD28CCE00386308 /* CookieeCollection */ = {
 			isa = PBXGroup;
 			children = (
+				832841EA2CD2960100386308 /* ViewModel */,
 				832841DC2CD28CD900386308 /* View */,
 			);
 			path = CookieeCollection;
@@ -337,6 +340,14 @@
 				832841E22CD293CD00386308 /* CookieeCollectionListResponseDTO.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		832841EA2CD2960100386308 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				832841EB2CD2961200386308 /* CookieeCollectionViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		833707C22CA4319E0050D1C7 /* Presentation */ = {
@@ -1108,6 +1119,7 @@
 				83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */,
 				8349F5FD2CB0139200746163 /* TokenRefreshService.swift in Sources */,
 				8305BACC2CBE864200658590 /* CalendarControlFunctions.swift in Sources */,
+				832841EC2CD2961200386308 /* CookieeCollectionViewModel.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83C88E4C2CCD13B7001554A4 /* ImageViewModelForPut.swift in Sources */,
 				8305BAD72CBE953C00658590 /* ThumbnailRequestDTO.swift in Sources */,

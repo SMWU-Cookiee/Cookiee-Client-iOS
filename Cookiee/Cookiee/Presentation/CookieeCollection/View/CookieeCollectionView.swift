@@ -8,18 +8,34 @@
 import SwiftUI
 
 struct CookieeCollectionView: View {
-    var body: some View {
-        Text("쿠키 모아보기")
-            .font(Font.Head1_B)
-            .foregroundStyle(Color.Brown00)
-            .frame(height: 44)
-        
-        VStack(spacing: 0) {
-            CategoryListRowViewForCollection(id: "1", name: "#343434", color: "343434", isCollectionExist: true)
-            CategoryListRowViewForCollection(id: "1", name: "#343434", color: "343434", isCollectionExist: true)
-        }
+    @ObservedObject var cookieeCollectionViewModel = CookieeCollectionViewModel()
 
-        Spacer()
+    
+    var body: some View {
+        VStack {
+            Text("쿠키 모아보기")
+                .font(Font.Head1_B)
+                .foregroundStyle(Color.Brown00)
+                .frame(height: 44)
+            
+            VStack(spacing: 0) {
+                ForEach(cookieeCollectionViewModel.cookieeCollectionList, id:\.id) { category in
+                    CategoryListRowViewForCollection(
+                        id: category.categoryId.description,
+                        name: category.categoryName,
+                        color: category.categoryColor,
+                        isCollectionExist: category.collectionExist
+                    )
+                }
+            }
+
+            Spacer()
+        }
+        .onAppear() {
+            DispatchQueue.main.async {
+                cookieeCollectionViewModel.loadCookieeCollectionListData()
+           }
+        }
     }
 }
 
