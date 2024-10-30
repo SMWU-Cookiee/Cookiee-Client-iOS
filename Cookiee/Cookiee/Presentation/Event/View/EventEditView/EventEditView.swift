@@ -1,14 +1,14 @@
 //
-//  EventAddView.swift
+//  EventUpdateView.swift
 //  Cookiee
 //
-//  Created by minseo Kyung on 9/18/24.
+//  Created by minseo Kyung on 10/26/24.
 //
 
 import SwiftUI
 import PhotosUI
 
-struct EventAddView: View {
+struct EventEditView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     // 백 버튼 커스텀
@@ -34,26 +34,20 @@ struct EventAddView: View {
     
     @State var isCategorySelectButtonTapped: Bool = false
     
-    @ObservedObject var eventViewModel = EventViewModel()
+    @ObservedObject var eventViewModel: EventViewModel
     @ObservedObject var categoryListViewModel = CategoryListViewModel()
-    @ObservedObject var categorySelectViewModel = CategorySelectViewModel()
+    @StateObject var categorySelectViewModel = CategorySelectViewModel()
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
+    @StateObject var imageViewModelForPut = ImageViewModelForPut()
     
     @State var maxImageCount: Int = 5
     @State var isSubmitting: Bool = false
     
-    var isValidForm: Bool {
-        !title.isEmpty && !place.isEmpty && !content.isEmpty && !people.isEmpty && !categorySelectViewModel.selectedCategory.isEmpty && !imagePickerForEventViewModel.selection.isEmpty
-    }
-    
     var body: some View {
         ScrollView {
+            
             VStack {
-                if (imagePickerForEventViewModel.selection.isEmpty) {
-                    InitialAddMessageCardView(viewModel: imagePickerForEventViewModel)
-                } else {
-                    ImageCarouselForPhotoPicker(viewModel: imagePickerForEventViewModel)
-                }
+                ImageCarouselForUIImage(imagePickerForEventViewModel: imagePickerForEventViewModel, imageViewModelForPut: imageViewModelForPut)
             }
             .padding(.bottom, 14)
             
@@ -134,20 +128,39 @@ struct EventAddView: View {
             }
             .padding()
         }
-
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("쿠키 추가하기")
+                Text("쿠키 수정하기")
                     .font(.Head1_B)
             }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .navigationBarItems(trailing: Button(action: {
-            if isValidForm {
-                isSubmitting = true
-                eventViewModel.addEvent(
+            isSubmitting = true
+            Task {
+                var imagesData: [Data] = []
+                
+                for image in imageViewModelForPut.uiImageList {
+                    imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000))
+                }
+                
+                for image in imagePickerForEventViewModel.selection {
+                    if let imageData = try? await image.loadTransferable(type: Data.self) {
+                        if let image = UIImage(data: imageData) {
+                            imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000))
+                        } else {
+                            print("❌ EventEditView : UIImage 변환 실패")
+                        }
+                    } else {
+                        print("❌ EventEditView : Failed to load image data")
+                    }
+                }
+
+                
+                eventViewModel.updateEvent(
+                    eventId: eventViewModel.eventDetail!.eventId,
                     eventTitle: title,
                     eventWhat: content,
                     eventWhere: place,
@@ -156,15 +169,18 @@ struct EventAddView: View {
                     month: month,
                     date: date,
                     categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
-                    images: imagePickerForEventViewModel.selection
+                    images: imagesData
                 )
+                
+                isSubmitting = false
             }
+           
         }, label: {
             Text("완료")
                 .font(.Body0_B)
-                .foregroundColor(isValidForm && !isSubmitting ? .Brown01 : .Gray03)
+                .foregroundColor(!isSubmitting ? .Brown01 : .Gray03)
         })
-            .disabled(!isValidForm || isSubmitting)
+            .disabled(isSubmitting)
         )
         
         .sheet(isPresented: $isCategorySelectButtonTapped) {
@@ -214,7 +230,7 @@ struct EventAddView: View {
         .photosPicker(
             isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
             selection: $imagePickerForEventViewModel.selection,
-            maxSelectionCount: maxImageCount,
+            maxSelectionCount: maxImageCount - imageViewModelForPut.uiImageList.count,
             selectionBehavior: .continuousAndOrdered,
             matching: .images,
             preferredItemEncoding: .current,
@@ -222,11 +238,26 @@ struct EventAddView: View {
         )
         .photosPickerStyle(.presentation)
         
-        .onChange(of: eventViewModel.isAddSuccess) {
-            if eventViewModel.isAddSuccess {
-                eventViewModel.isAddSuccess = false
-                isSubmitting = false
+        .onChange(of: eventViewModel.isUpdateSuccess) {
+            if eventViewModel.isUpdateSuccess {
+                eventViewModel.isUpdateSuccess = false
                 presentationMode.wrappedValue.dismiss()
+            }
+        }
+        
+        .onAppear() {
+            eventViewModel.loadEventDetail(eventId: eventViewModel.selectedEventId!)
+            
+            title = eventViewModel.eventDetail!.title
+            place = eventViewModel.eventDetail!.eventWhere
+            content = eventViewModel.eventDetail!.what
+            people = eventViewModel.eventDetail!.withWho
+            
+            categorySelectViewModel.selectedCategory = eventViewModel.eventDetail!.categories
+            
+            for url in eventViewModel.eventDetail!.eventImageUrlList {
+                guard let image = urlToUIImage(url: url) else { continue }
+                imageViewModelForPut.uiImageList.append(image)
             }
         }
     }

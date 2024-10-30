@@ -19,7 +19,7 @@ struct CustomTextField: View {
                     .font(.Body0_M)
         }
         .padding(10)
-        .font(.Body1_M)
+        .font(.Body0_M)
         .frame(height: 40)
         .background(Color.Gray01)
         .cornerRadius(5)

@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-struct ImageCarouselForUIImageView: View {
+struct ImageCarouselForPhotoPicker: View {
     @ObservedObject var viewModel: ImagePickerForEventViewModel
 
     var spacing: CGFloat = 10
@@ -79,10 +79,6 @@ struct ImageCarouselForUIImageView: View {
             .animation(.easeInOut, value: offset == 0)
         }
         .frame(height: 360)
-        .onTapGesture(perform: {
-            print(viewModel.selection.count)
-            
-        })
     }
 }
 
@@ -94,7 +90,8 @@ struct ImageAttachmentView: View {
         HStack {
             switch imageAttachment.imageStatus {
             case .finished(let image):
-                image.resizable()
+                Image(uiImage: image)
+                    .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 360)
             case .failed:
@@ -136,5 +133,3 @@ struct InitialAddMessageCardView: View {
         )
     }
 }
-
-

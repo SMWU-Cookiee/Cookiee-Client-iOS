@@ -76,6 +76,12 @@
 		83C88E392CCCD451001554A4 /* CategoryLabelViewDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E382CCCD451001554A4 /* CategoryLabelViewDeletable.swift */; };
 		83C88E3D2CCCD86B001554A4 /* EventRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E3C2CCCD86B001554A4 /* EventRequestDTO.swift */; };
 		83C88E432CCCE3C4001554A4 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E422CCCE3C4001554A4 /* CustomTextField.swift */; };
+		83C88E462CCCF7E2001554A4 /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E452CCCF7E2001554A4 /* EventEditView.swift */; };
+		83C88E4A2CCD0DC5001554A4 /* urlToUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E492CCD0DC5001554A4 /* urlToUIImage.swift */; };
+		83C88E4C2CCD13B7001554A4 /* ImageViewModelForPut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E4B2CCD13B7001554A4 /* ImageViewModelForPut.swift */; };
+		83C88E4E2CCD1778001554A4 /* ImageCarouselForUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E4D2CCD1778001554A4 /* ImageCarouselForUIImage.swift */; };
+		83C88E502CCD2E58001554A4 /* overlayIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E4F2CCD2E58001554A4 /* overlayIf.swift */; };
+		83C88E582CCD4D1E001554A4 /* downscaleTOjpegData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C88E572CCD4D1E001554A4 /* downscaleTOjpegData.swift */; };
 		83DA005F2C79BE7400B8CD46 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */; };
 		83DA00612C79C55500B8CD46 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA00602C79C55500B8CD46 /* ImagePicker.swift */; };
 		83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */; };
@@ -187,6 +193,12 @@
 		83C88E382CCCD451001554A4 /* CategoryLabelViewDeletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLabelViewDeletable.swift; sourceTree = "<group>"; };
 		83C88E3C2CCCD86B001554A4 /* EventRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRequestDTO.swift; sourceTree = "<group>"; };
 		83C88E422CCCE3C4001554A4 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		83C88E452CCCF7E2001554A4 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
+		83C88E492CCD0DC5001554A4 /* urlToUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlToUIImage.swift; sourceTree = "<group>"; };
+		83C88E4B2CCD13B7001554A4 /* ImageViewModelForPut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModelForPut.swift; sourceTree = "<group>"; };
+		83C88E4D2CCD1778001554A4 /* ImageCarouselForUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselForUIImage.swift; sourceTree = "<group>"; };
+		83C88E4F2CCD2E58001554A4 /* overlayIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = overlayIf.swift; sourceTree = "<group>"; };
+		83C88E572CCD4D1E001554A4 /* downscaleTOjpegData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = downscaleTOjpegData.swift; sourceTree = "<group>"; };
 		83DA005E2C79BE7400B8CD46 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		83DA00602C79C55500B8CD46 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
@@ -262,6 +274,7 @@
 				837AFD2E2CC0E5C000BCDD34 /* EventViewModel.swift */,
 				83C294A42CC513F4000799A3 /* CategorySelectViewModel.swift */,
 				83202F3F2CC533F4000C9825 /* ImagePickerForEventViewModel.swift */,
+				83C88E4B2CCD13B7001554A4 /* ImageViewModelForPut.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -332,6 +345,9 @@
 				835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */,
 				833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */,
 				83F02CBE2CAC3189001E8329 /* Placeholder.swift */,
+				83C88E492CCD0DC5001554A4 /* urlToUIImage.swift */,
+				83C88E4F2CCD2E58001554A4 /* overlayIf.swift */,
+				83C88E572CCD4D1E001554A4 /* downscaleTOjpegData.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -339,6 +355,7 @@
 		8362C3552CC10DDD0086D052 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				83C88E442CCCF7C3001554A4 /* EventEditView */,
 				83202F382CC53286000C9825 /* EventAddView */,
 				8362C3562CC10DFD0086D052 /* EventListView */,
 				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
@@ -649,6 +666,15 @@
 				83BD79A42C68BB590044C453 /* CookieeUITestsLaunchTests.swift */,
 			);
 			path = CookieeUITests;
+			sourceTree = "<group>";
+		};
+		83C88E442CCCF7C3001554A4 /* EventEditView */ = {
+			isa = PBXGroup;
+			children = (
+				83C88E452CCCF7E2001554A4 /* EventEditView.swift */,
+				83C88E4D2CCD1778001554A4 /* ImageCarouselForUIImage.swift */,
+			);
+			path = EventEditView;
 			sourceTree = "<group>";
 		};
 		83DEB9892C9B0B440049F7CD /* Event */ = {
@@ -1030,6 +1056,7 @@
 				8349F5FD2CB0139200746163 /* TokenRefreshService.swift in Sources */,
 				8305BACC2CBE864200658590 /* CalendarControlFunctions.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
+				83C88E4C2CCD13B7001554A4 /* ImageViewModelForPut.swift in Sources */,
 				8305BAD72CBE953C00658590 /* ThumbnailRequestDTO.swift in Sources */,
 				83E6F5F82CB7A9AC00DCDF32 /* SignOutViewModel.swift in Sources */,
 				837D74E42CBE428B005D20DC /* ProfileViewModel.swift in Sources */,
@@ -1038,10 +1065,12 @@
 				83E76C892CB6D84E000FEA67 /* SignUpService.swift in Sources */,
 				837AFD2B2CC0E4BA00BCDD34 /* EventAPI.swift in Sources */,
 				8389AB3A2CB1286000580F4D /* CategoryRequestDTO.swift in Sources */,
+				83C88E582CCD4D1E001554A4 /* downscaleTOjpegData.swift in Sources */,
 				837D74DC2CBE4096005D20DC /* ProfileAPI.swift in Sources */,
 				83E76C7D2CB6D1C2000FEA67 /* SignOutService.swift in Sources */,
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
 				8349F5F02CB0030700746163 /* saveToKeychain.swift in Sources */,
+				83C88E462CCCF7E2001554A4 /* EventEditView.swift in Sources */,
 				83DEB9882C9B05BC0049F7CD /* EventAddView.swift in Sources */,
 				837AFD2F2CC0E5C000BCDD34 /* EventViewModel.swift in Sources */,
 				83EE1DAA2CB038F0009E4488 /* ThumbnailAPI.swift in Sources */,
@@ -1057,6 +1086,7 @@
 				83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */,
 				83E76C852CB6D5FF000FEA67 /* SignUpResponseDTO.swift in Sources */,
 				83C88E392CCCD451001554A4 /* CategoryLabelViewDeletable.swift in Sources */,
+				83C88E502CCD2E58001554A4 /* overlayIf.swift in Sources */,
 				83F02CBD2CAC11F2001E8329 /* SignUpView.swift in Sources */,
 				837D74ED2CBE8473005D20DC /* CalendarCellView.swift in Sources */,
 				83202F402CC533F4000C9825 /* ImagePickerForEventViewModel.swift in Sources */,
@@ -1085,7 +1115,9 @@
 				83202F3E2CC5330B000C9825 /* ImageCarousel.swift in Sources */,
 				8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */,
 				837AFD272CC0E3F100BCDD34 /* EventListResponseDTO.swift in Sources */,
+				83C88E4E2CCD1778001554A4 /* ImageCarouselForUIImage.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
+				83C88E4A2CCD0DC5001554A4 /* urlToUIImage.swift in Sources */,
 				833707E82CA43EED0050D1C7 /* FindTopUIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

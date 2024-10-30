@@ -24,6 +24,9 @@ class EventViewModel : ObservableObject {
     @Published var selectedEventId: Int64?
     @Published var isRemoveSuccess: Bool = false
     @Published var isAddSuccess: Bool = false
+    @Published var isUpdateSuccess: Bool = false
+    @Published var isEditButtonTapped: Bool = false
+
     
     let service = EventService()
     
@@ -68,10 +71,14 @@ class EventViewModel : ObservableObject {
         
         Task {
             for image in images {
-                if let data = try? await image.loadTransferable(type: Data.self) {
-                    imagesData.append(data)
+                if let imageData = try? await image.loadTransferable(type: Data.self) {
+                    if let image = UIImage(data: imageData) {
+                        imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000))
+                    } else {
+                        print("❌ addEvent : UIImage 변환 실패")
+                    }
                 } else {
-                    print("Failed to load image data.")
+                    print("❌ addEvent : Failed to load image data")
                 }
             }
             
@@ -87,19 +94,6 @@ class EventViewModel : ObservableObject {
                 images: imagesData
             )
             
-            print(request.eventTitle)
-            print(request.eventWhat)
-            print(request.eventWhere)
-            print(request.withWho)
-            print(request.eventYear)
-            print(request.eventMonth)
-            print(request.eventDate)
-            print(request.categoryIds.description)
-            print(request.images.description)
-            
-            
-            
-            
             service.postEvent(requestBody: request) { result in
                 switch result {
                 case .success(let response):
@@ -108,6 +102,35 @@ class EventViewModel : ObservableObject {
                 case .failure(let error):
                     self.isAddSuccess = false
                     print("❌ addEvent 실패\n", error)
+                }
+            }
+        }
+    }
+    
+    func updateEvent(eventId: Int64, eventTitle: String, eventWhat: String, eventWhere: String, withWho: String, year: Int32, month: Int32, date: Int32, categoryIds: [Int64], images: [Data]) {
+        
+        Task {
+
+            let request = EventRequestDTO(
+                eventTitle: eventTitle,
+                eventWhat: eventWhat,
+                eventWhere: eventWhere,
+                withWho: withWho,
+                eventYear: year,
+                eventMonth: month,
+                eventDate: date,
+                categoryIds: categoryIds,
+                images: images
+            )
+            
+            service.putEvent(eventId: eventId, requestBody: request) { result in
+                switch result {
+                case .success(let response):
+                    self.isUpdateSuccess = true
+                    print("✅ updateEvent 성공\n", response)
+                case .failure(let error):
+                    self.isUpdateSuccess = false
+                    print("❌ updateEvent 실패\n", error)
                 }
             }
         }

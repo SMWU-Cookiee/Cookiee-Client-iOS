@@ -11,13 +11,22 @@ func fetchImageByURL(url: String) -> some View {
     AsyncImage(url: URL(string: url)) { phase in
         switch phase {
         case .success(let image):
-            image
-                .resizable()
-                .scaledToFit()
+            VStack(alignment: .center) {
+                Spacer()
+                image
+                    .resizable()
+                    .scaledToFit()
+                Spacer()
+            }
+            
         default:
-            Spacer()
-            ProgressView()
-            Spacer()
+            HStack {
+                Spacer()
+                ProgressView()
+                Spacer()
+            }
+            .frame(width: 350, height: 300)
+            .background(Color.white)
         }
     }
 }
