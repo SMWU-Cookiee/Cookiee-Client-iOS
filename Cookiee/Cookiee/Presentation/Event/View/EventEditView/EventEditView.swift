@@ -141,13 +141,13 @@ struct EventEditView: View {
                 var imagesData: [Data] = []
                 
                 for image in imageViewModelForPut.uiImageList {
-                    imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000) ?? Data())
+                    imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000))
                 }
                 
                 for image in imagePickerForEventViewModel.selection {
                     if let imageData = try? await image.loadTransferable(type: Data.self) {
                         if let image = UIImage(data: imageData) {
-                            imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000) ?? Data())
+                            imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000))
                         } else {
                             print("❌ EventEditView : UIImage 변환 실패")
                         }

@@ -72,7 +72,7 @@ class EventViewModel : ObservableObject {
             for image in images {
                 if let imageData = try? await image.loadTransferable(type: Data.self) {
                     if let image = UIImage(data: imageData) {
-                        imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000) ?? Data())
+                        imagesData.append(image.downscaleTOjpegData(maxBytes: 400_000))
                     } else {
                         print("❌ addEvent : UIImage 변환 실패")
                     }

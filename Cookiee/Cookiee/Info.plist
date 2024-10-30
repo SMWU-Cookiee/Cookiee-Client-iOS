@@ -30,5 +30,7 @@
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>site.apps.cookiee</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>사진 라이브러리에 접근하여 이미지를 선택하기 위해 필요합니다.</string>
 </dict>
 </plist>

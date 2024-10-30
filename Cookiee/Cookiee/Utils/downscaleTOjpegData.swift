@@ -8,16 +8,22 @@
 import SwiftUI
 
 extension UIImage {
-    public func downscaleTOjpegData(maxBytes: UInt) -> Data? {
+    public func downscaleTOjpegData(maxBytes: UInt) -> Data {
         var quality = 1.0
+        var compressedData: Data? = nil
+        
         while quality > 0 {
-            guard let jpeg = jpegData(compressionQuality: quality)
-            else { return nil }
+            compressedData = jpegData(compressionQuality: quality)
+            guard let jpeg = compressedData else { return Data() }
+            
             if jpeg.count <= maxBytes {
                 return jpeg
             }
             quality -= 0.1
         }
-        return nil
+        
+        print("❌ downscaleTOjpegData: maxBytes를 넘음.")
+        return compressedData ?? Data()
     }
 }
+
