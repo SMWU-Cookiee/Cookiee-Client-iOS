@@ -14,6 +14,7 @@
 		83202F3C2CC532B8000C9825 /* CategorySelectButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83202F3B2CC532B8000C9825 /* CategorySelectButtonView.swift */; };
 		83202F3E2CC5330B000C9825 /* ImageCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83202F3D2CC5330B000C9825 /* ImageCarousel.swift */; };
 		83202F402CC533F4000C9825 /* ImagePickerForEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83202F3F2CC533F4000C9825 /* ImagePickerForEventViewModel.swift */; };
+		832841DE2CD28CF800386308 /* CookieeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841DD2CD28CF800386308 /* CookieeCollectionView.swift */; };
 		833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */; };
 		833707C62CA433A80050D1C7 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C52CA433A80050D1C7 /* CombineMoya */; };
 		833707C82CA433A80050D1C7 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C72CA433A80050D1C7 /* Moya */; };
@@ -134,6 +135,7 @@
 		83202F3B2CC532B8000C9825 /* CategorySelectButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectButtonView.swift; sourceTree = "<group>"; };
 		83202F3D2CC5330B000C9825 /* ImageCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarousel.swift; sourceTree = "<group>"; };
 		83202F3F2CC533F4000C9825 /* ImagePickerForEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerForEventViewModel.swift; sourceTree = "<group>"; };
+		832841DD2CD28CF800386308 /* CookieeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionView.swift; sourceTree = "<group>"; };
 		833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddAndEditView.swift; sourceTree = "<group>"; };
 		833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTopUIViewController.swift; sourceTree = "<group>"; };
 		8349F5EF2CB0030700746163 /* saveToKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveToKeychain.swift; sourceTree = "<group>"; };
@@ -289,11 +291,28 @@
 			path = EventAddView;
 			sourceTree = "<group>";
 		};
+		832841DB2CD28CCE00386308 /* CookieeCollection */ = {
+			isa = PBXGroup;
+			children = (
+				832841DC2CD28CD900386308 /* View */,
+			);
+			path = CookieeCollection;
+			sourceTree = "<group>";
+		};
+		832841DC2CD28CD900386308 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				832841DD2CD28CF800386308 /* CookieeCollectionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		833707C22CA4319E0050D1C7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				83BD79892C68BB570044C453 /* ContentView.swift */,
 				83B5CA882C690DCE00C69ED1 /* TabBarView.swift */,
+				832841DB2CD28CCE00386308 /* CookieeCollection */,
 				837D74E72CBE65DC005D20DC /* Calendar */,
 				83F02CBB2CAC11D0001E8329 /* Account */,
 				83DEB9892C9B0B440049F7CD /* Event */,
@@ -1052,6 +1071,7 @@
 				8362C3542CC0FD060086D052 /* EventDeleteDTO.swift in Sources */,
 				83A3E2672C7A193B00ADDB55 /* DevelopersView.swift in Sources */,
 				833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */,
+				832841DE2CD28CF800386308 /* CookieeCollectionView.swift in Sources */,
 				83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */,
 				8349F5FD2CB0139200746163 /* TokenRefreshService.swift in Sources */,
 				8305BACC2CBE864200658590 /* CalendarControlFunctions.swift in Sources */,

@@ -25,11 +25,7 @@ struct TabBarView : View {
                     case .first:
                         HomeCalendarView()
                     case .second:
-                        VStack {
-                            Spacer()
-                            Text("모아보기")
-                            Spacer()
-                        }
+                        CookieeCollectionView()
                     case .third:
                         MyPageView()
                     }
@@ -100,3 +96,4 @@ struct CustomTabView: View {
 #Preview {
     TabBarView()
 }
+
