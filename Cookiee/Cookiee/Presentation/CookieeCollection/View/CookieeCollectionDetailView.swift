@@ -26,23 +26,26 @@ struct CookieeCollectionDetailView: View {
                     if cookieeCollectionDetail.eventImageList.isEmpty {
                         Text("등록된 이벤트가 없어요!")
                     } else {
-                        LazyVGrid(columns: columns, spacing: 1) {
-                            ForEach(cookieeCollectionDetail.eventImageList, id: \.eventId) { eventImage in
-                                AsyncImage(url: URL(string: eventImage.firstImageUrl)) { image in
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: cellWidth, height: cellWidth)
-                                        .clipped()
-                                } placeholder: {
-                                    ProgressView()
-                                        .frame(width: cellWidth, height: cellWidth)
+                        ScrollView {
+                            LazyVGrid(columns: columns, spacing: 1) {
+                                ForEach(cookieeCollectionDetail.eventImageList, id: \.eventId) { eventImage in
+                                    AsyncImage(url: URL(string: eventImage.firstImageUrl)) { image in
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: cellWidth, height: cellWidth)
+                                            .clipped()
+                                    } placeholder: {
+                                        ProgressView()
+                                            .frame(width: cellWidth, height: cellWidth)
+                                    }
                                 }
                             }
+                            .padding(.horizontal, 1)
+                            
+                            Spacer()
                         }
-                        .padding(.horizontal, 1)
                         
-                        Spacer()
                     }
                 } else {
                     Text("모아보기 데이터를 불러올 수 없습니다.")
