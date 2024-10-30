@@ -39,4 +39,22 @@ class CookieeCollectionService {
             }
         }
     }
+    
+    func getCookieeCollectionDetail(categoryId: Int64, completion: @escaping (Result<CookieeCollectionDetailResponseDTO, Error>) -> Void) {
+        provider.request(.getCookieeCollectionDetail(userId: userId, categoryId: categoryId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let response = try JSONDecoder().decode(CookieeCollectionDetailResponseDTO.self, from: response.data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                    print("getCookieeCollectionDetail Decoding error:", error)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+                print("getCookieeCollectionDetail error:", error)
+            }
+        }
+    }
 }

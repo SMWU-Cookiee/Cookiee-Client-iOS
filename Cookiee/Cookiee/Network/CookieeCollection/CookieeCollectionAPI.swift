@@ -10,12 +10,15 @@ import Moya
 
 enum CookieeCollectionAPI {
     case getCookieeCollectionList(userId: String)
+    case getCookieeCollectionDetail(userId: String, categoryId: Int64)
 }
 
 extension CookieeCollectionAPI: BaseTargetType {
     var headerType: HeaderType {
         switch self {
         case .getCookieeCollectionList:
+            return .accessTokenHeaderForJson
+        case .getCookieeCollectionDetail:
             return .accessTokenHeaderForJson
         }
     }
@@ -24,6 +27,8 @@ extension CookieeCollectionAPI: BaseTargetType {
         switch self {
         case .getCookieeCollectionList(userId: let userId):
             return "/api/v2/categories/collection/\(userId)"
+        case .getCookieeCollectionDetail(userId: let userId, categoryId: let categoryId):
+            return "/api/v2/categories/collection/\(userId)/\(categoryId)"
         }
     }
     
@@ -31,12 +36,16 @@ extension CookieeCollectionAPI: BaseTargetType {
         switch self {
         case .getCookieeCollectionList:
             return .get
+        case .getCookieeCollectionDetail:
+            return .get
         }
     }
     
     var task: Moya.Task {
         switch self {
         case .getCookieeCollectionList:
+            return .requestPlain
+        case .getCookieeCollectionDetail:
             return .requestPlain
         }
     }
