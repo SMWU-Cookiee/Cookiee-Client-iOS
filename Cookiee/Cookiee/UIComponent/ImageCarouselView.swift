@@ -24,12 +24,12 @@ struct ImageCarouselView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             GeometryReader { proxy in
                 let width = proxy.size.width - (trialingSpace - spacing)
                 let adjustmentWidth = (trialingSpace / 2) - spacing
                 
-                HStack(spacing: spacing) {
+                HStack(alignment: .center, spacing: spacing) {
                     ForEach(Array(imageUrls.enumerated()), id: \.offset) { offset, url in
                         fetchImageByURL(url: url)
                         .frame(width: proxy.size.width - trialingSpace)
