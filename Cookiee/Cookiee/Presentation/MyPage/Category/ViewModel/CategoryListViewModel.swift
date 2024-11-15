@@ -20,10 +20,13 @@ import Foundation
 class CategoryListViewModel: ObservableObject {
     @Published var categories: [CategoryResultData] = []
     @Published var isUpdateSuccess: Bool = false
+    @Published var isLoadingCompleted: Bool = false
+    
 
     let categoryService = CategoryService()
 
     func loadCategoryListData() {
+        self.isLoadingCompleted = false
         categoryService.getCategoryList { result in
             switch result {
             case .success(let categoryList):
@@ -37,6 +40,7 @@ class CategoryListViewModel: ObservableObject {
                     }
                     print("✅ loadCategoryListData 성공")
                     print("🍎 loadCategoryListData 결과 : ", self.categories)
+                    self.isLoadingCompleted = true
                 }
             case .failure(let error):
                 print("❌ Error loading categories: \(error)")

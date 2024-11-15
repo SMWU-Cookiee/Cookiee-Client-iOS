@@ -32,21 +32,25 @@ struct CategoryListView: View {
     
     var body: some View {
         VStack {
-            ScrollView {
-                ForEach(stateCategoryListViewModel.categories, id:\.id) { category in
-                    CategoryListRowView(
-                        id: category.categoryId.description,
-                        name: category.categoryName,
-                        color: category.categoryColor,
-                        isDeleteButtonTapped: $isDeleteButtonTapped,
-                        categoryNameToDelete: $categoryNameToDelete,
-                        categoryIdToDelete: $categoryIdToDelete,
-                        categoryListViewModel: stateCategoryListViewModel
-                    )
+            if !stateCategoryListViewModel.isLoadingCompleted {
+                ProgressView()
+            } else {
+                ScrollView {
+                    ForEach(stateCategoryListViewModel.categories, id:\.id) { category in
+                        CategoryListRowView(
+                            id: category.categoryId.description,
+                            name: category.categoryName,
+                            color: category.categoryColor,
+                            isDeleteButtonTapped: $isDeleteButtonTapped,
+                            categoryNameToDelete: $categoryNameToDelete,
+                            categoryIdToDelete: $categoryIdToDelete,
+                            categoryListViewModel: stateCategoryListViewModel
+                        )
+                    }
+                    CategoryAddButtonView(toggleIsTapped: {
+                        isAddButtonTapped.toggle()
+                    })
                 }
-                CategoryAddButtonView(toggleIsTapped: {
-                    isAddButtonTapped.toggle()
-                })
             }
         }
         .sheet(isPresented: $isAddButtonTapped, onDismiss: {
