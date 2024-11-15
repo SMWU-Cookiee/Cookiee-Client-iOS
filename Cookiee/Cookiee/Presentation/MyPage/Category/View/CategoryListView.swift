@@ -53,10 +53,7 @@ struct CategoryListView: View {
                 }
             }
         }
-        .sheet(isPresented: $isAddButtonTapped, onDismiss: {
-            print("카테고리 추가 onDismiss")
-            stateCategoryListViewModel.loadCategoryListData()
-        }) {
+        .sheet(isPresented: $isAddButtonTapped) {
             CategoryAddAndEditView(categoryListViewModel: stateCategoryListViewModel, toggleIsOpenCategoryAddSheet: {
                 isAddButtonTapped.toggle()
             })
@@ -80,9 +77,6 @@ struct CategoryListView: View {
                 stateCategoryListViewModel.loadCategoryListData()
            }
         }
-//        .onChange(of: stateCategoryListViewModel.isUpdateSuccess) {
-//            presentationMode.wrappedValue.dismiss()
-//        }
         .showCustomAlert(
             isPresented: $isDeleteButtonTapped,
             content: {

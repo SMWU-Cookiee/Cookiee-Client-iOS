@@ -40,8 +40,8 @@ class CategoryListViewModel: ObservableObject {
                     }
                     print("✅ loadCategoryListData 성공")
                     print("🍎 loadCategoryListData 결과 : ", self.categories)
-                    self.isLoadingCompleted = true
                 }
+                self.isLoadingCompleted = true
             case .failure(let error):
                 print("❌ Error loading categories: \(error)")
             }
