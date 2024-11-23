@@ -37,7 +37,6 @@ struct DateView: View {
     @State var selectedUIImage: UIImage?
     @State var newImage: UIImage?
     
-    
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
         newImage = selectedImage
@@ -49,37 +48,49 @@ struct DateView: View {
                 ZStack(alignment: .bottomLeading) {
                     HStack {
                         if thumbnailViewModel.thumbnailData != nil {
-                            Button(action: {
-                                isThumbnailPutOrDeleteModalOpen = true
-                            }, label: {
-                                AsyncImage(url: URL(string: thumbnailViewModel.thumbnailData!.thumbnailUrl)) { phase in
-                                    switch phase {
-                                    case .empty:
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .fill(Color.Gray01)
-                                            .frame(width: geometry.size.width, height: 265)
-                                            .overlay(ProgressView())
-                                    case .success(let image):
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: geometry.size.width, height: 265)
-                                            .clipped()
-                                    case .failure(_):
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .fill(Color.Gray01)
-                                            .overlay(
-                                                Image(systemName: "photo")
-                                                    .resizable()
-                                                    .frame(width: 30, height: 30)
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .foregroundStyle(Color.gray)
-                                            )
-                                    @unknown default:
-                                        EmptyView()
-                                    }
+                            ZStack {
+                                if !thumbnailViewModel.isLoading {
+                                    Button(action: {
+                                        isThumbnailPutOrDeleteModalOpen = true
+                                    }, label: {
+                                            AsyncImage(url: URL(string: thumbnailViewModel.thumbnailData!.thumbnailUrl)) { phase in
+                                                switch phase {
+                                                case .empty:
+                                                    RoundedRectangle(cornerRadius: 2)
+                                                        .fill(Color.Gray01)
+                                                        .frame(width: geometry.size.width, height: 265)
+                                                        .overlay(ProgressView())
+                                                case .success(let image):
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .frame(width: geometry.size.width, height: 265)
+                                                        .clipped()
+                                                case .failure(_):
+                                                    RoundedRectangle(cornerRadius: 2)
+                                                        .fill(Color.Gray01)
+                                                        .overlay(
+                                                            Image(systemName: "photo")
+                                                                .resizable()
+                                                                .frame(width: 30, height: 30)
+                                                                .aspectRatio(contentMode: .fit)
+                                                                .foregroundStyle(Color.gray)
+                                                        )
+                                                @unknown default:
+                                                    EmptyView()
+                                                }
+                                            }
+                                    })
                                 }
-                            })
+                                
+                                
+                                if thumbnailViewModel.isLoading {
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .fill(Color.Gray01)
+                                        .frame(width: geometry.size.width, height: 265)
+                                        .overlay(ProgressView())
+                                }
+                            }
                         } else {
                             Button(action: {
                                 print("썸네일 추가")
@@ -207,7 +218,9 @@ struct DateView: View {
                     
                     Button(action: {
                         if thumbnailViewModel.thumbnailData != nil {
+                            thumbnailViewModel.isLoading = true
                             thumbnailViewModel.removeThumbnail(thumbnailId: (thumbnailViewModel.thumbnailData!.thumbnailId.description), year: yearOfEvent, month: monthOfEvent, day: dayOfEvent)
+                            thumbnailViewModel.isLoading = false
                             isThumbnailPutOrDeleteModalOpen = false
                         }
                     }, label: {
