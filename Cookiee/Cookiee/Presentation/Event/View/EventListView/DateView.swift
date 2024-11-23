@@ -56,7 +56,7 @@ struct DateView: View {
                                     switch phase {
                                     case .empty:
                                         RoundedRectangle(cornerRadius: 2)
-                                            .fill(Color.white)
+                                            .fill(Color.Gray01)
                                             .frame(width: geometry.size.width, height: 265)
                                             .overlay(ProgressView())
                                     case .success(let image):
@@ -67,7 +67,7 @@ struct DateView: View {
                                             .clipped()
                                     case .failure(_):
                                         RoundedRectangle(cornerRadius: 2)
-                                            .fill(Color.white)
+                                            .fill(Color.Gray01)
                                             .overlay(
                                                 Image(systemName: "photo")
                                                     .resizable()
