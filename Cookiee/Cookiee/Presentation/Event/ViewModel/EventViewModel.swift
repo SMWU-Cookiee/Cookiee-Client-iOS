@@ -95,6 +95,7 @@ class EventViewModel : ObservableObject {
             )
             
             service.postEvent(requestBody: request) { result in
+                self.isAddSuccess = false
                 switch result {
                 case .success(let response):
                     self.isAddSuccess = true
