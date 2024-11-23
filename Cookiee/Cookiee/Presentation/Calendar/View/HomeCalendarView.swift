@@ -127,7 +127,7 @@ struct HomeCalendarView: View {
                 let thumbnailData = filterThumbnailUrlByDate(date: date)
                 
                 NavigationLink(
-                    destination: DateView(date: date, thumbnailId: thumbnailData?.thumbnailId),
+                    destination: DateView(date: date),
                     label: {
                         CellView(day: day, clicked: clicked, isToday: isToday, thumbnailUrl: thumbnailData?.thumbnailUrl)
                     }

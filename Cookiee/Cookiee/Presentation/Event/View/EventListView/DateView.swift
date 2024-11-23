@@ -33,7 +33,6 @@ struct DateView: View {
     var monthOfEvent : Int32 { Int32(calendar.component(.month, from: date)) }
     var dayOfEvent : Int32 { Int32(calendar.component(.day, from: date)) }
 
-    @State var thumbnailId: Int64?
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
     @State var newImage: UIImage?
@@ -49,11 +48,11 @@ struct DateView: View {
             VStack {
                 ZStack(alignment: .bottomLeading) {
                     HStack {
-                        if !thumbnailViewModel.thumbnail.isEmpty {
+                        if thumbnailViewModel.thumbnailData != nil {
                             Button(action: {
                                 isThumbnailPutOrDeleteModalOpen = true
                             }, label: {
-                                AsyncImage(url: URL(string: thumbnailViewModel.thumbnail)) { phase in
+                                AsyncImage(url: URL(string: thumbnailViewModel.thumbnailData!.thumbnailUrl)) { phase in
                                     switch phase {
                                     case .empty:
                                         RoundedRectangle(cornerRadius: 2)
@@ -175,7 +174,7 @@ struct DateView: View {
                     year: yearOfEvent,
                     month: monthOfEvent,
                     day: dayOfEvent
-                    )
+                )
             }) {
                 if eventViewModel.selectedEventId != nil {
                     EventDetailView(eventViewModel: eventViewModel, date: date)
@@ -207,8 +206,10 @@ struct DateView: View {
                     Divider()
                     
                     Button(action: {
-                        thumbnailViewModel.removeThumbnail(thumbnailId: thumbnailId!.description)
-                        isThumbnailPutOrDeleteModalOpen = false
+                        if thumbnailViewModel.thumbnailData != nil {
+                            thumbnailViewModel.removeThumbnail(thumbnailId: (thumbnailViewModel.thumbnailData!.thumbnailId.description), year: yearOfEvent, month: monthOfEvent, day: dayOfEvent)
+                            isThumbnailPutOrDeleteModalOpen = false
+                        }
                     }, label: {
                         HStack {
                             Image("TrashIconRed")
@@ -255,13 +256,11 @@ struct DateView: View {
                 month: monthOfEvent,
                 day: dayOfEvent
             )
-            if (thumbnailId != nil) {
-                thumbnailViewModel.loadThumbnilByDate(
-                    year: yearOfEvent,
-                    month: monthOfEvent,
-                    day: dayOfEvent
-                )
-            }
+            thumbnailViewModel.loadThumbnilByDate(
+                year: yearOfEvent,
+                month: monthOfEvent,
+                day: dayOfEvent
+            )
         }
         .onChange(of: newImage) {
             if newImage != nil {
@@ -275,8 +274,9 @@ struct DateView: View {
                     isRegisterImageModalOpen = false
                 } else if isUpdateImageModalOpen {
                     thumbnailViewModel.updateThumbnail(
-                        thumbnailId: thumbnailId!.description,
-                        newThumbnail: newImage!
+                        thumbnailId: thumbnailViewModel.thumbnailData!.thumbnailId.description,
+                        newThumbnail: newImage!,
+                        year: yearOfEvent, month: monthOfEvent, day: dayOfEvent
                     )
                     isUpdateImageModalOpen = false
                 }
