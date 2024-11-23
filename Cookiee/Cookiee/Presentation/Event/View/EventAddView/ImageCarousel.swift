@@ -11,7 +11,7 @@ import PhotosUI
 struct ImageCarouselForPhotoPicker: View {
     @ObservedObject var viewModel: ImagePickerForEventViewModel
 
-    var spacing: CGFloat = 10
+    var spacing: CGFloat = 15
     var trialingSpace: CGFloat = 30
     
     @GestureState var offset: CGFloat = 0
