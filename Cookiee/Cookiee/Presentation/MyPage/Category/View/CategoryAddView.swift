@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct CategoryAddAndEditView: View {
+struct CategoryAddView: View {
     @ObservedObject var categoryListViewModel: CategoryListViewModel
-    @State var isNewCategory: Bool = true
     
     @State var id: String = ""
     @State var name: String = ""
@@ -33,11 +32,7 @@ struct CategoryAddAndEditView: View {
                         Spacer()
                         
                         Button(action: {
-                            if isNewCategory {
-                                categoryListViewModel.addCategory(categoryName: name, categoryColor: selectedColor)
-                            } else {
-                                categoryListViewModel.updateCategory(categoryId: id, categoryName: name, categoryColor: selectedColor)
-                            }
+                            categoryListViewModel.addCategory(categoryName: name, categoryColor: selectedColor)
                             toggleIsOpenCategoryAddSheet()
                         }, label: {
                             Text("완료")
@@ -49,7 +44,7 @@ struct CategoryAddAndEditView: View {
                     
                     
                     Spacer()
-                    Text(isNewCategory ? "카테고리 추가하기" : "카테고리 수정하기")
+                    Text("카테고리 추가하기")
                         .font(.Head1_B)
                         .frame(alignment: .center)
 

@@ -54,7 +54,7 @@ struct CategoryListView: View {
             }
         }
         .sheet(isPresented: $isAddButtonTapped) {
-            CategoryAddAndEditView(categoryListViewModel: stateCategoryListViewModel, toggleIsOpenCategoryAddSheet: {
+            CategoryAddView(categoryListViewModel: stateCategoryListViewModel, toggleIsOpenCategoryAddSheet: {
                 isAddButtonTapped.toggle()
             })
             .presentationDetents([.fraction(0.95)])

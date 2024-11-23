@@ -61,9 +61,8 @@ struct CategoryListRowView: View {
             categoryListViewModel.loadCategoryListData()
             
         }) {
-            CategoryAddAndEditView(
+            CategoryEditView(
                 categoryListViewModel: categoryListViewModel,
-                isNewCategory: false,
                 id: id,
                 name: name,
                 selectedColor: color,

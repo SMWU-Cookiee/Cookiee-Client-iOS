@@ -21,7 +21,8 @@
 		832841EC2CD2961200386308 /* CookieeCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841EB2CD2961200386308 /* CookieeCollectionViewModel.swift */; };
 		832841EE2CD2982A00386308 /* CookieeCollectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841ED2CD2982A00386308 /* CookieeCollectionDetailView.swift */; };
 		832841F02CD29A2200386308 /* CookieeCollectionDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832841EF2CD29A2200386308 /* CookieeCollectionDetailResponseDTO.swift */; };
-		833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */; };
+		833321C02C7B6A7C00C94D9D /* CategoryAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833321BF2C7B6A7C00C94D9D /* CategoryAddView.swift */; };
+		8336B2A62CF22F4E004BE4E2 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336B2A52CF22F4E004BE4E2 /* CategoryEditView.swift */; };
 		833707C62CA433A80050D1C7 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C52CA433A80050D1C7 /* CombineMoya */; };
 		833707C82CA433A80050D1C7 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C72CA433A80050D1C7 /* Moya */; };
 		833707CA2CA433A80050D1C7 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 833707C92CA433A80050D1C7 /* ReactiveMoya */; };
@@ -150,7 +151,8 @@
 		832841EB2CD2961200386308 /* CookieeCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionViewModel.swift; sourceTree = "<group>"; };
 		832841ED2CD2982A00386308 /* CookieeCollectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionDetailView.swift; sourceTree = "<group>"; };
 		832841EF2CD29A2200386308 /* CookieeCollectionDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeCollectionDetailResponseDTO.swift; sourceTree = "<group>"; };
-		833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddAndEditView.swift; sourceTree = "<group>"; };
+		833321BF2C7B6A7C00C94D9D /* CategoryAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddView.swift; sourceTree = "<group>"; };
+		8336B2A52CF22F4E004BE4E2 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
 		833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTopUIViewController.swift; sourceTree = "<group>"; };
 		8349F5EF2CB0030700746163 /* saveToKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveToKeychain.swift; sourceTree = "<group>"; };
 		8349F5F12CB0036E00746163 /* loadFromKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadFromKeychain.swift; sourceTree = "<group>"; };
@@ -622,7 +624,8 @@
 			isa = PBXGroup;
 			children = (
 				83B1C6B22C74E76900740EA3 /* CategoryListView.swift */,
-				833321BF2C7B6A7C00C94D9D /* CategoryAddAndEditView.swift */,
+				833321BF2C7B6A7C00C94D9D /* CategoryAddView.swift */,
+				8336B2A52CF22F4E004BE4E2 /* CategoryEditView.swift */,
 				839584EF2CE7A20600FE19DD /* CategoryAddButtonView.swift */,
 				839584F12CE7A22500FE19DD /* CategoryListRowView.swift */,
 			);
@@ -1128,7 +1131,7 @@
 				83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */,
 				8362C3542CC0FD060086D052 /* EventDeleteDTO.swift in Sources */,
 				83A3E2672C7A193B00ADDB55 /* DevelopersView.swift in Sources */,
-				833321C02C7B6A7C00C94D9D /* CategoryAddAndEditView.swift in Sources */,
+				833321C02C7B6A7C00C94D9D /* CategoryAddView.swift in Sources */,
 				832841DE2CD28CF800386308 /* CookieeCollectionView.swift in Sources */,
 				83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */,
 				8349F5FD2CB0139200746163 /* TokenRefreshService.swift in Sources */,
@@ -1167,6 +1170,7 @@
 				83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */,
 				83E76C852CB6D5FF000FEA67 /* SignUpResponseDTO.swift in Sources */,
 				83C88E392CCCD451001554A4 /* CategoryLabelViewDeletable.swift in Sources */,
+				8336B2A62CF22F4E004BE4E2 /* CategoryEditView.swift in Sources */,
 				83C88E502CCD2E58001554A4 /* overlayIf.swift in Sources */,
 				83F02CBD2CAC11F2001E8329 /* SignUpView.swift in Sources */,
 				832841F02CD29A2200386308 /* CookieeCollectionDetailResponseDTO.swift in Sources */,
