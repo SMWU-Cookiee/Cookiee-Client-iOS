@@ -16,7 +16,7 @@ struct ImageCarouselView: View {
     @GestureState var offset: CGFloat = 0
     @State var currentIndex: Int = 0
     
-    init(spacing: CGFloat = 10, trialingSpace: CGFloat = 30, index: Binding<Int>, imageUrls: [String]) {
+    init(spacing: CGFloat = 15, trialingSpace: CGFloat = 30, index: Binding<Int>, imageUrls: [String]) {
         self.imageUrls = imageUrls
         self.spacing = spacing
         self.trialingSpace = trialingSpace
