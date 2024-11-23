@@ -29,13 +29,25 @@ struct ProfileEditView: View {
     @State var selectedUIImage: UIImage?
     @State var imageURL: String?
     @State var newImage: UIImage?
+    
+    @State var submitButtonColor: Color = .Gray02
+    @State var isSubmitButtonDisabled: Bool = true
 
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
         profileViewModel.newSelectedImage = selectedImage
     }
     
-    @State var submitButtonColor: Color = .Gray02
+    func isValidForm() {
+        let nicknameChanged = !nickname.trimmingCharacters(in: .whitespaces).isEmpty && nickname != profileViewModel.profile.nickname
+        let introductionChanged = !introduction.trimmingCharacters(in: .whitespaces).isEmpty && introduction != profileViewModel.profile.selfDescription
+        let imageChanged = profileViewModel.newSelectedImage != nil
+
+        let hasChanges = nicknameChanged || introductionChanged || imageChanged
+
+        submitButtonColor = hasChanges ? .Brown01 : .Gray02
+        isSubmitButtonDisabled = !hasChanges
+    }
     
     var body: some View {
         ZStack {
@@ -98,6 +110,7 @@ struct ProfileEditView: View {
                 }
                 .sheet(isPresented: $showImagePicker, onDismiss: {
                     loadImage()
+                    isValidForm()
                 }) {
                     ImagePicker(image: $selectedUIImage)
                 }
@@ -119,11 +132,7 @@ struct ProfileEditView: View {
                         .background(Color.Gray01)
                         .cornerRadius(5)
                         .onChange(of: nickname) {
-                            if nickname != profileViewModel.profile.nickname {
-                                submitButtonColor = .Brown01
-                            } else {
-                                submitButtonColor = .Gray02
-                            }
+                            isValidForm()
                         }
                 }
                 .padding(.bottom, 5)
@@ -144,11 +153,7 @@ struct ProfileEditView: View {
                         .background(Color.Gray01)
                         .cornerRadius(5)
                         .onChange(of: introduction) {
-                            if introduction != profileViewModel.profile.selfDescription {
-                                submitButtonColor = .Brown01
-                            } else {
-                                submitButtonColor = .Gray02
-                            }
+                            isValidForm()
                         }
                 }
                 Spacer()
@@ -168,11 +173,11 @@ struct ProfileEditView: View {
                 Text("완료")
                     .font(.Body0_B)
                     .foregroundColor(submitButtonColor)
-            }))
-
+            })
+            .disabled(isSubmitButtonDisabled))
             .padding()
             .padding(.top, 10)
-            .onAppear() {
+            .onAppear {
                 profileViewModel.loadUserProfile()
             }
             .onChange(of: profileViewModel.isSuccess) {
@@ -182,7 +187,7 @@ struct ProfileEditView: View {
             }
             .onChange(of: profileViewModel.newSelectedImage) {
                 newImage = profileViewModel.newSelectedImage
-                submitButtonColor = .Brown01
+                isValidForm()
             }
             
             if profileViewModel.isLoading {
