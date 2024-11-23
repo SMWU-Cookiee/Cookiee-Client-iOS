@@ -102,14 +102,15 @@ struct MyPageView: View {
                 Divider()
                 
                 HStack {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Link(destination: URL(string: "https://www.youtube.com/watch?v=O2Hv4VpVumg&list=TLGGBuy-JvoopEkyMzExMjAyNA")!) {
                         Text("사용 가이드")
                             .font(.Body1_M)
                             .foregroundStyle(Color.black)
                         Spacer()
                         Image("ChevronRightSmall")
                             .padding(.horizontal, 10)
-                    })
+                    }
+                    .frame(height: 32)
                     .frame(height: 32)
                 }
                 
