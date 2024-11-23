@@ -16,6 +16,15 @@ struct CategoryAddView: View {
     
     @State private var isShowColorPicker: Bool = false
     @State var toggleIsOpenCategoryAddSheet: () -> Void
+    
+    @State private var isSubmitButtonDisabled: Bool = true
+    @State private var submitButtonColor: Color = .Gray03
+
+    func isValidForm() {
+        let isValid = !name.trimmingCharacters(in: .whitespaces).isEmpty && !selectedColor.isEmpty
+        submitButtonColor = isValid ? .Brown01 : .Gray03
+        isSubmitButtonDisabled = !isValid
+    }
 
     var body: some View {
         ZStack {
@@ -37,17 +46,16 @@ struct CategoryAddView: View {
                         }, label: {
                             Text("완료")
                                 .font(.Body0_B)
-                                .foregroundStyle(Color.Gray03)
+                                .foregroundStyle(submitButtonColor)
                         })
                         .padding(.trailing, 10)
+                        .disabled(isSubmitButtonDisabled) // 버튼 활성화 조건 설정
                     }
-                    
                     
                     Spacer()
                     Text("카테고리 추가하기")
                         .font(.Head1_B)
                         .frame(alignment: .center)
-
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, 25)
@@ -67,6 +75,9 @@ struct CategoryAddView: View {
                         .frame(height: 40)
                         .background(Color.Gray01)
                         .cornerRadius(5)
+                        .onChange(of: name) {
+                            isValidForm()
+                        }
                 }
                 .padding(.bottom, 10)
                 .frame(width: 353)
@@ -99,6 +110,9 @@ struct CategoryAddView: View {
                         .frame(height: 40)
                         .background(Color.Gray01)
                         .cornerRadius(5)
+                        .onChange(of: selectedColor) {
+                            isValidForm()
+                        }
                 }
                 .frame(width: 353)
                 
@@ -113,6 +127,9 @@ struct CategoryAddView: View {
             }
         }
         .padding(.top, 20)
+        .onAppear {
+            isValidForm()
+        }
     }
 }
 
