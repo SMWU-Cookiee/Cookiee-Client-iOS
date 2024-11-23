@@ -256,8 +256,15 @@ struct EventEditView: View {
             categorySelectViewModel.selectedCategory = eventViewModel.eventDetail!.categories
             
             for url in eventViewModel.eventDetail!.eventImageUrlList {
-                guard let image = urlToUIImage(url: url) else { continue }
-                imageViewModelForPut.uiImageList.append(image)
+                urlToUIImage(url: url) { image in
+                    if let image = image {
+                        DispatchQueue.main.async {
+                            imageViewModelForPut.uiImageList.append(image)
+                        }
+                    } else {
+                        print("Failed to load image")
+                    }
+                }
             }
         }
     }
