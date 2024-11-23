@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CategoryEditView: View {
     @ObservedObject var categoryListViewModel: CategoryListViewModel
+    @ObservedObject var categoryViewModel = CategoryViewModel()
     
     @State var id: String = ""
     @State var name: String = ""
@@ -16,6 +17,20 @@ struct CategoryEditView: View {
     
     @State private var isShowColorPicker: Bool = false
     @State var toggleIsOpenCategoryAddSheet: () -> Void
+    
+    @State private var isSubmitButtonDisabled: Bool = true
+    @State private var submitButtonColor: Color = .Gray03
+
+    func isValidForm() {
+        print(name)
+        print(categoryViewModel.category?.categoryName)
+        print(selectedColor)
+        print(categoryViewModel.category?.categoryColor)
+        
+            let hasChanges = name != categoryViewModel.category?.categoryName || selectedColor != categoryViewModel.category?.categoryColor
+            submitButtonColor = hasChanges ? .Brown01 : .Gray03
+            isSubmitButtonDisabled = !hasChanges
+        }
 
     var body: some View {
         ZStack {
@@ -37,11 +52,11 @@ struct CategoryEditView: View {
                         }, label: {
                             Text("완료")
                                 .font(.Body0_B)
-                                .foregroundStyle(Color.Gray03)
+                                .foregroundStyle(submitButtonColor)
                         })
                         .padding(.trailing, 10)
+                        .disabled(isSubmitButtonDisabled)
                     }
-                    
                     
                     Spacer()
                     Text("카테고리 수정하기")
@@ -67,6 +82,9 @@ struct CategoryEditView: View {
                         .frame(height: 40)
                         .background(Color.Gray01)
                         .cornerRadius(5)
+                        .onChange(of: name) {
+                            isValidForm()
+                        }
                 }
                 .padding(.bottom, 10)
                 .frame(width: 353)
@@ -99,6 +117,9 @@ struct CategoryEditView: View {
                         .frame(height: 40)
                         .background(Color.Gray01)
                         .cornerRadius(5)
+                        .onChange(of: selectedColor) {
+                            isValidForm()
+                        }
                 }
                 .frame(width: 353)
                 
@@ -113,5 +134,9 @@ struct CategoryEditView: View {
             }
         }
         .padding(.top, 20)
+        .onAppear {
+            categoryViewModel.category = CategoryData(categoryName: name, categoryColor: selectedColor)
+            isValidForm()
+        }
     }
 }
