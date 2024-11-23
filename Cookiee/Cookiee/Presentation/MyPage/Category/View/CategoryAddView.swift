@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct CategoryAddAndEditView: View {
+struct CategoryAddView: View {
     @ObservedObject var categoryListViewModel: CategoryListViewModel
-    @State var isNewCategory: Bool = true
     
     @State var id: String = ""
     @State var name: String = ""
@@ -17,6 +16,15 @@ struct CategoryAddAndEditView: View {
     
     @State private var isShowColorPicker: Bool = false
     @State var toggleIsOpenCategoryAddSheet: () -> Void
+    
+    @State private var isSubmitButtonDisabled: Bool = true
+    @State private var submitButtonColor: Color = .Gray03
+
+    func isValidForm() {
+        let isValid = !name.trimmingCharacters(in: .whitespaces).isEmpty && !selectedColor.isEmpty
+        submitButtonColor = isValid ? .Brown01 : .Gray03
+        isSubmitButtonDisabled = !isValid
+    }
 
     var body: some View {
         ZStack {
@@ -33,26 +41,21 @@ struct CategoryAddAndEditView: View {
                         Spacer()
                         
                         Button(action: {
-                            if isNewCategory {
-                                categoryListViewModel.addCategory(categoryName: name, categoryColor: selectedColor)
-                            } else {
-                                categoryListViewModel.updateCategory(categoryId: id, categoryName: name, categoryColor: selectedColor)
-                            }
+                            categoryListViewModel.addCategory(categoryName: name, categoryColor: selectedColor)
                             toggleIsOpenCategoryAddSheet()
                         }, label: {
                             Text("완료")
                                 .font(.Body0_B)
-                                .foregroundStyle(Color.Gray03)
+                                .foregroundStyle(submitButtonColor)
                         })
                         .padding(.trailing, 10)
+                        .disabled(isSubmitButtonDisabled) // 버튼 활성화 조건 설정
                     }
                     
-                    
                     Spacer()
-                    Text(isNewCategory ? "카테고리 추가하기" : "카테고리 수정하기")
+                    Text("카테고리 추가하기")
                         .font(.Head1_B)
                         .frame(alignment: .center)
-
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, 25)
@@ -72,6 +75,9 @@ struct CategoryAddAndEditView: View {
                         .frame(height: 40)
                         .background(Color.Gray01)
                         .cornerRadius(5)
+                        .onChange(of: name) {
+                            isValidForm()
+                        }
                 }
                 .padding(.bottom, 10)
                 .frame(width: 353)
@@ -104,6 +110,9 @@ struct CategoryAddAndEditView: View {
                         .frame(height: 40)
                         .background(Color.Gray01)
                         .cornerRadius(5)
+                        .onChange(of: selectedColor) {
+                            isValidForm()
+                        }
                 }
                 .frame(width: 353)
                 
@@ -118,6 +127,9 @@ struct CategoryAddAndEditView: View {
             }
         }
         .padding(.top, 20)
+        .onAppear {
+            isValidForm()
+        }
     }
 }
 

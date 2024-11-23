@@ -7,16 +7,6 @@
 
 import Foundation
 
-//struct CategoryForListRowDTO : Identifiable {
-//    let categoryId: Int64
-//    let categoryName: String
-//    let categoryColor: String
-//    
-//    var id: Int64 {
-//        return categoryId
-//    }
-//}
-
 class CategoryListViewModel: ObservableObject {
     @Published var categories: [CategoryResultData] = []
     @Published var isUpdateSuccess: Bool = false

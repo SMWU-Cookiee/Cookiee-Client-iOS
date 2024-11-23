@@ -33,11 +33,9 @@ struct DateView: View {
     var monthOfEvent : Int32 { Int32(calendar.component(.month, from: date)) }
     var dayOfEvent : Int32 { Int32(calendar.component(.day, from: date)) }
 
-    @State var thumbnailId: Int64?
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
     @State var newImage: UIImage?
-    
     
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
@@ -49,38 +47,50 @@ struct DateView: View {
             VStack {
                 ZStack(alignment: .bottomLeading) {
                     HStack {
-                        if !thumbnailViewModel.thumbnail.isEmpty {
-                            Button(action: {
-                                isThumbnailPutOrDeleteModalOpen = true
-                            }, label: {
-                                AsyncImage(url: URL(string: thumbnailViewModel.thumbnail)) { phase in
-                                    switch phase {
-                                    case .empty:
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .fill(Color.white)
-                                            .frame(width: geometry.size.width, height: 265)
-                                            .overlay(ProgressView())
-                                    case .success(let image):
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: geometry.size.width, height: 265)
-                                            .clipped()
-                                    case .failure(_):
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .fill(Color.white)
-                                            .overlay(
-                                                Image(systemName: "photo")
-                                                    .resizable()
-                                                    .frame(width: 30, height: 30)
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .foregroundStyle(Color.gray)
-                                            )
-                                    @unknown default:
-                                        EmptyView()
-                                    }
+                        if thumbnailViewModel.thumbnailData != nil {
+                            ZStack {
+                                if !thumbnailViewModel.isLoading {
+                                    Button(action: {
+                                        isThumbnailPutOrDeleteModalOpen = true
+                                    }, label: {
+                                            AsyncImage(url: URL(string: thumbnailViewModel.thumbnailData!.thumbnailUrl)) { phase in
+                                                switch phase {
+                                                case .empty:
+                                                    RoundedRectangle(cornerRadius: 2)
+                                                        .fill(Color.Gray01)
+                                                        .frame(width: geometry.size.width, height: 265)
+                                                        .overlay(ProgressView())
+                                                case .success(let image):
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .frame(width: geometry.size.width, height: 265)
+                                                        .clipped()
+                                                case .failure(_):
+                                                    RoundedRectangle(cornerRadius: 2)
+                                                        .fill(Color.Gray01)
+                                                        .overlay(
+                                                            Image(systemName: "photo")
+                                                                .resizable()
+                                                                .frame(width: 30, height: 30)
+                                                                .aspectRatio(contentMode: .fit)
+                                                                .foregroundStyle(Color.gray)
+                                                        )
+                                                @unknown default:
+                                                    EmptyView()
+                                                }
+                                            }
+                                    })
                                 }
-                            })
+                                
+                                
+                                if thumbnailViewModel.isLoading {
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .fill(Color.Gray01)
+                                        .frame(width: geometry.size.width, height: 265)
+                                        .overlay(ProgressView())
+                                }
+                            }
                         } else {
                             Button(action: {
                                 print("썸네일 추가")
@@ -175,7 +185,7 @@ struct DateView: View {
                     year: yearOfEvent,
                     month: monthOfEvent,
                     day: dayOfEvent
-                    )
+                )
             }) {
                 if eventViewModel.selectedEventId != nil {
                     EventDetailView(eventViewModel: eventViewModel, date: date)
@@ -207,8 +217,12 @@ struct DateView: View {
                     Divider()
                     
                     Button(action: {
-                        thumbnailViewModel.removeThumbnail(thumbnailId: thumbnailId!.description)
-                        isThumbnailPutOrDeleteModalOpen = false
+                        if thumbnailViewModel.thumbnailData != nil {
+                            thumbnailViewModel.isLoading = true
+                            thumbnailViewModel.removeThumbnail(thumbnailId: (thumbnailViewModel.thumbnailData!.thumbnailId.description), year: yearOfEvent, month: monthOfEvent, day: dayOfEvent)
+                            thumbnailViewModel.isLoading = false
+                            isThumbnailPutOrDeleteModalOpen = false
+                        }
                     }, label: {
                         HStack {
                             Image("TrashIconRed")
@@ -255,13 +269,11 @@ struct DateView: View {
                 month: monthOfEvent,
                 day: dayOfEvent
             )
-            if (thumbnailId != nil) {
-                thumbnailViewModel.loadThumbnilByDate(
-                    year: yearOfEvent,
-                    month: monthOfEvent,
-                    day: dayOfEvent
-                )
-            }
+            thumbnailViewModel.loadThumbnilByDate(
+                year: yearOfEvent,
+                month: monthOfEvent,
+                day: dayOfEvent
+            )
         }
         .onChange(of: newImage) {
             if newImage != nil {
@@ -275,8 +287,9 @@ struct DateView: View {
                     isRegisterImageModalOpen = false
                 } else if isUpdateImageModalOpen {
                     thumbnailViewModel.updateThumbnail(
-                        thumbnailId: thumbnailId!.description,
-                        newThumbnail: newImage!
+                        thumbnailId: thumbnailViewModel.thumbnailData!.thumbnailId.description,
+                        newThumbnail: newImage!,
+                        year: yearOfEvent, month: monthOfEvent, day: dayOfEvent
                     )
                     isUpdateImageModalOpen = false
                 }

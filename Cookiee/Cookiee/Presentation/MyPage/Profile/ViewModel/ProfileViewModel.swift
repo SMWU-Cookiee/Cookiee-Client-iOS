@@ -16,6 +16,7 @@ struct UserProfileData {
 
 class ProfileViewModel: ObservableObject {
     @Published var isSuccess: Bool = false
+    @Published var isLoading: Bool = false
     @Published var profile = UserProfileData(nickname: "", selfDescription: "", profileImage: nil)
     @Published var newSelectedImage: UIImage?
     
@@ -37,6 +38,7 @@ class ProfileViewModel: ObservableObject {
     }
     
     func updateUserProfile(nickname: String, selfDescription: String, newUIImage: UIImage?) {
+        self.isLoading = true
         let imageData: Data?
         
         if newUIImage != nil {
@@ -58,11 +60,14 @@ class ProfileViewModel: ObservableObject {
         
         
         service.putProfile(requestBody: request) { result in
+            
             switch result {
             case .success:
                 self.isSuccess = true
+                self.isLoading = false
                 print("✅ putProfile 성공\n")
             case .failure(let error):
+                self.isLoading = false
                 print("❌ putProfile 실패\n", error)
             }
         }

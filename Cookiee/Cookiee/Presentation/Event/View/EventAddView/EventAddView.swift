@@ -47,186 +47,199 @@ struct EventAddView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                if (imagePickerForEventViewModel.selection.isEmpty) {
-                    InitialAddMessageCardView(viewModel: imagePickerForEventViewModel)
-                } else {
-                    ImageCarouselForPhotoPicker(viewModel: imagePickerForEventViewModel)
-                }
-            }
-            .padding(.bottom, 14)
-            
-            VStack {
-                VStack(alignment: .leading) {
-                    Text("쿠키 제목")
-                        .font(.Body1_M)
-                        .foregroundStyle(Color.Gray05)
-                        .frame(width: 75, alignment: .leading)
-                    
-                    CustomTextField(target: $title, placeholder: "쿠키의 제목을 입력해주세요.")
-                }
-                .padding(.bottom, 25)
-                VStack(alignment: .leading) {
-                    Text("장소")
-                        .font(.Body1_M)
-                        .foregroundStyle(Color.Gray05)
-                        .frame(width: 75, alignment: .leading)
-                    
-                    CustomTextField(target: $place, placeholder: "장소를 입력해주세요.")
-                }
-                .padding(.bottom, 25)
-                VStack(alignment: .leading) {
-                    Text("내용")
-                        .font(.Body1_M)
-                        .foregroundStyle(Color.Gray05)
-                        .frame(width: 75, alignment: .leading)
-                    
-                    CustomTextField(target: $content, placeholder: "어떤 활동을 하셨나요?")
-                }
-                .padding(.bottom, 25)
-                VStack(alignment: .leading) {
-                    Text("함께한 사람")
-                        .font(.Body1_M)
-                        .foregroundStyle(Color.Gray05)
-                        .frame(width: 75, alignment: .leading)
-                    
-                    CustomTextField(target: $people, placeholder: "함께한 사람들을 입력해주세요.")
-                }
-                .padding(.bottom, 25)
-                
-                VStack(alignment: .leading) {
-                    Text("카테고리")
-                        .font(.Body1_M)
-                        .foregroundStyle(Color.Gray05)
-                        .frame(width: 75, alignment: .leading)
-                    Button(action: {
-                        isCategorySelectButtonTapped = true
-                    }) {
-                        HStack {
-                            if (categorySelectViewModel.selectedCategory.isEmpty) {
-                                Text("카테고리를 선택해주세요.")
-                                    .font(.Body0_M)
-                                    .foregroundStyle(Color.Black)
-                            } else {
-                                ForEach(categorySelectViewModel.selectedCategory, id: \.categoryId) { category in
-                                    CategoryLabelViewDeletable(
-                                        name: category.categoryName,
-                                        color: category.categoryColor,
-                                        action: {
-                                            categorySelectViewModel.removeCategoryFromEvent(id: category.categoryId)
-                                        }
-                                    )
-                                    .padding(.horizontal, 1)
-                                }
-                            }
-                            Spacer()
-                            Image("UnderDropBlack")
-                                .padding(2)
-                        }
-                        .padding(10)
-                        .frame(height: 40)
-                        .background(Color.Gray01)
-                        .cornerRadius(5)
+        ZStack {
+            ScrollView {
+                VStack {
+                    if (imagePickerForEventViewModel.selection.isEmpty) {
+                        InitialAddMessageCardView(viewModel: imagePickerForEventViewModel)
+                    } else {
+                        ImageCarouselForPhotoPicker(viewModel: imagePickerForEventViewModel)
                     }
                 }
-                .padding(.bottom, 25)
-            }
-            .padding()
-        }
-
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("쿠키 추가하기")
-                    .font(.Head1_B)
-            }
-        }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
-        .navigationBarItems(trailing: Button(action: {
-            if isValidForm {
-                isSubmitting = true
-                eventViewModel.addEvent(
-                    eventTitle: title,
-                    eventWhat: content,
-                    eventWhere: place,
-                    withWho: people,
-                    year: year,
-                    month: month,
-                    date: date,
-                    categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
-                    images: imagePickerForEventViewModel.selection
-                )
-            }
-        }, label: {
-            Text("완료")
-                .font(.Body0_B)
-                .foregroundColor(isValidForm && !isSubmitting ? .Brown01 : .Gray03)
-        })
-            .disabled(!isValidForm || isSubmitting)
-        )
-        
-        .sheet(isPresented: $isCategorySelectButtonTapped) {
-            VStack {
-                VStack(spacing: 18) {
-                    Text("내 카테고리")
-                        .font(.Head1_B)
-                        .padding(.top, 25)
-                    
-                    ScrollView {
-                        ForEach(categoryListViewModel.categories, id:\.id) { category in
-                            CategorySelectButtonView(
-                                id: category.categoryId,
-                                name: category.categoryName,
-                                color: category.categoryColor,
-                                viewModel: categorySelectViewModel
-                            )
-                        }
-                    }
-                }
+                .padding(.bottom, 14)
                 
                 VStack {
-                    Button(action: {
-                        isCategorySelectButtonTapped = false
-                    }, label: {
-                        Text("카테고리 추가하기")
-                            .font(.Body0_SB)
-                            .foregroundStyle(Color.Gray00)
-                    })
-                    .frame(width: 363, height: 44)
-                    .background(categorySelectViewModel.selectedCategory.isEmpty ? Color.Gray03 : Color.Brown00)
-                    .cornerRadius(10)
+                    VStack(alignment: .leading) {
+                        Text("쿠키 제목")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.Gray05)
+                            .frame(width: 75, alignment: .leading)
+                        
+                        CustomTextField(target: $title, placeholder: "쿠키의 제목을 입력해주세요.")
+                    }
+                    .padding(.bottom, 25)
+                    VStack(alignment: .leading) {
+                        Text("장소")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.Gray05)
+                            .frame(width: 75, alignment: .leading)
+                        
+                        CustomTextField(target: $place, placeholder: "장소를 입력해주세요.")
+                    }
+                    .padding(.bottom, 25)
+                    VStack(alignment: .leading) {
+                        Text("내용")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.Gray05)
+                            .frame(width: 75, alignment: .leading)
+                        
+                        CustomTextField(target: $content, placeholder: "어떤 활동을 하셨나요?")
+                    }
+                    .padding(.bottom, 25)
+                    VStack(alignment: .leading) {
+                        Text("함께한 사람")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.Gray05)
+                            .frame(width: 75, alignment: .leading)
+                        
+                        CustomTextField(target: $people, placeholder: "함께한 사람들을 입력해주세요.")
+                    }
+                    .padding(.bottom, 25)
+                    
+                    VStack(alignment: .leading) {
+                        Text("카테고리")
+                            .font(.Body1_M)
+                            .foregroundStyle(Color.Gray05)
+                            .frame(width: 75, alignment: .leading)
+                        Button(action: {
+                            isCategorySelectButtonTapped = true
+                        }) {
+                            HStack {
+                                if (categorySelectViewModel.selectedCategory.isEmpty) {
+                                    Text("카테고리를 선택해주세요.")
+                                        .font(.Body0_M)
+                                        .foregroundStyle(Color.Black)
+                                } else {
+                                    ForEach(categorySelectViewModel.selectedCategory, id: \.categoryId) { category in
+                                        CategoryLabelViewDeletable(
+                                            name: category.categoryName,
+                                            color: category.categoryColor,
+                                            action: {
+                                                categorySelectViewModel.removeCategoryFromEvent(id: category.categoryId)
+                                            }
+                                        )
+                                        .padding(.horizontal, 1)
+                                    }
+                                }
+                                Spacer()
+                                Image("UnderDropBlack")
+                                    .padding(2)
+                            }
+                            .padding(10)
+                            .frame(height: 40)
+                            .background(Color.Gray01)
+                            .cornerRadius(5)
+                        }
+                    }
+                    .padding(.bottom, 25)
                 }
-                .padding(10)
-                .frame(height: 67)
-                .background(Color.White)
-                .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -10)
+                .padding()
             }
-            .onAppear() {
-                categoryListViewModel.loadCategoryListData()
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("쿠키 추가하기")
+                        .font(.Head1_B)
+                }
             }
-            .presentationDetents([.fraction(0.60)])
-            .presentationDragIndicator(Visibility.visible)
-        }
-        .padding(.top, 10)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: backButton)
+            .navigationBarItems(trailing: Button(action: {
+                if isValidForm {
+                    isSubmitting = true
+                    eventViewModel.addEvent(
+                        eventTitle: title,
+                        eventWhat: content,
+                        eventWhere: place,
+                        withWho: people,
+                        year: year,
+                        month: month,
+                        date: date,
+                        categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
+                        images: imagePickerForEventViewModel.selection
+                    )
+                }
+            }, label: {
+                Text("완료")
+                    .font(.Body0_B)
+                    .foregroundColor(isValidForm && !isSubmitting ? .Brown01 : .Gray03)
+            })
+                .disabled(!isValidForm || isSubmitting)
+            )
+            
+            .sheet(isPresented: $isCategorySelectButtonTapped) {
+                VStack {
+                    VStack(spacing: 18) {
+                        Text("내 카테고리")
+                            .font(.Head1_B)
+                            .padding(.top, 25)
+                        
+                        ScrollView {
+                            ForEach(categoryListViewModel.categories, id:\.id) { category in
+                                CategorySelectButtonView(
+                                    id: category.categoryId,
+                                    name: category.categoryName,
+                                    color: category.categoryColor,
+                                    viewModel: categorySelectViewModel
+                                )
+                            }
+                        }
+                    }
+                    
+                    VStack {
+                        Button(action: {
+                            isCategorySelectButtonTapped = false
+                        }, label: {
+                            Text("카테고리 추가하기")
+                                .font(.Body0_SB)
+                                .foregroundStyle(Color.Gray00)
+                        })
+                        .frame(width: 363, height: 44)
+                        .background(categorySelectViewModel.selectedCategory.isEmpty ? Color.Gray03 : Color.Brown00)
+                        .cornerRadius(10)
+                    }
+                    .padding(10)
+                    .frame(height: 67)
+                    .background(Color.White)
+                    .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -10)
+                }
+                .onAppear() {
+                    categoryListViewModel.loadCategoryListData()
+                }
+                .presentationDetents([.fraction(0.60)])
+                .presentationDragIndicator(Visibility.visible)
+            }
+            .padding(.top, 10)
 
-        .photosPicker(
-            isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
-            selection: $imagePickerForEventViewModel.selection,
-            maxSelectionCount: maxImageCount,
-            selectionBehavior: .continuousAndOrdered,
-            matching: .images,
-            preferredItemEncoding: .current,
-            photoLibrary: .shared()
-        )
-        .photosPickerStyle(.presentation)
-        
-        .onChange(of: eventViewModel.isAddSuccess) {
-            if eventViewModel.isAddSuccess {
-                eventViewModel.isAddSuccess = false
-                isSubmitting = false
-                presentationMode.wrappedValue.dismiss()
+            .photosPicker(
+                isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
+                selection: $imagePickerForEventViewModel.selection,
+                maxSelectionCount: maxImageCount,
+                selectionBehavior: .continuousAndOrdered,
+                matching: .images,
+                preferredItemEncoding: .current,
+                photoLibrary: .shared()
+            )
+            .photosPickerStyle(.presentation)
+            
+            .onChange(of: eventViewModel.isAddSuccess) {
+                if eventViewModel.isAddSuccess {
+                    eventViewModel.isAddSuccess = false
+                    isSubmitting = false
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+            
+            if isSubmitting {
+                VStack {
+                    Spacer()
+                    ProgressView()
+                        .controlSize(.large)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black.opacity(0.3))
+                
             }
         }
     }
