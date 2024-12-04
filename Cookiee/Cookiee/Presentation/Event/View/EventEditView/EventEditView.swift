@@ -43,6 +43,9 @@ struct EventEditView: View {
     @State var maxImageCount: Int = 5
     @State var isSubmitting: Bool = false
     
+    @FocusState private var isFocused: Bool
+
+    
     var body: some View {
         ZStack {
             ScrollView {
@@ -60,6 +63,7 @@ struct EventEditView: View {
                             .frame(width: 75, alignment: .leading)
                         
                         CustomTextField(target: $title, placeholder: "쿠키의 제목을 입력해주세요.")
+                            .focused($isFocused)
                     }
                     .padding(.bottom, 25)
                     VStack(alignment: .leading) {
@@ -69,6 +73,7 @@ struct EventEditView: View {
                             .frame(width: 75, alignment: .leading)
                         
                         CustomTextField(target: $place, placeholder: "장소를 입력해주세요.")
+                            .focused($isFocused)
                     }
                     .padding(.bottom, 25)
                     VStack(alignment: .leading) {
@@ -77,7 +82,8 @@ struct EventEditView: View {
                             .foregroundStyle(Color.Gray05)
                             .frame(width: 75, alignment: .leading)
                         
-                        CustomTextField(target: $content, placeholder: "어떤 활동을 하셨나요?")
+                        CustomTextFieldMultiLine(target: $content, placeholder: "어떤 활동을 하셨나요?")
+                            .focused($isFocused)
                     }
                     .padding(.bottom, 25)
                     VStack(alignment: .leading) {
@@ -87,6 +93,7 @@ struct EventEditView: View {
                             .frame(width: 75, alignment: .leading)
                         
                         CustomTextField(target: $people, placeholder: "함께한 사람들을 입력해주세요.")
+                            .focused($isFocused)
                     }
                     .padding(.bottom, 25)
                     
@@ -267,6 +274,10 @@ struct EventEditView: View {
                         }
                     }
                 }
+            }
+            
+            .onTapGesture {
+                isFocused = false
             }
             
             if isSubmitting {

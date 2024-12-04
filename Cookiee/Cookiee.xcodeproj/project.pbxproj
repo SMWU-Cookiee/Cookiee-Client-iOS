@@ -98,6 +98,7 @@
 		83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */; };
 		83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC7F822C6A2A1D002AB210 /* DateView.swift */; };
 		83DEB9882C9B05BC0049F7CD /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DEB9872C9B05BC0049F7CD /* EventAddView.swift */; };
+		83E3B3FC2D006A4800150B85 /* CustomTextFieldMultiLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E3B3FB2D006A4800150B85 /* CustomTextFieldMultiLine.swift */; };
 		83E6F5F82CB7A9AC00DCDF32 /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6F5F72CB7A9AC00DCDF32 /* SignOutViewModel.swift */; };
 		83E76C6E2CB6AE88000FEA67 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */; };
 		83E76C792CB6D0A9000FEA67 /* SignOutResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C782CB6D0A9000FEA67 /* SignOutResponseDTO.swift */; };
@@ -226,6 +227,7 @@
 		83DC7F802C69DF76002AB210 /* HomeCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCalendarView.swift; sourceTree = "<group>"; };
 		83DC7F822C6A2A1D002AB210 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		83DEB9872C9B05BC0049F7CD /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
+		83E3B3FB2D006A4800150B85 /* CustomTextFieldMultiLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldMultiLine.swift; sourceTree = "<group>"; };
 		83E6F5F72CB7A9AC00DCDF32 /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
 		83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		83E76C782CB6D0A9000FEA67 /* SignOutResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutResponseDTO.swift; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				83DA00602C79C55500B8CD46 /* ImagePicker.swift */,
 				83E76C6D2CB6AE88000FEA67 /* CustomAlertView.swift */,
 				83C88E422CCCE3C4001554A4 /* CustomTextField.swift */,
+				83E3B3FB2D006A4800150B85 /* CustomTextFieldMultiLine.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -1135,6 +1138,7 @@
 				8362C3542CC0FD060086D052 /* EventDeleteDTO.swift in Sources */,
 				83A3E2672C7A193B00ADDB55 /* DevelopersView.swift in Sources */,
 				833321C02C7B6A7C00C94D9D /* CategoryAddView.swift in Sources */,
+				83E3B3FC2D006A4800150B85 /* CustomTextFieldMultiLine.swift in Sources */,
 				832841DE2CD28CF800386308 /* CookieeCollectionView.swift in Sources */,
 				83DC7F832C6A2A1D002AB210 /* DateView.swift in Sources */,
 				8349F5FD2CB0139200746163 /* TokenRefreshService.swift in Sources */,
