@@ -23,7 +23,11 @@ struct ContentView: View {
                        }
                    }
            } else {
-               SocialLoginView()
+               if loadFromKeychain(key: "accessToken") != nil  {
+                   TabBarView()
+               } else {
+                   SocialLoginView()
+               }
            }
        }
 }
