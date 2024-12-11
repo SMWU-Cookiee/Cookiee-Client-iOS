@@ -23,6 +23,9 @@ class SignOutService {
                     print("deleteSignOut Decoding error:", error)
                 }
             case .failure(let error):
+                if let response = error.response {
+                    print("Response Data:", String(data: response.data, encoding: .utf8) ?? "No response body")
+                }
                 completion(.failure(error))
                 print("deleteSignOut error:", error)
             }
