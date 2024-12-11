@@ -51,6 +51,12 @@ struct SplashView: View {
                     }
                     .position(x: 0, y: 350)
                 }
+                HStack {
+                    Text("오늘 하루를 사진으로 기록해\n나만의 쿠키를 만들어 보아요")
+                        .foregroundStyle(Color.Brown01)
+                        .font(Font.Body0_SB)
+                }
+                .position(x: geometry.size.width / 2, y: 50)
                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
