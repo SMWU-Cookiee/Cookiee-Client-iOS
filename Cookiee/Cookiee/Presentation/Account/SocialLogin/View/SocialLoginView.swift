@@ -44,7 +44,7 @@ struct SocialLoginView: View {
                     .padding(.bottom, 11)
 
                     HStack {
-                        AppleSignInButton()
+                        AppleSignInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, name: $name, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken)
                     }
                     .padding(.bottom, 90)
                 }
@@ -64,45 +64,106 @@ struct SocialLoginView: View {
 
 //MARK: - 애플 로그인 버튼 & auth 처리
 struct AppleSignInButton : View {
-    @AppStorage("email") var email:String = ""
-    @AppStorage("fullName") var fullName:String = ""
-
+    
+    @Binding var navigateToSignUp: Bool // 네비게이션 상태를 부모에서 전달받음
+    @Binding var navigateToHome: Bool
+    
+    //Auth 값 바인딩
+    @Binding var name: String
+    @Binding var email: String
+    @Binding var socialId: String
+    @Binding var socialLoginType: String
+    @Binding var socialRefreshToken: String
+    @Binding var socialAccessToken: String
+    
+    @State var isNewMember: Bool = false
     
     var body: some View {
-        SignInWithAppleButton(onRequest: { request in
-            request.requestedScopes = [.email, .fullName]
-        }, onCompletion: { result in
-            switch result {
-            case .success(let auth):
-                switch auth.credential {
-                case let credential as ASAuthorizationAppleIDCredential:
-                    // User ID
-                    let userId = credential.user
-                    let fullName = credential.fullName
-                    let email = credential.email
-                              
-                    if  let authorizationCode = credential.authorizationCode,
-                       let identityToken = credential.identityToken,
-                       let authString = String(data: authorizationCode, encoding: .utf8),
-                       let tokenString = String(data: identityToken, encoding: .utf8) {
-                       print("authorizationCode: \(authorizationCode)")
-                       print("identityToken: \(identityToken)")
-                       print("authorizationCode to String: \(authString)")
-                       print("identityToken to String: \(tokenString)")
-                   }
-                    
-                    print("userId: \(userId)")
-                    print("fullName: \(String(describing: fullName))")
-                    print("email: \(String(describing: email))")
-                    
-                default:
-                    break
+        Button {
+        } label: {
+            Image("AppleIcon")
+            Text("Apple 계정으로 로그인")
+                .font(Font.Body1_SB)
+                .foregroundStyle(Color.white)
+        }
+        .frame(width: 265, height: 37)
+        .background(Color.black)
+        .cornerRadius(5)
+        .overlay(
+            SignInWithAppleButton(onRequest: { request in
+                request.requestedScopes = [.email, .fullName]
+            }, onCompletion: { result in
+                switch result {
+                case .success(let auth):
+                    switch auth.credential {
+                    case let credential as ASAuthorizationAppleIDCredential:
+                        
+                        if let authorizationCode = credential.authorizationCode,
+                           let identityToken = credential.identityToken,
+                           let authString = String(data: authorizationCode, encoding: .utf8),
+                           let tokenString = String(data: identityToken, encoding: .utf8) {
+                            
+                            print("authorizationCode to String: \(authString)")
+                            print("identityToken to String: \(tokenString)")
+                            
+                            Task {
+                                do {
+                                    let success = try await postAppleLogin(identityToken: tokenString, authorizationCode: authString)
+                                    if success {
+                                        if isNewMember {
+                                            navigateToSignUp = true
+                                        } else {
+                                            navigateToHome = true
+                                        }
+                                    }
+                                } catch {
+                                    print("Apple login failed with error: \(error)")
+                                }
+                            }
+                        }
+                    default:
+                        break
+                    }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
-            };
-        })
-        .frame(width : UIScreen.main.bounds.width * 0.7, height:45)
+            })
+            .navigationBarBackButtonHidden(true)
+            .blendMode(.overlay)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.black, lineWidth: 1)
+            )
+        )
+    }
+        
+    
+    func postAppleLogin(identityToken: String, authorizationCode: String) async throws -> Bool {
+
+        // API 처리
+        return try await withCheckedThrowingContinuation { continuation in
+            let appleLoginService = AppleLoginService()
+            appleLoginService.postAppleLogin(identityToken: identityToken, authorizationCode: authorizationCode) { result in
+                switch result {
+                case .success(let response):
+                    print("=====================================")
+                    print("애플 로그인 결과: \(response)")
+                    print("=====================================")
+
+                    // Auth 값 설정
+                    socialId = response.result.socialId
+                    socialLoginType = "apple"
+                    socialRefreshToken = response.result.refreshToken ?? ""
+                    socialAccessToken = response.result.accessToken ?? ""
+                    isNewMember = response.result.isNewMember
+                    
+                    continuation.resume(returning: true) // 성공 시 true 반환
+                case .failure(let error):
+                    print("API Error: \(error)")
+                    continuation.resume(returning: false) // 실패 시 false 반환
+                }
+            }
+        }
     }
 }
 
@@ -133,12 +194,6 @@ struct GoogleLoginInButton: View {
                         if isNewMember {
                             navigateToSignUp = true // 신규 가입이면 회원가입으로
                         } else {
-                            // 임시로 신규 회원이 아닐때에 키체인 등록
-                            saveToKeychain(key: "accessToken", data: socialAccessToken)
-                            saveToKeychain(key: "refreshToken", data: socialAccessToken)
-                            saveToKeychain(key: "userId", data: "72")
-                            
-                            
                             navigateToHome = true // 신규 가입이 아니면 홈으로
                         }
                     }
