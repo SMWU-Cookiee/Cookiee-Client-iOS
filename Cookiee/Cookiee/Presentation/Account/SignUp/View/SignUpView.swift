@@ -44,6 +44,19 @@ struct SignUpView: View {
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
         image = Image(uiImage: selectedImage)
+        isValidForm()
+    }
+    
+    @State var submitButtonColor: Color = .Gray02
+    @State var isSubmitButtonDisabled: Bool = true
+
+    
+    func isValidForm() {
+
+        let isAllInputted = nickname != "" && introduction != "" && image != nil
+
+        submitButtonColor = isAllInputted ? .Brown01 : .Gray02
+        isSubmitButtonDisabled = !isAllInputted
     }
     
     var body: some View {
@@ -95,6 +108,9 @@ struct SignUpView: View {
                     .frame(height: 40)
                     .background(Color.Gray01)
                     .cornerRadius(5)
+                    .onChange(of: nickname) {
+                        isValidForm()
+                    }
             }
             .padding(.bottom, 5)
             
@@ -114,6 +130,9 @@ struct SignUpView: View {
                     .frame(height: 40)
                     .background(Color.Gray01)
                     .cornerRadius(5)
+                    .onChange(of: introduction) {
+                        isValidForm()
+                    }
             }
             Spacer()
         }
@@ -133,8 +152,9 @@ struct SignUpView: View {
                 }, label: {
                     Text("완료")
                         .font(.Body0_B)
-                        .foregroundColor(.Gray03)
+                        .foregroundColor(submitButtonColor)
                 })
+                .disabled(isSubmitButtonDisabled)
         )
         .padding()
         .padding(.top, 10)
