@@ -13,6 +13,7 @@ enum HeaderType {
     case accessTokenHeaderForJson
     case accessTokenHeaderForMultipart
     case refreshTokenHeader
+    case appleLoginHeader(identityToken: String, authorizationCode: String)
 }
 
 protocol BaseTargetType: TargetType {
@@ -54,6 +55,10 @@ extension BaseTargetType {
                               "Authorization": "Bearer \(accessToken)",
                               "RefreshToken": "Bearer \(refreshToken)"]
                 return header
+            
+            case .appleLoginHeader(let identityToken, let authorizationCode):
+                        return ["IdentityToken": identityToken, "AuthorizationCode": authorizationCode, "Content-Type": "application/json"]
+                
         }
     }
     

@@ -74,6 +74,9 @@
 		83B2173C2CCCC55B008C9793 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B217382CCCC55B008C9793 /* Pretendard-SemiBold.ttf */; };
 		83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CA882C690DCE00C69ED1 /* TabBarView.swift */; };
 		83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */; };
+		83B8E7602D09797D00F0DD27 /* AppleLoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8E75F2D09797D00F0DD27 /* AppleLoginResponseDTO.swift */; };
+		83B8E7622D0979C000F0DD27 /* AppleLoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8E7612D0979C000F0DD27 /* AppleLoginAPI.swift */; };
+		83B8E7642D0979CC00F0DD27 /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B8E7632D0979CC00F0DD27 /* AppleLoginService.swift */; };
 		83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79872C68BB570044C453 /* CookieeApp.swift */; };
 		83BD798A2C68BB570044C453 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BD79892C68BB570044C453 /* ContentView.swift */; };
 		83BD798C2C68BB580044C453 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83BD798B2C68BB580044C453 /* Assets.xcassets */; };
@@ -199,6 +202,9 @@
 		83B5CA882C690DCE00C69ED1 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		83B5CA8A2C6910D900C69ED1 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		83B5CAA02C6911EB00C69ED1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		83B8E75F2D09797D00F0DD27 /* AppleLoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginResponseDTO.swift; sourceTree = "<group>"; };
+		83B8E7612D0979C000F0DD27 /* AppleLoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginAPI.swift; sourceTree = "<group>"; };
+		83B8E7632D0979CC00F0DD27 /* AppleLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		83BD79842C68BB570044C453 /* Cookiee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookiee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83BD79872C68BB570044C453 /* CookieeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieeApp.swift; sourceTree = "<group>"; };
 		83BD79892C68BB570044C453 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -689,6 +695,32 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		83B8E75C2D09794A00F0DD27 /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				83B8E75D2D09795100F0DD27 /* DTO */,
+				83B8E7612D0979C000F0DD27 /* AppleLoginAPI.swift */,
+				83B8E7632D0979CC00F0DD27 /* AppleLoginService.swift */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
+		83B8E75D2D09795100F0DD27 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				83B8E75E2D09795900F0DD27 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		83B8E75E2D09795900F0DD27 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				83B8E75F2D09797D00F0DD27 /* AppleLoginResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		83BD797B2C68BB570044C453 = {
 			isa = PBXGroup;
 			children = (
@@ -933,6 +965,7 @@
 		83F02CAC2CAC07B6001E8329 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				83B8E75C2D09794A00F0DD27 /* Apple */,
 				8349F5F92CB011BD00746163 /* Token */,
 				83F02CAD2CAC08BE001E8329 /* Google */,
 			);
@@ -1148,6 +1181,7 @@
 				83C88E4C2CCD13B7001554A4 /* ImageViewModelForPut.swift in Sources */,
 				8305BAD72CBE953C00658590 /* ThumbnailRequestDTO.swift in Sources */,
 				83E6F5F82CB7A9AC00DCDF32 /* SignOutViewModel.swift in Sources */,
+				83B8E7622D0979C000F0DD27 /* AppleLoginAPI.swift in Sources */,
 				837D74E42CBE428B005D20DC /* ProfileViewModel.swift in Sources */,
 				8349F5F82CB010D500746163 /* TokenInterceptor.swift in Sources */,
 				8349F6012CB0147B00746163 /* TokenRefreshResponseDTO.swift in Sources */,
@@ -1173,8 +1207,10 @@
 				839584F22CE7A22500FE19DD /* CategoryListRowView.swift in Sources */,
 				83E76C872CB6D6D3000FEA67 /* SignUpAPI.swift in Sources */,
 				8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */,
+				83B8E7642D0979CC00F0DD27 /* AppleLoginService.swift in Sources */,
 				835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */,
 				83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */,
+				83B8E7602D09797D00F0DD27 /* AppleLoginResponseDTO.swift in Sources */,
 				83E76C852CB6D5FF000FEA67 /* SignUpResponseDTO.swift in Sources */,
 				83C88E392CCCD451001554A4 /* CategoryLabelViewDeletable.swift in Sources */,
 				8336B2A62CF22F4E004BE4E2 /* CategoryEditView.swift in Sources */,
