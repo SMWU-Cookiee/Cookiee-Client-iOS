@@ -15,6 +15,9 @@ struct TermsOfServiceView: View {
     
     var body: some View {
         VStack {
+            Spacer()
+                .frame(height: 60)
+            
             VStack(alignment: .leading) {
                 HStack {
                     Image("cookiee_typo")
@@ -28,17 +31,32 @@ struct TermsOfServiceView: View {
                         .font(Font.Head0_B_24)
                     Spacer()
                 }
+                
+                Spacer()
+                    .frame(height: 130)
+                
+                termsOfServiceView
             }
+            .padding(5)
             
             Spacer()
             
             HStack {
-                termsOfServiceView
+                NavigationLink(
+                    destination: ContentView(),
+                    label: {
+                        Text("다음")
+                            .foregroundStyle(Color.Gray00)
+                            .font(.Body0_SB)
+                    }
+                )
+                .frame(width: 363, height: 44)
+                .background(termsOfServiceViewModel.allPermit ? Color.Brown00 : Color.Gray03)
+                .cornerRadius(10)
+                .disabled(!termsOfServiceViewModel.allPermit)
             }
-            
-            Spacer()
         }
-        .padding()
+        .padding(15)
         
         .sheet(isPresented: $showTermsOfService) {
             SafariView(url:URL(string: "https://thunder-syrup-94d.notion.site/6a378d5d676444cbad61bbe971591da5?pvs=74")!)
@@ -83,8 +101,7 @@ struct TermsOfServiceView: View {
                 }
                 Spacer()
             }
-
-            .padding(.bottom, 8)
+            .padding(.bottom, 18)
 
             HStack(spacing: 0) {
                 Toggle("", isOn: $termsOfServiceViewModel.privacyPolicyPermit)
