@@ -117,6 +117,7 @@
 		83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */; };
 		83EFD1812D113972008D35CD /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EFD1802D113972008D35CD /* SafariView.swift */; };
 		83EFD1852D113DD0008D35CD /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EFD1842D113DD0008D35CD /* TermsOfServiceView.swift */; };
+		83EFD1882D1140C8008D35CD /* TermsOfServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EFD1872D1140C8008D35CD /* TermsOfServiceViewModel.swift */; };
 		83F02CB32CAC0920001E8329 /* GoogleLoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB22CAC0920001E8329 /* GoogleLoginResponseDTO.swift */; };
 		83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB42CAC0A8E001E8329 /* GoogleLoginAPI.swift */; };
 		83F02CB82CAC0ACE001E8329 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB62CAC0ACE001E8329 /* BaseTargetType.swift */; };
@@ -251,6 +252,7 @@
 		83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailService.swift; sourceTree = "<group>"; };
 		83EFD1802D113972008D35CD /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		83EFD1842D113DD0008D35CD /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
+		83EFD1872D1140C8008D35CD /* TermsOfServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewModel.swift; sourceTree = "<group>"; };
 		83F02CB22CAC0920001E8329 /* GoogleLoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginResponseDTO.swift; sourceTree = "<group>"; };
 		83F02CB42CAC0A8E001E8329 /* GoogleLoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginAPI.swift; sourceTree = "<group>"; };
 		83F02CB62CAC0ACE001E8329 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
@@ -956,6 +958,7 @@
 		83EFD1822D113DB4008D35CD /* TermsOfService */ = {
 			isa = PBXGroup;
 			children = (
+				83EFD1862D1140B2008D35CD /* ViewModel */,
 				83EFD1832D113DC3008D35CD /* View */,
 			);
 			path = TermsOfService;
@@ -967,6 +970,14 @@
 				83EFD1842D113DD0008D35CD /* TermsOfServiceView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		83EFD1862D1140B2008D35CD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				83EFD1872D1140C8008D35CD /* TermsOfServiceViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		83F02CAB2CAC0794001E8329 /* Network */ = {
@@ -1203,6 +1214,7 @@
 				832841EC2CD2961200386308 /* CookieeCollectionViewModel.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83C88E4C2CCD13B7001554A4 /* ImageViewModelForPut.swift in Sources */,
+				83EFD1882D1140C8008D35CD /* TermsOfServiceViewModel.swift in Sources */,
 				8305BAD72CBE953C00658590 /* ThumbnailRequestDTO.swift in Sources */,
 				83E6F5F82CB7A9AC00DCDF32 /* SignOutViewModel.swift in Sources */,
 				83B8E7622D0979C000F0DD27 /* AppleLoginAPI.swift in Sources */,
