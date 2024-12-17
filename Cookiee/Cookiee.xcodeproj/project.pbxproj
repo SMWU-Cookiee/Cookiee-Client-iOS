@@ -115,6 +115,7 @@
 		83EE1DA82CB0372B009E4488 /* ThumbnailListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DA72CB0372B009E4488 /* ThumbnailListResponseDTO.swift */; };
 		83EE1DAA2CB038F0009E4488 /* ThumbnailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */; };
 		83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */; };
+		83EFD1812D113972008D35CD /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EFD1802D113972008D35CD /* SafariView.swift */; };
 		83F02CB32CAC0920001E8329 /* GoogleLoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB22CAC0920001E8329 /* GoogleLoginResponseDTO.swift */; };
 		83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB42CAC0A8E001E8329 /* GoogleLoginAPI.swift */; };
 		83F02CB82CAC0ACE001E8329 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB62CAC0ACE001E8329 /* BaseTargetType.swift */; };
@@ -247,6 +248,7 @@
 		83EE1DA72CB0372B009E4488 /* ThumbnailListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailListResponseDTO.swift; sourceTree = "<group>"; };
 		83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailAPI.swift; sourceTree = "<group>"; };
 		83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailService.swift; sourceTree = "<group>"; };
+		83EFD1802D113972008D35CD /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		83F02CB22CAC0920001E8329 /* GoogleLoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginResponseDTO.swift; sourceTree = "<group>"; };
 		83F02CB42CAC0A8E001E8329 /* GoogleLoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginAPI.swift; sourceTree = "<group>"; };
 		83F02CB62CAC0ACE001E8329 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				83C88E492CCD0DC5001554A4 /* urlToUIImage.swift */,
 				83C88E4F2CCD2E58001554A4 /* overlayIf.swift */,
 				83C88E572CCD4D1E001554A4 /* downscaleTOjpegData.swift */,
+				83EFD1802D113972008D35CD /* SafariView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1154,6 +1157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83DC7F812C69DF76002AB210 /* HomeCalendarView.swift in Sources */,
+				83EFD1812D113972008D35CD /* SafariView.swift in Sources */,
 				8305BADA2CBE98C500658590 /* ThumbnailViewModel.swift in Sources */,
 				83B5CA8B2C6910D900C69ED1 /* FontExtension.swift in Sources */,
 				832841EE2CD2982A00386308 /* CookieeCollectionDetailView.swift in Sources */,
@@ -1413,7 +1417,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cookiee/Preview Content\"";
 				DEVELOPMENT_TEAM = ATV75VJ92J;
 				ENABLE_PREVIEWS = YES;
@@ -1425,6 +1429,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1449,7 +1454,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cookiee/Cookiee.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Cookiee/Preview Content\"";
 				DEVELOPMENT_TEAM = ATV75VJ92J;
 				ENABLE_PREVIEWS = YES;
@@ -1461,6 +1466,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
