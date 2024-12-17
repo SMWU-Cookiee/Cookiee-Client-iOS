@@ -27,5 +27,6 @@ extension Font {
     
     static let Head1_M: Font = .custom("Pretendard-Medium", size: 18)
     static let Head0_B_22: Font = .custom("Pretendard-Bold", size: 22)
+    static let Head0_B_24: Font = .custom("Pretendard-Bold", size: 24)
     static let Body3_R: Font = .custom("Pretendard-Regular", size: 10)
 }

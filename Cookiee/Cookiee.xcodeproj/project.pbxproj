@@ -116,6 +116,7 @@
 		83EE1DAA2CB038F0009E4488 /* ThumbnailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */; };
 		83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */; };
 		83EFD1812D113972008D35CD /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EFD1802D113972008D35CD /* SafariView.swift */; };
+		83EFD1852D113DD0008D35CD /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EFD1842D113DD0008D35CD /* TermsOfServiceView.swift */; };
 		83F02CB32CAC0920001E8329 /* GoogleLoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB22CAC0920001E8329 /* GoogleLoginResponseDTO.swift */; };
 		83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB42CAC0A8E001E8329 /* GoogleLoginAPI.swift */; };
 		83F02CB82CAC0ACE001E8329 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02CB62CAC0ACE001E8329 /* BaseTargetType.swift */; };
@@ -249,6 +250,7 @@
 		83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailAPI.swift; sourceTree = "<group>"; };
 		83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailService.swift; sourceTree = "<group>"; };
 		83EFD1802D113972008D35CD /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		83EFD1842D113DD0008D35CD /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		83F02CB22CAC0920001E8329 /* GoogleLoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginResponseDTO.swift; sourceTree = "<group>"; };
 		83F02CB42CAC0A8E001E8329 /* GoogleLoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginAPI.swift; sourceTree = "<group>"; };
 		83F02CB62CAC0ACE001E8329 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
@@ -951,6 +953,22 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		83EFD1822D113DB4008D35CD /* TermsOfService */ = {
+			isa = PBXGroup;
+			children = (
+				83EFD1832D113DC3008D35CD /* View */,
+			);
+			path = TermsOfService;
+			sourceTree = "<group>";
+		};
+		83EFD1832D113DC3008D35CD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83EFD1842D113DD0008D35CD /* TermsOfServiceView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		83F02CAB2CAC0794001E8329 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -1012,6 +1030,7 @@
 		83F02CBB2CAC11D0001E8329 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				83EFD1822D113DB4008D35CD /* TermsOfService */,
 				83E76C8F2CB6E956000FEA67 /* SignUp */,
 				83E76C8A2CB6DA95000FEA67 /* SocialLogin */,
 			);
@@ -1171,6 +1190,7 @@
 				8383B48C2C74C74700C9127F /* MyPageView.swift in Sources */,
 				837D74EB2CBE6603005D20DC /* CalendarThumnailViewModel.swift in Sources */,
 				8305BAD02CBE8B6100658590 /* EventCardCellView.swift in Sources */,
+				83EFD1852D113DD0008D35CD /* TermsOfServiceView.swift in Sources */,
 				83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */,
 				8362C3542CC0FD060086D052 /* EventDeleteDTO.swift in Sources */,
 				83A3E2672C7A193B00ADDB55 /* DevelopersView.swift in Sources */,
