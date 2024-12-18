@@ -22,13 +22,8 @@ struct SignUpView: View {
         }
     }
     
-    // 회원가입에 필요한 Auth 값
-    var email: String
-    var name: String
-    var socialId: String
-    var socialLoginType: String
-    var socialRefreshToken: String
-    var socialAccessToken: String
+    // ViewModel 전달
+    @ObservedObject var socialLoginViewModel: SocialLoginViewModel
 
     // 사용자 입력 필드
     @State var nickname: String = ""
@@ -50,11 +45,8 @@ struct SignUpView: View {
     @State var submitButtonColor: Color = .Gray02
     @State var isSubmitButtonDisabled: Bool = true
 
-    
     func isValidForm() {
-
         let isAllInputted = nickname != "" && introduction != "" && image != nil
-
         submitButtonColor = isAllInputted ? .Brown01 : .Gray02
         isSubmitButtonDisabled = !isAllInputted
     }
@@ -148,7 +140,15 @@ struct SignUpView: View {
         .navigationBarItems(
             trailing:
                 Button(action: {
-                    signUpViewModel.postSignUp(email: email, name: name, nickname: nickname, selfDescription: introduction, socialId: socialId, socialLoginType: socialLoginType, selectedUIImage: selectedUIImage)
+                    signUpViewModel.postSignUp(
+                        email: socialLoginViewModel.email ?? "",
+                        name: socialLoginViewModel.name ?? "",
+                        nickname: nickname,
+                        selfDescription: introduction,
+                        socialId: socialLoginViewModel.socialId ?? "",
+                        socialLoginType: socialLoginViewModel.socialLoginType ?? "",
+                        selectedUIImage: selectedUIImage
+                    )
                 }, label: {
                     Text("완료")
                         .font(.Body0_B)

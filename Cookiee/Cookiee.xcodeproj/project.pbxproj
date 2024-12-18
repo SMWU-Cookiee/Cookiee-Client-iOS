@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83007E162D12DD5900BA7121 /* SocialLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83007E152D12DD5900BA7121 /* SocialLoginViewModel.swift */; };
 		8305BACC2CBE864200658590 /* CalendarControlFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BACB2CBE864200658590 /* CalendarControlFunctions.swift */; };
 		8305BAD02CBE8B6100658590 /* EventCardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BACF2CBE8B6100658590 /* EventCardCellView.swift */; };
 		8305BAD72CBE953C00658590 /* ThumbnailRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BAD62CBE953C00658590 /* ThumbnailRequestDTO.swift */; };
@@ -145,6 +146,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		83007E152D12DD5900BA7121 /* SocialLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewModel.swift; sourceTree = "<group>"; };
 		8305BACB2CBE864200658590 /* CalendarControlFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarControlFunctions.swift; sourceTree = "<group>"; };
 		8305BACF2CBE8B6100658590 /* EventCardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardCellView.swift; sourceTree = "<group>"; };
 		8305BAD62CBE953C00658590 /* ThumbnailRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailRequestDTO.swift; sourceTree = "<group>"; };
@@ -295,6 +297,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		83007E142D12DD4500BA7121 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				83007E152D12DD5900BA7121 /* SocialLoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8305BAD32CBE951A00658590 /* Request */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,6 +900,7 @@
 		83E76C8A2CB6DA95000FEA67 /* SocialLogin */ = {
 			isa = PBXGroup;
 			children = (
+				83007E142D12DD4500BA7121 /* ViewModel */,
 				83E76C8B2CB6DAA0000FEA67 /* View */,
 			);
 			path = SocialLogin;
@@ -1205,6 +1216,7 @@
 				83F02CB52CAC0A8E001E8329 /* GoogleLoginAPI.swift in Sources */,
 				8362C3542CC0FD060086D052 /* EventDeleteDTO.swift in Sources */,
 				83A3E2672C7A193B00ADDB55 /* DevelopersView.swift in Sources */,
+				83007E162D12DD5900BA7121 /* SocialLoginViewModel.swift in Sources */,
 				833321C02C7B6A7C00C94D9D /* CategoryAddView.swift in Sources */,
 				83E3B3FC2D006A4800150B85 /* CustomTextFieldMultiLine.swift in Sources */,
 				832841DE2CD28CF800386308 /* CookieeCollectionView.swift in Sources */,
