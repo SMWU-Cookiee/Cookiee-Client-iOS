@@ -11,17 +11,11 @@ import AuthenticationServices
 import GoogleSignIn
 import GoogleSignInSwift
 
-
 struct SocialLoginView: View {
-    @State private var navigateToSignUp: Bool = false // 회원가입으로 이동
-    @State private var navigateToHome: Bool = false // 홈으로 이동
+    @State private var navigateToTermsOfService: Bool = false
+    @State private var navigateToHome: Bool = false
     
-    @State private var name:String = ""
-    @State private var email: String = ""
-    @State private var socialId: String = ""
-    @State private var socialLoginType: String = ""
-    @State private var socialRefreshToken: String = ""
-    @State private var socialAccessToken: String = ""
+    @ObservedObject var socialLoginViewModel = SocialLoginViewModel()
 
     var body: some View {
         NavigationStack {
@@ -39,44 +33,43 @@ struct SocialLoginView: View {
                     }
 
                     HStack {
-                        GoogleLoginInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, name: $name, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken) // 상태 전달
+                        GoogleLoginInButton(
+                            navigateToSignUp: $navigateToTermsOfService,
+                            navigateToHome: $navigateToHome,
+                            socialLoginViewModel: socialLoginViewModel
+                        )
                     }
                     .padding(.bottom, 11)
 
                     HStack {
-                        AppleSignInButton(navigateToSignUp: $navigateToSignUp, navigateToHome: $navigateToHome, name: $name, email: $email, socialId: $socialId, socialLoginType: $socialLoginType, socialRefreshToken: $socialRefreshToken, socialAccessToken: $socialAccessToken)
+                        AppleSignInButton(
+                            navigateToSignUp: $navigateToTermsOfService,
+                            navigateToHome: $navigateToHome,
+                            socialLoginViewModel: socialLoginViewModel
+                        )
                     }
                     .padding(.bottom, 90)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            // 로그인 성공 시 SignUpView로 이동
-            .navigationDestination(isPresented: $navigateToSignUp) {
-                SignUpView(email: email, name: name, socialId: socialId, socialLoginType: socialLoginType, socialRefreshToken: socialRefreshToken, socialAccessToken: socialAccessToken)
+            .navigationDestination(isPresented: $navigateToTermsOfService) {
+                TermsOfServiceView(socialLoginViewModel: socialLoginViewModel)
             }
             .navigationDestination(isPresented: $navigateToHome, destination: {
                 TabBarView()
             })
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
-
-//MARK: - 애플 로그인 버튼 & auth 처리
-struct AppleSignInButton : View {
-    
-    @Binding var navigateToSignUp: Bool // 네비게이션 상태를 부모에서 전달받음
+// MARK: - AppleSignInButton
+struct AppleSignInButton: View {
+    @Binding var navigateToSignUp: Bool
     @Binding var navigateToHome: Bool
     
-    //Auth 값 바인딩
-    @Binding var name: String
-    @Binding var email: String
-    @Binding var socialId: String
-    @Binding var socialLoginType: String
-    @Binding var socialRefreshToken: String
-    @Binding var socialAccessToken: String
-    
-    @State var isNewMember: Bool = false
+    @ObservedObject var socialLoginViewModel: SocialLoginViewModel
+    @State private var isNewMember: Bool = false
     
     var body: some View {
         Button {
@@ -97,30 +90,7 @@ struct AppleSignInButton : View {
                 case .success(let auth):
                     switch auth.credential {
                     case let credential as ASAuthorizationAppleIDCredential:
-                        
-                        if let authorizationCode = credential.authorizationCode,
-                           let identityToken = credential.identityToken,
-                           let authString = String(data: authorizationCode, encoding: .utf8),
-                           let tokenString = String(data: identityToken, encoding: .utf8) {
-                            
-                            print("authorizationCode to String: \(authString)")
-                            print("identityToken to String: \(tokenString)")
-                            
-                            Task {
-                                do {
-                                    let success = try await postAppleLogin(identityToken: tokenString, authorizationCode: authString)
-                                    if success {
-                                        if isNewMember {
-                                            navigateToSignUp = true
-                                        } else {
-                                            navigateToHome = true
-                                        }
-                                    }
-                                } catch {
-                                    print("Apple login failed with error: \(error)")
-                                }
-                            }
-                        }
+                        handleAppleCredential(credential: credential)
                     default:
                         break
                     }
@@ -128,19 +98,33 @@ struct AppleSignInButton : View {
                     print(error)
                 }
             })
-            .navigationBarBackButtonHidden(true)
-            .blendMode(.overlay)
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color.black, lineWidth: 1)
-            )
         )
     }
-        
     
-    func postAppleLogin(identityToken: String, authorizationCode: String) async throws -> Bool {
+    private func handleAppleCredential(credential: ASAuthorizationAppleIDCredential) {
+        if let authorizationCode = credential.authorizationCode,
+           let identityToken = credential.identityToken,
+           let authString = String(data: authorizationCode, encoding: .utf8),
+           let tokenString = String(data: identityToken, encoding: .utf8) {
+            
+            Task {
+                do {
+                    let success = try await postAppleLogin(identityToken: tokenString, authorizationCode: authString)
+                    if success {
+                        if isNewMember {
+                            navigateToSignUp = true
+                        } else {
+                            navigateToHome = true
+                        }
+                    }
+                } catch {
+                    print("Apple login failed with error: \(error)")
+                }
+            }
+        }
+    }
 
-        // API 처리
+    func postAppleLogin(identityToken: String, authorizationCode: String) async throws -> Bool {
         return try await withCheckedThrowingContinuation { continuation in
             let appleLoginService = AppleLoginService()
             appleLoginService.postAppleLogin(identityToken: identityToken, authorizationCode: authorizationCode) { result in
@@ -149,52 +133,42 @@ struct AppleSignInButton : View {
                     print("=====================================")
                     print("애플 로그인 결과: \(response)")
                     print("=====================================")
-
-                    // Auth 값 설정
-                    socialId = response.result.socialId
-                    socialLoginType = "apple"
-                    socialRefreshToken = response.result.refreshToken ?? ""
-                    socialAccessToken = response.result.accessToken ?? ""
+                    socialLoginViewModel.email = response.result.email
+                    socialLoginViewModel.name = response.result.name
+                    socialLoginViewModel.socialId = response.result.socialId
+                    socialLoginViewModel.socialLoginType = "apple"
+                    socialLoginViewModel.socialRefreshToken = response.result.refreshToken ?? ""
+                    socialLoginViewModel.socialAccessToken = response.result.accessToken ?? ""
                     isNewMember = response.result.isNewMember
                     
-                    continuation.resume(returning: true) // 성공 시 true 반환
+                    continuation.resume(returning: true)
                 case .failure(let error):
                     print("API Error: \(error)")
-                    continuation.resume(returning: false) // 실패 시 false 반환
+                    continuation.resume(returning: false)
                 }
             }
         }
     }
 }
 
-//MARK: - 구글 로그인 버튼 & auth 처리
-// GoogleLoginInButton 수정
+// MARK: - GoogleLoginInButton
 struct GoogleLoginInButton: View {
-    @Binding var navigateToSignUp: Bool // 네비게이션 상태를 부모에서 전달받음
+    @Binding var navigateToSignUp: Bool
     @Binding var navigateToHome: Bool
     
-    //Auth 값 바인딩
-    @Binding var name: String
-    @Binding var email: String
-    @Binding var socialId: String
-    @Binding var socialLoginType: String
-    @Binding var socialRefreshToken: String
-    @Binding var socialAccessToken: String
+    @ObservedObject var socialLoginViewModel: SocialLoginViewModel
+    @State private var isNewMember: Bool = false
     
-    @State var isNewMember: Bool = false
-    
-
     var body: some View {
         Button {
             Task {
                 do {
                     let loginSuccess = try await getGoogleUserID()
-                    
-                    if loginSuccess { // 구글 로그인 성공 여부 확인
+                    if loginSuccess {
                         if isNewMember {
-                            navigateToSignUp = true // 신규 가입이면 회원가입으로
+                            navigateToSignUp = true
                         } else {
-                            navigateToHome = true // 신규 가입이 아니면 홈으로
+                            navigateToHome = true
                         }
                     }
                 } catch {
@@ -212,9 +186,7 @@ struct GoogleLoginInButton: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.Gray04, lineWidth: 1)
         )
-        .navigationBarBackButtonHidden(true)
     }
-    
     
     func getGoogleUserID() async throws -> Bool {
         guard let TopUIViewController = FindTopUIViewController() else {
@@ -226,12 +198,12 @@ struct GoogleLoginInButton: View {
         let user = gidSignInResult.user
         guard let googleSocialId = user.userID else {
             print("Error: No User ID found")
-            return false // 실패 시 false 반환
+            return false
         }
-        email = user.profile!.email
-        name = user.profile!.name
+        
+        socialLoginViewModel.email = user.profile?.email
+        socialLoginViewModel.name = user.profile?.name
 
-        // API 처리
         return try await withCheckedThrowingContinuation { continuation in
             let googleLoginService = GoogleLoginService()
             googleLoginService.getGoogleLogin(socialId: googleSocialId) { result in
@@ -240,26 +212,19 @@ struct GoogleLoginInButton: View {
                     print("=====================================")
                     print("구글 로그인 결과: \(response)")
                     print("=====================================")
-
-                    // Auth 값 설정
-                    socialId = response.result.socialId
-                    socialLoginType = "google"
-                    socialRefreshToken = response.result.refreshToken ?? ""
-                    socialAccessToken = response.result.accessToken ?? ""
+                    socialLoginViewModel.socialId = response.result.socialId
+                    socialLoginViewModel.socialLoginType = "google"
+                    socialLoginViewModel.socialRefreshToken = response.result.refreshToken ?? ""
+                    socialLoginViewModel.socialAccessToken = response.result.accessToken ?? ""
                     isNewMember = response.result.isNewMember
                     
-                    continuation.resume(returning: true) // 성공 시 true 반환
+                    continuation.resume(returning: true)
                 case .failure(let error):
                     print("API Error: \(error)")
-                    continuation.resume(returning: false) // 실패 시 false 반환
+                    continuation.resume(returning: false)
                 }
             }
         }
     }
 }
 
-
-
-#Preview {
-    SocialLoginView()
-}
