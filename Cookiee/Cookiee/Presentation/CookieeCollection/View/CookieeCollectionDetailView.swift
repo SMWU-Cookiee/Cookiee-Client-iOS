@@ -50,7 +50,7 @@ struct CookieeCollectionDetailView: View {
                             Text("동기들 카테고리로 이벤트를 등록해서 쿠키를 모아보세요!")
                                 .font(Font.Body1_M)
                                 .foregroundStyle(Color.Brown03)
-                                .padding(.top, 5)
+                                .padding(.top, 1)
                                 
                         }
                         .frame(width: geometry.size.width)
