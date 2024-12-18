@@ -10,8 +10,11 @@ import UIKit
 
 class SignUpViewModel: ObservableObject {
     @Published var isSignUpSuccess: Bool = false
+    @Published var isLoading: Bool = false
     
     func postSignUp(email: String, name: String, nickname: String, selfDescription: String, socialId: String, socialLoginType: String, selectedUIImage: UIImage?) {
+        
+        self.isLoading = true
         
         let email: String = email
         let name: String = name
@@ -42,6 +45,7 @@ class SignUpViewModel: ObservableObject {
                 saveToKeychain(key: "userId", data: response.result.userId.description)
                 
                 self.isSignUpSuccess = true
+                self.isLoading = false
                 print(response)
         
             case .failure(let error):
