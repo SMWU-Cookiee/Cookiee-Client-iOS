@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @State var isBackButtonTapped: Bool = false
+    @State var isSignUpCanceled: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     // 백 버튼 커스텀
     var backButton: some View {
         Button {
-            self.presentationMode.wrappedValue.dismiss()
+            self.isBackButtonTapped = true
         } label: {
             HStack {
                 Image("ChevronLeftIconBlack")
@@ -174,6 +176,38 @@ struct SignUpView: View {
         
         .navigationDestination(isPresented: $signUpViewModel.isSignUpSuccess) {
             TabBarView()
+        }
+        
+        .showCustomAlert(
+            isPresented: $isBackButtonTapped,
+            content: {
+                VStack(alignment: .center) {
+                        Text("입력을 취소하고")
+                            .font(.Head1_B)
+                            .padding(.bottom, 1)
+                        Text("페이지를 나갈까요?")
+                            .font(.Head1_B)
+                            .padding(.bottom, 9)
+                        Text("페이지를 나가면 복구가 어렵습니다.")
+                            .font(.Body1_R)
+                    }
+            },
+            firstButton:
+                CustomAlertButton(
+                    action: { isBackButtonTapped = false },
+                    title: Text("취소").foregroundColor(Color.Gray04)
+                ),
+            secondButton:
+                CustomAlertButton(
+                    action: {
+                        isBackButtonTapped = false
+                        isSignUpCanceled = true
+                    },
+                    title: Text("탈퇴하기").foregroundColor(Color.Brown00))
+        )
+        
+        .navigationDestination(isPresented: $isSignUpCanceled) {
+            ContentView()
         }
     }
 }
