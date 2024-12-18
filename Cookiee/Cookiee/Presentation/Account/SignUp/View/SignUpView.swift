@@ -52,81 +52,96 @@ struct SignUpView: View {
     }
     
     var body: some View {
-        VStack {
-            // 프로필 이미지
-            HStack {
-                if let image = image {
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                        .frame(width: 129, height: 129)
-                } else {
-                    Circle()
-                        .foregroundColor(Color.Gray01)
-                        .frame(width: 129, height: 129)
-                        .overlay(
-                            Button(action: {
-                                showImagePicker.toggle()
-                            }, label: {
-                                Image("Photo")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                            })
-                            
-                        )
-                }
-            }
-            .sheet(isPresented: $showImagePicker, onDismiss: {
-                loadImage()
-            }) {
-                ImagePicker(image: $selectedUIImage)
-            }
-            .padding(.bottom, 35)
-        
-            // 닉네임 편집
-            HStack() {
-                Text("닉네임")
-                    .font(.Body0_SB)
-                    .frame(width: 75, alignment: .leading)
-                TextField("\(nickname)", text: $nickname)
-                    .placeholder(when: nickname.isEmpty) {
-                        Text("닉네임을 입력해주세요.")
-                            .foregroundStyle(Color.Gray04)
-                            .font(.Body0_M)
-                }
-                    .padding(10)
-                    .font(.Body1_M)
-                    .frame(height: 40)
-                    .background(Color.Gray01)
-                    .cornerRadius(5)
-                    .onChange(of: nickname) {
-                        isValidForm()
+        ZStack {
+            VStack {
+                // 프로필 이미지
+                HStack {
+                    if let image = image {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .clipShape(Circle())
+                            .frame(width: 129, height: 129)
+                    } else {
+                        Circle()
+                            .foregroundColor(Color.Gray01)
+                            .frame(width: 129, height: 129)
+                            .overlay(
+                                Button(action: {
+                                    showImagePicker.toggle()
+                                }, label: {
+                                    Image("Photo")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                })
+                                
+                            )
                     }
+                }
+                .sheet(isPresented: $showImagePicker, onDismiss: {
+                    loadImage()
+                }) {
+                    ImagePicker(image: $selectedUIImage)
+                }
+                .padding(.bottom, 35)
+                
+                // 닉네임 편집
+                HStack() {
+                    Text("닉네임")
+                        .font(.Body0_SB)
+                        .frame(width: 75, alignment: .leading)
+                    TextField("\(nickname)", text: $nickname)
+                        .placeholder(when: nickname.isEmpty) {
+                            Text("닉네임을 입력해주세요.")
+                                .foregroundStyle(Color.Gray04)
+                                .font(.Body0_M)
+                        }
+                        .padding(10)
+                        .font(.Body1_M)
+                        .frame(height: 40)
+                        .background(Color.Gray01)
+                        .cornerRadius(5)
+                        .onChange(of: nickname) {
+                            isValidForm()
+                        }
+                }
+                .padding(.bottom, 5)
+                
+                // 한 줄 소개 편집
+                HStack {
+                    Text("한 줄 소개")
+                        .font(.Body0_SB)
+                        .frame(width: 75, alignment: .leading)
+                    TextField("\(introduction)", text: $introduction)
+                        .placeholder(when: introduction.isEmpty) {
+                            Text("한 줄 소개를 입력해주세요.")
+                                .foregroundStyle(Color.Gray04)
+                                .font(.Body0_M)
+                        }
+                        .padding(10)
+                        .font(.Body1_M)
+                        .frame(height: 40)
+                        .background(Color.Gray01)
+                        .cornerRadius(5)
+                        .onChange(of: introduction) {
+                            isValidForm()
+                        }
+                }
+                Spacer()
             }
-            .padding(.bottom, 5)
+            .padding()
+            .padding(.top, 10)
             
-            // 한 줄 소개 편집
-            HStack {
-                Text("한 줄 소개")
-                    .font(.Body0_SB)
-                    .frame(width: 75, alignment: .leading)
-                TextField("\(introduction)", text: $introduction)
-                    .placeholder(when: introduction.isEmpty) {
-                        Text("한 줄 소개를 입력해주세요.")
-                            .foregroundStyle(Color.Gray04)
-                            .font(.Body0_M)
+            if signUpViewModel.isLoading {
+                VStack {
+                    Spacer()
+                    ProgressView()
+                        .controlSize(.large)
+                    Spacer()
                 }
-                    .padding(10)
-                    .font(.Body1_M)
-                    .frame(height: 40)
-                    .background(Color.Gray01)
-                    .cornerRadius(5)
-                    .onChange(of: introduction) {
-                        isValidForm()
-                    }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black.opacity(0.3))
             }
-            Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -154,10 +169,9 @@ struct SignUpView: View {
                         .font(.Body0_B)
                         .foregroundColor(submitButtonColor)
                 })
-                .disabled(isSubmitButtonDisabled)
+                .disabled(isSubmitButtonDisabled || signUpViewModel.isLoading)
         )
-        .padding()
-        .padding(.top, 10)
+        
         .navigationDestination(isPresented: $signUpViewModel.isSignUpSuccess) {
             TabBarView()
         }
