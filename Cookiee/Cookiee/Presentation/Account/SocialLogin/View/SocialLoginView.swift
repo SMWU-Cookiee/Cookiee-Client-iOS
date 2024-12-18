@@ -8,8 +8,6 @@
 import SwiftUI
 import AuthenticationServices
 
-import GoogleSignIn
-import GoogleSignInSwift
 
 struct SocialLoginView: View {
     @State private var navigateToTermsOfService: Bool = false
@@ -63,44 +61,38 @@ struct SocialLoginView: View {
     }
 }
 
-// MARK: - AppleSignInButton
-struct AppleSignInButton: View {
+// MARK: - DelegateHandler
+class AppleSignInHandler: NSObject, ObservableObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     @Binding var navigateToSignUp: Bool
     @Binding var navigateToHome: Bool
-    
+    @Published var isNewMember: Bool = false
+
     @ObservedObject var socialLoginViewModel: SocialLoginViewModel
-    @State private var isNewMember: Bool = false
-    
-    var body: some View {
-        Button {
-        } label: {
-            Image("AppleIcon")
-            Text("Apple 계정으로 로그인")
-                .font(Font.Body1_SB)
-                .foregroundStyle(Color.white)
+
+    init(navigateToSignUp: Binding<Bool>, navigateToHome: Binding<Bool>, socialLoginViewModel: SocialLoginViewModel) {
+            self._navigateToSignUp = navigateToSignUp
+            self._navigateToHome = navigateToHome
+            self.socialLoginViewModel = socialLoginViewModel
         }
-        .frame(width: 265, height: 37)
-        .background(Color.black)
-        .cornerRadius(5)
-        .overlay(
-            SignInWithAppleButton(onRequest: { request in
-                request.requestedScopes = [.email, .fullName]
-            }, onCompletion: { result in
-                switch result {
-                case .success(let auth):
-                    switch auth.credential {
-                    case let credential as ASAuthorizationAppleIDCredential:
-                        handleAppleCredential(credential: credential)
-                    default:
-                        break
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-            })
-        )
+
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
+            fatalError("AppleSignInHandler - presentationAnchor: No key window found")
+        }
+        return window
     }
-    
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            handleAppleCredential(credential: credential)
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Apple Login Error: \(error.localizedDescription)")
+    }
+
     private func handleAppleCredential(credential: ASAuthorizationAppleIDCredential) {
         if let authorizationCode = credential.authorizationCode,
            let identityToken = credential.identityToken,
@@ -133,13 +125,13 @@ struct AppleSignInButton: View {
                     print("=====================================")
                     print("애플 로그인 결과: \(response)")
                     print("=====================================")
-                    socialLoginViewModel.email = response.result.email
-                    socialLoginViewModel.name = response.result.name
-                    socialLoginViewModel.socialId = response.result.socialId
-                    socialLoginViewModel.socialLoginType = "apple"
-                    socialLoginViewModel.socialRefreshToken = response.result.refreshToken ?? ""
-                    socialLoginViewModel.socialAccessToken = response.result.accessToken ?? ""
-                    isNewMember = response.result.isNewMember
+                    self.socialLoginViewModel.email = response.result.email
+                    self.socialLoginViewModel.name = response.result.name
+                    self.socialLoginViewModel.socialId = response.result.socialId
+                    self.socialLoginViewModel.socialLoginType = "apple"
+                    self.socialLoginViewModel.socialRefreshToken = response.result.refreshToken ?? ""
+                    self.socialLoginViewModel.socialAccessToken = response.result.accessToken ?? ""
+                    self.isNewMember = response.result.isNewMember
                     
                     continuation.resume(returning: true)
                 case .failure(let error):
@@ -151,80 +143,42 @@ struct AppleSignInButton: View {
     }
 }
 
-// MARK: - GoogleLoginInButton
-struct GoogleLoginInButton: View {
-    @Binding var navigateToSignUp: Bool
-    @Binding var navigateToHome: Bool
-    
-    @ObservedObject var socialLoginViewModel: SocialLoginViewModel
-    @State private var isNewMember: Bool = false
-    
+
+// MARK: - AppleSignInButton
+struct AppleSignInButton: View {
+    @StateObject private var appleSignInHandler: AppleSignInHandler
+
+    init(navigateToSignUp: Binding<Bool>, navigateToHome: Binding<Bool>, socialLoginViewModel: SocialLoginViewModel) {
+            _appleSignInHandler = StateObject(wrappedValue: AppleSignInHandler(
+                navigateToSignUp: navigateToSignUp,
+                navigateToHome: navigateToHome,
+                socialLoginViewModel: socialLoginViewModel
+            ))
+        }
+
     var body: some View {
-        Button {
-            Task {
-                do {
-                    let loginSuccess = try await getGoogleUserID()
-                    if loginSuccess {
-                        if isNewMember {
-                            navigateToSignUp = true
-                        } else {
-                            navigateToHome = true
-                        }
-                    }
-                } catch {
-                    print("Google login failed with error: \(error)")
-                }
+        Button(action: handleAppleLogin) {
+            HStack {
+                Image("AppleIcon")
+                    .resizable()
+                    .frame(width: 18, height: 18)
+                Text("Apple 계정으로 로그인")
+                    .font(Font.Body1_SB)
+                    .foregroundColor(.white)
             }
-        } label: {
-            Image("GoogleLogos")
-            Text("Google 계정으로 로그인")
-                .font(Font.Body1_SB)
-                .foregroundStyle(Color.Gray06)
+            .frame(width: 265, height: 37)
+            .background(Color.black)
+            .cornerRadius(5)
         }
-        .frame(width: 265, height: 37)
-        .overlay(
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(Color.Gray04, lineWidth: 1)
-        )
     }
-    
-    func getGoogleUserID() async throws -> Bool {
-        guard let TopUIViewController = FindTopUIViewController() else {
-            throw URLError(.cannotFindHost)
-        }
-        
-        let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: TopUIViewController)
-        
-        let user = gidSignInResult.user
-        guard let googleSocialId = user.userID else {
-            print("Error: No User ID found")
-            return false
-        }
-        
-        socialLoginViewModel.email = user.profile?.email
-        socialLoginViewModel.name = user.profile?.name
 
-        return try await withCheckedThrowingContinuation { continuation in
-            let googleLoginService = GoogleLoginService()
-            googleLoginService.getGoogleLogin(socialId: googleSocialId) { result in
-                switch result {
-                case .success(let response):
-                    print("=====================================")
-                    print("구글 로그인 결과: \(response)")
-                    print("=====================================")
-                    socialLoginViewModel.socialId = response.result.socialId
-                    socialLoginViewModel.socialLoginType = "google"
-                    socialLoginViewModel.socialRefreshToken = response.result.refreshToken ?? ""
-                    socialLoginViewModel.socialAccessToken = response.result.accessToken ?? ""
-                    isNewMember = response.result.isNewMember
-                    
-                    continuation.resume(returning: true)
-                case .failure(let error):
-                    print("API Error: \(error)")
-                    continuation.resume(returning: false)
-                }
-            }
-        }
+    private func handleAppleLogin() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.email, .fullName]
+
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = appleSignInHandler
+        controller.presentationContextProvider = appleSignInHandler
+        controller.performRequests()
     }
 }
-

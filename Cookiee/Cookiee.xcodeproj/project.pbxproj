@@ -67,6 +67,7 @@
 		8389AB3A2CB1286000580F4D /* CategoryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8389AB392CB1286000580F4D /* CategoryRequestDTO.swift */; };
 		839584F02CE7A20600FE19DD /* CategoryAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839584EF2CE7A20600FE19DD /* CategoryAddButtonView.swift */; };
 		839584F22CE7A22500FE19DD /* CategoryListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839584F12CE7A22500FE19DD /* CategoryListRowView.swift */; };
+		839765AD2D130CB200DB96EA /* GoogleLoginInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839765AC2D130CB200DB96EA /* GoogleLoginInButton.swift */; };
 		83A3E2672C7A193B00ADDB55 /* DevelopersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3E2662C7A193B00ADDB55 /* DevelopersView.swift */; };
 		83B1C6B32C74E76900740EA3 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1C6B22C74E76900740EA3 /* CategoryListView.swift */; };
 		83B217392CCCC55B008C9793 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B217362CCCC55B008C9793 /* Pretendard-Medium.ttf */; };
@@ -198,6 +199,7 @@
 		8389AB392CB1286000580F4D /* CategoryRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRequestDTO.swift; sourceTree = "<group>"; };
 		839584EF2CE7A20600FE19DD /* CategoryAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddButtonView.swift; sourceTree = "<group>"; };
 		839584F12CE7A22500FE19DD /* CategoryListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListRowView.swift; sourceTree = "<group>"; };
+		839765AC2D130CB200DB96EA /* GoogleLoginInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginInButton.swift; sourceTree = "<group>"; };
 		83A3E2662C7A193B00ADDB55 /* DevelopersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersView.swift; sourceTree = "<group>"; };
 		83B1C6B22C74E76900740EA3 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 		83B217352CCCC55B008C9793 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
@@ -910,6 +912,7 @@
 			isa = PBXGroup;
 			children = (
 				83BD79B82C68BE4C0044C453 /* SocialLoginView.swift */,
+				839765AC2D130CB200DB96EA /* GoogleLoginInButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1294,6 +1297,7 @@
 				83202F3E2CC5330B000C9825 /* ImageCarousel.swift in Sources */,
 				8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */,
 				837AFD272CC0E3F100BCDD34 /* EventListResponseDTO.swift in Sources */,
+				839765AD2D130CB200DB96EA /* GoogleLoginInButton.swift in Sources */,
 				83C88E4E2CCD1778001554A4 /* ImageCarouselForUIImage.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
 				83C88E4A2CCD0DC5001554A4 /* urlToUIImage.swift in Sources */,
