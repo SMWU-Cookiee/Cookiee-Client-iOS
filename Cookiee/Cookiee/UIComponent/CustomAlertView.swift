@@ -60,15 +60,49 @@ extension View {
         firstButton: CustomAlertButton,
         secondButton: CustomAlertButton? = nil
     ) -> some View {
-        ZStack {
-            self
-            if isPresented.wrappedValue {
-                CustomAlertView(content: content(), firstButton: firstButton, secondButton: secondButton)
-                    .transition(.opacity)
+        self
+            .fullScreenCover(isPresented: isPresented) {
+                ZStack {
+                    Color.black.opacity(0.4)
+                        .ignoresSafeArea()
+                    CustomAlertView(
+                        content: content(),
+                        firstButton: firstButton,
+                        secondButton: secondButton
+                    )
+                }
+                .background(ClearBackground())
             }
-        }
+            .transaction { transaction in
+                transaction.disablesAnimations = isPresented.wrappedValue
+            }
     }
 }
+
+
+struct ClearBackground: UIViewRepresentable {
+    
+    public func makeUIView(context: Context) -> UIView {
+        
+        let view = ClearBackgroundView()
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        return view
+    }
+
+    public func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
+class ClearBackgroundView: UIView {
+    open override func layoutSubviews() {
+        guard let parentView = superview?.superview else {
+            return
+        }
+        parentView.backgroundColor = .clear
+    }
+}
+
 
 
 #Preview {
