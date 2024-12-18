@@ -59,6 +59,7 @@ struct SocialLoginView: View {
                 TabBarView()
             })
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
