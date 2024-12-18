@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TermsOfServiceView: View {
+    @ObservedObject var socialLoginViewModel: SocialLoginViewModel
     @ObservedObject var termsOfServiceViewModel = TermsOfServiceViewModel()
     
     @State var showTermsOfService = false
@@ -43,7 +44,7 @@ struct TermsOfServiceView: View {
             
             HStack {
                 NavigationLink(
-                    destination: ContentView(),
+                    destination: SignUpView(socialLoginViewModel: socialLoginViewModel),
                     label: {
                         Text("다음")
                             .foregroundStyle(Color.Gray00)
@@ -57,6 +58,7 @@ struct TermsOfServiceView: View {
             }
         }
         .padding(15)
+        .navigationBarBackButtonHidden(true)
         
         .sheet(isPresented: $showTermsOfService) {
             SafariView(url:URL(string: "https://thunder-syrup-94d.notion.site/6a378d5d676444cbad61bbe971591da5?pvs=74")!)
@@ -124,10 +126,6 @@ struct TermsOfServiceView: View {
             }
         }
     }
-}
-
-#Preview {
-    TermsOfServiceView()
 }
 
 struct CheckboxToggleStyle: ToggleStyle {

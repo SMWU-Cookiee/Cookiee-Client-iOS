@@ -12,8 +12,8 @@ import GoogleSignIn
 import GoogleSignInSwift
 
 struct SocialLoginView: View {
-    @State private var navigateToSignUp: Bool = false // 회원가입으로 이동
-    @State private var navigateToHome: Bool = false // 홈으로 이동
+    @State private var navigateToTermsOfService: Bool = false
+    @State private var navigateToHome: Bool = false
     
     @ObservedObject var socialLoginViewModel = SocialLoginViewModel()
 
@@ -34,7 +34,7 @@ struct SocialLoginView: View {
 
                     HStack {
                         GoogleLoginInButton(
-                            navigateToSignUp: $navigateToSignUp,
+                            navigateToSignUp: $navigateToTermsOfService,
                             navigateToHome: $navigateToHome,
                             socialLoginViewModel: socialLoginViewModel
                         )
@@ -43,7 +43,7 @@ struct SocialLoginView: View {
 
                     HStack {
                         AppleSignInButton(
-                            navigateToSignUp: $navigateToSignUp,
+                            navigateToSignUp: $navigateToTermsOfService,
                             navigateToHome: $navigateToHome,
                             socialLoginViewModel: socialLoginViewModel
                         )
@@ -52,8 +52,8 @@ struct SocialLoginView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .navigationDestination(isPresented: $navigateToSignUp) {
-                SignUpView(socialLoginViewModel: socialLoginViewModel)
+            .navigationDestination(isPresented: $navigateToTermsOfService) {
+                TermsOfServiceView(socialLoginViewModel: socialLoginViewModel)
             }
             .navigationDestination(isPresented: $navigateToHome, destination: {
                 TabBarView()
