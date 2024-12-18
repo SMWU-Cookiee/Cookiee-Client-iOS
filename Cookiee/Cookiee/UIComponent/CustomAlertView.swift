@@ -63,7 +63,7 @@ extension View {
         self
             .fullScreenCover(isPresented: isPresented) {
                 ZStack {
-                    Color.black.opacity(0.4)
+                    Color.black.opacity(0.1)
                         .ignoresSafeArea()
                     CustomAlertView(
                         content: content(),
