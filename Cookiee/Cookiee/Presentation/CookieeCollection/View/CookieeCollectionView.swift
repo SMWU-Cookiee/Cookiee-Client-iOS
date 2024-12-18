@@ -12,24 +12,47 @@ struct CookieeCollectionView: View {
 
     
     var body: some View {
-        VStack {
-            Text("쿠키 모아보기")
-                .font(Font.Head1_B)
-                .foregroundStyle(Color.Brown00)
-                .frame(height: 44)
-            
-            VStack(spacing: 0) {
-                ForEach(cookieeCollectionViewModel.cookieeCollectionList, id:\.id) { category in
-                    CategoryListRowViewForCollection(
-                        id: category.categoryId,
-                        name: category.categoryName,
-                        color: category.categoryColor,
-                        isCollectionExist: category.collectionExist
-                    )
+        GeometryReader { geometry in
+            VStack {
+                Text("쿠키 모아보기")
+                    .font(Font.Head1_B)
+                    .foregroundStyle(Color.Brown00)
+                    .frame(height: 44)
+                
+                VStack(spacing: 0) {
+                    if cookieeCollectionViewModel.cookieeCollectionList.isEmpty {
+                        VStack(alignment: .center) {
+                            
+                            Image("CookieeWithQuestionMark")
+                                .frame(width: 74, height: 74)
+                                .padding(.top, geometry.size.height / 3)
+                            
+                            Text("모아볼 카테고리가 없어요!")
+                                .font(Font.Body0_B)
+                                .foregroundStyle(Color.Brown00)
+                                .padding(.top, 13)
+                            
+                            Text("새로운 카테고리를 등록해서 모아보기를 시작하세요!")
+                                .font(Font.Body1_M)
+                                .foregroundStyle(Color.Brown03)
+                                .padding(.top, 1)
+                            
+                        }
+                        .frame(width: geometry.size.width)
+                    } else {
+                        ForEach(cookieeCollectionViewModel.cookieeCollectionList, id:\.id) { category in
+                            CategoryListRowViewForCollection(
+                                id: category.categoryId,
+                                name: category.categoryName,
+                                color: category.categoryColor,
+                                isCollectionExist: category.collectionExist
+                            )
+                        }
+                    }
                 }
-            }
 
-            Spacer()
+                Spacer()
+            }
         }
         .onAppear() {
             DispatchQueue.main.async {
