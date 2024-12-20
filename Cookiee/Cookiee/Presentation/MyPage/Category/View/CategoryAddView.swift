@@ -19,6 +19,8 @@ struct CategoryAddView: View {
     
     @State private var isSubmitButtonDisabled: Bool = true
     @State private var submitButtonColor: Color = .Gray03
+    @FocusState private var isTextFieldFocused: Bool
+
 
     func isValidForm() {
         let isValid = !name.trimmingCharacters(in: .whitespaces).isEmpty && !selectedColor.isEmpty
@@ -70,6 +72,7 @@ struct CategoryAddView: View {
                         text: $name,
                         prompt: Text("카테고리 이름을 입력해주세요.").foregroundColor(Color.Gray04)
                     )
+                        .focused($isTextFieldFocused)
                         .padding(10)
                         .font(.Body0_M)
                         .frame(height: 40)
@@ -88,6 +91,7 @@ struct CategoryAddView: View {
                         .foregroundStyle(Color.Gray05)
                         .frame(width: 92, alignment: .leading)
                     Button(action: {
+                        isTextFieldFocused = false
                         withAnimation(.easeInOut) {
                             isShowColorPicker.toggle()
                         }

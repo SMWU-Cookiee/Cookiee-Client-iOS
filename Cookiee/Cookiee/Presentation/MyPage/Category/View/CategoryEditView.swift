@@ -20,13 +20,9 @@ struct CategoryEditView: View {
     
     @State private var isSubmitButtonDisabled: Bool = true
     @State private var submitButtonColor: Color = .Gray03
+    @FocusState private var isTextFieldFocused: Bool
 
     func isValidForm() {
-        print(name)
-        print(categoryViewModel.category?.categoryName)
-        print(selectedColor)
-        print(categoryViewModel.category?.categoryColor)
-        
             let hasChanges = name != categoryViewModel.category?.categoryName || selectedColor != categoryViewModel.category?.categoryColor
             submitButtonColor = hasChanges ? .Brown01 : .Gray03
             isSubmitButtonDisabled = !hasChanges
@@ -77,6 +73,7 @@ struct CategoryEditView: View {
                         text: $name,
                         prompt: Text("카테고리 이름을 입력해주세요.").foregroundColor(Color.Gray04)
                     )
+                        .focused($isTextFieldFocused)
                         .padding(10)
                         .font(.Body0_M)
                         .frame(height: 40)
@@ -95,6 +92,7 @@ struct CategoryEditView: View {
                         .foregroundStyle(Color.Gray05)
                         .frame(width: 92, alignment: .leading)
                     Button(action: {
+                        isTextFieldFocused = false
                         withAnimation(.easeInOut) {
                             isShowColorPicker.toggle()
                         }
