@@ -14,6 +14,7 @@ struct CategoryListView: View {
 
     @State private var isAddButtonTapped = false
     @State private var isDeleteButtonTapped = false
+    @State private var isAddCategoryAlertPresented = false
     @State private var categoryNameToDelete: String?
     @State private var categoryIdToDelete: String?
     
@@ -106,6 +107,30 @@ struct CategoryListView: View {
                     },
                     title: Text("삭제하기").foregroundColor(Color.Brown00))
         )
+        .showCustomAlert(
+            isPresented: $isAddCategoryAlertPresented,
+            content: {
+                AnyView(
+                    VStack {
+                        Text("이미 존재하는 카테고리 이름입니다.")
+                            .font(.Head1_B)
+                            .padding(.bottom, 9)
+                        Text("다른 이름을 선택해주세요.")
+                            .font(.Body1_R)
+                    }
+                )
+            },
+            firstButton:
+                CustomAlertButton(
+                    action: { isAddCategoryAlertPresented = false },
+                    title: Text("확인").foregroundColor(Color.Brown00)
+                )
+        )
+        .onChange(of: stateCategoryListViewModel.isAddCategoryFailed) {
+            if stateCategoryListViewModel.isAddCategoryFailed {
+                isAddCategoryAlertPresented = true
+            }
+        }
     }
     
     

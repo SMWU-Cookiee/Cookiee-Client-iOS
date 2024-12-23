@@ -11,6 +11,7 @@ class CategoryListViewModel: ObservableObject {
     @Published var categories: [CategoryResultData] = []
     @Published var isUpdateSuccess: Bool = false
     @Published var isLoadingCompleted: Bool = false
+    @Published var isAddCategoryFailed: Bool = false
     
 
     let categoryService = CategoryService()
@@ -53,7 +54,10 @@ class CategoryListViewModel: ObservableObject {
                }
         
             case .failure(let error):
-                print("addCategory error:", error)
+                DispatchQueue.main.async {
+                    self.isAddCategoryFailed = true
+                    print("addCategory error:", error)
+                }
             }
         }
     }
