@@ -19,6 +19,8 @@ struct CategoryAddView: View {
     
     @State private var isSubmitButtonDisabled: Bool = true
     @State private var submitButtonColor: Color = .Gray03
+    @FocusState private var isTextFieldFocused: Bool
+
 
     func isValidForm() {
         let isValid = !name.trimmingCharacters(in: .whitespaces).isEmpty && !selectedColor.isEmpty
@@ -27,7 +29,7 @@ struct CategoryAddView: View {
     }
 
     var body: some View {
-        ZStack {
+        VStack {
             VStack {
                 ZStack {
                     HStack {
@@ -70,6 +72,7 @@ struct CategoryAddView: View {
                         text: $name,
                         prompt: Text("카테고리 이름을 입력해주세요.").foregroundColor(Color.Gray04)
                     )
+                        .focused($isTextFieldFocused)
                         .padding(10)
                         .font(.Body0_M)
                         .frame(height: 40)
@@ -77,6 +80,11 @@ struct CategoryAddView: View {
                         .cornerRadius(5)
                         .onChange(of: name) {
                             isValidForm()
+                        }
+                        .onChange(of: isTextFieldFocused) {
+                            if isTextFieldFocused {
+                                isShowColorPicker = false
+                            }
                         }
                 }
                 .padding(.bottom, 10)
@@ -88,6 +96,7 @@ struct CategoryAddView: View {
                         .foregroundStyle(Color.Gray05)
                         .frame(width: 92, alignment: .leading)
                     Button(action: {
+                        isTextFieldFocused = false
                         withAnimation(.easeInOut) {
                             isShowColorPicker.toggle()
                         }
@@ -115,47 +124,26 @@ struct CategoryAddView: View {
                         }
                 }
                 .frame(width: 353)
-                
-                Spacer()
             }
             .padding(10)
-            
+
             if isShowColorPicker {
-                ColorPickerBottomSheetView(isPresented: $isShowColorPicker, selectedColor: $selectedColor)
-                    .transition(.move(edge: .bottom))
-                    .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -5)
+                VStack {
+                    UIColorPickerViewControllerWrapper(selectedColor: $selectedColor) {
+                        withAnimation {
+                            isShowColorPicker = false
+                        }
+                    }
+                    .background(Color.white)
+                }
+                .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -5)
+            } else {
+                Spacer()
             }
         }
         .padding(.top, 20)
         .onAppear {
             isValidForm()
-        }
-    }
-}
-
-struct ColorPickerBottomSheetView: View {
-    @Binding var isPresented: Bool
-    @Binding var selectedColor: String
-    
-    var body: some View {
-        VStack {
-            Color.clear
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation {
-                        isPresented = false
-                    }
-                }
-            ZStack {
-                UIColorPickerViewControllerWrapper(selectedColor: $selectedColor) {
-                    withAnimation {
-                        isPresented = false
-                    }
-                }
-                .frame(height: 520)
-            }
-            .background(Color.white)
-            .zIndex(1)
         }
     }
 }
