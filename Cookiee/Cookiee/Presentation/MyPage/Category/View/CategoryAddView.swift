@@ -81,6 +81,11 @@ struct CategoryAddView: View {
                         .onChange(of: name) {
                             isValidForm()
                         }
+                        .onChange(of: isTextFieldFocused) {
+                            if isTextFieldFocused {
+                                isShowColorPicker = false
+                            }
+                        }
                 }
                 .padding(.bottom, 10)
                 .frame(width: 353)
