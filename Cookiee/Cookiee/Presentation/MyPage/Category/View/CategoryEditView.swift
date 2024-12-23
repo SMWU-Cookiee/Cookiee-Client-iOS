@@ -29,7 +29,7 @@ struct CategoryEditView: View {
         }
 
     var body: some View {
-        ZStack {
+        VStack {
             VStack {
                 ZStack {
                     HStack {
@@ -120,15 +120,21 @@ struct CategoryEditView: View {
                         }
                 }
                 .frame(width: 353)
-                
-                Spacer()
             }
             .padding(10)
             
             if isShowColorPicker {
-                ColorPickerBottomSheetView(isPresented: $isShowColorPicker, selectedColor: $selectedColor)
-                    .transition(.move(edge: .bottom))
-                    .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -5)
+                VStack {
+                    UIColorPickerViewControllerWrapper(selectedColor: $selectedColor) {
+                        withAnimation {
+                            isShowColorPicker = false
+                        }
+                    }
+                    .background(Color.white)
+                }
+                .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -5)
+            } else {
+                Spacer()
             }
         }
         .padding(.top, 20)
