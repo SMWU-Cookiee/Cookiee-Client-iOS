@@ -129,6 +129,7 @@ struct CategoryListView: View {
         .onChange(of: stateCategoryListViewModel.isAddCategoryFailed) {
             if stateCategoryListViewModel.isAddCategoryFailed {
                 isAddCategoryAlertPresented = true
+                stateCategoryListViewModel.isAddCategoryFailed = false
             }
         }
     }
