@@ -10,8 +10,10 @@ import SwiftUI
 struct MyPageView: View {
     @ObservedObject var signOutViewModel = SignOutViewModel()
     @ObservedObject var profileViewModel = ProfileViewModel()
+    @ObservedObject var logOutViewModel = LogOutViewModel()
 
     @State var isSignOutButtonTapped: Bool = false
+    @State var isLogOutButtonTapped: Bool = false
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -150,7 +152,9 @@ struct MyPageView: View {
                 
                 Divider()
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {
+                    isLogOutButtonTapped = true
+                }, label: {
                     Text("로그아웃")
                         .font(.Body1_M)
                         .foregroundStyle(Color.black)
@@ -220,6 +224,32 @@ struct MyPageView: View {
         .navigationDestination(isPresented: $signOutViewModel.isSignOutSuccess, destination: {
             ContentView()
         })
+        
+        .showCustomAlert(
+            isPresented: $isLogOutButtonTapped,
+            content: {
+                    VStack {
+                        Text("로그아웃할까요?")
+                            .font(.Head1_B)
+                    }
+            },
+            firstButton:
+                CustomAlertButton(
+                    action: { isLogOutButtonTapped = false },
+                    title: Text("취소").foregroundColor(Color.Gray04)
+                ),
+            secondButton:
+                CustomAlertButton(
+                    action: {
+                        isLogOutButtonTapped = false
+                        logOutViewModel.deleteSignOut()
+                    },
+                    title: Text("완료").foregroundColor(Color.Brown00))
+        )
+        .navigationDestination(isPresented: $logOutViewModel.isLogOutSuccess, destination: {
+            ContentView()
+        })
+        
         .onAppear() {
             profileViewModel.loadUserProfile()
         }
