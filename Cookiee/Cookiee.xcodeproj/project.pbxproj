@@ -44,6 +44,10 @@
 		835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */; };
 		8362C3522CC0F3EA0086D052 /* EventDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8362C3512CC0F3EA0086D052 /* EventDetailResponseDTO.swift */; };
 		8362C3542CC0FD060086D052 /* EventDeleteDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8362C3532CC0FD060086D052 /* EventDeleteDTO.swift */; };
+		83631D9C2D1A6F3C0018C3C3 /* LogOutResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83631D9B2D1A6F3C0018C3C3 /* LogOutResponseDTO.swift */; };
+		83631D9E2D1A6F5E0018C3C3 /* LogOutAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83631D9D2D1A6F5E0018C3C3 /* LogOutAPI.swift */; };
+		83631DA02D1A6FA20018C3C3 /* LogOutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83631D9F2D1A6FA20018C3C3 /* LogOutService.swift */; };
+		83631DA42D1A70490018C3C3 /* LogOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83631DA32D1A70490018C3C3 /* LogOutViewModel.swift */; };
 		8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369B3742C6905F6005ACDBD /* ColorExtension.swift */; };
 		837AFD272CC0E3F100BCDD34 /* EventListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837AFD262CC0E3F100BCDD34 /* EventListResponseDTO.swift */; };
 		837AFD2B2CC0E4BA00BCDD34 /* EventAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837AFD2A2CC0E4BA00BCDD34 /* EventAPI.swift */; };
@@ -177,6 +181,10 @@
 		835F7AD12C70CD3F006AEE89 /* FetchImageByURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageByURL.swift; sourceTree = "<group>"; };
 		8362C3512CC0F3EA0086D052 /* EventDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailResponseDTO.swift; sourceTree = "<group>"; };
 		8362C3532CC0FD060086D052 /* EventDeleteDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDeleteDTO.swift; sourceTree = "<group>"; };
+		83631D9B2D1A6F3C0018C3C3 /* LogOutResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutResponseDTO.swift; sourceTree = "<group>"; };
+		83631D9D2D1A6F5E0018C3C3 /* LogOutAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutAPI.swift; sourceTree = "<group>"; };
+		83631D9F2D1A6FA20018C3C3 /* LogOutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutService.swift; sourceTree = "<group>"; };
+		83631DA32D1A70490018C3C3 /* LogOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewModel.swift; sourceTree = "<group>"; };
 		8369B3742C6905F6005ACDBD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		837AFD262CC0E3F100BCDD34 /* EventListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListResponseDTO.swift; sourceTree = "<group>"; };
 		837AFD2A2CC0E4BA00BCDD34 /* EventAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAPI.swift; sourceTree = "<group>"; };
@@ -477,6 +485,48 @@
 			path = EventListView;
 			sourceTree = "<group>";
 		};
+		83631D982D1A6F100018C3C3 /* LogOut */ = {
+			isa = PBXGroup;
+			children = (
+				83631D992D1A6F1C0018C3C3 /* DTO */,
+				83631D9D2D1A6F5E0018C3C3 /* LogOutAPI.swift */,
+				83631D9F2D1A6FA20018C3C3 /* LogOutService.swift */,
+			);
+			path = LogOut;
+			sourceTree = "<group>";
+		};
+		83631D992D1A6F1C0018C3C3 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				83631D9A2D1A6F2E0018C3C3 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		83631D9A2D1A6F2E0018C3C3 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				83631D9B2D1A6F3C0018C3C3 /* LogOutResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		83631DA12D1A70220018C3C3 /* LogOut */ = {
+			isa = PBXGroup;
+			children = (
+				83631DA22D1A702D0018C3C3 /* ViewModel */,
+			);
+			path = LogOut;
+			sourceTree = "<group>";
+		};
+		83631DA22D1A702D0018C3C3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				83631DA32D1A70490018C3C3 /* LogOutViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		837AFD202CC0E39E00BCDD34 /* Event */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,6 +734,7 @@
 		83A3E2682C7A203A00ADDB55 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				83631DA12D1A70220018C3C3 /* LogOut */,
 				8389AB332CB10FC500580F4D /* Category */,
 				837D74DF2CBE425C005D20DC /* Profile */,
 				83E6F5F52CB7A99500DCDF32 /* SignOut */,
@@ -841,6 +892,7 @@
 		83E76C732CB6CDF6000FEA67 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				83631D982D1A6F100018C3C3 /* LogOut */,
 				837D74D52CBE3D4C005D20DC /* Profile */,
 				83E76C7E2CB6D4AF000FEA67 /* SignUp */,
 				83E76C742CB6CDFF000FEA67 /* SignOut */,
@@ -1263,6 +1315,7 @@
 				83E76C872CB6D6D3000FEA67 /* SignUpAPI.swift in Sources */,
 				8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */,
 				83B8E7642D0979CC00F0DD27 /* AppleLoginService.swift in Sources */,
+				83631D9E2D1A6F5E0018C3C3 /* LogOutAPI.swift in Sources */,
 				835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */,
 				83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */,
 				83B8E7602D09797D00F0DD27 /* AppleLoginResponseDTO.swift in Sources */,
@@ -1281,9 +1334,11 @@
 				83E76C792CB6D0A9000FEA67 /* SignOutResponseDTO.swift in Sources */,
 				8349F5F42CB003EA00746163 /* deleteFromKeychain.swift in Sources */,
 				83F80D492C79AD18001231A9 /* ColorPickerView.swift in Sources */,
+				83631DA02D1A6FA20018C3C3 /* LogOutService.swift in Sources */,
 				83C88E432CCCE3C4001554A4 /* CustomTextField.swift in Sources */,
 				837D74E62CBE4EE5005D20DC /* ProfilePutRequestDTO.swift in Sources */,
 				83C88E3D2CCCD86B001554A4 /* EventRequestDTO.swift in Sources */,
+				83631D9C2D1A6F3C0018C3C3 /* LogOutResponseDTO.swift in Sources */,
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
 				832841E52CD294C400386308 /* CookieeCollectionAPI.swift in Sources */,
 				83F02CBF2CAC3189001E8329 /* Placeholder.swift in Sources */,
@@ -1302,6 +1357,7 @@
 				8385C5AD2C6E6B5E00D1DD21 /* ImageCarouselView.swift in Sources */,
 				837AFD272CC0E3F100BCDD34 /* EventListResponseDTO.swift in Sources */,
 				839765AD2D130CB200DB96EA /* GoogleLoginInButton.swift in Sources */,
+				83631DA42D1A70490018C3C3 /* LogOutViewModel.swift in Sources */,
 				83C88E4E2CCD1778001554A4 /* ImageCarouselForUIImage.swift in Sources */,
 				8369B3752C6905F6005ACDBD /* ColorExtension.swift in Sources */,
 				83C88E4A2CCD0DC5001554A4 /* urlToUIImage.swift in Sources */,
