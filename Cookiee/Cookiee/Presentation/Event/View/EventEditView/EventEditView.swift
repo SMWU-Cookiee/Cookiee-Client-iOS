@@ -9,12 +9,13 @@ import SwiftUI
 import PhotosUI
 
 struct EventEditView: View {
+    @State var isBackButtonTapped: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     // 백 버튼 커스텀
     var backButton: some View {
         Button {
-            self.presentationMode.wrappedValue.dismiss()
+            self.isBackButtonTapped = true
         } label: {
             HStack {
                 Image("ChevronLeftIconBlack")
@@ -292,5 +293,29 @@ struct EventEditView: View {
                 
             }
         }
+        .showCustomAlert(
+            isPresented: $isBackButtonTapped,
+            content: {
+                VStack(alignment: .center) {
+                        Text("쿠키 수정을 그만할까요?")
+                            .font(Font.Head1_B)
+                            .padding(.bottom, 9)
+                        Text("지금까지 변경사항은 저장되지 않습니다.")
+                            .font(Font.Body1_R)
+                    }
+            },
+            firstButton:
+                CustomAlertButton(
+                    action: { isBackButtonTapped = false },
+                    title: Text("취소").foregroundColor(Color.Gray04)
+                ),
+            secondButton:
+                CustomAlertButton(
+                    action: {
+                        isBackButtonTapped = false
+                        self.presentationMode.wrappedValue.dismiss()
+                    },
+                    title: Text("확인").foregroundColor(Color.Brown00))
+        )
     }
 }
