@@ -140,16 +140,21 @@ struct EventEditView: View {
     private var submittingOverlay: some View {
         Group {
             if isSubmitting {
-                VStack {
-                    if isEditSuccess {
-                        successAlert
-                    } else {
-                        progressIndicator
+                ZStack {
+                    Color.black.opacity(0.4)
+                        .ignoresSafeArea()
+                    
+                    VStack {
+                        if isEditSuccess {
+                            successAlert
+                        } else {
+                            progressIndicator
+                        }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .zIndex(1)
                 }
-                .edgesIgnoringSafeArea(.all)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.black.opacity(0.3))
+                .zIndex(2)
             }
         }
     }
