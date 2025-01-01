@@ -53,9 +53,9 @@ struct EventAddView: View {
     var body: some View {
         ZStack {
             contentScrollView
+                .padding(.top, 10)
             submittingOverlay
         }
-        .padding(.top, 10)
         .photosPicker(
             isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
             selection: $imagePickerForEventViewModel.selection,
