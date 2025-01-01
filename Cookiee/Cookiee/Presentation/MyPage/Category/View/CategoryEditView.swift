@@ -21,6 +21,8 @@ struct CategoryEditView: View {
     @State private var isSubmitButtonDisabled: Bool = true
     @State private var submitButtonColor: Color = .Gray03
     @FocusState private var isTextFieldFocused: Bool
+    
+    @State var isBackButtonTapped: Bool = false
 
     func isValidForm() {
             let hasChanges = name != categoryViewModel.category?.categoryName || selectedColor != categoryViewModel.category?.categoryColor
@@ -34,7 +36,7 @@ struct CategoryEditView: View {
                 ZStack {
                     HStack {
                         Button(action: {
-                            toggleIsOpenCategoryAddSheet()
+                            isBackButtonTapped = true
                         }, label: {
                             Image("XmarkIcon")
                         })
@@ -147,5 +149,30 @@ struct CategoryEditView: View {
             categoryViewModel.category = CategoryData(categoryName: name, categoryColor: selectedColor)
             isValidForm()
         }
+        
+        .showCustomAlert(
+            isPresented: $isBackButtonTapped,
+            content: {
+                VStack(alignment: .center) {
+                        Text("카테고리 수정을 그만할까요?")
+                            .font(.Head1_B)
+                            .padding(.bottom, 9)
+                        Text("페이지를 나가면 복구가 어렵습니다.")
+                            .font(.Body1_R)
+                    }
+            },
+            firstButton:
+                CustomAlertButton(
+                    action: { isBackButtonTapped = false },
+                    title: Text("취소").foregroundColor(Color.Gray04)
+                ),
+            secondButton:
+                CustomAlertButton(
+                    action: {
+                        isBackButtonTapped = false
+                        toggleIsOpenCategoryAddSheet()
+                    },
+                    title: Text("확인").foregroundColor(Color.Brown00))
+        )
     }
 }
