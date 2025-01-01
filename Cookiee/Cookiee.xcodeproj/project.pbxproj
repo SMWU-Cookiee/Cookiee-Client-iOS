@@ -12,6 +12,10 @@
 		8305BAD02CBE8B6100658590 /* EventCardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BACF2CBE8B6100658590 /* EventCardCellView.swift */; };
 		8305BAD72CBE953C00658590 /* ThumbnailRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BAD62CBE953C00658590 /* ThumbnailRequestDTO.swift */; };
 		8305BADA2CBE98C500658590 /* ThumbnailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BAD92CBE98C500658590 /* ThumbnailViewModel.swift */; };
+		831BDD8A2D256A4500AE0AB4 /* CustomTextFieldWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831BDD892D256A4500AE0AB4 /* CustomTextFieldWithLabel.swift */; };
+		831BDD8C2D256A5500AE0AB4 /* CategorySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831BDD8B2D256A5500AE0AB4 /* CategorySelectView.swift */; };
+		831BDD8E2D256A7400AE0AB4 /* CategoryAddInEventButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831BDD8D2D256A7400AE0AB4 /* CategoryAddInEventButtonView.swift */; };
+		831BDD902D256AFB00AE0AB4 /* CategorySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831BDD8F2D256AFB00AE0AB4 /* CategorySelectorView.swift */; };
 		83202F3C2CC532B8000C9825 /* CategorySelectButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83202F3B2CC532B8000C9825 /* CategorySelectButtonView.swift */; };
 		83202F3E2CC5330B000C9825 /* ImageCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83202F3D2CC5330B000C9825 /* ImageCarousel.swift */; };
 		83202F402CC533F4000C9825 /* ImagePickerForEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83202F3F2CC533F4000C9825 /* ImagePickerForEventViewModel.swift */; };
@@ -119,6 +123,8 @@
 		83E76C872CB6D6D3000FEA67 /* SignUpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C862CB6D6D3000FEA67 /* SignUpAPI.swift */; };
 		83E76C892CB6D84E000FEA67 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C882CB6D84E000FEA67 /* SignUpService.swift */; };
 		83E76C8E2CB6DACA000FEA67 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C8D2CB6DACA000FEA67 /* SignUpViewModel.swift */; };
+		83EA322A2D25797600FA758C /* CategorySelectBottomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EA32292D25797600FA758C /* CategorySelectBottomModal.swift */; };
+		83EA322C2D257A2F00FA758C /* EventFormFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EA322B2D257A2F00FA758C /* EventFormFields.swift */; };
 		83EE1DA82CB0372B009E4488 /* ThumbnailListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DA72CB0372B009E4488 /* ThumbnailListResponseDTO.swift */; };
 		83EE1DAA2CB038F0009E4488 /* ThumbnailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */; };
 		83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */; };
@@ -157,6 +163,10 @@
 		8305BACF2CBE8B6100658590 /* EventCardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardCellView.swift; sourceTree = "<group>"; };
 		8305BAD62CBE953C00658590 /* ThumbnailRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailRequestDTO.swift; sourceTree = "<group>"; };
 		8305BAD92CBE98C500658590 /* ThumbnailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailViewModel.swift; sourceTree = "<group>"; };
+		831BDD892D256A4500AE0AB4 /* CustomTextFieldWithLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldWithLabel.swift; sourceTree = "<group>"; };
+		831BDD8B2D256A5500AE0AB4 /* CategorySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectView.swift; sourceTree = "<group>"; };
+		831BDD8D2D256A7400AE0AB4 /* CategoryAddInEventButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddInEventButtonView.swift; sourceTree = "<group>"; };
+		831BDD8F2D256AFB00AE0AB4 /* CategorySelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorView.swift; sourceTree = "<group>"; };
 		83202F3B2CC532B8000C9825 /* CategorySelectButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectButtonView.swift; sourceTree = "<group>"; };
 		83202F3D2CC5330B000C9825 /* ImageCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarousel.swift; sourceTree = "<group>"; };
 		83202F3F2CC533F4000C9825 /* ImagePickerForEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerForEventViewModel.swift; sourceTree = "<group>"; };
@@ -261,6 +271,8 @@
 		83E76C862CB6D6D3000FEA67 /* SignUpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAPI.swift; sourceTree = "<group>"; };
 		83E76C882CB6D84E000FEA67 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		83E76C8D2CB6DACA000FEA67 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		83EA32292D25797600FA758C /* CategorySelectBottomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectBottomModal.swift; sourceTree = "<group>"; };
+		83EA322B2D257A2F00FA758C /* EventFormFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormFields.swift; sourceTree = "<group>"; };
 		83EE1DA72CB0372B009E4488 /* ThumbnailListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailListResponseDTO.swift; sourceTree = "<group>"; };
 		83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailAPI.swift; sourceTree = "<group>"; };
 		83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailService.swift; sourceTree = "<group>"; };
@@ -468,8 +480,7 @@
 		8362C3552CC10DDD0086D052 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				83C88E442CCCF7C3001554A4 /* EventEditView */,
-				83202F382CC53286000C9825 /* EventAddView */,
+				83EA322D2D257B2900FA758C /* EventAdd&Edit */,
 				8362C3562CC10DFD0086D052 /* EventListView */,
 				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
 			);
@@ -997,6 +1008,21 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		83EA322D2D257B2900FA758C /* EventAdd&Edit */ = {
+			isa = PBXGroup;
+			children = (
+				83202F382CC53286000C9825 /* EventAddView */,
+				83C88E442CCCF7C3001554A4 /* EventEditView */,
+				831BDD892D256A4500AE0AB4 /* CustomTextFieldWithLabel.swift */,
+				831BDD8B2D256A5500AE0AB4 /* CategorySelectView.swift */,
+				831BDD8D2D256A7400AE0AB4 /* CategoryAddInEventButtonView.swift */,
+				831BDD8F2D256AFB00AE0AB4 /* CategorySelectorView.swift */,
+				83EA322B2D257A2F00FA758C /* EventFormFields.swift */,
+				83EA32292D25797600FA758C /* CategorySelectBottomModal.swift */,
+			);
+			path = "EventAdd&Edit";
+			sourceTree = "<group>";
+		};
 		83EE1DA42CB03640009E4488 /* Thumbnail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1263,12 +1289,14 @@
 				832841EE2CD2982A00386308 /* CookieeCollectionDetailView.swift in Sources */,
 				839584F02CE7A20600FE19DD /* CategoryAddButtonView.swift in Sources */,
 				837AFD2D2CC0E55B00BCDD34 /* EventService.swift in Sources */,
+				831BDD8C2D256A5500AE0AB4 /* CategorySelectView.swift in Sources */,
 				83DA005F2C79BE7400B8CD46 /* ProfileEditView.swift in Sources */,
 				83EE1DA82CB0372B009E4488 /* ThumbnailListResponseDTO.swift in Sources */,
 				83F02CB82CAC0ACE001E8329 /* BaseTargetType.swift in Sources */,
 				837D74DA2CBE4051005D20DC /* ProfileResponseDTO.swift in Sources */,
 				83DA00612C79C55500B8CD46 /* ImagePicker.swift in Sources */,
 				8383B48C2C74C74700C9127F /* MyPageView.swift in Sources */,
+				831BDD902D256AFB00AE0AB4 /* CategorySelectorView.swift in Sources */,
 				837D74EB2CBE6603005D20DC /* CalendarThumnailViewModel.swift in Sources */,
 				8305BAD02CBE8B6100658590 /* EventCardCellView.swift in Sources */,
 				83EFD1852D113DD0008D35CD /* TermsOfServiceView.swift in Sources */,
@@ -1315,6 +1343,7 @@
 				83E76C872CB6D6D3000FEA67 /* SignUpAPI.swift in Sources */,
 				8385C5AB2C6E6B1500D1DD21 /* CategoryLabelView.swift in Sources */,
 				83B8E7642D0979CC00F0DD27 /* AppleLoginService.swift in Sources */,
+				83EA322A2D25797600FA758C /* CategorySelectBottomModal.swift in Sources */,
 				83631D9E2D1A6F5E0018C3C3 /* LogOutAPI.swift in Sources */,
 				835F7AD22C70CD3F006AEE89 /* FetchImageByURL.swift in Sources */,
 				83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */,
@@ -1325,6 +1354,7 @@
 				83C88E502CCD2E58001554A4 /* overlayIf.swift in Sources */,
 				83F02CBD2CAC11F2001E8329 /* SignUpView.swift in Sources */,
 				832841F02CD29A2200386308 /* CookieeCollectionDetailResponseDTO.swift in Sources */,
+				83EA322C2D257A2F00FA758C /* EventFormFields.swift in Sources */,
 				837D74ED2CBE8473005D20DC /* CalendarCellView.swift in Sources */,
 				832841E72CD294D000386308 /* CookieeCollectionService.swift in Sources */,
 				83202F402CC533F4000C9825 /* ImagePickerForEventViewModel.swift in Sources */,
@@ -1342,6 +1372,7 @@
 				83BD79882C68BB570044C453 /* CookieeApp.swift in Sources */,
 				832841E52CD294C400386308 /* CookieeCollectionAPI.swift in Sources */,
 				83F02CBF2CAC3189001E8329 /* Placeholder.swift in Sources */,
+				831BDD8A2D256A4500AE0AB4 /* CustomTextFieldWithLabel.swift in Sources */,
 				83E76C822CB6D575000FEA67 /* SignUpRequestDTO.swift in Sources */,
 				837D74DE2CBE40A0005D20DC /* ProfileService.swift in Sources */,
 				8349F5FB2CB011E600746163 /* TokenRefreshAPI.swift in Sources */,
@@ -1350,6 +1381,7 @@
 				83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */,
 				83C861BC2C74E1DC004FDF7A /* PrivacyPolicyView.swift in Sources */,
 				8385C5A62C6E229800D1DD21 /* EventDetailView.swift in Sources */,
+				831BDD8E2D256A7400AE0AB4 /* CategoryAddInEventButtonView.swift in Sources */,
 				83E76C6E2CB6AE88000FEA67 /* CustomAlertView.swift in Sources */,
 				83E76C8E2CB6DACA000FEA67 /* SignUpViewModel.swift in Sources */,
 				83B1C6B32C74E76900740EA3 /* CategoryListView.swift in Sources */,

@@ -14,8 +14,6 @@ struct CustomAlertView<Content: View>: View {
     
     var body: some View {
         ZStack{
-            Color.black.opacity(0.4).ignoresSafeArea()
-
             VStack(spacing: 0){
                 content
                     .padding(.vertical, 25)
@@ -38,7 +36,7 @@ struct CustomAlertView<Content: View>: View {
 }
 
 struct CustomAlertButton: View {
-    typealias Action = () -> ()
+    typealias Action = () -> Void
     
     let action: Action
     let title: Text
@@ -63,7 +61,7 @@ extension View {
         self
             .fullScreenCover(isPresented: isPresented) {
                 ZStack {
-                    Color.black.opacity(0.1)
+                    Color.black.opacity(0.4)
                         .ignoresSafeArea()
                     CustomAlertView(
                         content: content(),
