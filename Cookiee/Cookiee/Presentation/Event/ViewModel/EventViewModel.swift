@@ -125,6 +125,7 @@ class EventViewModel : ObservableObject {
             )
             
             service.putEvent(eventId: eventId, requestBody: request) { result in
+                self.isUpdateSuccess = false
                 switch result {
                 case .success(let response):
                     self.isUpdateSuccess = true

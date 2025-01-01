@@ -38,7 +38,7 @@ struct CustomAlertView<Content: View>: View {
 }
 
 struct CustomAlertButton: View {
-    typealias Action = () -> ()
+    typealias Action = () -> Void
     
     let action: Action
     let title: Text
