@@ -59,6 +59,7 @@ struct CookieeCollectionView: View {
                 cookieeCollectionViewModel.loadCookieeCollectionListData()
            }
         }
+        .popGestureDisabled()
     }
 }
 

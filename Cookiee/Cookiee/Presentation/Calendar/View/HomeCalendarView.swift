@@ -48,6 +48,7 @@ struct HomeCalendarView: View {
         .onAppear() {
             homeCalendarViewModel.loadThumbnailList()
         }
+        .popGestureDisabled()
     }
     
     private var CalendarHeaderView: some View {
