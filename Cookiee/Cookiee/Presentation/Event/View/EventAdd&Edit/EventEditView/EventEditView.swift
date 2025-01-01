@@ -51,9 +51,9 @@ struct EventEditView: View {
     var body: some View {
         ZStack {
             contentScrollView
-            submittingOverlay   
+                .padding(.top, 10)
+            submittingOverlay
         }
-        .padding(.top, 10)
         .onAppear() {
             loadInitialData()
         }

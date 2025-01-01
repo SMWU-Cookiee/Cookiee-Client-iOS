@@ -253,6 +253,8 @@ struct MyPageView: View {
         .onAppear() {
             profileViewModel.loadUserProfile()
         }
+        
+        .popGestureDisabled()
     }
 }
 

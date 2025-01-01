@@ -125,6 +125,7 @@
 		83E76C8E2CB6DACA000FEA67 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E76C8D2CB6DACA000FEA67 /* SignUpViewModel.swift */; };
 		83EA322A2D25797600FA758C /* CategorySelectBottomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EA32292D25797600FA758C /* CategorySelectBottomModal.swift */; };
 		83EA322C2D257A2F00FA758C /* EventFormFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EA322B2D257A2F00FA758C /* EventFormFields.swift */; };
+		83EA322F2D257FF400FA758C /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EA322E2D257FF400FA758C /* UINavigationController.swift */; };
 		83EE1DA82CB0372B009E4488 /* ThumbnailListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DA72CB0372B009E4488 /* ThumbnailListResponseDTO.swift */; };
 		83EE1DAA2CB038F0009E4488 /* ThumbnailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */; };
 		83EE1DAC2CB039EA009E4488 /* ThumbnailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */; };
@@ -273,6 +274,7 @@
 		83E76C8D2CB6DACA000FEA67 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		83EA32292D25797600FA758C /* CategorySelectBottomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectBottomModal.swift; sourceTree = "<group>"; };
 		83EA322B2D257A2F00FA758C /* EventFormFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormFields.swift; sourceTree = "<group>"; };
+		83EA322E2D257FF400FA758C /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		83EE1DA72CB0372B009E4488 /* ThumbnailListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailListResponseDTO.swift; sourceTree = "<group>"; };
 		83EE1DA92CB038F0009E4488 /* ThumbnailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailAPI.swift; sourceTree = "<group>"; };
 		83EE1DAB2CB039EA009E4488 /* ThumbnailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailService.swift; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 				83C88E4F2CCD2E58001554A4 /* overlayIf.swift */,
 				83C88E572CCD4D1E001554A4 /* downscaleTOjpegData.swift */,
 				83EFD1802D113972008D35CD /* SafariView.swift */,
+				83EA322E2D257FF400FA758C /* UINavigationController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1297,6 +1300,7 @@
 				83DA00612C79C55500B8CD46 /* ImagePicker.swift in Sources */,
 				8383B48C2C74C74700C9127F /* MyPageView.swift in Sources */,
 				831BDD902D256AFB00AE0AB4 /* CategorySelectorView.swift in Sources */,
+				83EA322F2D257FF400FA758C /* UINavigationController.swift in Sources */,
 				837D74EB2CBE6603005D20DC /* CalendarThumnailViewModel.swift in Sources */,
 				8305BAD02CBE8B6100658590 /* EventCardCellView.swift in Sources */,
 				83EFD1852D113DD0008D35CD /* TermsOfServiceView.swift in Sources */,
