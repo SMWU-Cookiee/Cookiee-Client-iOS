@@ -9,12 +9,13 @@ import SwiftUI
 import PhotosUI
 
 struct EventAddView: View {
+    @State var isBackButtonTapped: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     // 백 버튼 커스텀
     var backButton: some View {
         Button {
-            self.presentationMode.wrappedValue.dismiss()
+            self.isBackButtonTapped = true
         } label: {
             HStack {
                 Image("ChevronLeftIconBlack")
@@ -51,7 +52,7 @@ struct EventAddView: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
+            ScrollView (.vertical, showsIndicators: true) {
                 VStack {
                     if (imagePickerForEventViewModel.selection.isEmpty) {
                         InitialAddMessageCardView(viewModel: imagePickerForEventViewModel)
@@ -64,7 +65,7 @@ struct EventAddView: View {
                 VStack {
                     VStack(alignment: .leading) {
                         Text("쿠키 제목")
-                            .font(.Body1_M)
+                            .font(Font.Body1_M)
                             .foregroundStyle(Color.Gray05)
                             .frame(width: 75, alignment: .leading)
                         
@@ -74,7 +75,7 @@ struct EventAddView: View {
                     .padding(.bottom, 25)
                     VStack(alignment: .leading) {
                         Text("장소")
-                            .font(.Body1_M)
+                            .font(Font.Body1_M)
                             .foregroundStyle(Color.Gray05)
                             .frame(width: 75, alignment: .leading)
                         
@@ -84,7 +85,7 @@ struct EventAddView: View {
                     .padding(.bottom, 25)
                     VStack(alignment: .leading) {
                         Text("내용")
-                            .font(.Body1_M)
+                            .font(Font.Body1_M)
                             .foregroundStyle(Color.Gray05)
                             .frame(width: 75, alignment: .leading)
                         
@@ -94,7 +95,7 @@ struct EventAddView: View {
                     .padding(.bottom, 25)
                     VStack(alignment: .leading) {
                         Text("함께한 사람")
-                            .font(.Body1_M)
+                            .font(Font.Body1_M)
                             .foregroundStyle(Color.Gray05)
                             .frame(width: 75, alignment: .leading)
                         
@@ -105,7 +106,7 @@ struct EventAddView: View {
                     
                     VStack(alignment: .leading) {
                         Text("카테고리")
-                            .font(.Body1_M)
+                            .font(Font.Body1_M)
                             .foregroundStyle(Color.Gray05)
                             .frame(width: 75, alignment: .leading)
                         Button(action: {
@@ -114,7 +115,7 @@ struct EventAddView: View {
                             HStack {
                                 if (categorySelectViewModel.selectedCategory.isEmpty) {
                                     Text("카테고리를 선택해주세요.")
-                                        .font(.Body0_M)
+                                        .font(Font.Body0_M)
                                         .foregroundStyle(Color.Black)
                                 } else {
                                     ForEach(categorySelectViewModel.selectedCategory, id: \.categoryId) { category in
@@ -142,105 +143,7 @@ struct EventAddView: View {
                 }
                 .padding()
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("쿠키 추가하기")
-                        .font(.Head1_B)
-                }
-            }
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: backButton)
-            .navigationBarItems(trailing: Button(action: {
-                if isValidForm {
-                    isSubmitting = true
-                    eventViewModel.addEvent(
-                        eventTitle: title,
-                        eventWhat: content,
-                        eventWhere: place,
-                        withWho: people,
-                        year: year,
-                        month: month,
-                        date: date,
-                        categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
-                        images: imagePickerForEventViewModel.selection
-                    )
-                }
-            }, label: {
-                Text("완료")
-                    .font(.Body0_B)
-                    .foregroundColor(isValidForm && !isSubmitting ? .Brown01 : .Gray03)
-            })
-                .disabled(!isValidForm || isSubmitting)
-            )
-            
-            .sheet(isPresented: $isCategorySelectButtonTapped) {
-                VStack {
-                    VStack(spacing: 18) {
-                        Text("내 카테고리")
-                            .font(.Head1_B)
-                            .padding(.top, 25)
-                        
-                        ScrollView {
-                            ForEach(categoryListViewModel.categories, id:\.id) { category in
-                                CategorySelectButtonView(
-                                    id: category.categoryId,
-                                    name: category.categoryName,
-                                    color: category.categoryColor,
-                                    viewModel: categorySelectViewModel
-                                )
-                            }
-                        }
-                    }
-                    
-                    VStack {
-                        Button(action: {
-                            isCategorySelectButtonTapped = false
-                        }, label: {
-                            Text("카테고리 추가하기")
-                                .font(.Body0_SB)
-                                .foregroundStyle(Color.Gray00)
-                        })
-                        .frame(width: 363, height: 44)
-                        .background(categorySelectViewModel.selectedCategory.isEmpty ? Color.Gray03 : Color.Brown00)
-                        .cornerRadius(10)
-                    }
-                    .padding(10)
-                    .frame(height: 67)
-                    .background(Color.White)
-                    .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -10)
-                }
-                .onAppear() {
-                    categoryListViewModel.loadCategoryListData()
-                }
-                .presentationDetents([.fraction(0.60)])
-                .presentationDragIndicator(Visibility.visible)
-            }
-            .padding(.top, 10)
-
-            .photosPicker(
-                isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
-                selection: $imagePickerForEventViewModel.selection,
-                maxSelectionCount: maxImageCount,
-                selectionBehavior: .continuousAndOrdered,
-                matching: .images,
-                preferredItemEncoding: .current,
-                photoLibrary: .shared()
-            )
-            .photosPickerStyle(.presentation)
-            
-            .onChange(of: eventViewModel.isAddSuccess) {
-                if eventViewModel.isAddSuccess {
-                    eventViewModel.isAddSuccess = false
-                    isSubmitting = false
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }
-            
-            .onTapGesture {
-                isFocused = false
-            }
-            
+ 
             if isSubmitting {
                 VStack {
                     Spacer()
@@ -253,5 +156,131 @@ struct EventAddView: View {
                 
             }
         }
+        .padding(.top, 10)
+        .photosPicker(
+            isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
+            selection: $imagePickerForEventViewModel.selection,
+            maxSelectionCount: maxImageCount,
+            selectionBehavior: .continuousAndOrdered,
+            matching: .images,
+            preferredItemEncoding: .current,
+            photoLibrary: .shared()
+        )
+        .photosPickerStyle(.presentation)
+        
+        .onChange(of: eventViewModel.isAddSuccess) {
+            if eventViewModel.isAddSuccess {
+                eventViewModel.isAddSuccess = false
+                isSubmitting = false
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
+        
+        .onTapGesture {
+            isFocused = false
+        }
+        
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("쿠키 추가하기")
+                    .font(Font.Head1_B)
+            }
+            ToolbarItem(placement: .navigationBarLeading) {
+                backButton
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    if isValidForm {
+                        isSubmitting = true
+                        eventViewModel.addEvent(
+                            eventTitle: title,
+                            eventWhat: content,
+                            eventWhere: place,
+                            withWho: people,
+                            year: year,
+                            month: month,
+                            date: date,
+                            categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
+                            images: imagePickerForEventViewModel.selection
+                        )
+                    }
+                }, label: {
+                    Text("완료")
+                        .font(Font.Body0_B)
+                        .foregroundColor(isValidForm && !isSubmitting ? Color.Brown01 : Color.Gray03)
+                })
+                .disabled(!isValidForm || isSubmitting)
+            }
+        }
+        
+        .sheet(isPresented: $isCategorySelectButtonTapped) {
+            VStack {
+                VStack(spacing: 18) {
+                    Text("내 카테고리")
+                        .font(Font.Head1_B)
+                        .padding(.top, 25)
+                    
+                    ScrollView {
+                        ForEach(categoryListViewModel.categories, id:\.id) { category in
+                            CategorySelectButtonView(
+                                id: category.categoryId,
+                                name: category.categoryName,
+                                color: category.categoryColor,
+                                viewModel: categorySelectViewModel
+                            )
+                        }
+                    }
+                }
+                
+                VStack {
+                    Button(action: {
+                        isCategorySelectButtonTapped = false
+                    }, label: {
+                        Text("카테고리 추가하기")
+                            .font(Font.Body0_SB)
+                            .foregroundStyle(Color.Gray00)
+                    })
+                    .frame(width: 363, height: 44)
+                    .background(categorySelectViewModel.selectedCategory.isEmpty ? Color.Gray03 : Color.Brown00)
+                    .cornerRadius(10)
+                }
+                .padding(10)
+                .frame(height: 67)
+                .background(Color.White)
+                .shadow(color: .black.opacity(0.05), radius: 13, x: 0, y: -10)
+            }
+            .onAppear() {
+                categoryListViewModel.loadCategoryListData()
+            }
+            .presentationDetents([.fraction(0.60)])
+            .presentationDragIndicator(Visibility.visible)
+        }
+        
+        .showCustomAlert(
+            isPresented: $isBackButtonTapped,
+            content: {
+                VStack(alignment: .center) {
+                        Text("쿠키 추가를 그만할까요?")
+                            .font(Font.Head1_B)
+                            .padding(.bottom, 9)
+                        Text("페이지를 나가면 복구가 어렵습니다.")
+                            .font(Font.Body1_R)
+                    }
+            },
+            firstButton:
+                CustomAlertButton(
+                    action: { isBackButtonTapped = false },
+                    title: Text("취소").foregroundColor(Color.Gray04)
+                ),
+            secondButton:
+                CustomAlertButton(
+                    action: {
+                        isBackButtonTapped = false
+                        self.presentationMode.wrappedValue.dismiss()
+                    },
+                    title: Text("확인").foregroundColor(Color.Brown00))
+        )
     }
 }
