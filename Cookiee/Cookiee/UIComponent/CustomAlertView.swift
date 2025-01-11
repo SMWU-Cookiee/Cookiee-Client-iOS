@@ -51,29 +51,53 @@ struct CustomAlertButton: View {
     }
 }
 
-extension View {
-    func showCustomAlert<Content: View>(
-        isPresented: Binding<Bool>,
-        content: @escaping () -> Content,
-        firstButton: CustomAlertButton,
-        secondButton: CustomAlertButton? = nil
-    ) -> some View {
-        self
-            .fullScreenCover(isPresented: isPresented) {
+struct CustomAlertModifier<AlertContent: View>: ViewModifier {
+    @Binding var isPresented: Bool
+    let alertContent: () -> AlertContent
+    let firstButton: CustomAlertButton
+    let secondButton: CustomAlertButton?
+
+    func body(content: Content) -> some View {
+        content
+            .fullScreenCover(isPresented: $isPresented, content: {
                 ZStack {
                     Color.black.opacity(0.4)
                         .ignoresSafeArea()
                     CustomAlertView(
-                        content: content(),
+                        content: alertContent(),
                         firstButton: firstButton,
                         secondButton: secondButton
                     )
                 }
                 .background(ClearBackground())
-            }
+                .onAppear {
+                    UIView.setAnimationsEnabled(false)
+                }
+                .onDisappear {
+                    UIView.setAnimationsEnabled(true)
+                }
+            })
             .transaction { transaction in
-                transaction.disablesAnimations = isPresented.wrappedValue
+                transaction.disablesAnimations = $isPresented.wrappedValue
             }
+    }
+}
+
+extension View {
+    func showCustomAlert<AlertContent: View>(
+        isPresented: Binding<Bool>,
+        alertContent: @escaping () -> AlertContent,
+        firstButton: CustomAlertButton,
+        secondButton: CustomAlertButton? = nil
+    ) -> some View {
+        self.modifier(
+            CustomAlertModifier(
+                isPresented: isPresented,
+                alertContent: alertContent,
+                firstButton: firstButton,
+                secondButton: secondButton
+            )
+        )
     }
 }
 
@@ -127,5 +151,3 @@ class ClearBackgroundView: UIView {
                 .foregroundColor(.Brown00))
     )
 }
-
-

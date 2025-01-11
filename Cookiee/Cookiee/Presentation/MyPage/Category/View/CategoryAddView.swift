@@ -150,7 +150,7 @@ struct CategoryAddView: View {
         
         .showCustomAlert(
             isPresented: $isBackButtonTapped,
-            content: {
+            alertContent: {
                 VStack(alignment: .center) {
                         Text("카테고리 추가를 그만할까요?")
                             .font(.Head1_B)

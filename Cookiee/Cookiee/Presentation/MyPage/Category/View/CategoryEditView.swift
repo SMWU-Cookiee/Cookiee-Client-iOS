@@ -152,7 +152,7 @@ struct CategoryEditView: View {
         
         .showCustomAlert(
             isPresented: $isBackButtonTapped,
-            content: {
+            alertContent: {
                 VStack(alignment: .center) {
                         Text("카테고리 수정을 그만할까요?")
                             .font(.Head1_B)

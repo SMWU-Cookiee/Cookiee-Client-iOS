@@ -80,7 +80,7 @@ struct CategoryListView: View {
         }
         .showCustomAlert(
             isPresented: $isDeleteButtonTapped,
-            content: {
+            alertContent: {
                 AnyView(
                     VStack {
                         Text(categoryNameToDelete!)
@@ -109,7 +109,7 @@ struct CategoryListView: View {
         )
         .showCustomAlert(
             isPresented: $isAddCategoryAlertPresented,
-            content: {
+            alertContent: {
                 AnyView(
                     VStack {
                         Text("이미 존재하는 카테고리 이름입니다.")
