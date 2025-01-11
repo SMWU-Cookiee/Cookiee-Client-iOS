@@ -199,7 +199,7 @@ struct MyPageView: View {
         .padding(.bottom, 10)
         .showCustomAlert(
             isPresented: $isSignOutButtonTapped,
-            content: {
+            alertContent: {
                     VStack {
                         Text("회원탈퇴할까요?")
                             .font(.Head1_B)
@@ -227,7 +227,7 @@ struct MyPageView: View {
         
         .showCustomAlert(
             isPresented: $isLogOutButtonTapped,
-            content: {
+            alertContent: {
                     VStack {
                         Text("로그아웃할까요?")
                             .font(.Head1_B)

@@ -97,7 +97,7 @@ struct EventDetailView: View {
     
         .showCustomAlert(
             isPresented: $isDeleteButtonTapped,
-            content: {
+            alertContent: {
                     VStack {
                         Text(eventViewModel.eventDetail!.title)
                             .font(.Head1_B)

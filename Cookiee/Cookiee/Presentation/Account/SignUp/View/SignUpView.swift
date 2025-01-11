@@ -180,7 +180,7 @@ struct SignUpView: View {
         
         .showCustomAlert(
             isPresented: $isBackButtonTapped,
-            content: {
+            alertContent: {
                 VStack(alignment: .center) {
                         Text("입력을 취소하고")
                             .font(.Head1_B)
