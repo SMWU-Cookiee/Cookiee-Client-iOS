@@ -71,8 +71,14 @@ struct GoogleLoginInButton: View {
                     print("=====================================")
                     socialLoginViewModel.socialId = response.result.socialId
                     socialLoginViewModel.socialLoginType = "google"
-                    socialLoginViewModel.socialRefreshToken = response.result.refreshToken ?? ""
-                    socialLoginViewModel.socialAccessToken = response.result.accessToken ?? ""
+                    if response.result.refreshToken != nil {
+                        socialLoginViewModel.socialRefreshToken = response.result.refreshToken
+                        saveToKeychain(key: "refreshToken", data: response.result.refreshToken!)
+                    }
+                    if response.result.accessToken != nil {
+                        socialLoginViewModel.socialAccessToken = response.result.accessToken
+                        saveToKeychain(key: "accessToken", data: response.result.accessToken!)
+                    }
                     isNewMember = response.result.isNewMember
                     
                     continuation.resume(returning: true)

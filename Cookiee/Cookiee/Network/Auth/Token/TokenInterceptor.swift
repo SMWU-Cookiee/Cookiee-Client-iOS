@@ -46,6 +46,7 @@ final class TokenInterceptor: RequestInterceptor {
                 completion(.retry)
             case .failure(let error):
                 print("🔐 postRefreshToken Error: \(error)")
+                print("🔐 refresh 토큰 만료. 재로그인 필요")
                 completion(.doNotRetryWithError(error))
             }
         }

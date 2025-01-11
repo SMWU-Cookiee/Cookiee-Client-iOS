@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var isLaunching: Bool = true
+    @State var tokenExpired: Bool = false
        
        var body: some View {
            if isLaunching {
@@ -19,17 +20,43 @@ struct ContentView: View {
                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                            withAnimation(.easeIn(duration: 0.2)) {
                                isLaunching = false
+                               checkTokenStatus()
                            }
                        }
                    }
            } else {
-               if loadFromKeychain(key: "accessToken") != nil  {
-                   TabBarView()
-               } else {
+               if tokenExpired {
                    SocialLoginView()
+               } else {
+                   TabBarView()
                }
            }
        }
+    
+    func checkTokenStatus() {
+        isRefrehTokenExpired { expired in
+            DispatchQueue.main.async {
+                tokenExpired = expired
+            }
+        }
+    }
+    
+    func isRefrehTokenExpired(completion: @escaping (Bool) -> Void) {
+        let tokenRefreshService = TokenRefreshService()
+        tokenRefreshService.postRefreshToken() { result in
+            switch result {
+            case .success(let response):
+                print("🔐 postRefreshToken Response: \(response)")
+                print("🔐 Access Token 재설정")
+                saveToKeychain(key: "accessToken", data: response.result.accessToken)
+                completion(false)
+            case .failure(let error):
+                print("🔐 postRefreshToken Error: \(error)")
+                print("🔐 refresh 토큰 만료. 재로그인 필요")
+                completion(true)
+            }
+        }
+    }
 }
 
 #Preview {
