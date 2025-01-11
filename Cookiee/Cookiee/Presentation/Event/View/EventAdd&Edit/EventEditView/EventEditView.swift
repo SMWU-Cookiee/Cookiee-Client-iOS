@@ -95,7 +95,7 @@ struct EventEditView: View {
         
         .showCustomAlert(
             isPresented: $isBackButtonTapped,
-            content: {
+            alertContent: {
                 VStack(alignment: .center) {
                     Text("쿠키 수정을 그만할까요?")
                         .font(Font.Head1_B)
