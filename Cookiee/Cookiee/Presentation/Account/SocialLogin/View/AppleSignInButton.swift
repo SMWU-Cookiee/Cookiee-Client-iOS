@@ -115,8 +115,15 @@ class AppleSignInHandler: NSObject, ObservableObject, ASAuthorizationControllerD
                     self.socialLoginViewModel.name = response.result.name
                     self.socialLoginViewModel.socialId = response.result.socialId
                     self.socialLoginViewModel.socialLoginType = "apple"
-                    self.socialLoginViewModel.socialRefreshToken = response.result.refreshToken ?? ""
-                    self.socialLoginViewModel.socialAccessToken = response.result.accessToken ?? ""
+
+                    if response.result.refreshToken != nil {
+                        self.socialLoginViewModel.socialRefreshToken = response.result.refreshToken
+                        saveToKeychain(key: "refreshToken", data: response.result.refreshToken!)
+                    }
+                    if response.result.accessToken != nil {
+                        self.socialLoginViewModel.socialAccessToken = response.result.accessToken
+                        saveToKeychain(key: "accessToken", data: response.result.accessToken!)
+                    }
                     self.isNewMember = response.result.isNewMember
                     
                     continuation.resume(returning: true)
