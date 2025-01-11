@@ -428,6 +428,17 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		8348BE872D32392A008D1E7A /* EventCategoryView */ = {
+			isa = PBXGroup;
+			children = (
+				831BDD8D2D256A7400AE0AB4 /* CategoryAddInEventButtonView.swift */,
+				831BDD8B2D256A5500AE0AB4 /* CategorySelectView.swift */,
+				831BDD8F2D256AFB00AE0AB4 /* CategorySelectorView.swift */,
+				83EA32292D25797600FA758C /* CategorySelectBottomModal.swift */,
+			);
+			path = EventCategoryView;
+			sourceTree = "<group>";
+		};
 		8349F5EE2CB0018C00746163 /* KeyChain */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,6 +679,7 @@
 		8385C5A92C6E6AF900D1DD21 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
+				831BDD892D256A4500AE0AB4 /* CustomTextFieldWithLabel.swift */,
 				8385C5AA2C6E6B1500D1DD21 /* CategoryLabelView.swift */,
 				83C88E382CCCD451001554A4 /* CategoryLabelViewDeletable.swift */,
 				8385C5AC2C6E6B5E00D1DD21 /* ImageCarouselView.swift */,
@@ -1014,14 +1026,10 @@
 		83EA322D2D257B2900FA758C /* EventAdd&Edit */ = {
 			isa = PBXGroup;
 			children = (
+				8348BE872D32392A008D1E7A /* EventCategoryView */,
 				83202F382CC53286000C9825 /* EventAddView */,
 				83C88E442CCCF7C3001554A4 /* EventEditView */,
-				831BDD892D256A4500AE0AB4 /* CustomTextFieldWithLabel.swift */,
-				831BDD8B2D256A5500AE0AB4 /* CategorySelectView.swift */,
-				831BDD8D2D256A7400AE0AB4 /* CategoryAddInEventButtonView.swift */,
-				831BDD8F2D256AFB00AE0AB4 /* CategorySelectorView.swift */,
 				83EA322B2D257A2F00FA758C /* EventFormFields.swift */,
-				83EA32292D25797600FA758C /* CategorySelectBottomModal.swift */,
 			);
 			path = "EventAdd&Edit";
 			sourceTree = "<group>";
