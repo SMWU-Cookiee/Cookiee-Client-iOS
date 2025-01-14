@@ -11,7 +11,6 @@ import MapKit
 struct MapLocationSearchView: View {
     @ObservedObject var locationSearchService = LocationSearchService()
     @State private var selectedLocation: MapLocationDTO? = nil
-    @State private var annotationItems: [MapLocationDTO] = []
     @State private var isPlaceSelected: Bool = false
     @State private var cameraPosition: MapCameraPosition = .camera(.init(centerCoordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), distance: 1))
 
@@ -29,8 +28,8 @@ struct MapLocationSearchView: View {
             ScrollView {
                 ForEach(locationSearchService.completions) { completion in
                     Button(action: {
-                        isPlaceSelected = true
                         searchLocation(for: completion)
+                        isPlaceSelected = true
                     }, label: {
                         HStack {
                             Image("PlacePin")
@@ -105,17 +104,6 @@ struct MapLocationSearchView: View {
                     span: MKCoordinateSpan(latitudeDelta: 0, longitudeDelta: 0)
                 )
                 searchRequest.region = region
-            }
-
-            // annotationItems를 채우기
-            annotationItems = response.mapItems.compactMap { (item: MKMapItem) -> MapLocationDTO? in
-                let coordinate = item.placemark.coordinate
-                return MapLocationDTO(
-                    title: item.name ?? "알 수 없는 장소",
-                    subtitle: item.placemark.title ?? "주소 없음",
-                    latitude: coordinate.latitude,
-                    longitude: coordinate.longitude
-                )
             }
         }
     }
