@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct SearchBar: UIViewRepresentable {
+struct EventMapLocationSearchBarUIView: UIViewRepresentable {
     @Binding var text: String
 
     class Coordinator: NSObject, UISearchBarDelegate {
@@ -23,11 +23,11 @@ struct SearchBar: UIViewRepresentable {
         }
     }
 
-    func makeCoordinator() -> SearchBar.Coordinator {
+    func makeCoordinator() -> EventMapLocationSearchBarUIView.Coordinator {
         return Coordinator(text: $text)
     }
 
-    func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
+    func makeUIView(context: UIViewRepresentableContext<EventMapLocationSearchBarUIView>) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = context.coordinator
         searchBar.searchBarStyle = .minimal
@@ -38,7 +38,7 @@ struct SearchBar: UIViewRepresentable {
         return searchBar
     }
 
-    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBar>) {
+    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<EventMapLocationSearchBarUIView>) {
         uiView.text = text
     }
 }

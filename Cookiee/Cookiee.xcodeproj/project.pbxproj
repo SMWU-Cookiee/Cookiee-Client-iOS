@@ -41,7 +41,7 @@
 		8345EA482D364C620052840A /* MapLocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA472D364C620052840A /* MapLocationSearchView.swift */; };
 		8345EA4A2D364CEA0052840A /* MapLocationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA492D364CEA0052840A /* MapLocationDTO.swift */; };
 		8345EA4C2D364DBA0052840A /* EventMapLocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */; };
-		8345EA4E2D364DD40052840A /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA4D2D364DD40052840A /* SearchBar.swift */; };
+		8345EA4E2D364DD40052840A /* EventMapLocationSearchBarUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */; };
 		8349F5F02CB0030700746163 /* saveToKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F5EF2CB0030700746163 /* saveToKeychain.swift */; };
 		8349F5F22CB0036E00746163 /* loadFromKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F5F12CB0036E00746163 /* loadFromKeychain.swift */; };
 		8349F5F42CB003EA00746163 /* deleteFromKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F5F32CB003EA00746163 /* deleteFromKeychain.swift */; };
@@ -189,7 +189,7 @@
 		8345EA472D364C620052840A /* MapLocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationSearchView.swift; sourceTree = "<group>"; };
 		8345EA492D364CEA0052840A /* MapLocationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationDTO.swift; sourceTree = "<group>"; };
 		8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapLocationSearchViewModel.swift; sourceTree = "<group>"; };
-		8345EA4D2D364DD40052840A /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapLocationSearchBarUIView.swift; sourceTree = "<group>"; };
 		8349F5EF2CB0030700746163 /* saveToKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveToKeychain.swift; sourceTree = "<group>"; };
 		8349F5F12CB0036E00746163 /* loadFromKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadFromKeychain.swift; sourceTree = "<group>"; };
 		8349F5F32CB003EA00746163 /* deleteFromKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteFromKeychain.swift; sourceTree = "<group>"; };
@@ -442,7 +442,7 @@
 				8345EA472D364C620052840A /* MapLocationSearchView.swift */,
 				8345EA492D364CEA0052840A /* MapLocationDTO.swift */,
 				8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */,
-				8345EA4D2D364DD40052840A /* SearchBar.swift */,
+				8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */,
 			);
 			path = EventMapView;
 			sourceTree = "<group>";
@@ -1361,7 +1361,7 @@
 				83C88E582CCD4D1E001554A4 /* downscaleTOjpegData.swift in Sources */,
 				837D74DC2CBE4096005D20DC /* ProfileAPI.swift in Sources */,
 				83E76C7D2CB6D1C2000FEA67 /* SignOutService.swift in Sources */,
-				8345EA4E2D364DD40052840A /* SearchBar.swift in Sources */,
+				8345EA4E2D364DD40052840A /* EventMapLocationSearchBarUIView.swift in Sources */,
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
 				8349F5F02CB0030700746163 /* saveToKeychain.swift in Sources */,
 				83C88E462CCCF7E2001554A4 /* EventEditView.swift in Sources */,

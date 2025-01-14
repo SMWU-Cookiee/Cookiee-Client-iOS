@@ -18,7 +18,7 @@ struct MapLocationSearchView: View {
         VStack {
             VStack {
                 VStack {
-                    SearchBar(text: $locationSearchService.searchQuery)
+                    EventMapLocationSearchBarUIView(text: $locationSearchService.searchQuery)
                 }
                 .padding([.bottom, .horizontal], 7)
                 .background(Color.white)
