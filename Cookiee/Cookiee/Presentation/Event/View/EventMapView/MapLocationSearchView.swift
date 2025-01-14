@@ -28,31 +28,36 @@ struct MapLocationSearchView: View {
             
             ScrollView {
                 ForEach(locationSearchService.completions) { completion in
-                    HStack {
-                        Image("PlacePin")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .padding(.leading, 15)
-                            .padding(.trailing, 2)
-
-                        VStack(alignment: .leading) {
-                            
-                            Text(completion.title)
-                                .font(Font.Body0_M)
-                                .padding(.bottom, 1)
-                            
-                            Text(completion.subtitle)
-                                .font(Font.Body1_R)
-                                .foregroundColor(Color.Gray05)
-                        }
-                        Spacer()
-                    }
-                    .onTapGesture {
+                    Button(action: {
                         isPlaceSelected = true
                         searchLocation(for: completion)
-                    }
-                    .padding(.vertical, 3)
-                    Divider()
+                    }, label: {
+                        HStack {
+                            Image("PlacePin")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .padding(.leading, 15)
+                                .padding(.trailing, 2)
+
+                            VStack(alignment: .leading) {
+                                
+                                Text(completion.title)
+                                    .foregroundStyle(Color.black)
+                                    .font(Font.Body0_M)
+                                    .padding(.bottom, 1)
+                                
+                                Text(completion.subtitle)
+                                    .font(Font.Body1_R)
+                                    .foregroundColor(Color.Gray05)
+                                    .multilineTextAlignment(.leading)
+                                
+                            }
+                            Spacer()
+                        }
+                        .padding(.vertical, 3)
+                        Divider()
+                    })
+                    
                 }
             }
             
