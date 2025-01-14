@@ -63,16 +63,18 @@ struct MapLocationSearchView: View {
             Spacer()
         }
         .sheet(isPresented: $isPlaceSelected, onDismiss: {
-            cameraPosition = .camera(
-                .init(centerCoordinate: CLLocationCoordinate2D(
-                    latitude: 0,
-                    longitude: 0
-                ), distance: 500)
-            )
+            selectedLocation = nil
         }, content: {
-            if let region = selectedLocation {
-                MapLocationDetailView(region: region, cameraPosition: $cameraPosition)
+            VStack {
+                if let region = selectedLocation {
+                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition)
+                } else {
+                    ProgressView()
+                }
             }
+            .padding(.top, 12)
+            .presentationDetents([.fraction(0.7)])
+            .presentationDragIndicator(.visible)
         })
     }
 
@@ -149,9 +151,6 @@ struct MapLocationSearchView: View {
                 }
                 .padding(.vertical, 8)
             }
-            .padding(.top, 12)
-            .presentationDetents([.fraction(0.7)])
-            .presentationDragIndicator(.visible)
             .onAppear {
                 cameraPosition = .camera(
                     .init(centerCoordinate: CLLocationCoordinate2D(
