@@ -20,38 +20,41 @@ struct MapLocationSearchView: View {
                 VStack {
                     SearchBar(text: $locationSearchService.searchQuery)
                 }
-                .padding(7)
+                .padding([.bottom, .horizontal], 7)
                 .background(Color.white)
             }
             .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
             
-            ForEach(locationSearchService.completions) { completion in
-                HStack {
-                    Image("PlacePin")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .padding(.leading, 15)
-                        .padding(.trailing, 2)
+            ScrollView {
+                ForEach(locationSearchService.completions) { completion in
+                    HStack {
+                        Image("PlacePin")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .padding(.leading, 15)
+                            .padding(.trailing, 2)
 
-                    VStack(alignment: .leading) {
-                        
-                        Text(completion.title)
-                            .font(Font.Body0_M)
-                            .padding(.bottom, 1)
-                        
-                        Text(completion.subtitle)
-                            .font(Font.Body1_R)
-                            .foregroundColor(Color.Gray05)
+                        VStack(alignment: .leading) {
+                            
+                            Text(completion.title)
+                                .font(Font.Body0_M)
+                                .padding(.bottom, 1)
+                            
+                            Text(completion.subtitle)
+                                .font(Font.Body1_R)
+                                .foregroundColor(Color.Gray05)
+                        }
+                        Spacer()
                     }
-                    Spacer()
+                    .onTapGesture {
+                        isPlaceSelected = true
+                        searchLocation(for: completion)
+                    }
+                    .padding(.vertical, 3)
+                    Divider()
                 }
-                .onTapGesture {
-                    isPlaceSelected = true
-                    searchLocation(for: completion)
-                }
-                .padding(.vertical, 3)
-                Divider()
             }
+            
             
             Spacer()
         }
@@ -69,6 +72,38 @@ struct MapLocationSearchView: View {
                             Image("CookieePin")
                         }
                     }
+                    
+                    HStack {
+                        Button(action: {}, label: {
+                            VStack{
+                                Text("취소")
+                                    .font(Font.Body0_SB)
+                                    .foregroundStyle(Color.Brown00)
+                            }
+                            
+                        })
+                        .frame(width: 120, height: 44)
+                        .cornerRadius(10)
+                        .overlay(content: {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.Brown00, lineWidth: 1)
+                        })
+                        
+                        
+                        Button(action: {}, label: {
+                            VStack{
+                                Text("추가하기")
+                                    .font(Font.Body0_SB)
+                                    .foregroundStyle(.white)
+                            }
+                            
+                        })
+                        .frame(width: 224, height: 44)
+                        .background(Color.Brown00)
+                        .cornerRadius(10)
+                        
+                    }
+                    .padding(.vertical, 8)
                 }
             }
             .padding(.top, 12)
