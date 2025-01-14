@@ -13,6 +13,7 @@ struct MapLocationSearchView: View {
     @State private var selectedLocation: MapLocationDTO? = nil
     @State private var annotationItems: [MapLocationDTO] = []
     @State private var isPlaceSelected: Bool = false
+    @State private var cameraPosition: MapCameraPosition = .camera(.init(centerCoordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), distance: 1))
 
     var body: some View {
         VStack {
@@ -55,60 +56,19 @@ struct MapLocationSearchView: View {
                 }
             }
             
-            
             Spacer()
         }
-        .sheet(isPresented: $isPlaceSelected, content: {
-            VStack {
-                if let region = selectedLocation {
-                    HStack {
-                        Text("\(region.title) 으로 장소를 추가할까요?")
-                            .font(Font.Head1_B)
-                            .padding(15)
-                    }
-                   
-                    Map() {
-                        Annotation("\(region.title)", coordinate: region.coordinate) {
-                            Image("CookieePin")
-                        }
-                    }
-                    
-                    HStack {
-                        Button(action: {}, label: {
-                            VStack{
-                                Text("취소")
-                                    .font(Font.Body0_SB)
-                                    .foregroundStyle(Color.Brown00)
-                            }
-                            
-                        })
-                        .frame(width: 120, height: 44)
-                        .cornerRadius(10)
-                        .overlay(content: {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.Brown00, lineWidth: 1)
-                        })
-                        
-                        
-                        Button(action: {}, label: {
-                            VStack{
-                                Text("추가하기")
-                                    .font(Font.Body0_SB)
-                                    .foregroundStyle(.white)
-                            }
-                            
-                        })
-                        .frame(width: 224, height: 44)
-                        .background(Color.Brown00)
-                        .cornerRadius(10)
-                        
-                    }
-                    .padding(.vertical, 8)
-                }
+        .sheet(isPresented: $isPlaceSelected, onDismiss: {
+            cameraPosition = .camera(
+                .init(centerCoordinate: CLLocationCoordinate2D(
+                    latitude: 0,
+                    longitude: 0
+                ), distance: 500)
+            )
+        }, content: {
+            if let region = selectedLocation {
+                MapLocationDetailView(region: region, cameraPosition: $cameraPosition)
             }
-            .padding(.top, 12)
-            .presentationDetents([.fraction(0.65)])
-            .presentationDragIndicator(.visible)
         })
     }
 
@@ -116,7 +76,6 @@ struct MapLocationSearchView: View {
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = completion.title
         
-
         let search = MKLocalSearch(request: searchRequest)
         search.start { response, error in
             guard let response = response else {
@@ -136,11 +95,11 @@ struct MapLocationSearchView: View {
 
                 print("\(String(describing: selectedPlace.name)), \(String(describing: selectedPlace.title)), \(coordinate.latitude), \(coordinate.longitude)")
                 
-                // map 중앙 설정
-                searchRequest.region = MKCoordinateRegion(
+                let region = MKCoordinateRegion(
                     center: coordinate,
-                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+                    span: MKCoordinateSpan(latitudeDelta: 0, longitudeDelta: 0)
                 )
+                searchRequest.region = region
             }
 
             // annotationItems를 채우기
@@ -155,8 +114,70 @@ struct MapLocationSearchView: View {
             }
         }
     }
+
+    private struct MapLocationDetailView: View {
+        var region: MapLocationDTO
+        @Binding var cameraPosition: MapCameraPosition
+        
+        var body: some View {
+            VStack {
+                HStack {
+                    Text("\(region.title) 으로 장소를 추가할까요?")
+                        .font(Font.Head1_B)
+                        .padding(15)
+                }
+                
+                Map(position: $cameraPosition, bounds: nil, interactionModes: .all, scope: nil) {
+                    Annotation("\(region.title)", coordinate: region.coordinate) {
+                        Image("CookieePin")
+                    }
+                }
+                .mapControlVisibility(.visible)
+                
+                HStack {
+                    Button(action: {}, label: {
+                        VStack {
+                            Text("취소")
+                                .font(Font.Body0_SB)
+                                .foregroundStyle(Color.Brown00)
+                        }
+                    })
+                    .frame(width: 120, height: 44)
+                    .cornerRadius(10)
+                    .overlay(content: {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.Brown00, lineWidth: 1)
+                    })
+                    
+                    Button(action: {}, label: {
+                        VStack {
+                            Text("추가하기")
+                                .font(Font.Body0_SB)
+                                .foregroundStyle(.white)
+                        }
+                    })
+                    .frame(width: 224, height: 44)
+                    .background(Color.Brown00)
+                    .cornerRadius(10)
+                }
+                .padding(.vertical, 8)
+            }
+            .padding(.top, 12)
+            .presentationDetents([.fraction(0.7)])
+            .presentationDragIndicator(.visible)
+            .onAppear {
+                cameraPosition = .camera(
+                    .init(centerCoordinate: CLLocationCoordinate2D(
+                        latitude: region.latitude,
+                        longitude: region.longitude
+                    ), distance: 500)
+                )
+            }
+        }
+    }
 }
 
 #Preview {
     MapLocationSearchView()
 }
+
