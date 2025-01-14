@@ -350,6 +350,8 @@
 		8305BAD82CBE98B300658590 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8345EA492D364CEA0052840A /* MapLocationDTO.swift */,
+				8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */,
 				8305BAD92CBE98C500658590 /* ThumbnailViewModel.swift */,
 				837AFD2E2CC0E5C000BCDD34 /* EventViewModel.swift */,
 				83C294A42CC513F4000799A3 /* CategorySelectViewModel.swift */,
@@ -440,8 +442,6 @@
 			isa = PBXGroup;
 			children = (
 				8345EA472D364C620052840A /* EventMapLocationSearchView.swift */,
-				8345EA492D364CEA0052840A /* MapLocationDTO.swift */,
-				8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */,
 				8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */,
 			);
 			path = EventMapView;
