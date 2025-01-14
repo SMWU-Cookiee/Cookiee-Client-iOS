@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct MapLocationSearchView: View {
-    @ObservedObject var locationSearchService = LocationSearchService()
+    @ObservedObject var locationSearchService = EventMapLocationSearchViewModel()
     @State private var selectedLocation: MapLocationDTO? = nil
     @State private var isPlaceSelected: Bool = false
     @State private var cameraPosition: MapCameraPosition = .camera(.init(centerCoordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), distance: 1))

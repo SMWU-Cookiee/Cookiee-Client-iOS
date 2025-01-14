@@ -12,7 +12,7 @@ import Combine
 
 extension MKLocalSearchCompletion: @retroactive Identifiable {}
 
-class LocationSearchService: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
+class EventMapLocationSearchViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
     @Published var searchQuery = ""
     var completer: MKLocalSearchCompleter
     @Published var completions: [MKLocalSearchCompletion] = []
