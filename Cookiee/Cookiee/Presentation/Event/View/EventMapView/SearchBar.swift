@@ -31,6 +31,10 @@ struct SearchBar: UIViewRepresentable {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = context.coordinator
         searchBar.searchBarStyle = .minimal
+        searchBar.barTintColor = UIColor(Color.Gray01)
+        searchBar.placeholder = "장소를 검색하세요"
+        searchBar.searchTextField.leftView?.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
+        
         return searchBar
     }
 

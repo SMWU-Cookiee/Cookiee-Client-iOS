@@ -15,23 +15,45 @@ struct MapLocationSearchView: View {
     @State private var isPlaceSelected: Bool = false
 
     var body: some View {
-        NavigationView {
+        VStack {
             VStack {
-                SearchBar(text: $locationSearchService.searchQuery)
-                
-                List(locationSearchService.completions) { completion in
-                    VStack(alignment: .leading) {
-                        Text(completion.title)
-                        Text(completion.subtitle)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
-                    .onTapGesture {
-                        isPlaceSelected = true
-                        searchLocation(for: completion)
-                    }
+                VStack {
+                    SearchBar(text: $locationSearchService.searchQuery)
                 }
+                .padding(7)
+                .background(Color.white)
             }
+            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+            
+            ForEach(locationSearchService.completions) { completion in
+                HStack {
+                    Image("PlacePin")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .padding(.leading, 15)
+                        .padding(.trailing, 2)
+
+                    VStack(alignment: .leading) {
+                        
+                        Text(completion.title)
+                            .font(Font.Body0_M)
+                            .padding(.bottom, 1)
+                        
+                        Text(completion.subtitle)
+                            .font(Font.Body1_R)
+                            .foregroundColor(Color.Gray05)
+                    }
+                    Spacer()
+                }
+                .onTapGesture {
+                    isPlaceSelected = true
+                    searchLocation(for: completion)
+                }
+                .padding(.vertical, 3)
+                Divider()
+            }
+            
+            Spacer()
         }
         .sheet(isPresented: $isPlaceSelected, content: {
             VStack {
@@ -100,3 +122,6 @@ struct MapLocationSearchView: View {
     }
 }
 
+#Preview {
+    MapLocationSearchView()
+}
