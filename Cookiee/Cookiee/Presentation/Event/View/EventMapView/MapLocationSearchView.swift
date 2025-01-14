@@ -98,12 +98,6 @@ struct MapLocationSearchView: View {
                 )
 
                 print("\(String(describing: selectedPlace.name)), \(String(describing: selectedPlace.title)), \(coordinate.latitude), \(coordinate.longitude)")
-                
-                let region = MKCoordinateRegion(
-                    center: coordinate,
-                    span: MKCoordinateSpan(latitudeDelta: 0, longitudeDelta: 0)
-                )
-                searchRequest.region = region
             }
         }
     }
