@@ -38,7 +38,7 @@
 		833707E42CA4392B0050D1C7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 833707E32CA4392B0050D1C7 /* GoogleSignIn */; };
 		833707E62CA4392B0050D1C7 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 833707E52CA4392B0050D1C7 /* GoogleSignInSwift */; };
 		833707E82CA43EED0050D1C7 /* FindTopUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */; };
-		8345EA482D364C620052840A /* MapLocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA472D364C620052840A /* MapLocationSearchView.swift */; };
+		8345EA482D364C620052840A /* EventMapLocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA472D364C620052840A /* EventMapLocationSearchView.swift */; };
 		8345EA4A2D364CEA0052840A /* MapLocationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA492D364CEA0052840A /* MapLocationDTO.swift */; };
 		8345EA4C2D364DBA0052840A /* EventMapLocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */; };
 		8345EA4E2D364DD40052840A /* EventMapLocationSearchBarUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */; };
@@ -186,7 +186,7 @@
 		8336B2A52CF22F4E004BE4E2 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
 		8336B2A72CF231A3004BE4E2 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTopUIViewController.swift; sourceTree = "<group>"; };
-		8345EA472D364C620052840A /* MapLocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationSearchView.swift; sourceTree = "<group>"; };
+		8345EA472D364C620052840A /* EventMapLocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapLocationSearchView.swift; sourceTree = "<group>"; };
 		8345EA492D364CEA0052840A /* MapLocationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationDTO.swift; sourceTree = "<group>"; };
 		8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapLocationSearchViewModel.swift; sourceTree = "<group>"; };
 		8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapLocationSearchBarUIView.swift; sourceTree = "<group>"; };
@@ -439,7 +439,7 @@
 		8345EA462D364C120052840A /* EventMapView */ = {
 			isa = PBXGroup;
 			children = (
-				8345EA472D364C620052840A /* MapLocationSearchView.swift */,
+				8345EA472D364C620052840A /* EventMapLocationSearchView.swift */,
 				8345EA492D364CEA0052840A /* MapLocationDTO.swift */,
 				8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */,
 				8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */,
@@ -1411,7 +1411,7 @@
 				83E76C822CB6D575000FEA67 /* SignUpRequestDTO.swift in Sources */,
 				837D74DE2CBE40A0005D20DC /* ProfileService.swift in Sources */,
 				8349F5FB2CB011E600746163 /* TokenRefreshAPI.swift in Sources */,
-				8345EA482D364C620052840A /* MapLocationSearchView.swift in Sources */,
+				8345EA482D364C620052840A /* EventMapLocationSearchView.swift in Sources */,
 				83F02CB32CAC0920001E8329 /* GoogleLoginResponseDTO.swift in Sources */,
 				83202F3C2CC532B8000C9825 /* CategorySelectButtonView.swift in Sources */,
 				83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */,

@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct MapLocationSearchView: View {
+struct EventMapLocationSearchView: View {
     @ObservedObject var locationSearchService = EventMapLocationSearchViewModel()
     @State private var selectedLocation: MapLocationDTO? = nil
     @State private var isPlaceSelected: Bool = false
@@ -164,6 +164,6 @@ struct MapLocationSearchView: View {
 }
 
 #Preview {
-    MapLocationSearchView()
+    EventMapLocationSearchView()
 }
 
