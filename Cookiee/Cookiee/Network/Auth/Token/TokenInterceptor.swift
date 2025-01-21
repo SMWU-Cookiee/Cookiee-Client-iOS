@@ -47,6 +47,10 @@ final class TokenInterceptor: RequestInterceptor {
             case .failure(let error):
                 print("🔐 postRefreshToken Error: \(error)")
                 print("🔐 refresh 토큰 만료. 재로그인 필요")
+                deleteFromKeychain(key: "accessToken")
+                deleteFromKeychain(key: "refreshToken")
+                deleteFromKeychain(key: "userId")
+                
                 completion(.doNotRetryWithError(error))
             }
         }

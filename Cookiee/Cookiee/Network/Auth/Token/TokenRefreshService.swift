@@ -24,7 +24,7 @@ final class TokenRefreshService {
                 }
             case .failure(let error):
                 completion(.failure(error))
-                print("TokenRefreshService.postRefreshToken 에버 발생 : ", error)
+                print("TokenRefreshService.postRefreshToken 에러 발생 : ", error)
             }
         }
     }
