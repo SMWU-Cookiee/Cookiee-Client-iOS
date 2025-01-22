@@ -41,6 +41,7 @@ struct EventEditView: View {
     @StateObject var categorySelectViewModel = CategorySelectViewModel()
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
     @StateObject var imageViewModelForPut = ImageViewModelForPut()
+    @ObservedObject var locationSearchService = EventMapLocationSearchViewModel()
     
     @State var maxImageCount: Int = 5
     @State var isSubmitting: Bool = false
@@ -132,8 +133,10 @@ struct EventEditView: View {
                 placeText: $placeText,
                 content: $content,
                 people: $people,
+                place: $place,
                 categorySelectViewModel: categorySelectViewModel,
-                isCategorySelectButtonTapped: $isCategorySelectButtonTapped
+                isCategorySelectButtonTapped: $isCategorySelectButtonTapped,
+                locationSearchService: locationSearchService
             )
         }
     }

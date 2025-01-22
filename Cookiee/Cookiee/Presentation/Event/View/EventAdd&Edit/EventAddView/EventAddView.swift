@@ -135,21 +135,15 @@ struct EventAddView: View {
             }
             .padding(.bottom, 14)
             
-            
-            NavigationLink(
-                destination: EventMapLocationSearchView(locationSearchService: locationSearchService, selectedLocationData: $place),
-                label: {
-                    Image("MapIcon")
-                }
-            )
-            
             EventFormFields(
                 title: $title,
                 placeText: $placeText,
                 content: $content,
                 people: $people,
+                place: $place,
                 categorySelectViewModel: categorySelectViewModel,
-                isCategorySelectButtonTapped: $isCategorySelectButtonTapped
+                isCategorySelectButtonTapped: $isCategorySelectButtonTapped,
+                locationSearchService: locationSearchService
             )
         }
     }

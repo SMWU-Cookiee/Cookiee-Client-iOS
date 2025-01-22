@@ -145,7 +145,9 @@ struct EventMapLocationSearchView: View {
                 .mapControlVisibility(.visible)
                 
                 HStack {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        
+                    }, label: {
                         VStack {
                             Text("취소")
                                 .font(Font.Body0_SB)
@@ -159,7 +161,9 @@ struct EventMapLocationSearchView: View {
                             .stroke(Color.Brown00, lineWidth: 1)
                     })
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        
+                    }, label: {
                         VStack {
                             Text("추가하기")
                                 .font(Font.Body0_SB)
