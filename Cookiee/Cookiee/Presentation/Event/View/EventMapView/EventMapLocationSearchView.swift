@@ -9,10 +9,25 @@ import SwiftUI
 import MapKit
 
 struct EventMapLocationSearchView: View {
-    @ObservedObject var locationSearchService = EventMapLocationSearchViewModel()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    // 백 버튼 커스텀
+    var backButton: some View {
+        Button {
+            presentationMode.wrappedValue.dismiss()
+        } label: {
+            HStack {
+                Image("ChevronLeftIconBlack")
+                    .aspectRatio(contentMode: .fit)
+            }
+        }
+    }
+
+    @ObservedObject var locationSearchService: EventMapLocationSearchViewModel
     @State private var selectedLocation: MapLocationDTO? = nil
     @State private var isPlaceSelected: Bool = false
     @State private var cameraPosition: MapCameraPosition = .camera(.init(centerCoordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), distance: 1))
+    @Binding var selectedLocationData: EventWherePlace?
 
     var body: some View {
         VStack {
@@ -62,6 +77,12 @@ struct EventMapLocationSearchView: View {
             
             Spacer()
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            toolbarItems
+        }
+        
         .sheet(isPresented: $isPlaceSelected, onDismiss: {
             selectedLocation = nil
         }, content: {
@@ -93,8 +114,8 @@ struct EventMapLocationSearchView: View {
             if let selectedPlace = response.mapItems.first?.placemark {
                 let coordinate = selectedPlace.coordinate
                 selectedLocation = MapLocationDTO(
-                    title: selectedPlace.name ?? "알 수 없는 장소",
-                    subtitle: selectedPlace.title ?? "알 수 없는 장소",
+                    name: selectedPlace.name ?? "알 수 없는 장소",
+                    fullAddress: selectedPlace.title ?? "알 수 없는 장소",
                     latitude: coordinate.latitude,
                     longitude: coordinate.longitude
                 )
@@ -111,13 +132,13 @@ struct EventMapLocationSearchView: View {
         var body: some View {
             VStack {
                 HStack {
-                    Text("\(region.title) 으로 장소를 추가할까요?")
+                    Text("\(region.name) 으로 장소를 추가할까요?")
                         .font(Font.Head1_B)
                         .padding(15)
                 }
                 
                 Map(position: $cameraPosition, bounds: nil, interactionModes: .all, scope: nil) {
-                    Annotation("\(region.title)", coordinate: region.coordinate) {
+                    Annotation("\(region.name)", coordinate: region.coordinate) {
                         Image("CookieePin")
                     }
                 }
@@ -161,9 +182,12 @@ struct EventMapLocationSearchView: View {
             }
         }
     }
+    
+    private var toolbarItems: some ToolbarContent {
+        Group {
+            ToolbarItem(placement: .navigationBarLeading) {
+                backButton
+            }
+        }
+    }
 }
-
-#Preview {
-    EventMapLocationSearchView()
-}
-

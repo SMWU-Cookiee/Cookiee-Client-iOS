@@ -32,7 +32,7 @@ struct EventAddView: View {
     @State var content: String = ""
     @State var people: String = ""
     @State var placeText: String = ""
-    @State var place: EventWherePlace?
+    @State var place: EventWherePlace? = nil
     
     @State var isCategorySelectButtonTapped: Bool = false
     
@@ -40,6 +40,7 @@ struct EventAddView: View {
     @ObservedObject var categoryListViewModel = CategoryListViewModel()
     @ObservedObject var categorySelectViewModel = CategorySelectViewModel()
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
+    @ObservedObject var locationSearchService = EventMapLocationSearchViewModel()
     
     @State var maxImageCount: Int = 5
     @State var isSubmitting: Bool = false
@@ -136,7 +137,7 @@ struct EventAddView: View {
             
             
             NavigationLink(
-                destination: EventMapLocationSearchView(selectedLocationData: $place),
+                destination: EventMapLocationSearchView(locationSearchService: locationSearchService, selectedLocationData: $place),
                 label: {
                     Image("MapIcon")
                 }
