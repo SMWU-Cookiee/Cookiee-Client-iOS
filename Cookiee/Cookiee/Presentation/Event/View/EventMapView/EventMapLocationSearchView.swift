@@ -88,7 +88,7 @@ struct EventMapLocationSearchView: View {
         }, content: {
             VStack {
                 if let region = selectedLocation {
-                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition, isPlaceSelected: $isPlaceSelected)
+                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition, isPlaceSelected: $isPlaceSelected, selectedLocationData: $selectedLocationData, parentPresentationMode: presentationMode)
                 } else {
                     ProgressView()
                 }
@@ -120,16 +120,18 @@ struct EventMapLocationSearchView: View {
                     longitude: coordinate.longitude
                 )
 
-                print("\(String(describing: selectedPlace.name)), \(String(describing: selectedPlace.title)), \(coordinate.latitude), \(coordinate.longitude)")
+                print(selectedLocation!)
             }
         }
     }
 
-    private struct MapLocationDetailView: View {
+    struct MapLocationDetailView: View {
         var region: MapLocationDTO
         @Binding var cameraPosition: MapCameraPosition
         @Binding var isPlaceSelected: Bool
-        
+        @Binding var selectedLocationData: EventWherePlace?
+        var parentPresentationMode: Binding<PresentationMode>
+
         var body: some View {
             VStack {
                 HStack {
@@ -137,14 +139,14 @@ struct EventMapLocationSearchView: View {
                         .font(Font.Head1_B)
                         .padding(15)
                 }
-                
+
                 Map(position: $cameraPosition, bounds: nil, interactionModes: .all, scope: nil) {
                     Annotation("\(region.name)", coordinate: region.coordinate) {
                         Image("CookieePin")
                     }
                 }
                 .mapControlVisibility(.visible)
-                
+
                 HStack {
                     Button(action: {
                         isPlaceSelected = false
@@ -161,9 +163,16 @@ struct EventMapLocationSearchView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.Brown00, lineWidth: 1)
                     })
-                    
+
                     Button(action: {
-                        
+                        isPlaceSelected = false
+                        selectedLocationData = EventWherePlace(
+                            latitude: region.latitude.description,
+                            longitude: region.longitude.description,
+                            name: region.name,
+                            fullAddress: region.fullAddress
+                        )
+                        parentPresentationMode.wrappedValue.dismiss()
                     }, label: {
                         VStack {
                             Text("추가하기")
@@ -187,6 +196,7 @@ struct EventMapLocationSearchView: View {
             }
         }
     }
+
     
     private var toolbarItems: some ToolbarContent {
         Group {
