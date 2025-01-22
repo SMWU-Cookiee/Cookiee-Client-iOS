@@ -29,9 +29,10 @@ struct EventEditView: View {
     var date: Int32
     
     @State var title: String = ""
-    @State var place: String = ""
     @State var content: String = ""
     @State var people: String = ""
+    @State var placeText: String = ""
+    @State var place: EventWherePlace?
     
     @State var isCategorySelectButtonTapped: Bool = false
     
@@ -128,7 +129,7 @@ struct EventEditView: View {
             
             EventFormFields(
                 title: $title,
-                place: $place,
+                place: $placeText,
                 content: $content,
                 people: $people,
                 categorySelectViewModel: categorySelectViewModel,
@@ -223,7 +224,8 @@ extension EventEditView {
         
         if let eventDetail = eventViewModel.eventDetail {
             title = eventDetail.title
-            place = eventDetail.eventWhere
+            placeText = eventDetail.eventWhereText ?? ""
+            place = eventDetail.eventWherePlace
             content = eventDetail.what
             people = eventDetail.withWho
             categorySelectViewModel.selectedCategory = eventDetail.categories
@@ -266,7 +268,8 @@ extension EventEditView {
                 eventId: eventViewModel.eventDetail!.eventId,
                 eventTitle: title,
                 eventWhat: content,
-                eventWhere: place,
+                eventWhereText: placeText,
+                eventWherePlace: place,
                 withWho: people,
                 year: year,
                 month: month,

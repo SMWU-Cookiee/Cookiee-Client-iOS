@@ -72,7 +72,7 @@ struct EventDetailView: View {
                         VStack (alignment: .leading) {
                             EventInfoDetailView(
                                 title: "장소",
-                                decription: eventViewModel.eventDetail!.eventWhere
+                                decription: eventViewModel.eventDetail!.eventWhereText ?? ""
                             )
                             EventInfoDetailView(
                                 title: "내용",

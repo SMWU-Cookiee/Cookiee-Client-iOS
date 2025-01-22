@@ -29,9 +29,10 @@ struct EventAddView: View {
     var date: Int32
     
     @State var title: String = ""
-    @State var place: String = ""
     @State var content: String = ""
     @State var people: String = ""
+    @State var placeText: String = ""
+    @State var place: EventWherePlace?
     
     @State var isCategorySelectButtonTapped: Bool = false
     
@@ -45,9 +46,12 @@ struct EventAddView: View {
     
     @FocusState private var isFocused: Bool
     
-    
     var isValidForm: Bool {
-        !title.isEmpty && !place.isEmpty && !content.isEmpty && !people.isEmpty && !categorySelectViewModel.selectedCategory.isEmpty && !imagePickerForEventViewModel.selection.isEmpty
+        !title.isEmpty &&
+        !content.isEmpty &&
+        !people.isEmpty &&
+        !categorySelectViewModel.selectedCategory.isEmpty &&
+        !imagePickerForEventViewModel.selection.isEmpty
     }
     
     var body: some View {
@@ -130,9 +134,17 @@ struct EventAddView: View {
             }
             .padding(.bottom, 14)
             
+            
+            NavigationLink(
+                destination: EventMapLocationSearchView(selectedLocationData: $place),
+                label: {
+                    Image("MapIcon")
+                }
+            )
+            
             EventFormFields(
                 title: $title,
-                place: $place,
+                place: $placeText,
                 content: $content,
                 people: $people,
                 categorySelectViewModel: categorySelectViewModel,
@@ -179,7 +191,8 @@ struct EventAddView: View {
                         eventViewModel.addEvent(
                             eventTitle: title,
                             eventWhat: content,
-                            eventWhere: place,
+                            eventWhereText: placeText,
+                            eventWherePlace: place,
                             withWho: people,
                             year: year,
                             month: month,

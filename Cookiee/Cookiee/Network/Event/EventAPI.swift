@@ -82,7 +82,14 @@ extension EventAPI: BaseTargetType {
         
         multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventTitle)".data(using: .utf8)!), name: "eventTitle"))
         multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventWhat)".data(using: .utf8)!), name: "eventWhat"))
-        multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventWhere)".data(using: .utf8)!), name: "eventWhere"))
+        multipartData.append(Moya.MultipartFormData(provider: .data("\(String(describing: requestBody.eventWhereText))".data(using: .utf8)!), name: "eventWhereText"))
+        
+        if let eventWherePlace = requestBody.eventWherePlace {
+            if let eventWherePlaceData = try? JSONEncoder().encode(eventWherePlace) {
+                multipartData.append(Moya.MultipartFormData(provider: .data(eventWherePlaceData), name: "eventWherePlace", mimeType: "application/json"))
+            }
+        }
+        
         multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.withWho)".data(using: .utf8)!), name: "withWho"))
         multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventYear)".data(using: .utf8)!), name: "eventYear"))
         multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventMonth)".data(using: .utf8)!), name: "eventMonth"))
