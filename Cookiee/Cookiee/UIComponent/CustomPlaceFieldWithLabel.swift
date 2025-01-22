@@ -36,8 +36,28 @@ struct CustomPlaceFieldWithLabel: View {
                 )
             }
             
-            CustomTextField(target: $text, placeholder: placeholder)
-                .focused($isFocused)
+            if place == nil {
+                CustomTextField(target: $text, placeholder: placeholder)
+                    .focused($isFocused)
+            } else {
+                HStack {
+                    Image("PlacePinBrown")
+                    Text("\(String(describing: place!.name))")
+                        .font(.Body0_M)
+                    Spacer()
+                    Button(action: {
+                        place = nil
+                    }, label: {
+                        Image("XmarkSmall")
+                            .padding(.horizontal, 3)
+                    })
+                }
+                .padding(10)
+                .frame(maxWidth: .infinity, maxHeight: 40)
+                .background(Color.Gray01)
+                .cornerRadius(5)
+            }
+            
         }
         .padding(.bottom, 25)
     }
