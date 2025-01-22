@@ -29,7 +29,7 @@ public struct EventFormFields: View {
             
             CustomPlaceFieldWithLabel(
                 label: "장소",
-                text: $placeText,
+                placeText: $placeText,
                 placeholder: "장소를 직접 입력하거나 지도에서 선택해주세요.",
                 locationSearchService: locationSearchService,
                 place: $place

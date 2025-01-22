@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomPlaceFieldWithLabel: View {
     var label: String
-    @Binding var text: String
+    @Binding var placeText: String
     var placeholder: String
     @ObservedObject var locationSearchService: EventMapLocationSearchViewModel
     @Binding var place: EventWherePlace?
@@ -28,7 +28,8 @@ struct CustomPlaceFieldWithLabel: View {
                 NavigationLink(
                     destination: EventMapLocationSearchView(
                         locationSearchService: locationSearchService,
-                        selectedLocationData: $place
+                        selectedLocationData: $place,
+                        placeText: $placeText
                     ),
                     label: {
                         Image("MapIcon")
@@ -37,7 +38,7 @@ struct CustomPlaceFieldWithLabel: View {
             }
             
             if place == nil {
-                CustomTextField(target: $text, placeholder: placeholder)
+                CustomTextField(target: $placeText, placeholder: placeholder)
                     .focused($isFocused)
             } else {
                 HStack {

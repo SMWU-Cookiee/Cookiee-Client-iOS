@@ -183,10 +183,18 @@ struct EventAddView: View {
                 Button(action: {
                     if isValidForm {
                         isSubmitting = true
+                        
+                        let placeTextOrNil: String?
+                        if placeText == "" {
+                            placeTextOrNil = nil
+                        } else {
+                            placeTextOrNil = placeText
+                        }
+                        
                         eventViewModel.addEvent(
                             eventTitle: title,
                             eventWhat: content,
-                            eventWhereText: placeText,
+                            eventWhereText: placeTextOrNil,
                             eventWherePlace: place,
                             withWho: people,
                             year: year,

@@ -28,6 +28,7 @@ struct EventMapLocationSearchView: View {
     @State private var isPlaceSelected: Bool = false
     @State private var cameraPosition: MapCameraPosition = .camera(.init(centerCoordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), distance: 1))
     @Binding var selectedLocationData: EventWherePlace?
+    @Binding var placeText: String
 
     var body: some View {
         VStack {
@@ -88,7 +89,7 @@ struct EventMapLocationSearchView: View {
         }, content: {
             VStack {
                 if let region = selectedLocation {
-                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition, isPlaceSelected: $isPlaceSelected, selectedLocationData: $selectedLocationData, parentPresentationMode: presentationMode)
+                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition, isPlaceSelected: $isPlaceSelected, selectedLocationData: $selectedLocationData, placeText: $placeText, parentPresentationMode: presentationMode)
                 } else {
                     ProgressView()
                 }
@@ -130,6 +131,7 @@ struct EventMapLocationSearchView: View {
         @Binding var cameraPosition: MapCameraPosition
         @Binding var isPlaceSelected: Bool
         @Binding var selectedLocationData: EventWherePlace?
+        @Binding var placeText: String
         var parentPresentationMode: Binding<PresentationMode>
 
         var body: some View {
@@ -165,6 +167,7 @@ struct EventMapLocationSearchView: View {
                     })
 
                     Button(action: {
+                        placeText = ""
                         isPlaceSelected = false
                         selectedLocationData = EventWherePlace(
                             latitude: region.latitude.description,
