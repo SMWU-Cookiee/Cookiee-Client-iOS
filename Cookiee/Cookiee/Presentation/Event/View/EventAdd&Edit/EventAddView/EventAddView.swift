@@ -52,7 +52,8 @@ struct EventAddView: View {
         !content.isEmpty &&
         !people.isEmpty &&
         !categorySelectViewModel.selectedCategory.isEmpty &&
-        !imagePickerForEventViewModel.selection.isEmpty
+        !imagePickerForEventViewModel.selection.isEmpty &&
+        (!placeText.isEmpty || place != nil)
     }
     
     var body: some View {
