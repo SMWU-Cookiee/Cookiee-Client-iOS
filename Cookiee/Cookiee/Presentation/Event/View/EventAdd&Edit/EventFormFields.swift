@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct EventFormFields: View {
     @Binding var title: String
-    @Binding var place: String
+    @Binding var placeText: String
     @Binding var content: String
     @Binding var people: String
     
@@ -26,7 +26,7 @@ public struct EventFormFields: View {
             
             CustomTextFieldWithLabel(
                 label: "장소",
-                text: $place,
+                text: $placeText,
                 placeholder: "장소를 직접 입력하거나 지도에서 선택해주세요."
             )
             

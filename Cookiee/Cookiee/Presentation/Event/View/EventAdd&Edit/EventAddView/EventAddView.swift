@@ -145,7 +145,7 @@ struct EventAddView: View {
             
             EventFormFields(
                 title: $title,
-                place: $placeText,
+                placeText: $placeText,
                 content: $content,
                 people: $people,
                 categorySelectViewModel: categorySelectViewModel,
