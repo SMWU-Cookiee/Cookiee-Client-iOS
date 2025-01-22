@@ -50,6 +50,14 @@ struct EventEditView: View {
     @State var isEditSuccess: Bool = false
     @State var isInitialDataLoaded: Bool = false
     
+    var isValidForm: Bool {
+        !title.isEmpty &&
+        !content.isEmpty &&
+        !people.isEmpty &&
+        !categorySelectViewModel.selectedCategory.isEmpty &&
+        (imageViewModelForPut.uiImageList.count + imagePickerForEventViewModel.selection.count > 0) &&
+        (placeText.isEmpty == false || place != nil)
+    }
     
     var body: some View {
         ZStack {
@@ -216,9 +224,9 @@ struct EventEditView: View {
                 }, label: {
                     Text("완료")
                         .font(.Body0_B)
-                        .foregroundColor(!isSubmitting ? .Brown01 : .Gray03)
+                        .foregroundColor(isValidForm ? .Brown01 : .Gray03)
                 })
-                .disabled(isSubmitting)
+                .disabled(!isValidForm || isSubmitting)
             }
         }
     }
