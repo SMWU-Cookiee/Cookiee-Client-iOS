@@ -88,7 +88,7 @@ struct EventMapLocationSearchView: View {
         }, content: {
             VStack {
                 if let region = selectedLocation {
-                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition)
+                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition, isPlaceSelected: $isPlaceSelected)
                 } else {
                     ProgressView()
                 }
@@ -128,6 +128,7 @@ struct EventMapLocationSearchView: View {
     private struct MapLocationDetailView: View {
         var region: MapLocationDTO
         @Binding var cameraPosition: MapCameraPosition
+        @Binding var isPlaceSelected: Bool
         
         var body: some View {
             VStack {
@@ -146,7 +147,7 @@ struct EventMapLocationSearchView: View {
                 
                 HStack {
                     Button(action: {
-                        
+                        isPlaceSelected = false
                     }, label: {
                         VStack {
                             Text("취소")
