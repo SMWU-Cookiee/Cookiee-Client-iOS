@@ -48,6 +48,7 @@ struct EventEditView: View {
     
     @FocusState private var isFocused: Bool
     @State var isEditSuccess: Bool = false
+    @State var isInitialDataLoaded: Bool = false
     
     
     var body: some View {
@@ -57,7 +58,9 @@ struct EventEditView: View {
             submittingOverlay
         }
         .onAppear() {
-            loadInitialData()
+            if !isInitialDataLoaded {
+                loadInitialData()
+            }
         }
         .onTapGesture {
             isFocused = false
@@ -226,6 +229,8 @@ extension EventEditView {
         eventViewModel.loadEventDetail(eventId: eventViewModel.selectedEventId!)
         
         if let eventDetail = eventViewModel.eventDetail {
+            isInitialDataLoaded = true
+            
             title = eventDetail.title
             placeText = eventDetail.eventWhereText ?? ""
             place = eventDetail.eventWherePlace
@@ -267,11 +272,18 @@ extension EventEditView {
                 }
             }
             
+            let placeTextOrNil: String?
+            if placeText == "" {
+                placeTextOrNil = nil
+            } else {
+                placeTextOrNil = placeText
+            }
+            
             eventViewModel.updateEvent(
                 eventId: eventViewModel.eventDetail!.eventId,
                 eventTitle: title,
                 eventWhat: content,
-                eventWhereText: placeText,
+                eventWhereText: placeTextOrNil,
                 eventWherePlace: place,
                 withWho: people,
                 year: year,
