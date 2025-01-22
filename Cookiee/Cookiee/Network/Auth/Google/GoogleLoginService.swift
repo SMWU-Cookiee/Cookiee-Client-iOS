@@ -24,6 +24,10 @@ class GoogleLoginService {
                 }
             case .failure(let error):
                 completion(.failure(error))
+                if let data = error.response?.data {
+                    let responseString = String(data: data, encoding: .utf8)
+                    print("Error response data: \(responseString ?? "No Data")")
+                }
                 print("getGoogleLogin error:", error)
             }
         }

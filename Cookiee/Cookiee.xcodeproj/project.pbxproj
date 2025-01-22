@@ -38,6 +38,10 @@
 		833707E42CA4392B0050D1C7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 833707E32CA4392B0050D1C7 /* GoogleSignIn */; };
 		833707E62CA4392B0050D1C7 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 833707E52CA4392B0050D1C7 /* GoogleSignInSwift */; };
 		833707E82CA43EED0050D1C7 /* FindTopUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */; };
+		8345EA482D364C620052840A /* EventMapLocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA472D364C620052840A /* EventMapLocationSearchView.swift */; };
+		8345EA4A2D364CEA0052840A /* MapLocationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA492D364CEA0052840A /* MapLocationDTO.swift */; };
+		8345EA4C2D364DBA0052840A /* EventMapLocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */; };
+		8345EA4E2D364DD40052840A /* EventMapLocationSearchBarUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */; };
 		8349F5F02CB0030700746163 /* saveToKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F5EF2CB0030700746163 /* saveToKeychain.swift */; };
 		8349F5F22CB0036E00746163 /* loadFromKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F5F12CB0036E00746163 /* loadFromKeychain.swift */; };
 		8349F5F42CB003EA00746163 /* deleteFromKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F5F32CB003EA00746163 /* deleteFromKeychain.swift */; };
@@ -182,6 +186,10 @@
 		8336B2A52CF22F4E004BE4E2 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
 		8336B2A72CF231A3004BE4E2 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		833707E72CA43EED0050D1C7 /* FindTopUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTopUIViewController.swift; sourceTree = "<group>"; };
+		8345EA472D364C620052840A /* EventMapLocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapLocationSearchView.swift; sourceTree = "<group>"; };
+		8345EA492D364CEA0052840A /* MapLocationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationDTO.swift; sourceTree = "<group>"; };
+		8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapLocationSearchViewModel.swift; sourceTree = "<group>"; };
+		8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapLocationSearchBarUIView.swift; sourceTree = "<group>"; };
 		8349F5EF2CB0030700746163 /* saveToKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveToKeychain.swift; sourceTree = "<group>"; };
 		8349F5F12CB0036E00746163 /* loadFromKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadFromKeychain.swift; sourceTree = "<group>"; };
 		8349F5F32CB003EA00746163 /* deleteFromKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteFromKeychain.swift; sourceTree = "<group>"; };
@@ -342,6 +350,8 @@
 		8305BAD82CBE98B300658590 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8345EA492D364CEA0052840A /* MapLocationDTO.swift */,
+				8345EA4B2D364DBA0052840A /* EventMapLocationSearchViewModel.swift */,
 				8305BAD92CBE98C500658590 /* ThumbnailViewModel.swift */,
 				837AFD2E2CC0E5C000BCDD34 /* EventViewModel.swift */,
 				83C294A42CC513F4000799A3 /* CategorySelectViewModel.swift */,
@@ -428,6 +438,26 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		8345EA462D364C120052840A /* EventMapView */ = {
+			isa = PBXGroup;
+			children = (
+				8345EA472D364C620052840A /* EventMapLocationSearchView.swift */,
+				8345EA4D2D364DD40052840A /* EventMapLocationSearchBarUIView.swift */,
+			);
+			path = EventMapView;
+			sourceTree = "<group>";
+		};
+		8348BE872D32392A008D1E7A /* EventCategoryView */ = {
+			isa = PBXGroup;
+			children = (
+				831BDD8D2D256A7400AE0AB4 /* CategoryAddInEventButtonView.swift */,
+				831BDD8B2D256A5500AE0AB4 /* CategorySelectView.swift */,
+				831BDD8F2D256AFB00AE0AB4 /* CategorySelectorView.swift */,
+				83EA32292D25797600FA758C /* CategorySelectBottomModal.swift */,
+			);
+			path = EventCategoryView;
+			sourceTree = "<group>";
+		};
 		8349F5EE2CB0018C00746163 /* KeyChain */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +513,7 @@
 		8362C3552CC10DDD0086D052 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8345EA462D364C120052840A /* EventMapView */,
 				83EA322D2D257B2900FA758C /* EventAdd&Edit */,
 				8362C3562CC10DFD0086D052 /* EventListView */,
 				8385C5A52C6E229800D1DD21 /* EventDetailView.swift */,
@@ -668,6 +699,7 @@
 		8385C5A92C6E6AF900D1DD21 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
+				831BDD892D256A4500AE0AB4 /* CustomTextFieldWithLabel.swift */,
 				8385C5AA2C6E6B1500D1DD21 /* CategoryLabelView.swift */,
 				83C88E382CCCD451001554A4 /* CategoryLabelViewDeletable.swift */,
 				8385C5AC2C6E6B5E00D1DD21 /* ImageCarouselView.swift */,
@@ -1014,14 +1046,10 @@
 		83EA322D2D257B2900FA758C /* EventAdd&Edit */ = {
 			isa = PBXGroup;
 			children = (
+				8348BE872D32392A008D1E7A /* EventCategoryView */,
 				83202F382CC53286000C9825 /* EventAddView */,
 				83C88E442CCCF7C3001554A4 /* EventEditView */,
-				831BDD892D256A4500AE0AB4 /* CustomTextFieldWithLabel.swift */,
-				831BDD8B2D256A5500AE0AB4 /* CategorySelectView.swift */,
-				831BDD8D2D256A7400AE0AB4 /* CategoryAddInEventButtonView.swift */,
-				831BDD8F2D256AFB00AE0AB4 /* CategorySelectorView.swift */,
 				83EA322B2D257A2F00FA758C /* EventFormFields.swift */,
-				83EA32292D25797600FA758C /* CategorySelectBottomModal.swift */,
 			);
 			path = "EventAdd&Edit";
 			sourceTree = "<group>";
@@ -1294,6 +1322,7 @@
 				837AFD2D2CC0E55B00BCDD34 /* EventService.swift in Sources */,
 				831BDD8C2D256A5500AE0AB4 /* CategorySelectView.swift in Sources */,
 				83DA005F2C79BE7400B8CD46 /* ProfileEditView.swift in Sources */,
+				8345EA4C2D364DBA0052840A /* EventMapLocationSearchViewModel.swift in Sources */,
 				83EE1DA82CB0372B009E4488 /* ThumbnailListResponseDTO.swift in Sources */,
 				83F02CB82CAC0ACE001E8329 /* BaseTargetType.swift in Sources */,
 				837D74DA2CBE4051005D20DC /* ProfileResponseDTO.swift in Sources */,
@@ -1315,6 +1344,7 @@
 				8349F5FD2CB0139200746163 /* TokenRefreshService.swift in Sources */,
 				8305BACC2CBE864200658590 /* CalendarControlFunctions.swift in Sources */,
 				832841EC2CD2961200386308 /* CookieeCollectionViewModel.swift in Sources */,
+				8345EA4A2D364CEA0052840A /* MapLocationDTO.swift in Sources */,
 				83BD79B92C68BE4C0044C453 /* SocialLoginView.swift in Sources */,
 				83C88E4C2CCD13B7001554A4 /* ImageViewModelForPut.swift in Sources */,
 				83EFD1882D1140C8008D35CD /* TermsOfServiceViewModel.swift in Sources */,
@@ -1331,6 +1361,7 @@
 				83C88E582CCD4D1E001554A4 /* downscaleTOjpegData.swift in Sources */,
 				837D74DC2CBE4096005D20DC /* ProfileAPI.swift in Sources */,
 				83E76C7D2CB6D1C2000FEA67 /* SignOutService.swift in Sources */,
+				8345EA4E2D364DD40052840A /* EventMapLocationSearchBarUIView.swift in Sources */,
 				83BD798A2C68BB570044C453 /* ContentView.swift in Sources */,
 				8349F5F02CB0030700746163 /* saveToKeychain.swift in Sources */,
 				83C88E462CCCF7E2001554A4 /* EventEditView.swift in Sources */,
@@ -1380,6 +1411,7 @@
 				83E76C822CB6D575000FEA67 /* SignUpRequestDTO.swift in Sources */,
 				837D74DE2CBE40A0005D20DC /* ProfileService.swift in Sources */,
 				8349F5FB2CB011E600746163 /* TokenRefreshAPI.swift in Sources */,
+				8345EA482D364C620052840A /* EventMapLocationSearchView.swift in Sources */,
 				83F02CB32CAC0920001E8329 /* GoogleLoginResponseDTO.swift in Sources */,
 				83202F3C2CC532B8000C9825 /* CategorySelectButtonView.swift in Sources */,
 				83B5CA892C690DCE00C69ED1 /* TabBarView.swift in Sources */,

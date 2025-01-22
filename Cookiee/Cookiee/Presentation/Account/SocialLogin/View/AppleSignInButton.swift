@@ -125,6 +125,9 @@ class AppleSignInHandler: NSObject, ObservableObject, ASAuthorizationControllerD
                         saveToKeychain(key: "accessToken", data: response.result.accessToken!)
                     }
                     self.isNewMember = response.result.isNewMember
+                    if response.result.isNewMember == false {
+                        saveToKeychain(key: "userId", data: response.result.userId!.description)
+                    }
                     
                     continuation.resume(returning: true)
                 case .failure(let error):
