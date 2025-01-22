@@ -70,9 +70,8 @@ struct EventMapLocationSearchView: View {
                             Spacer()
                         }
                         .padding(.vertical, 3)
-                        Divider()
                     })
-                    
+                    Divider()
                 }
             }
             
