@@ -9,12 +9,15 @@ import SwiftUI
 
 public struct EventFormFields: View {
     @Binding var title: String
-    @Binding var place: String
+    @Binding var placeText: String
     @Binding var content: String
     @Binding var people: String
-    
+    @Binding var place: EventWherePlace?
+
     @ObservedObject var categorySelectViewModel: CategorySelectViewModel
     @Binding var isCategorySelectButtonTapped: Bool
+    
+    @ObservedObject var locationSearchService: EventMapLocationSearchViewModel
     
     public var body: some View {
         VStack {
@@ -24,10 +27,12 @@ public struct EventFormFields: View {
                 placeholder: "쿠키의 제목을 입력해주세요."
             )
             
-            CustomTextFieldWithLabel(
+            CustomPlaceFieldWithLabel(
                 label: "장소",
-                text: $place,
-                placeholder: "장소를 입력해주세요."
+                placeText: $placeText,
+                placeholder: "장소를 직접 입력하거나 지도에서 선택해주세요.",
+                locationSearchService: locationSearchService,
+                place: $place
             )
             
             CustomTextFieldWithLabel(

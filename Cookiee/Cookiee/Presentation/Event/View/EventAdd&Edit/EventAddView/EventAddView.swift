@@ -29,9 +29,10 @@ struct EventAddView: View {
     var date: Int32
     
     @State var title: String = ""
-    @State var place: String = ""
     @State var content: String = ""
     @State var people: String = ""
+    @State var placeText: String = ""
+    @State var place: EventWherePlace? = nil
     
     @State var isCategorySelectButtonTapped: Bool = false
     
@@ -39,15 +40,20 @@ struct EventAddView: View {
     @ObservedObject var categoryListViewModel = CategoryListViewModel()
     @ObservedObject var categorySelectViewModel = CategorySelectViewModel()
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
+    @ObservedObject var locationSearchService = EventMapLocationSearchViewModel()
     
     @State var maxImageCount: Int = 5
     @State var isSubmitting: Bool = false
     
     @FocusState private var isFocused: Bool
     
-    
     var isValidForm: Bool {
-        !title.isEmpty && !place.isEmpty && !content.isEmpty && !people.isEmpty && !categorySelectViewModel.selectedCategory.isEmpty && !imagePickerForEventViewModel.selection.isEmpty
+        !title.isEmpty &&
+        !content.isEmpty &&
+        !people.isEmpty &&
+        !categorySelectViewModel.selectedCategory.isEmpty &&
+        !imagePickerForEventViewModel.selection.isEmpty &&
+        (!placeText.isEmpty || place != nil)
     }
     
     var body: some View {
@@ -132,11 +138,13 @@ struct EventAddView: View {
             
             EventFormFields(
                 title: $title,
-                place: $place,
+                placeText: $placeText,
                 content: $content,
                 people: $people,
+                place: $place,
                 categorySelectViewModel: categorySelectViewModel,
-                isCategorySelectButtonTapped: $isCategorySelectButtonTapped
+                isCategorySelectButtonTapped: $isCategorySelectButtonTapped,
+                locationSearchService: locationSearchService
             )
         }
     }
@@ -176,10 +184,19 @@ struct EventAddView: View {
                 Button(action: {
                     if isValidForm {
                         isSubmitting = true
+                        
+                        let placeTextOrNil: String?
+                        if placeText == "" {
+                            placeTextOrNil = nil
+                        } else {
+                            placeTextOrNil = placeText
+                        }
+                        
                         eventViewModel.addEvent(
                             eventTitle: title,
                             eventWhat: content,
-                            eventWhere: place,
+                            eventWhereText: placeTextOrNil,
+                            eventWherePlace: place,
                             withWho: people,
                             year: year,
                             month: month,

@@ -10,8 +10,8 @@ import MapKit
 
 struct MapLocationDTO: Identifiable {
     let id = UUID()
-    let title: String
-    let subtitle: String
+    let name: String
+    let fullAddress: String
     let latitude: Double
     let longitude: Double
     

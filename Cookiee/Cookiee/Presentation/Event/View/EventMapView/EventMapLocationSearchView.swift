@@ -9,10 +9,26 @@ import SwiftUI
 import MapKit
 
 struct EventMapLocationSearchView: View {
-    @ObservedObject var locationSearchService = EventMapLocationSearchViewModel()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    // 백 버튼 커스텀
+    var backButton: some View {
+        Button {
+            presentationMode.wrappedValue.dismiss()
+        } label: {
+            HStack {
+                Image("ChevronLeftIconBlack")
+                    .aspectRatio(contentMode: .fit)
+            }
+        }
+    }
+
+    @ObservedObject var locationSearchService: EventMapLocationSearchViewModel
     @State private var selectedLocation: MapLocationDTO? = nil
     @State private var isPlaceSelected: Bool = false
     @State private var cameraPosition: MapCameraPosition = .camera(.init(centerCoordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), distance: 1))
+    @Binding var selectedLocationData: EventWherePlace?
+    @Binding var placeText: String
 
     var body: some View {
         VStack {
@@ -54,20 +70,25 @@ struct EventMapLocationSearchView: View {
                             Spacer()
                         }
                         .padding(.vertical, 3)
-                        Divider()
                     })
-                    
+                    Divider()
                 }
             }
             
             Spacer()
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            toolbarItems
+        }
+        
         .sheet(isPresented: $isPlaceSelected, onDismiss: {
             selectedLocation = nil
         }, content: {
             VStack {
                 if let region = selectedLocation {
-                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition)
+                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition, isPlaceSelected: $isPlaceSelected, selectedLocationData: $selectedLocationData, placeText: $placeText, parentPresentationMode: presentationMode)
                 } else {
                     ProgressView()
                 }
@@ -93,38 +114,44 @@ struct EventMapLocationSearchView: View {
             if let selectedPlace = response.mapItems.first?.placemark {
                 let coordinate = selectedPlace.coordinate
                 selectedLocation = MapLocationDTO(
-                    title: selectedPlace.name ?? "알 수 없는 장소",
-                    subtitle: selectedPlace.title ?? "알 수 없는 장소",
+                    name: selectedPlace.name ?? "알 수 없는 장소",
+                    fullAddress: selectedPlace.title ?? "알 수 없는 장소",
                     latitude: coordinate.latitude,
                     longitude: coordinate.longitude
                 )
 
-                print("\(String(describing: selectedPlace.name)), \(String(describing: selectedPlace.title)), \(coordinate.latitude), \(coordinate.longitude)")
+                print(selectedLocation!)
             }
         }
     }
 
-    private struct MapLocationDetailView: View {
+    struct MapLocationDetailView: View {
         var region: MapLocationDTO
         @Binding var cameraPosition: MapCameraPosition
-        
+        @Binding var isPlaceSelected: Bool
+        @Binding var selectedLocationData: EventWherePlace?
+        @Binding var placeText: String
+        var parentPresentationMode: Binding<PresentationMode>
+
         var body: some View {
             VStack {
                 HStack {
-                    Text("\(region.title) 으로 장소를 추가할까요?")
+                    Text("\(region.name) 으로 장소를 추가할까요?")
                         .font(Font.Head1_B)
                         .padding(15)
                 }
-                
+
                 Map(position: $cameraPosition, bounds: nil, interactionModes: .all, scope: nil) {
-                    Annotation("\(region.title)", coordinate: region.coordinate) {
+                    Annotation("\(region.name)", coordinate: region.coordinate) {
                         Image("CookieePin")
                     }
                 }
                 .mapControlVisibility(.visible)
-                
+
                 HStack {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        isPlaceSelected = false
+                    }, label: {
                         VStack {
                             Text("취소")
                                 .font(Font.Body0_SB)
@@ -137,8 +164,18 @@ struct EventMapLocationSearchView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.Brown00, lineWidth: 1)
                     })
-                    
-                    Button(action: {}, label: {
+
+                    Button(action: {
+                        placeText = ""
+                        isPlaceSelected = false
+                        selectedLocationData = EventWherePlace(
+                            latitude: region.latitude.description,
+                            longitude: region.longitude.description,
+                            name: region.name,
+                            fullAddress: region.fullAddress
+                        )
+                        parentPresentationMode.wrappedValue.dismiss()
+                    }, label: {
                         VStack {
                             Text("추가하기")
                                 .font(Font.Body0_SB)
@@ -161,9 +198,13 @@ struct EventMapLocationSearchView: View {
             }
         }
     }
-}
 
-#Preview {
-    EventMapLocationSearchView()
+    
+    private var toolbarItems: some ToolbarContent {
+        Group {
+            ToolbarItem(placement: .navigationBarLeading) {
+                backButton
+            }
+        }
+    }
 }
-

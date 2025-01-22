@@ -80,20 +80,19 @@ extension EventAPI: BaseTargetType {
     private func multipartDataForEvent(for requestBody: EventRequestDTO) -> [Moya.MultipartFormData] {
         var multipartData: [Moya.MultipartFormData] = []
         
-        multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventTitle)".data(using: .utf8)!), name: "eventTitle"))
-        multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventWhat)".data(using: .utf8)!), name: "eventWhat"))
-        multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventWhere)".data(using: .utf8)!), name: "eventWhere"))
-        multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.withWho)".data(using: .utf8)!), name: "withWho"))
-        multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventYear)".data(using: .utf8)!), name: "eventYear"))
-        multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventMonth)".data(using: .utf8)!), name: "eventMonth"))
-        multipartData.append(Moya.MultipartFormData(provider: .data("\(requestBody.eventDate)".data(using: .utf8)!), name: "eventDate"))
-        
-        for categoryId in requestBody.categoryIds {
-            multipartData.append(Moya.MultipartFormData(provider: .data("\(categoryId)".data(using: .utf8)!), name: "categoryIds"))
+        if let eventDetailData = try? JSONEncoder().encode(requestBody) {
+            multipartData.append(
+                Moya.MultipartFormData(
+                    provider: .data(eventDetailData),
+                    name: "eventDetail",
+                    mimeType: "application/json"
+                )
+            )
         }
+
         
         for image in requestBody.images {
-            multipartData.append(Moya.MultipartFormData(provider: .data(image), name: "images", fileName: "\(image)", mimeType: "image/jpeg"))
+           multipartData.append(Moya.MultipartFormData(provider: .data(image), name: "images", fileName: "image.jpg", mimeType: "image/jpeg"))
         }
         
         return multipartData

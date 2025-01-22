@@ -18,7 +18,8 @@ struct EventResultData: Codable {
     let eventId: Int64
     let title: String
     let what: String
-    let eventWhere: String
+    let eventWhereText: String?
+    let eventWherePlace: EventWherePlace?
     let withWho: String
     let EventYear: Int32
     let EventMonth: Int32

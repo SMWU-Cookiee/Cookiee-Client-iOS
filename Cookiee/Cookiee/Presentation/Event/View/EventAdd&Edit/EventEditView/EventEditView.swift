@@ -29,9 +29,10 @@ struct EventEditView: View {
     var date: Int32
     
     @State var title: String = ""
-    @State var place: String = ""
     @State var content: String = ""
     @State var people: String = ""
+    @State var placeText: String = ""
+    @State var place: EventWherePlace?
     
     @State var isCategorySelectButtonTapped: Bool = false
     
@@ -40,13 +41,23 @@ struct EventEditView: View {
     @StateObject var categorySelectViewModel = CategorySelectViewModel()
     @StateObject var imagePickerForEventViewModel = ImagePickerForEventViewModel()
     @StateObject var imageViewModelForPut = ImageViewModelForPut()
+    @ObservedObject var locationSearchService = EventMapLocationSearchViewModel()
     
     @State var maxImageCount: Int = 5
     @State var isSubmitting: Bool = false
     
     @FocusState private var isFocused: Bool
     @State var isEditSuccess: Bool = false
+    @State var isInitialDataLoaded: Bool = false
     
+    var isValidForm: Bool {
+        !title.isEmpty &&
+        !content.isEmpty &&
+        !people.isEmpty &&
+        !categorySelectViewModel.selectedCategory.isEmpty &&
+        (imageViewModelForPut.uiImageList.count + imagePickerForEventViewModel.selection.count > 0) &&
+        (placeText.isEmpty == false || place != nil)
+    }
     
     var body: some View {
         ZStack {
@@ -55,7 +66,9 @@ struct EventEditView: View {
             submittingOverlay
         }
         .onAppear() {
-            loadInitialData()
+            if !isInitialDataLoaded {
+                loadInitialData()
+            }
         }
         .onTapGesture {
             isFocused = false
@@ -128,11 +141,13 @@ struct EventEditView: View {
             
             EventFormFields(
                 title: $title,
-                place: $place,
+                placeText: $placeText,
                 content: $content,
                 people: $people,
+                place: $place,
                 categorySelectViewModel: categorySelectViewModel,
-                isCategorySelectButtonTapped: $isCategorySelectButtonTapped
+                isCategorySelectButtonTapped: $isCategorySelectButtonTapped,
+                locationSearchService: locationSearchService
             )
         }
     }
@@ -209,9 +224,9 @@ struct EventEditView: View {
                 }, label: {
                     Text("완료")
                         .font(.Body0_B)
-                        .foregroundColor(!isSubmitting ? .Brown01 : .Gray03)
+                        .foregroundColor(isValidForm ? .Brown01 : .Gray03)
                 })
-                .disabled(isSubmitting)
+                .disabled(!isValidForm || isSubmitting)
             }
         }
     }
@@ -222,8 +237,11 @@ extension EventEditView {
         eventViewModel.loadEventDetail(eventId: eventViewModel.selectedEventId!)
         
         if let eventDetail = eventViewModel.eventDetail {
+            isInitialDataLoaded = true
+            
             title = eventDetail.title
-            place = eventDetail.eventWhere
+            placeText = eventDetail.eventWhereText ?? ""
+            place = eventDetail.eventWherePlace
             content = eventDetail.what
             people = eventDetail.withWho
             categorySelectViewModel.selectedCategory = eventDetail.categories
@@ -262,11 +280,19 @@ extension EventEditView {
                 }
             }
             
+            let placeTextOrNil: String?
+            if placeText == "" {
+                placeTextOrNil = nil
+            } else {
+                placeTextOrNil = placeText
+            }
+            
             eventViewModel.updateEvent(
                 eventId: eventViewModel.eventDetail!.eventId,
                 eventTitle: title,
                 eventWhat: content,
-                eventWhere: place,
+                eventWhereText: placeTextOrNil,
+                eventWherePlace: place,
                 withWho: people,
                 year: year,
                 month: month,

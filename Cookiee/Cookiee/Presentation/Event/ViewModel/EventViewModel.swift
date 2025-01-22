@@ -65,7 +65,7 @@ class EventViewModel : ObservableObject {
         }
     }
     
-    func addEvent(eventTitle: String, eventWhat: String, eventWhere: String, withWho: String, year: Int32, month: Int32, date: Int32, categoryIds: [Int64], images: [PhotosPickerItem]) {
+    func addEvent(eventTitle: String, eventWhat: String, eventWhereText: String?, eventWherePlace: EventWherePlace?, withWho: String, year: Int32, month: Int32, date: Int32, categoryIds: [Int64], images: [PhotosPickerItem]) {
         
         var imagesData: [Data] = []
         
@@ -85,7 +85,8 @@ class EventViewModel : ObservableObject {
             let request = EventRequestDTO(
                 eventTitle: eventTitle,
                 eventWhat: eventWhat,
-                eventWhere: eventWhere,
+                eventWhereText: eventWhereText,
+                eventWherePlace: eventWherePlace,
                 withWho: withWho,
                 eventYear: year,
                 eventMonth: month,
@@ -108,14 +109,15 @@ class EventViewModel : ObservableObject {
         }
     }
     
-    func updateEvent(eventId: Int64, eventTitle: String, eventWhat: String, eventWhere: String, withWho: String, year: Int32, month: Int32, date: Int32, categoryIds: [Int64], images: [Data]) {
+    func updateEvent(eventId: Int64, eventTitle: String, eventWhat: String, eventWhereText: String?, eventWherePlace: EventWherePlace?, withWho: String, year: Int32, month: Int32, date: Int32, categoryIds: [Int64], images: [Data]) {
         
         Task {
 
             let request = EventRequestDTO(
                 eventTitle: eventTitle,
                 eventWhat: eventWhat,
-                eventWhere: eventWhere,
+                eventWhereText: eventWhereText,
+                eventWherePlace: eventWherePlace,
                 withWho: withWho,
                 eventYear: year,
                 eventMonth: month,

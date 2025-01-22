@@ -70,17 +70,44 @@ struct EventDetailView: View {
                     
                     ScrollView {
                         VStack (alignment: .leading) {
-                            EventInfoDetailView(
-                                title: "장소",
-                                decription: eventViewModel.eventDetail!.eventWhere
-                            )
+                            if eventViewModel.eventDetail!.eventWhereText == nil {
+                                EventInfoDetailView(
+                                    title: "장소",
+                                    decription: {
+                                        AnyView(
+                                            HStack {
+                                                Image("PlacePinBrown")
+                                                Text(eventViewModel.eventDetail!.eventWherePlace?.name ?? "장소 정보를 가져올 수 없음")
+                                            }
+                                        )
+                                    }
+                                )
+                            } else {
+                                EventInfoDetailView(
+                                    title: "장소",
+                                    decription: {
+                                        AnyView(
+                                            Text(eventViewModel.eventDetail!.eventWhereText ?? "장소 정보를 가져올 수 없음")
+                                        )
+                                    }
+                                )
+                            }
+                            
                             EventInfoDetailView(
                                 title: "내용",
-                                decription: eventViewModel.eventDetail!.what
+                                decription: {
+                                    AnyView(
+                                        Text(eventViewModel.eventDetail!.what)
+                                    )
+                                }
                             )
                             EventInfoDetailView(
                                 title: "함께한 사람",
-                                decription: eventViewModel.eventDetail!.withWho
+                                decription: {
+                                    AnyView(
+                                        Text(eventViewModel.eventDetail!.withWho)
+                                    )
+                                }
                             )
                         }
                     }
@@ -145,7 +172,7 @@ extension EventDetailView {
 
 struct EventInfoDetailView: View {
     let title: String
-    let decription: String
+    let decription: () -> AnyView
 
     var body: some View {
         VStack (alignment: .leading) {
@@ -158,7 +185,7 @@ struct EventInfoDetailView: View {
             }
             
             HStack {
-                Text(decription)
+                decription()
                     .font(.Body1_R)
                     .padding(10)
                     .background(Color.Beige)

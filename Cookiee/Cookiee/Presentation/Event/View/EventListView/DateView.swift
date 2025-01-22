@@ -299,9 +299,6 @@ struct DateView: View {
             isPresented: $eventViewModel.isEditButtonTapped,
             destination: {
                 EventEditView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent, eventViewModel: eventViewModel)
-                    .onDisappear() {
-                        isEventDetailViewModalOpen = true
-                    }
         })
     }
 }
