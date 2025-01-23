@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 
 extension Font {
@@ -29,4 +30,17 @@ extension Font {
     static let Head0_B_22: Font = .custom("Pretendard-Bold", size: 22)
     static let Head0_B_24: Font = .custom("Pretendard-Bold", size: 24)
     static let Body3_R: Font = .custom("Pretendard-Regular", size: 10)
+}
+
+extension UIFont {
+    static func font(_ style: String, ofSize size: CGFloat) -> UIFont {
+        guard let customFont = UIFont(name: style, size: size) else {
+            return UIFont.systemFont(ofSize: size)
+        }
+        return customFont
+    }
+    
+    @nonobjc class var Body0_R_UIFont: UIFont {
+        return UIFont.font("Pretendard-Regular", ofSize: 16)
+    }
 }
