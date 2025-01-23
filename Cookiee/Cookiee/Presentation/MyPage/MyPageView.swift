@@ -181,7 +181,7 @@ struct MyPageView: View {
                         .font(.Body1_M)
                         .foregroundStyle(Color.black)
                     Spacer()
-                    Text("v 1.0.0")
+                    Text("v 2.1.0")
                         .font(.Body1_M)
                         .foregroundStyle(Color.Gray05)
                 }
