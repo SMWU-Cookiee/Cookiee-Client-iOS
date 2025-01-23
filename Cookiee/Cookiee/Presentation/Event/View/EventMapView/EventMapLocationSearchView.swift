@@ -20,6 +20,7 @@ struct EventMapLocationSearchView: View {
                 Image("ChevronLeftIconBlack")
                     .aspectRatio(contentMode: .fit)
             }
+            .padding(.leading, 5)
         }
     }
 
@@ -33,10 +34,12 @@ struct EventMapLocationSearchView: View {
     var body: some View {
         VStack {
             VStack {
-                VStack {
+                HStack {
+                    backButton
                     EventMapLocationSearchBarUIView(text: $locationSearchService.searchQuery)
                 }
-                .padding([.bottom, .horizontal], 7)
+                .padding(.bottom, 7)
+                .padding(.horizontal, 5)
                 .background(Color.white)
             }
             .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
@@ -77,11 +80,7 @@ struct EventMapLocationSearchView: View {
             
             Spacer()
         }
-        .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .toolbar {
-            toolbarItems
-        }
         
         .sheet(isPresented: $isPlaceSelected, onDismiss: {
             selectedLocation = nil
@@ -195,15 +194,6 @@ struct EventMapLocationSearchView: View {
                         longitude: region.longitude
                     ), distance: 500)
                 )
-            }
-        }
-    }
-
-    
-    private var toolbarItems: some ToolbarContent {
-        Group {
-            ToolbarItem(placement: .navigationBarLeading) {
-                backButton
             }
         }
     }
