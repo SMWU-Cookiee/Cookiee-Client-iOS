@@ -26,14 +26,6 @@ struct HomeCalendarView: View {
             VStack {
                 ZStack {
                     Image("cookiee_typo_small")
-                    HStack {
-                        Button {
-                            // action
-                        } label: {
-                            Image("Download")
-                        }
-                    }
-                    .padding(.leading, 340)
                 }
                 .frame(width: geometry.size.width, height: 45)
                 
