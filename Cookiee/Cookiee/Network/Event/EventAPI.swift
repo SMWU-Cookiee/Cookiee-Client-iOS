@@ -24,9 +24,9 @@ extension EventAPI: BaseTargetType {
         case .getEventDetail:
             return .accessTokenHeaderForJson
         case .postEvent:
-            return .accessTokenHeaderForJson
+            return .accessTokenHeaderForMultipart
         case .putEvent:
-            return .accessTokenHeaderForJson
+            return .accessTokenHeaderForMultipart
         case .deleteEvet:
             return .accessTokenHeaderForJson
         }
@@ -79,22 +79,36 @@ extension EventAPI: BaseTargetType {
     
     private func multipartDataForEvent(for requestBody: EventRequestDTO) -> [Moya.MultipartFormData] {
         var multipartData: [Moya.MultipartFormData] = []
-        
-        if let eventDetailData = try? JSONEncoder().encode(requestBody) {
+                        
+        if var eventDict = try? JSONSerialization.jsonObject(with: JSONEncoder().encode(requestBody), options: []) as? [String: Any] {
+            eventDict.removeValue(forKey: "images")
+            
+            if let filteredData = try? JSONSerialization.data(withJSONObject: eventDict, options: []) {
+                multipartData.append(
+                    Moya.MultipartFormData(
+                        provider: .data(filteredData),
+                        name: "eventDetail",
+                        mimeType: "application/json"
+                    )
+                )
+            } else {
+                print("❌ 이벤트 multipart : filteredData JSON 변환 실패")
+            }
+        } else {
+            print("❌ 이벤트 multipart : eventDict JSON 변환 실패")
+        }
+
+        for (index, image) in requestBody.images.enumerated() {
             multipartData.append(
                 Moya.MultipartFormData(
-                    provider: .data(eventDetailData),
-                    name: "eventDetail",
-                    mimeType: "application/json"
+                    provider: .data(image),
+                    name: "images",
+                    fileName: "image\(index + 1).jpg",
+                    mimeType: "image/jpeg"
                 )
             )
         }
 
-        
-        for image in requestBody.images {
-           multipartData.append(Moya.MultipartFormData(provider: .data(image), name: "images", fileName: "image.jpg", mimeType: "image/jpeg"))
-        }
-        
         return multipartData
     }
 }
