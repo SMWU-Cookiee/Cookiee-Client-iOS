@@ -67,14 +67,18 @@ class EventService {
                     let response = try JSONDecoder().decode(EventDetailResponseDTO.self, from: response.data)
                     completion(.success(response))
                 } catch {
-                    completion(.failure(error))
                     print("postEvent Decoding error:", error)
+                    completion(.failure(error))
                 }
             case .failure(let error):
+                print("postEvent error:", error)
+                if let response = error.response {
+                    print("Response Data:", String(data: response.data, encoding: .utf8) ?? "No response body")
+                }
                 completion(.failure(error))
-                print("postEvent error:", error.errorDescription as Any)
             }
         }
+
     }
     
     func putEvent(eventId: Int64, requestBody: EventRequestDTO, completion: @escaping (Result<EventDetailResponseDTO, Error>) -> Void) {
