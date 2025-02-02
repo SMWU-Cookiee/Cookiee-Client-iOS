@@ -145,6 +145,7 @@ struct EventMapLocationSearchView: View {
             VStack {
                 HStack {
                     Text("\(region.name) 으로 장소를 추가할까요?")
+                        .multilineTextAlignment(.center)
                         .font(Font.Head1_B)
                         .padding(15)
                 }
