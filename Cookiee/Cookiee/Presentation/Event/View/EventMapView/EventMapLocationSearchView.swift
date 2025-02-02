@@ -26,6 +26,7 @@ struct EventMapLocationSearchView: View {
 
     @ObservedObject var locationSearchService: EventMapLocationSearchViewModel
     @State private var selectedLocation: MapLocationDTO? = nil
+    @State private var selectedLocationMapData: MapLocationDTO? = nil
     @State private var isPlaceSelected: Bool = false
     @State private var cameraPosition: MapCameraPosition = .camera(.init(centerCoordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), distance: 1))
     @Binding var selectedLocationData: EventWherePlace?
@@ -48,7 +49,6 @@ struct EventMapLocationSearchView: View {
                 ForEach(locationSearchService.completions) { completion in
                     Button(action: {
                         searchLocation(for: completion)
-                        isPlaceSelected = true
                     }, label: {
                         HStack {
                             Image("PlacePin")
@@ -83,11 +83,12 @@ struct EventMapLocationSearchView: View {
         .navigationBarBackButtonHidden(true)
         
         .sheet(isPresented: $isPlaceSelected, onDismiss: {
+            selectedLocationMapData = nil
             selectedLocation = nil
         }, content: {
             VStack {
-                if let region = selectedLocation {
-                    MapLocationDetailView(region: region, cameraPosition: $cameraPosition, isPlaceSelected: $isPlaceSelected, selectedLocationData: $selectedLocationData, placeText: $placeText, parentPresentationMode: presentationMode)
+                if selectedLocationMapData != nil {
+                    MapLocationDetailView(region: selectedLocationMapData!, cameraPosition: $cameraPosition, isPlaceSelected: $isPlaceSelected, selectedLocationData: $selectedLocationData, placeText: $placeText, parentPresentationMode: presentationMode)
                 } else {
                     ProgressView()
                 }
@@ -95,32 +96,40 @@ struct EventMapLocationSearchView: View {
             .padding(.top, 12)
             .presentationDetents([.fraction(0.7)])
             .presentationDragIndicator(.visible)
+            .onAppear() {
+                selectedLocationMapData = selectedLocation
+            }
         })
     }
 
-    private func searchLocation(for completion: MKLocalSearchCompletion) {
-        let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = completion.title
-        
-        let search = MKLocalSearch(request: searchRequest)
-        search.start { response, error in
-            guard let response = response else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
+    func searchLocation(for suggestedCompletion: MKLocalSearchCompletion) {
+        let searchRequest = MKLocalSearch.Request(completion: suggestedCompletion)
+        selectedLocation = nil
+        search(using: searchRequest)
+    }
 
-            // 첫 번째 검색 결과 설정
-            if let selectedPlace = response.mapItems.first?.placemark {
-                let coordinate = selectedPlace.coordinate
-                selectedLocation = MapLocationDTO(
-                    name: selectedPlace.name ?? "알 수 없는 장소",
-                    fullAddress: selectedPlace.title ?? "알 수 없는 장소",
-                    latitude: coordinate.latitude,
-                    longitude: coordinate.longitude
-                )
+    func search(using searchRequest: MKLocalSearch.Request) {
+        searchRequest.resultTypes = .address
 
-                print(selectedLocation!)
-            }
+        let localSearch = MKLocalSearch(request: searchRequest)
+
+        localSearch.start { (response, error) in
+            guard error == nil else { return }
+
+            guard let place = response?.mapItems[0] else { return }
+
+            let placeName = place.name ?? "알 수 없는 장소명"
+            let placeAddress = place.placemark.title ?? "알 수 없는 주소"
+            let placeLatitude = Double(place.placemark.coordinate.latitude)
+            let placeLongtitude = Double(place.placemark.coordinate.longitude)
+    
+            selectedLocation = MapLocationDTO(
+                name: placeName,
+                fullAddress: placeAddress,
+                latitude: placeLatitude,
+                longitude: placeLongtitude
+            )
+            isPlaceSelected = true
         }
     }
 
