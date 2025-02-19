@@ -15,6 +15,7 @@ extension View {
         ZStack(alignment: .leading) {
             placeholder().opacity(shouldShow ? 1 : 0)
             self
+                .foregroundStyle(Color.Brown00)
         }
     }
 }

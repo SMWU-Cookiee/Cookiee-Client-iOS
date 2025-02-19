@@ -66,17 +66,20 @@ struct SignUpView: View {
                             .frame(width: 129, height: 129)
                     } else {
                         Circle()
-                            .foregroundColor(Color.Gray01)
+                            .foregroundColor(Color.white)
                             .frame(width: 129, height: 129)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.Brown02, lineWidth: 1)
+                            )
                             .overlay(
                                 Button(action: {
                                     showImagePicker.toggle()
                                 }, label: {
-                                    Image("Photo")
+                                    Image("ImageBrown")
                                         .resizable()
                                         .frame(width: 30, height: 30)
                                 })
-                                
                             )
                     }
                 }
@@ -92,39 +95,49 @@ struct SignUpView: View {
                     Text("닉네임")
                         .font(.Body0_SB)
                         .frame(width: 75, alignment: .leading)
+                        .foregroundStyle(Color.Brown00)
                     TextField("\(nickname)", text: $nickname)
                         .placeholder(when: nickname.isEmpty) {
                             Text("닉네임을 입력해주세요.")
-                                .foregroundStyle(Color.Gray04)
+                                .foregroundStyle(Color.Brown05)
                                 .font(.Body0_M)
                         }
                         .padding(10)
                         .font(.Body1_M)
                         .frame(height: 40)
-                        .background(Color.Gray01)
+                        .background(Color.white)
                         .cornerRadius(5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.Brown02, lineWidth: 1)
+                        )
                         .onChange(of: nickname) {
                             isValidForm()
                         }
                 }
-                .padding(.bottom, 5)
+                .padding(.bottom, 10)
                 
                 // 한 줄 소개 편집
                 HStack {
                     Text("한 줄 소개")
                         .font(.Body0_SB)
                         .frame(width: 75, alignment: .leading)
+                        .foregroundStyle(Color.Brown00)
                     TextField("\(introduction)", text: $introduction)
                         .placeholder(when: introduction.isEmpty) {
                             Text("한 줄 소개를 입력해주세요.")
-                                .foregroundStyle(Color.Gray04)
+                                .foregroundStyle(Color.Brown05)
                                 .font(.Body0_M)
                         }
                         .padding(10)
                         .font(.Body1_M)
                         .frame(height: 40)
-                        .background(Color.Gray01)
+                        .background(Color.white)
                         .cornerRadius(5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.Brown02, lineWidth: 1)
+                        )
                         .onChange(of: introduction) {
                             isValidForm()
                         }
