@@ -118,6 +118,11 @@ struct ImageCarouselForUIImage: View {
                 .overlayIf(indexToDeleteInImageAttachment == index, overlayForDeletion(at: index, imageAttachment: imageAttachment))
         }
         .frame(width: proxy.size.width - trialingSpace)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.Brown04, lineWidth: 1)
+        )
+        .frame(width: proxy.size.width - trialingSpace)
         .background(Color.white)
     }
     
@@ -150,15 +155,19 @@ struct ImageCarouselForUIImage: View {
                 imagePickerForEventViewModel.isPhotoPickerPresented = true
             }, label: {
                 VStack {
-                    Image("PlusGray")
+                    Image("PlusBrown")
                         .resizable()
-                        .frame(width: 35, height: 35)
+                        .frame(width: 40, height: 40)
                         .padding(10)
                 }
             })
             .frame(width: 270, height: 360)
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.Gray04, lineWidth: 1))
         }
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.Brown04, lineWidth: 1)
+        )
         .frame(width: proxy.size.width - trialingSpace)
         .background(Color.white)
     }
