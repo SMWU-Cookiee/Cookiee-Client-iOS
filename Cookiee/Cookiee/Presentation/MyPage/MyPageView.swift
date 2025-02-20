@@ -25,7 +25,7 @@ struct MyPageView: View {
                                 switch phase {
                                 case .empty:
                                     Circle()
-                                        .fill(Color.Gray01)
+                                        .fill(Color.white)
                                         .frame(width: 60, height: 60)
                                         .overlay(ProgressView())
                                 case .success(let image):
@@ -51,7 +51,7 @@ struct MyPageView: View {
                             }
                         } else {
                             Circle()
-                                .foregroundColor(Color.Gray01)
+                                .foregroundColor(Color.white)
                                 .frame(width: 60, height: 60)
                         }
                     }
@@ -71,16 +71,18 @@ struct MyPageView: View {
                     NavigationLink(
                         destination: ProfileEditView(),
                         label: {
-                            Text("프로필 수정")
-                                .font(.Body2_R)
-                                .foregroundColor(Color.Gray04)
-                            Image("ChevronRightSmall")
+                            HStack(spacing: 0){
+                                Text("프로필 수정")
+                                    .font(.Body2_R)
+                                    .foregroundColor(Color.Brown01)
+                                Image("ChevronRightSmall")
+                            }
                         }
                     )
                 }
                 .frame(height: 100)
                 .padding(.horizontal)
-                .background(Color.Gray00)
+                .background(Color.Beige01)
                 .cornerRadius(10)
             }
             .padding(.bottom, 30)
@@ -135,23 +137,6 @@ struct MyPageView: View {
                 
                 Divider()
                 
-                HStack {
-                    NavigationLink(
-                        destination: DevelopersView(),
-                        label: {
-                            Text("개발자 정보")
-                                .font(.Body1_M)
-                                .foregroundStyle(Color.black)
-                            Spacer()
-                            Image("ChevronRightSmall")
-                                .padding(.horizontal, 10)
-                        }
-                    )
-                    .frame(height: 32)
-                }
-                
-                Divider()
-                
                 Button(action: {
                     isLogOutButtonTapped = true
                 }, label: {
@@ -187,11 +172,25 @@ struct MyPageView: View {
                 }
                 .frame(height: 32)
                 
+                Divider()
+                
+                HStack {
+                    NavigationLink(
+                        destination: DevelopersView(),
+                        label: {
+                            Text("🍪👩‍🍳❓")
+                                .font(.Body1_M)
+                                .foregroundStyle(Color.black)
+                            Spacer()
+                        }
+                    )
+                    .frame(height: 32)
+                }
             }
             Spacer()
             Text(verbatim: "Contact: apps.cookiee@gmail.com")
                 .font(.Body1_R)
-                .foregroundStyle(Color.Gray03)
+                .foregroundStyle(Color.Brown05)
             
         }
         .padding(.horizontal, 15)
