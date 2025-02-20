@@ -18,7 +18,7 @@ struct CustomTextFieldWithLabel: View {
         VStack(alignment: .leading) {
             Text(label)
                 .font(.Body1_M)
-                .foregroundStyle(Color.Gray05)
+                .foregroundStyle(Color.Brown02)
                 .frame(width: 75, alignment: .leading)
             
             CustomTextField(target: $text, placeholder: placeholder)
