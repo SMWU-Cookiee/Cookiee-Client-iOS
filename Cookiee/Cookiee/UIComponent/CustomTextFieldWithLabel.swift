@@ -21,8 +21,13 @@ struct CustomTextFieldWithLabel: View {
                 .foregroundStyle(Color.Brown02)
                 .frame(width: 75, alignment: .leading)
             
-            CustomTextField(target: $text, placeholder: placeholder)
-                .focused($isFocused)
+            if label == "내용" {
+                CustomTextFieldWithMulLine(target: $text, placeholder: placeholder)
+                    .focused($isFocused)
+            } else {
+                CustomTextField(target: $text, placeholder: placeholder)
+                    .focused($isFocused)
+            }
         }
         .padding(.bottom, 25)
     }
