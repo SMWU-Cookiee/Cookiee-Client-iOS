@@ -64,6 +64,15 @@ struct SignUpView: View {
                             .aspectRatio(contentMode: .fill)
                             .clipShape(Circle())
                             .frame(width: 129, height: 129)
+                            .overlay(
+                                Button(action: {
+                                    showImagePicker.toggle()
+                                }, label: {
+                                    Image("ImageBrown")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                })
+                            )
                     } else {
                         Circle()
                             .foregroundColor(Color.white)
