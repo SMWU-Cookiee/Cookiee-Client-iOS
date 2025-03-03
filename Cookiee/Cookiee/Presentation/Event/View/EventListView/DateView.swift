@@ -98,12 +98,12 @@ struct DateView: View {
                                 showImagePicker = true
                             }, label: {
                                 VStack(alignment: .center) {
-                                    Image("ThumbnailPhoto")
+                                    Image("ImageBrown")
                                         .frame(width: 31, height: 31)
                                         .padding(.vertical, 7)
                                     Text("탭하여 썸네일 추가하기")
                                         .font(.Body1_M)
-                                        .foregroundStyle(Color.Gray05)
+                                        .foregroundStyle(Color.Brown02)
                                 }
                                 .frame(width: geometry.size.width, height: 265)
                                 .background(Color.Gray01)

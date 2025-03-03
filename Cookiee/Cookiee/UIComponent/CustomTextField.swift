@@ -15,13 +15,17 @@ struct CustomTextField: View {
         TextField("\(target)", text: $target)
             .placeholder(when: target.isEmpty) {
                 Text("\(placeholder)")
-                    .foregroundStyle(Color.Gray04)
+                    .foregroundStyle(Color.Brown05)
                     .font(.Body0_M)
         }
         .padding(10)
         .font(.Body0_M)
         .frame(height: 40)
-        .background(Color.Gray01)
+        .background(Color.white)
         .cornerRadius(5)
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.Brown02, lineWidth: 1)
+        )
     }
 }

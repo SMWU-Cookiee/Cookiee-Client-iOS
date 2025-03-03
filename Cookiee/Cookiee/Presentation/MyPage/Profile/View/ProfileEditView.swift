@@ -120,20 +120,25 @@ struct ProfileEditView: View {
                     Text("닉네임")
                         .font(.Body0_SB)
                         .frame(width: 75, alignment: .leading)
+                        .foregroundStyle(Color.Brown00)
                     TextField("\(nickname)", text: $nickname)
                         .placeholder(when: nickname.isEmpty) {
                             Text("\(profileViewModel.profile.nickname)")
-                                .foregroundStyle(Color.Gray04)
+                                .foregroundStyle(Color.Brown00)
                                 .font(.Body0_M)
                     }
                         .padding(10)
-                        .font(.Body1_M)
+                        .font(.Body0_M)
                         .frame(height: 40)
-                        .background(Color.Gray01)
+                        .background(Color.white)
                         .cornerRadius(5)
                         .onChange(of: nickname) {
                             isValidForm()
                         }
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                               .stroke(Color.Brown02, lineWidth: 1)
+                        )
                 }
                 .padding(.bottom, 5)
                 
@@ -141,20 +146,25 @@ struct ProfileEditView: View {
                     Text("한 줄 소개")
                         .font(.Body0_SB)
                         .frame(width: 75, alignment: .leading)
+                        .foregroundStyle(Color.Brown00)
                     TextField("\(introduction)", text: $introduction)
                         .placeholder(when: introduction.isEmpty) {
                             Text("\(profileViewModel.profile.selfDescription)")
-                                .foregroundStyle(Color.Gray04)
+                                .foregroundStyle(Color.Brown00)
                                 .font(.Body0_M)
                     }
                         .padding(10)
-                        .font(.Body1_M)
+                        .font(.Body0_M)
                         .frame(height: 40)
-                        .background(Color.Gray01)
+                        .background(Color.white)
                         .cornerRadius(5)
                         .onChange(of: introduction) {
                             isValidForm()
                         }
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                               .stroke(Color.Brown02, lineWidth: 1)
+                        )
                 }
                 Spacer()
             }

@@ -27,8 +27,8 @@ final class TokenInterceptor: RequestInterceptor {
             print("retry : 401 오류 발생")
             refreshAccessToken(request: request, completion: completion)
         } else if response.statusCode == 500 {
-            print("retry : 500 서버 오류 발생, 토큰 만료 가능성 있음")
-            refreshAccessToken(request: request, completion: completion)
+            print("retry : 500 서버 오류 발생")
+            completion(.doNotRetryWithError(error))
         } else {
             completion(.doNotRetryWithError(error))
             print("retry : 401이나 500이 아님")

@@ -67,19 +67,24 @@ struct CategoryAddView: View {
                 HStack {
                     Text("카테고리 이름")
                         .font(.Body1_M)
-                        .foregroundStyle(Color.Gray05)
+                        .foregroundStyle(Color.Brown02)
                         .frame(width: 92, alignment: .leading)
                     TextField(
                         "카테고리 이름",
                         text: $name,
-                        prompt: Text("카테고리 이름을 입력해주세요.").foregroundColor(Color.Gray04)
+                        prompt: Text("카테고리 이름을 입력해주세요.").foregroundColor(Color.Brown05)
                     )
                         .focused($isTextFieldFocused)
                         .padding(10)
                         .font(.Body0_M)
+                        .foregroundStyle(Color.Brown00)
                         .frame(height: 40)
-                        .background(Color.Gray01)
+                        .background(Color.white)
                         .cornerRadius(5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.Brown02, lineWidth: 1)
+                        )
                         .onChange(of: name) {
                             isValidForm()
                         }
@@ -95,7 +100,7 @@ struct CategoryAddView: View {
                 HStack {
                     Text("카테고리 색")
                         .font(.Body1_M)
-                        .foregroundStyle(Color.Gray05)
+                        .foregroundStyle(Color.Brown02)
                         .frame(width: 92, alignment: .leading)
                     Button(action: {
                         isTextFieldFocused = false
@@ -105,7 +110,7 @@ struct CategoryAddView: View {
                     }, label: {
                         if selectedColor.isEmpty {
                             Text("탭하여 색 선택하기")
-                                .foregroundStyle(Color.Gray04)
+                                .foregroundStyle(Color.Brown05)
                         } else {
                             Rectangle()
                                 .fill(Color(hex: selectedColor))
@@ -119,8 +124,12 @@ struct CategoryAddView: View {
                         .padding(10)
                         .font(.Body0_M)
                         .frame(height: 40)
-                        .background(Color.Gray01)
+                        .background(Color.white)
                         .cornerRadius(5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.Brown02, lineWidth: 1)
+                        )
                         .onChange(of: selectedColor) {
                             isValidForm()
                         }

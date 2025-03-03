@@ -21,7 +21,7 @@ struct CustomPlaceFieldWithLabel: View {
             HStack {
                 Text(label)
                     .font(.Body1_M)
-                    .foregroundStyle(Color.Gray05)
+                    .foregroundStyle(Color.Brown02)
                     .frame(width: 75, alignment: .leading)
                 
                 Spacer()
@@ -45,6 +45,7 @@ struct CustomPlaceFieldWithLabel: View {
                     Image("PlacePinBrown")
                     Text("\(String(describing: place!.name))")
                         .font(.Body0_M)
+                        .foregroundStyle(Color.Brown00)
                     Spacer()
                     Button(action: {
                         place = nil
@@ -55,8 +56,12 @@ struct CustomPlaceFieldWithLabel: View {
                 }
                 .padding(10)
                 .frame(maxWidth: .infinity, maxHeight: 40)
-                .background(Color.Gray01)
+                .background(Color.white)
                 .cornerRadius(5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color.Brown02, lineWidth: 1)
+                )
             }
             
         }

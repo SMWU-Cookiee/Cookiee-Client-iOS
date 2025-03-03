@@ -47,9 +47,11 @@ struct CategoryListRowView: View {
                             
                 // 삭제 버튼
                 Button(action: {
-                    categoryNameToDelete = name
-                    categoryIdToDelete = id
-                    isDeleteButtonTapped = true
+                    DispatchQueue.main.async {
+                        categoryNameToDelete = name
+                        categoryIdToDelete = id
+                        isDeleteButtonTapped = true
+                    }
                 }, label: {
                     Image("TrashIconRed")
                 })

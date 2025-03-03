@@ -78,14 +78,26 @@ struct CategoryListView: View {
                 stateCategoryListViewModel.loadCategoryListData()
            }
         }
+        .onChange(of: isDeleteButtonTapped) {
+            if categoryNameToDelete == nil {
+                isDeleteButtonTapped = false
+            }
+        }
+
         .showCustomAlert(
             isPresented: $isDeleteButtonTapped,
             alertContent: {
                 AnyView(
                     VStack {
-                        Text(categoryNameToDelete!)
-                            .font(.Head1_B)
-                            .foregroundStyle(Color.Brown01)
+                        if let categoryName = categoryNameToDelete {
+                            Text(categoryName)
+                                .font(.Head1_B)
+                                .foregroundStyle(Color.Brown01)
+                        } else {
+                            Text("선택된 카테고리가 없습니다.")
+                                .font(.Head1_B)
+                                .foregroundStyle(Color.Gray04)
+                        }
                         Text("카테고리를 삭제할까요?")
                             .font(.Head1_B)
                             .padding(.bottom, 9)
@@ -103,10 +115,14 @@ struct CategoryListView: View {
                 CustomAlertButton(
                     action: {
                         isDeleteButtonTapped = false
-                        stateCategoryListViewModel.removeCategory(categoryId: categoryIdToDelete!)
+                        if let categoryId = categoryIdToDelete {
+                            stateCategoryListViewModel.removeCategory(categoryId: categoryId)
+                        }
                     },
-                    title: Text("삭제하기").foregroundColor(Color.Brown00))
+                    title: Text("삭제하기").foregroundColor(Color.Brown00)
+                )
         )
+
         .showCustomAlert(
             isPresented: $isAddCategoryAlertPresented,
             alertContent: {

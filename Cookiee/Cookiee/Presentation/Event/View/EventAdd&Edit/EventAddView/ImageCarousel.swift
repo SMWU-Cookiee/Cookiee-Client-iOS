@@ -104,9 +104,9 @@ struct ImageCarouselForPhotoPicker: View {
                 viewModel.isPhotoPickerPresented = true
             }, label: {
                 VStack {
-                    Image("PlusGray")
+                    Image("PlusBrown")
                         .resizable()
-                        .frame(width: 35, height: 35)
+                        .frame(width: 40, height: 40)
                         .padding(10)
                 }
                 .frame(width: 270, height: 360)
@@ -114,7 +114,7 @@ struct ImageCarouselForPhotoPicker: View {
         }
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.Gray04, lineWidth: 1)
+                .stroke(Color.Brown04, lineWidth: 1)
         )
         .frame(width: proxy.size.width - trialingSpace)
         .background(Color.white)
@@ -153,22 +153,21 @@ struct InitialAddMessageCardView: View {
                 viewModel.isPhotoPickerPresented = true
             }, label: {
                 VStack {
-                    Image("Photo")
+                    Image("ImageIconBrown04")
                         .resizable()
                         .frame(width: 35, height: 35)
                         .padding(10)
                     
                     Text("최대 5장까지 추가할 수 있어요.")
-                        .foregroundStyle(Color.Gray04)
+                        .foregroundStyle(Color.Brown04)
                         .font(Font.Body1_M)
                 }
                 .frame(width: 270, height: 360)
             })
         }
-        
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.Gray04, lineWidth: 1)
+                .stroke(Color.Brown04, lineWidth: 1)
         )
     }
 }

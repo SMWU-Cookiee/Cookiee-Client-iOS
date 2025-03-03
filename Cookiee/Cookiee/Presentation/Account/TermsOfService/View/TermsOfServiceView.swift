@@ -52,7 +52,7 @@ struct TermsOfServiceView: View {
                     }
                 )
                 .frame(width: 363, height: 44)
-                .background(termsOfServiceViewModel.allPermit ? Color.Brown00 : Color.Gray03)
+                .background(termsOfServiceViewModel.allPermit ? Color.Brown00 : Color.Brown06)
                 .cornerRadius(10)
                 .disabled(!termsOfServiceViewModel.allPermit)
             }
@@ -74,7 +74,7 @@ struct TermsOfServiceView: View {
             HStack {
                 Toggle("이용약관 전체 동의", isOn: $termsOfServiceViewModel.allPermit)
                     .toggleStyle(CheckboxToggleStyle())
-                    .foregroundColor(Color.black)
+                    .foregroundColor(Color.Brown00)
                     .font(Font.Head0_B)
 
                 Spacer()
@@ -83,6 +83,7 @@ struct TermsOfServiceView: View {
             
             Divider()
                 .padding(.vertical, 12)
+                .foregroundStyle(Color.Brown06)
 
             HStack(alignment: .center, spacing: 0) {
                 Toggle("", isOn: $termsOfServiceViewModel.termsOfServicePermit)
@@ -94,11 +95,11 @@ struct TermsOfServiceView: View {
                     HStack(spacing: 0){
                         Text("[필수]")
                             .font(Font.Body0_M)
-                            .foregroundColor(Color.Gray04)
+                            .foregroundColor(Color.Brown04)
                         Text(" 이용약관")
                             .underline()
                             .font(Font.Body0_M)
-                            .foregroundColor(Color.Gray04)
+                            .foregroundColor(Color.Brown04)
                     }
                 }
                 Spacer()
@@ -115,11 +116,11 @@ struct TermsOfServiceView: View {
                     HStack(spacing: 0) {
                         Text("[필수]")
                             .font(Font.Body0_M)
-                            .foregroundColor(Color.Gray04)
+                            .foregroundColor(Color.Brown04)
                         Text(" 개인정보 활용방침")
                             .underline()
                             .font(Font.Body0_M)
-                            .foregroundColor(Color.Gray04)
+                            .foregroundColor(Color.Brown04)
                     }
                 }
                 Spacer()
@@ -138,7 +139,7 @@ struct CheckboxToggleStyle: ToggleStyle {
             HStack {
                 Image(configuration.isOn ? "AgreeIconFill" : "AgreeIconBlank")
                     .frame(width: 24, height: 24)
-                    .foregroundColor(Color.Gray03)
+                    .foregroundColor(Color.Brown05)
                 configuration.label
             }
         })
