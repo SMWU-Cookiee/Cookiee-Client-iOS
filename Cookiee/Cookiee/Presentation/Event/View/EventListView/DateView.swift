@@ -355,7 +355,7 @@ struct DateView: View {
         .navigationDestination(
             isPresented: $eventViewModel.isEditButtonTapped,
             destination: {
-                EventEditView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent, eventViewModel: eventViewModel)
+                EventEditView(eventViewModel: eventViewModel)
         })
     }
 }
