@@ -24,7 +24,6 @@ struct DateView: View {
     @StateObject private var thumbnailViewModel = ThumbnailViewModel()
     @State private var isEventDetailViewModalOpen: Bool = false
     @State private var isThumbnailDetailModalOpen: Bool = false
-    @State private var isThumbnailPutOrDeleteModalOpen: Bool = false
     @State var isRegisterImageModalOpen: Bool = false
     @State var isUpdateImageModalOpen: Bool = false
         
@@ -172,7 +171,7 @@ struct DateView: View {
             }
             .edgesIgnoringSafeArea(.top)
             .fullScreenCover(isPresented: $isThumbnailDetailModalOpen) {
-                ZStack {
+                VStack {
                     VStack {
                         Spacer()
                         VStack {
@@ -200,90 +199,63 @@ struct DateView: View {
                     }
                     
                     VStack {
-                        Spacer()
-                        HStack {
-                            Spacer()
+                        Divider()
+                            .background(Color.white)
+                        
+                        HStack(spacing: 20) {
                             Button(action: {
-                                isThumbnailPutOrDeleteModalOpen = true
+                                isUpdateImageModalOpen = true
+                                showImagePicker = true
                             }, label: {
-                                Image("MenuIcon")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
+                                VStack {
+                                    Image("EditIconWhite")
+                                    Text("수정하기")
+                                        .font(.Body1_R)
+                                        .foregroundStyle(Color.white)
+                                }
                             })
+                            .frame(width: 100, height: 100)
+
+                            Button(action: {
+                                if thumbnailViewModel.thumbnailData != nil {
+                                    thumbnailViewModel.isLoading = true
+                                    thumbnailViewModel.removeThumbnail(thumbnailId: (thumbnailViewModel.thumbnailData!.thumbnailId.description), year: yearOfEvent, month: monthOfEvent, day: dayOfEvent)
+                                    thumbnailViewModel.isLoading = false
+                                    isThumbnailDetailModalOpen = false
+                                }
+                            }, label: {
+                                VStack {
+                                    Image("TrashCanWhite")
+                                    Text("삭제하기")
+                                        .font(.Body1_R)
+                                        .foregroundStyle(Color.white)
+                                }
+                            })
+                            .frame(width: 100, height: 100)
+
+                            Button(action: {
+                                isThumbnailDetailModalOpen = false
+                            }, label: {
+                                VStack() {
+                                    Image("XmarkIconWhite")
+                                    Text("뒤로가기")
+                                        .font(Font.Body1_R)
+                                        .foregroundStyle(Color.white)
+                                }
+                            })
+                            .frame(width: 100, height: 100)
+
                         }
                     }
-                    .padding(15)
+                    .background(Color.black)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.black)
                 .onTapGesture {
                     isThumbnailDetailModalOpen = false
                 }
-                .sheet(isPresented: $isThumbnailPutOrDeleteModalOpen) {
-                    VStack(spacing: 0) {
-                        Text("썸네일")
-                            .font(.Head1_B)
-                        
-                        Button(action: {
-                            isUpdateImageModalOpen = true
-                            showImagePicker = true
-                            isThumbnailPutOrDeleteModalOpen = false
-                        }, label: {
-                            HStack {
-                                Image("EditIcon")
-                                Text("수정하기")
-                                    .font(.Body0_M)
-                                    .foregroundStyle(Color.black)
-                                Spacer()
-                            }
-                        })
-                        .frame(height: 44)
-                        .padding(.top, 10)
-                        
-                        Divider()
-                        
-                        Button(action: {
-                            if thumbnailViewModel.thumbnailData != nil {
-                                thumbnailViewModel.isLoading = true
-                                thumbnailViewModel.removeThumbnail(thumbnailId: (thumbnailViewModel.thumbnailData!.thumbnailId.description), year: yearOfEvent, month: monthOfEvent, day: dayOfEvent)
-                                thumbnailViewModel.isLoading = false
-                                isThumbnailPutOrDeleteModalOpen = false
-                                isThumbnailDetailModalOpen = false
-                            }
-                        }, label: {
-                            HStack {
-                                Image("TrashIconRed")
-                                Text("삭제하기")
-                                    .font(.Body0_M)
-                                    .foregroundStyle(Color.Error)
-                                Spacer()
-                            }
-                        })
-                        .frame(height: 44)
-
-                        Divider()
-                        
-                        Button(action: {
-                            isThumbnailPutOrDeleteModalOpen = false
-                        }, label: {
-                            HStack {
-                                Image("XmarkIcon")
-                                Text("취소")
-                                    .font(.Body0_M)
-                                    .foregroundStyle(Color.black)
-                                Spacer()
-                            }
-                        })
-                        .frame(height: 40)
-
-                    }
-                    .padding()
-                    .presentationDetents([.fraction(0.27)])
-                    .presentationDragIndicator(Visibility.visible)
-                }
                 .sheet(isPresented: $showImagePicker, onDismiss: {
                     showImagePicker = false
-                    isThumbnailPutOrDeleteModalOpen = false
                     isThumbnailDetailModalOpen = false
                     loadImage()
                 }) {
@@ -310,7 +282,6 @@ struct DateView: View {
         }
         .sheet(isPresented: $showImagePicker, onDismiss: {
             showImagePicker = false
-            isThumbnailPutOrDeleteModalOpen = false
             isThumbnailDetailModalOpen = false
             loadImage()
         }) {
