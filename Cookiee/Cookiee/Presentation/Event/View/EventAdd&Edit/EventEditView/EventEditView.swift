@@ -62,6 +62,7 @@ struct EventEditView: View {
             submittingOverlay
         }
         .onAppear() {
+            isFocused = false
             if !isInitialDataLoaded {
                 loadInitialData()
             }
