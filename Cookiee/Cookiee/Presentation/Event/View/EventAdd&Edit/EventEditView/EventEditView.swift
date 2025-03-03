@@ -141,6 +141,7 @@ struct EventEditView: View {
                 content: $content,
                 people: $people,
                 place: $place,
+                isFocused: $isFocused,
                 categorySelectViewModel: categorySelectViewModel,
                 isCategorySelectButtonTapped: $isCategorySelectButtonTapped,
                 locationSearchService: locationSearchService

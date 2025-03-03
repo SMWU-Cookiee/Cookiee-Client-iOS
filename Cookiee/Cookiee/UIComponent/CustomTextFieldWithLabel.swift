@@ -12,7 +12,7 @@ struct CustomTextFieldWithLabel: View {
     @Binding var text: String
     var placeholder: String
     
-    @FocusState private var isFocused: Bool
+    @FocusState.Binding var isFocused: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
