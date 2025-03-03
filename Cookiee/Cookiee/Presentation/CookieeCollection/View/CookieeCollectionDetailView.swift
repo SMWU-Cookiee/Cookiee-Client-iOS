@@ -101,6 +101,11 @@ struct CookieeCollectionDetailView: View {
                 cookieeCollectionViewModel.loadCookieeCollectionDetailData(categoryId: id)
             }
         }
+        .navigationDestination(
+            isPresented: $eventViewModel.isEditButtonTapped,
+            destination: {
+                EventEditView(eventViewModel: eventViewModel)
+        })
     }
     
     private func ThumbnailButtonToEventDetail(url: String, cellWidth: CGFloat, eventId: Int64) -> some View {
