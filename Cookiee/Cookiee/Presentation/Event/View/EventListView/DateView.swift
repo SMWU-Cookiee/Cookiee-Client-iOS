@@ -171,15 +171,6 @@ struct DateView: View {
                 }
             }
             .edgesIgnoringSafeArea(.top)
-//            .overlay(
-//                isModalOpen ?
-//                Rectangle()
-//                    .edgesIgnoringSafeArea(.all)
-//                    .background(Color.Black)
-//                    .opacity(0.5)
-//                    .transition(.opacity.animation(.easeInOut(duration: 0.1)))
-//                : nil
-//            )
             .sheet(isPresented: $isEventDetailViewModalOpen, onDismiss: {
                 eventViewModel.loadEventList(
                     year: yearOfEvent,
