@@ -42,7 +42,7 @@ struct CustomTextFieldWithMulLine: View {
                     .font(.Body0_M)
         }
         .multilineTextAlignment(.leading)
-        .lineLimit(3...5)
+        .lineLimit(3)
         .padding(10)
         .font(.Body0_M)
         .background(Color.white)
