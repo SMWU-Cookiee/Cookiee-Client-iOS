@@ -300,7 +300,7 @@ struct DateView: View {
             )
         }) {
             if eventViewModel.selectedEventId != nil {
-                EventDetailView(eventViewModel: eventViewModel, date: date)
+                EventDetailView(eventViewModel: eventViewModel)
                     .presentationDetents([.fraction(0.99)])
                     .presentationDragIndicator(Visibility.visible)
             }
