@@ -23,6 +23,7 @@ struct CookieeCollectionDetailView: View {
     @ObservedObject var cookieeCollectionViewModel = CookieeCollectionViewModel()
     @ObservedObject var eventViewModel = EventViewModel()
     @State private var isEventDetailViewModalOpen: Bool = false
+    @State private var isEventRemoved: Bool = false
     
     var id: Int64
     private let columns = [
@@ -92,6 +93,12 @@ struct CookieeCollectionDetailView: View {
                 EventDetailView(eventViewModel: eventViewModel)
                     .presentationDetents([.fraction(0.99)])
                     .presentationDragIndicator(Visibility.visible)
+            }
+        }
+        .onChange(of: isEventDetailViewModalOpen) {
+            if eventViewModel.isRemoveSuccess {
+                eventViewModel.isRemoveSuccess = false
+                cookieeCollectionViewModel.loadCookieeCollectionDetailData(categoryId: id)
             }
         }
     }

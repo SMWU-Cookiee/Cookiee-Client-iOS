@@ -303,6 +303,9 @@ struct DateView: View {
                 EventDetailView(eventViewModel: eventViewModel)
                     .presentationDetents([.fraction(0.99)])
                     .presentationDragIndicator(Visibility.visible)
+                    .onDisappear() {
+                        eventViewModel.isRemoveSuccess = false
+                    }
             }
         }
         .sheet(isPresented: $showImagePicker, onDismiss: {
