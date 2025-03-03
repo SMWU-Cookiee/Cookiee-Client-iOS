@@ -2,14 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BUNDLE_ID</key>
+	<string>cookiee.2025</string>
 	<key>CFBundleIconName</key>
 	<string>AppIcon</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>BUNDLE_ID</key>
-	<string>site.apps.cookiee</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -36,7 +32,5 @@
 		<string>Pretendard-Medium.ttf</string>
 		<string>Pretendard-Regular.ttf</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>앱을 실행 중일 때 위치 서비스를 사용할 권한을 허용하시겠습니까?</string>
 </dict>
 </plist>
