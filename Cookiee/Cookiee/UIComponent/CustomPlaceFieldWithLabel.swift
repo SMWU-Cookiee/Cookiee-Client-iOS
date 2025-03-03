@@ -14,7 +14,7 @@ struct CustomPlaceFieldWithLabel: View {
     @ObservedObject var locationSearchService: EventMapLocationSearchViewModel
     @Binding var place: EventWherePlace?
     
-    @FocusState private var isFocused: Bool
+    @FocusState.Binding var isFocused: Bool
     
     var body: some View {
         VStack(alignment: .leading) {

@@ -62,6 +62,10 @@ struct EventAddView: View {
                 .padding(.top, 10)
             submittingOverlay
         }
+        .onAppear() {
+            isFocused = false
+        }
+        
         .photosPicker(
             isPresented: $imagePickerForEventViewModel.isPhotoPickerPresented,
             selection: $imagePickerForEventViewModel.selection,
@@ -142,6 +146,7 @@ struct EventAddView: View {
                 content: $content,
                 people: $people,
                 place: $place,
+                isFocused: $isFocused,
                 categorySelectViewModel: categorySelectViewModel,
                 isCategorySelectButtonTapped: $isCategorySelectButtonTapped,
                 locationSearchService: locationSearchService
