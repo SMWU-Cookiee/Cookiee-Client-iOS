@@ -24,10 +24,6 @@ struct EventEditView: View {
         }
     }
     
-    var year: Int32
-    var month: Int32
-    var date: Int32
-    
     @State var title: String = ""
     @State var content: String = ""
     @State var people: String = ""
@@ -294,9 +290,9 @@ extension EventEditView {
                 eventWhereText: placeTextOrNil,
                 eventWherePlace: place,
                 withWho: people,
-                year: year,
-                month: month,
-                date: date,
+                year: eventViewModel.eventDetail!.EventYear,
+                month: eventViewModel.eventDetail!.EventMonth,
+                date: eventViewModel.eventDetail!.EventDate,
                 categoryIds: categorySelectViewModel.getSelectedCategoryIds(),
                 images: imagesData
             )

@@ -52,6 +52,9 @@ class EventService {
                     print("getEventDetail Decoding error:", error)
                 }
             case .failure(let error):
+                if let response = error.response {
+                    print("getEventDetail Response Data: \n", String(data: response.data, encoding: .utf8) ?? "No response body")
+                }
                 completion(.failure(error))
                 print("getEventDetail error:", error)
             }

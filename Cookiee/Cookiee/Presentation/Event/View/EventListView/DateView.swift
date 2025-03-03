@@ -300,9 +300,12 @@ struct DateView: View {
             )
         }) {
             if eventViewModel.selectedEventId != nil {
-                EventDetailView(eventViewModel: eventViewModel, date: date)
+                EventDetailView(eventViewModel: eventViewModel)
                     .presentationDetents([.fraction(0.99)])
                     .presentationDragIndicator(Visibility.visible)
+                    .onDisappear() {
+                        eventViewModel.isRemoveSuccess = false
+                    }
             }
         }
         .sheet(isPresented: $showImagePicker, onDismiss: {
@@ -352,7 +355,7 @@ struct DateView: View {
         .navigationDestination(
             isPresented: $eventViewModel.isEditButtonTapped,
             destination: {
-                EventEditView(year: yearOfEvent, month: monthOfEvent, date: dayOfEvent, eventViewModel: eventViewModel)
+                EventEditView(eventViewModel: eventViewModel)
         })
     }
 }

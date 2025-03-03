@@ -21,6 +21,9 @@ struct CookieeCollectionDetailView: View {
     }
     
     @ObservedObject var cookieeCollectionViewModel = CookieeCollectionViewModel()
+    @ObservedObject var eventViewModel = EventViewModel()
+    @State private var isEventDetailViewModalOpen: Bool = false
+    @State private var isEventRemoved: Bool = false
     
     var id: Int64
     private let columns = [
@@ -58,16 +61,7 @@ struct CookieeCollectionDetailView: View {
                         ScrollView {
                             LazyVGrid(columns: columns, spacing: 1) {
                                 ForEach(cookieeCollectionDetail.eventImageList, id: \.eventId) { eventImage in
-                                    AsyncImage(url: URL(string: eventImage.firstImageUrl)) { image in
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: cellWidth, height: cellWidth)
-                                            .clipped()
-                                    } placeholder: {
-                                        ProgressView()
-                                            .frame(width: cellWidth, height: cellWidth)
-                                    }
+                                    ThumbnailButtonToEventDetail(url: eventImage.firstImageUrl, cellWidth: cellWidth, eventId: eventImage.eventId)
                                 }
                             }
                             .padding(.horizontal, 1)
@@ -94,6 +88,43 @@ struct CookieeCollectionDetailView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+        .sheet(isPresented: $isEventDetailViewModalOpen) {
+            if eventViewModel.selectedEventId != nil {
+                EventDetailView(eventViewModel: eventViewModel)
+                    .presentationDetents([.fraction(0.99)])
+                    .presentationDragIndicator(Visibility.visible)
+            }
+        }
+        .onChange(of: isEventDetailViewModalOpen) {
+            if eventViewModel.isRemoveSuccess {
+                eventViewModel.isRemoveSuccess = false
+                cookieeCollectionViewModel.loadCookieeCollectionDetailData(categoryId: id)
+            }
+        }
+        .navigationDestination(
+            isPresented: $eventViewModel.isEditButtonTapped,
+            destination: {
+                EventEditView(eventViewModel: eventViewModel)
+        })
+    }
+    
+    private func ThumbnailButtonToEventDetail(url: String, cellWidth: CGFloat, eventId: Int64) -> some View {
+        Button(action: {
+            print(eventId)
+            eventViewModel.selectedEventId = eventId
+            isEventDetailViewModalOpen = true
+        }, label: {
+            AsyncImage(url: URL(string: url)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: cellWidth, height: cellWidth)
+                    .clipped()
+            } placeholder: {
+                ProgressView()
+                    .frame(width: cellWidth, height: cellWidth)
+            }
+        })
     }
 }
 

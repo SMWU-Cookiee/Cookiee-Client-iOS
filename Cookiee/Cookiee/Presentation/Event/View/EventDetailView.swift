@@ -11,7 +11,6 @@ struct EventDetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @StateObject var eventViewModel: EventViewModel
-    @State var date: Date
     
     @State private var currentIndex: Int = 0
     @State private var imageList: [String] = []
@@ -23,7 +22,7 @@ struct EventDetailView: View {
             VStack {
                 if eventViewModel.eventDetail != nil {
                     HStack (alignment: .bottom) {
-                        Text("\(date, formatter: Self.dateFormatter)")
+                        Text("\(eventViewModel.eventDetail!.EventYear.description).\(eventViewModel.eventDetail!.EventMonth).\(eventViewModel.eventDetail!.EventDate)")
                             .font(.Head1_B)
                         Spacer()
                         HStack {
@@ -155,19 +154,10 @@ struct EventDetailView: View {
         }
         .onChange(of: eventViewModel.isRemoveSuccess) {
             if eventViewModel.isRemoveSuccess {
-                eventViewModel.isRemoveSuccess = false
                 presentationMode.wrappedValue.dismiss()
             }
         }
     }
-}
-
-extension EventDetailView {
-    static let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd"
-        return formatter
-    }()
 }
 
 struct EventInfoDetailView: View {
