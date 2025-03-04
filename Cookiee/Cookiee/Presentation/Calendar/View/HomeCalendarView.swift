@@ -29,10 +29,12 @@ struct HomeCalendarView: View {
                 }
                 .frame(width: geometry.size.width, height: 45)
                 
-                VStack {
-                    CalendarHeaderView
-                    CalendarGridView
-                    Spacer()
+                GeometryReader { inner_geometry in
+                    VStack {
+                        CalendarHeaderView
+                        CalendarGridView(cellWidth: inner_geometry.size.width / 7 - 1, cellHeight: (inner_geometry.size.height - 100) / 6 - 1)
+                        Spacer()
+                    }
                 }
                 .background(Color.Beige)
             }
@@ -96,7 +98,7 @@ struct HomeCalendarView: View {
     }
 
       
-    private var CalendarGridView: some View {
+    private func CalendarGridView(cellWidth: CGFloat, cellHeight: CGFloat) -> some View {
         let daysInMonth = numberOfDays(in: month)
         let firstWeekday = firstWeekdayOfMonth(in: month) - 1
         let lastDayOfMonthBefore = numberOfDays(in: previousMonth())
@@ -106,7 +108,7 @@ struct HomeCalendarView: View {
         return VStack {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0, alignment: .top), count: 7), spacing: 2) {
                 ForEach(-firstWeekday ..< daysInMonth + visibleDaysOfNextMonth, id: \.self) { index in
-                    CalendarGridGroupCellView(index: index, daysInMonth: daysInMonth, firstWeekday: firstWeekday, lastDayOfMonthBefore: lastDayOfMonthBefore)
+                    CalendarGridGroupCellView(cellWidth: cellWidth, cellHeight: cellHeight, index: index, daysInMonth: daysInMonth, firstWeekday: firstWeekday, lastDayOfMonthBefore: lastDayOfMonthBefore)
                 }
             }
         }
@@ -123,7 +125,7 @@ struct HomeCalendarView: View {
         )
     }
 
-    private func CalendarGridGroupCellView(index: Int, daysInMonth: Int, firstWeekday: Int, lastDayOfMonthBefore: Int) -> some View {
+    private func CalendarGridGroupCellView(cellWidth :CGFloat, cellHeight :CGFloat, index: Int, daysInMonth: Int, firstWeekday: Int, lastDayOfMonthBefore: Int) -> some View {
         Group {
             if index >= 0 && index < daysInMonth {
                 let date = getDate(for: index)
@@ -135,7 +137,7 @@ struct HomeCalendarView: View {
                 NavigationLink(
                     destination: DateView(date: date),
                     label: {
-                        CellView(day: day, clicked: clicked, isToday: isToday, thumbnailUrl: thumbnailData?.thumbnailUrl)
+                        CellView(cellWidth: cellWidth, cellHeight: cellHeight, day: day, clicked: clicked, isToday: isToday, thumbnailUrl: thumbnailData?.thumbnailUrl)
                     }
                 )
             } else if let prevMonthDate = Calendar.current.date(
@@ -144,7 +146,7 @@ struct HomeCalendarView: View {
                 to: previousMonth()
             ) {
                 let day = Calendar.current.component(.day, from: prevMonthDate)
-                CellView(day: day, isCurrentMonthDay: false, thumbnailUrl: nil)
+                CellView(cellWidth: cellWidth, cellHeight: cellHeight, day: day, isCurrentMonthDay: false, thumbnailUrl: nil)
             }
         }
         .onTapGesture {

@@ -9,6 +9,9 @@ import SwiftUI
 
  extension HomeCalendarView {
     struct CellView: View {
+        private var cellWidth: CGFloat
+        private var cellHeight: CGFloat
+        
         private var day: Int
         private var clicked: Bool
         private var isToday: Bool
@@ -35,12 +38,16 @@ import SwiftUI
 
 
         init(
+            cellWidth: CGFloat,
+            cellHeight: CGFloat,
             day: Int,
             clicked: Bool = false,
             isToday: Bool = false,
             isCurrentMonthDay: Bool = true,
             thumbnailUrl: String?
         ) {
+            self.cellWidth = cellWidth
+            self.cellHeight = cellHeight
             self.day = day
             self.clicked = clicked
             self.isToday = isToday
@@ -61,7 +68,7 @@ import SwiftUI
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 55, height: 95)
+                                .frame(width: cellWidth, height: cellHeight)
                                 .clipShape(RoundedRectangle(cornerRadius: 2))
                             
                         case .failure(_):
@@ -84,7 +91,7 @@ import SwiftUI
                         .overlay(Text(String(day)).foregroundColor(textColor))
                 }
             }
-            .frame(width: 55, height: 95)
+            .frame(width: cellWidth, height: cellHeight)
         }
     }
 }
