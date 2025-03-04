@@ -15,39 +15,38 @@ struct SocialLoginView: View {
 
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
+            VStack {
                 VStack {
-                    HStack {
-                        HStack {
-                            Image("cookiee_icon_big")
-                        }
-                        .position(x: geometry.size.width / 2, y: 216)
-                        HStack {
-                            Image("cookiee_typo")
-                        }
-                        .position(x: 0, y: 350)
-                    }
-
-                    HStack {
-                        GoogleLoginInButton(
-                            navigateToSignUp: $navigateToTermsOfService,
-                            navigateToHome: $navigateToHome,
-                            socialLoginViewModel: socialLoginViewModel
-                        )
-                    }
-                    .padding(.bottom, 11)
-
-                    HStack {
-                        AppleSignInButton(
-                            navigateToSignUp: $navigateToTermsOfService,
-                            navigateToHome: $navigateToHome,
-                            socialLoginViewModel: socialLoginViewModel
-                        )
-                    }
-                    .padding(.bottom, 90)
+                    Spacer()
+                        .frame(height: 150)
+                    Image("cookiee_icon_big")
+                    Spacer()
+                        .frame(height: 33)
+                    Image("cookiee_typo")
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                HStack {
+                    GoogleLoginInButton(
+                        navigateToSignUp: $navigateToTermsOfService,
+                        navigateToHome: $navigateToHome,
+                        socialLoginViewModel: socialLoginViewModel
+                    )
+                }
+                .padding(.bottom, 11)
+
+                HStack {
+                    AppleSignInButton(
+                        navigateToSignUp: $navigateToTermsOfService,
+                        navigateToHome: $navigateToHome,
+                        socialLoginViewModel: socialLoginViewModel
+                    )
+                }
+                
+                Spacer()
+                    .frame(height: 150)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationDestination(isPresented: $navigateToTermsOfService) {
                 TermsOfServiceView(socialLoginViewModel: socialLoginViewModel)
             }
