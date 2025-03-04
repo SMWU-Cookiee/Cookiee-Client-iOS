@@ -259,7 +259,7 @@ struct DateView: View {
                     isThumbnailDetailModalOpen = false
                     loadImage()
                 }) {
-                    ImagePicker(image: $selectedUIImage)
+                    ImagePicker(allowEditing: false, image: $selectedUIImage)
                 }
             }
             
@@ -285,7 +285,7 @@ struct DateView: View {
             isThumbnailDetailModalOpen = false
             loadImage()
         }) {
-            ImagePicker(image: $selectedUIImage)
+            ImagePicker(allowEditing: false, image: $selectedUIImage)
         }
         
 
