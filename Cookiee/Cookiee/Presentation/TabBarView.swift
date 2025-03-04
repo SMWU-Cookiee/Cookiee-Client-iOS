@@ -30,7 +30,7 @@ struct TabBarView : View {
                         MyPageView()
                     }
                 }
-                .padding(.bottom, 50)
+                .padding(.bottom, 60)
                 Spacer()
                 CustomTabView(selectedTab: $selectedTab)
                     .background(Color.White)
@@ -87,7 +87,7 @@ struct CustomTabView: View {
             .padding(.top, 15)
 
         }
-        .frame(height: 50, alignment: .center)
+        .frame(height: 60, alignment: .center)
     }
     
 }

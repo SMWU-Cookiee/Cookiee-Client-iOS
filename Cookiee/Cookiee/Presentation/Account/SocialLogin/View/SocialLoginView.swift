@@ -15,38 +15,40 @@ struct SocialLoginView: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
+            GeometryReader { geometry in
                 VStack {
-                    Spacer()
-                        .frame(height: 150)
-                    Image("cookiee_icon_big")
-                    Spacer()
-                        .frame(height: 33)
-                    Image("cookiee_typo")
-                    Spacer()
-                }
-                
-                HStack {
-                    GoogleLoginInButton(
-                        navigateToSignUp: $navigateToTermsOfService,
-                        navigateToHome: $navigateToHome,
-                        socialLoginViewModel: socialLoginViewModel
-                    )
-                }
-                .padding(.bottom, 11)
+                    VStack {
+                        Spacer()
+                            .frame(height: 150)
+                        Image("cookiee_icon_big")
+                        Spacer()
+                            .frame(height: 33)
+                        Image("cookiee_typo")
+                        Spacer()
+                    }
+                    
+                    HStack {
+                        GoogleLoginInButton(
+                            navigateToSignUp: $navigateToTermsOfService,
+                            navigateToHome: $navigateToHome,
+                            socialLoginViewModel: socialLoginViewModel
+                        )
+                    }
+                    .padding(.bottom, 11)
 
-                HStack {
-                    AppleSignInButton(
-                        navigateToSignUp: $navigateToTermsOfService,
-                        navigateToHome: $navigateToHome,
-                        socialLoginViewModel: socialLoginViewModel
-                    )
+                    HStack {
+                        AppleSignInButton(
+                            navigateToSignUp: $navigateToTermsOfService,
+                            navigateToHome: $navigateToHome,
+                            socialLoginViewModel: socialLoginViewModel
+                        )
+                    }
+                    
+                    Spacer()
+                        .frame(height: geometry.size.height * 0.15)
                 }
-                
-                Spacer()
-                    .frame(height: 150)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationDestination(isPresented: $navigateToTermsOfService) {
                 TermsOfServiceView(socialLoginViewModel: socialLoginViewModel)
             }
