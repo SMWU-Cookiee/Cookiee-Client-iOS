@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ImageCarouselView: View {
+    var imageHeight: CGFloat
     var imageUrls: [String]
     var spacing: CGFloat
     var trialingSpace: CGFloat
@@ -16,7 +17,8 @@ struct ImageCarouselView: View {
     @GestureState var offset: CGFloat = 0
     @State var currentIndex: Int = 0
     
-    init(spacing: CGFloat = 15, trialingSpace: CGFloat = 30, index: Binding<Int>, imageUrls: [String]) {
+    init(imageHeight: CGFloat, spacing: CGFloat = 15, trialingSpace: CGFloat = 30, index: Binding<Int>, imageUrls: [String]) {
+        self.imageHeight = imageHeight
         self.imageUrls = imageUrls
         self.spacing = spacing
         self.trialingSpace = trialingSpace
@@ -32,7 +34,7 @@ struct ImageCarouselView: View {
                     HStack(spacing: spacing) {
                         ForEach(Array(imageUrls.enumerated()), id: \.offset) { offset, url in
                             fetchImageByURL(url: url)
-                            .frame(width: proxy.size.width - trialingSpace)
+                                .frame(width: proxy.size.width - trialingSpace, height: imageHeight)
                         }
                     }
                     .padding(.horizontal, spacing)
@@ -41,7 +43,7 @@ struct ImageCarouselView: View {
                 }
                 .animation(.easeInOut, value: offset == 0)
             }
-            .frame(height: 360)
+            .frame(height: imageHeight + 5)
             
             HStack(spacing: 8) {
                 ForEach(0..<imageUrls.count, id: \.self) { i in

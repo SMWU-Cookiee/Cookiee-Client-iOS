@@ -18,107 +18,110 @@ struct EventDetailView: View {
     @State private var isDeleteButtonTapped: Bool = false
 
     var body: some View {
-        VStack {
+        GeometryReader { geometry in
             VStack {
-                if eventViewModel.eventDetail != nil {
-                    HStack (alignment: .bottom) {
-                        Text("\(eventViewModel.eventDetail!.EventYear.description).\(eventViewModel.eventDetail!.EventMonth).\(eventViewModel.eventDetail!.EventDate)")
-                            .font(.Head1_B)
-                        Spacer()
-                        HStack {
-                            Button {
-                                eventViewModel.isEditButtonTapped = true
-                                presentationMode.wrappedValue.dismiss()
-                            } label: {
-                                Image("EditIcon")
-                            }
-                            Button {
-                                isDeleteButtonTapped = true
-                            } label: {
-                                Image("TrashIcon")
+                VStack {
+                    if eventViewModel.eventDetail != nil {
+                        HStack (alignment: .bottom) {
+                            Text("\(eventViewModel.eventDetail!.EventYear.description).\(eventViewModel.eventDetail!.EventMonth).\(eventViewModel.eventDetail!.EventDate)")
+                                .font(.Head1_B)
+                            Spacer()
+                            HStack {
+                                Button {
+                                    eventViewModel.isEditButtonTapped = true
+                                    presentationMode.wrappedValue.dismiss()
+                                } label: {
+                                    Image("EditIcon")
+                                }
+                                Button {
+                                    isDeleteButtonTapped = true
+                                } label: {
+                                    Image("TrashIcon")
+                                }
                             }
                         }
-                    }
-                    .padding(20)
-                    .padding(.top, 23)
+                        .padding(20)
+                        .padding(.top, 23)
 
-                    
-                    HStack {
-                        ImageCarouselView(
-                            index: $currentIndex,
-                            imageUrls: eventViewModel.eventDetail!.eventImageUrlList
-                        )
-                            .frame(height: 365)
-                    }
-                    
-                    VStack {
-                        Text(eventViewModel.eventDetail!.title)
-                            .font(.Body0_SB)
+                        
                         HStack {
-                            ForEach(eventViewModel.eventDetail!.categories, id: \.categoryId) { category in
-                                CategoryLabel(
-                                    name: category.categoryName,
-                                    color: category.categoryColor
-                                )
-                                .padding(.horizontal, 1)
+                            ImageCarouselView(
+                                imageHeight: geometry.size.height * 0.4,
+                                index: $currentIndex,
+                                imageUrls: eventViewModel.eventDetail!.eventImageUrlList
+                            )
+                            .frame(height: geometry.size.height * 0.4)
+                        }
+                        
+                        VStack {
+                            Text(eventViewModel.eventDetail!.title)
+                                .font(.Body0_SB)
+                            HStack {
+                                ForEach(eventViewModel.eventDetail!.categories, id: \.categoryId) { category in
+                                    CategoryLabel(
+                                        name: category.categoryName,
+                                        color: category.categoryColor
+                                    )
+                                    .padding(.horizontal, 1)
+                                }
                             }
                         }
-                    }
-                    .padding(.bottom, 3)
-                    .padding(.top, 15)
-                    
-                    ScrollView {
-                        VStack (alignment: .leading) {
-                            if eventViewModel.eventDetail!.eventWhereText == nil {
+                        .padding(.bottom, 3)
+                        .padding(.top, 15)
+                        
+                        ScrollView {
+                            VStack (alignment: .leading) {
+                                if eventViewModel.eventDetail!.eventWhereText == nil {
+                                    EventInfoDetailView(
+                                        title: "장소",
+                                        decription: {
+                                            AnyView(
+                                                HStack {
+                                                    Image("PlacePinBrown")
+                                                    Text(eventViewModel.eventDetail!.eventWherePlace?.name ?? "장소 정보를 가져올 수 없음")
+                                                }
+                                            )
+                                        }
+                                    )
+                                } else {
+                                    EventInfoDetailView(
+                                        title: "장소",
+                                        decription: {
+                                            AnyView(
+                                                Text(eventViewModel.eventDetail!.eventWhereText ?? "장소 정보를 가져올 수 없음")
+                                            )
+                                        }
+                                    )
+                                }
+                                
                                 EventInfoDetailView(
-                                    title: "장소",
+                                    title: "내용",
                                     decription: {
                                         AnyView(
-                                            HStack {
-                                                Image("PlacePinBrown")
-                                                Text(eventViewModel.eventDetail!.eventWherePlace?.name ?? "장소 정보를 가져올 수 없음")
-                                            }
+                                            Text(eventViewModel.eventDetail!.what)
                                         )
                                     }
                                 )
-                            } else {
                                 EventInfoDetailView(
-                                    title: "장소",
+                                    title: "함께한 사람",
                                     decription: {
                                         AnyView(
-                                            Text(eventViewModel.eventDetail!.eventWhereText ?? "장소 정보를 가져올 수 없음")
+                                            Text(eventViewModel.eventDetail!.withWho)
                                         )
                                     }
                                 )
                             }
-                            
-                            EventInfoDetailView(
-                                title: "내용",
-                                decription: {
-                                    AnyView(
-                                        Text(eventViewModel.eventDetail!.what)
-                                    )
-                                }
-                            )
-                            EventInfoDetailView(
-                                title: "함께한 사람",
-                                decription: {
-                                    AnyView(
-                                        Text(eventViewModel.eventDetail!.withWho)
-                                    )
-                                }
-                            )
                         }
+                        .padding(.horizontal, 15)
+     
+                    } else {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
                     }
-                    .padding(.horizontal, 15)
- 
-                } else {
-                    Spacer()
-                    ProgressView()
-                    Spacer()
                 }
+                Spacer()
             }
-            Spacer()
         }
     
         .showCustomAlert(
