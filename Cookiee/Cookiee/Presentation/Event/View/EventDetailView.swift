@@ -46,11 +46,11 @@ struct EventDetailView: View {
                         
                         HStack {
                             ImageCarouselView(
-                                imageHeight: geometry.size.height * 0.4,
+                                imageHeight: geometry.size.height * 0.45,
                                 index: $currentIndex,
                                 imageUrls: eventViewModel.eventDetail!.eventImageUrlList
                             )
-                            .frame(height: geometry.size.height * 0.4)
+                            .frame(height: geometry.size.height * 0.45)
                         }
                         
                         VStack {
