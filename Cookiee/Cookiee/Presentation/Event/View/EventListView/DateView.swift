@@ -166,7 +166,7 @@ struct DateView: View {
                     .frame(width: 355, height: 44)
                     .background(Color.Brown00)
                     .cornerRadius(10)
-                    .padding(.top, 3)
+                    .padding(.vertical, 3)
                 }
             }
             .edgesIgnoringSafeArea(.top)
@@ -259,7 +259,7 @@ struct DateView: View {
                     isThumbnailDetailModalOpen = false
                     loadImage()
                 }) {
-                    ImagePicker(image: $selectedUIImage)
+                    ImagePicker(allowEditing: false, image: $selectedUIImage)
                 }
             }
             
@@ -285,7 +285,7 @@ struct DateView: View {
             isThumbnailDetailModalOpen = false
             loadImage()
         }) {
-            ImagePicker(image: $selectedUIImage)
+            ImagePicker(allowEditing: false, image: $selectedUIImage)
         }
         
 

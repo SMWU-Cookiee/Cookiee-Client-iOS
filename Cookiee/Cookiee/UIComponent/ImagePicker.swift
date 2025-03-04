@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
     
+    var allowEditing: Bool
     @Binding var image: UIImage?
     @Environment(\.presentationMode) var mode
     
@@ -19,7 +20,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> some UIViewController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
-        picker.allowsEditing = true
+        picker.allowsEditing = allowEditing
         return picker
     }
     

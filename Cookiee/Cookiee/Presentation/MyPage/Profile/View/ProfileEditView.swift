@@ -112,7 +112,7 @@ struct ProfileEditView: View {
                     loadImage()
                     isValidForm()
                 }) {
-                    ImagePicker(image: $selectedUIImage)
+                    ImagePicker(allowEditing: true, image: $selectedUIImage)
                 }
                 .padding(.bottom, 35)
             

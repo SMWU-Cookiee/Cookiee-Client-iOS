@@ -95,7 +95,7 @@ struct SignUpView: View {
                 .sheet(isPresented: $showImagePicker, onDismiss: {
                     loadImage()
                 }) {
-                    ImagePicker(image: $selectedUIImage)
+                    ImagePicker(allowEditing: true, image: $selectedUIImage)
                 }
                 .padding(.bottom, 35)
                 

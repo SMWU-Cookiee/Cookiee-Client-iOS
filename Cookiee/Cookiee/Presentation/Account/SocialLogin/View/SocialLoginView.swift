@@ -17,17 +17,16 @@ struct SocialLoginView: View {
         NavigationStack {
             GeometryReader { geometry in
                 VStack {
-                    HStack {
-                        HStack {
-                            Image("cookiee_icon_big")
-                        }
-                        .position(x: geometry.size.width / 2, y: 216)
-                        HStack {
-                            Image("cookiee_typo")
-                        }
-                        .position(x: 0, y: 350)
+                    VStack {
+                        Spacer()
+                            .frame(height: 150)
+                        Image("cookiee_icon_big")
+                        Spacer()
+                            .frame(height: 33)
+                        Image("cookiee_typo")
+                        Spacer()
                     }
-
+                    
                     HStack {
                         GoogleLoginInButton(
                             navigateToSignUp: $navigateToTermsOfService,
@@ -44,7 +43,9 @@ struct SocialLoginView: View {
                             socialLoginViewModel: socialLoginViewModel
                         )
                     }
-                    .padding(.bottom, 90)
+                    
+                    Spacer()
+                        .frame(height: geometry.size.height * 0.15)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }

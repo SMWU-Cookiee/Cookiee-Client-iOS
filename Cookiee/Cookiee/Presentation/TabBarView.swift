@@ -30,7 +30,7 @@ struct TabBarView : View {
                         MyPageView()
                     }
                 }
-                .padding(.bottom, 50)
+                .padding(.bottom, 60)
                 Spacer()
                 CustomTabView(selectedTab: $selectedTab)
                     .background(Color.White)
@@ -44,7 +44,7 @@ struct TabBarView : View {
 struct CustomTabView: View {
     @Binding var selectedTab: Tab
     var body: some View {
-        HStack {
+        VStack {
             HStack() {
                 Spacer()
                 Button {
@@ -84,10 +84,8 @@ struct CustomTabView: View {
                 .frame(width: 70)
                 Spacer()
             }
-            .padding(.top, 15)
-
         }
-        .frame(height: 50, alignment: .center)
+        .frame(minHeight: 60, alignment: .center)
     }
     
 }
